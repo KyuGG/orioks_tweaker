@@ -1,0 +1,15 @@
+{
+    "manifest_version": 2,
+    "name": "orioks fix",
+    "version": "0.1",
+    "content_scripts": [
+        {
+            "matches": [
+                "https://orioks.miet.ru/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}
