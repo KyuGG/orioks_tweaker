@@ -2,6 +2,11 @@
     "manifest_version": 2,
     "name": "orioks_tweaker",
     "version": "0.1",
+    "browser_action": {
+        "default_title": "interface/ORIOKS tweaker",
+        "default_icon": "interface/logo.png",
+        "default_popup": "interface/interface.html"
+    },
     "content_scripts": [
         {
             "matches": [
@@ -11,5 +16,8 @@
                 "content.js"
             ]
         }
+    ],
+    "permissions": [
+        "activeTab"
     ]
 }
