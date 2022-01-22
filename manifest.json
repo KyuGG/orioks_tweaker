@@ -3,7 +3,7 @@
     "name": "orioks_tweaker",
     "version": "0.1",
     "browser_action": {
-        "default_title": "interface/ORIOKS tweaker",
+        "default_title": "ORIOKS tweaker",
         "default_icon": "interface/logo.png",
         "default_popup": "interface/interface.html"
     },
