@@ -8,12 +8,7 @@ checkbox2.checked = (localStorage.getItem('checkbox2') === 'true')
 checkbox3.checked = (localStorage.getItem('checkbox3') === 'true')
 
 if (checkbox1.checked == true) {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.tabs.executeScript(
-            tabs[0].id,
-            { file: 'scripts/clear.js' }
-        )
-    })
+    //activate script
 }
 
 checkbox1.onclick = () => {
