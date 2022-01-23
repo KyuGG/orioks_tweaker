@@ -118,6 +118,7 @@ function darkTheme() {
             el.style.backgroundColor = black
             el.style.color = white
         })
+        document.querySelectorAll('ul')[5].style.backgroundColor = black
     }
     //темная тема для конкретного ДЗ
     if (path == '/student/homework/view') {
