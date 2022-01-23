@@ -22,6 +22,7 @@ const onClick = () => {
     })
 }
 
+
 checkbox1.onclick = () => onClick()
 checkbox2.onclick = () => onClick()
 checkbox3.onclick = () => onClick()

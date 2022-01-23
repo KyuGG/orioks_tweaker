@@ -21,24 +21,16 @@ function removeTrash() {
     logo.className = 'navbar-header'
     let orioks = document.getElementsByClassName("container")[0]
     orioks.prepend(logo)
-    //смена балл на сум
     if (document.location.pathname == '/student/student') {
+        //смена балл на сум
         let span = document.getElementById("bp")
         let clack = new Event('click')
         span.dispatchEvent(clack)
         span.dispatchEvent(clack)
         span.remove()
         //удаление красных точек
-        let redButtons = document.getElementsByClassName("mini_circle bad ng-scope")
-        let buttonsLength = redButtons.length
-        for (let i = 0; i < buttonsLength; i++) {
-            redButtons[0].remove()
-        }
+        document.querySelectorAll('.bad').forEach(el => el.remove())
         //удаление надписей типа "из 100"
-        let from100 = document.getElementsByClassName("mvb")
-        let from100Length = from100.length
-        for (let i = 0; i < from100Length; i++) {
-            from100[0].remove()
-        }
+        document.querySelectorAll('.mvb').forEach(el => el.remove())
     }
 }
