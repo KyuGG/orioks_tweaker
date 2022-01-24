@@ -73,13 +73,19 @@ function darkTheme() {
             el.style.color = white
         })
         document.querySelectorAll('ul')[5].style.backgroundColor = black
-        document.querySelectorAll('.grade').forEach(el => el.style.color = 'black')
 
         document.styleSheets[1].cssRules[7].style.background = '#1FA5F7'
         document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
         document.styleSheets[1].cssRules[5].style.background = '#7D919E'
         document.styleSheets[1].cssRules[4].style.background = '#fff'
         document.styleSheets[1].cssRules[3].style.background = '#C49068'
+        document.styleSheets[1].cssRules[2].style.color = 'black'
+
+        //динамические блоки
+        document.styleSheets[3].cssRules[1324].style.backgroundColor = black
+        document.styleSheets[3].cssRules[1288].style.backgroundColor = black
+
+
     }
     //темная тема для страницы практика
     if (path == '/student/practice/index') {
@@ -205,5 +211,11 @@ function darkTheme() {
         let dragnDrop = document.querySelector('.resumable-drop')
         dragnDrop.style.backgroundColor = black
         dragnDrop.style.color = white
+    }
+    //темная тема для страницы ресурсы
+    if (path == '/student/ir/') {
+        document.querySelectorAll('ul')[5].style.backgroundColor = black
+        document.querySelectorAll('li.active')[1].style.color = purple
+        document.querySelectorAll('.list-group-item').forEach(el => el.style.backgroundColor = black)
     }
 }
