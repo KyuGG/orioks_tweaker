@@ -75,15 +75,11 @@ function darkTheme() {
         document.querySelectorAll('ul')[5].style.backgroundColor = black
         document.querySelectorAll('.grade').forEach(el => el.style.color = 'black')
 
-        //КОСТЫЛЬ (ЗАМЕНИТЬ ПРИ ПЕРВОЙ ВОЗМОЖНОСТИ)
-        for (let i = 7; i > 2; i--) {
-            document.styleSheets[1].deleteRule(i)
-        }
-        document.styleSheets[1].insertRule('.grade_5 {background: #1FA5F7}', 1)
-        document.styleSheets[1].insertRule('.grade_4 {background: #71C0F0}', 1)
-        document.styleSheets[1].insertRule('.grade_3 {background: #7D919E}', 1)
-        document.styleSheets[1].insertRule('.grade_2 {background: #fff}', 1)
-        document.styleSheets[1].insertRule('.grade_1 {background: #C49068}', 1)
+        document.styleSheets[1].cssRules[7].style.background = '#1FA5F7'
+        document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
+        document.styleSheets[1].cssRules[5].style.background = '#7D919E'
+        document.styleSheets[1].cssRules[4].style.background = '#fff'
+        document.styleSheets[1].cssRules[3].style.background = '#C49068'
     }
     //темная тема для страницы практика
     if (path == '/student/practice/index') {
