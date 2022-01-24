@@ -1,16 +1,31 @@
-//делаем запрос к настройкам, хранящимся в background.js
-chrome.runtime.sendMessage({ data: 'settings' }, (response) => {
-    //всевозможные сценарии работы плагина
-    if (response.answer.checkbox1 == 'true') {
-        removeTrash()
+_ini()
+
+function _ini() {
+
+    document.getElementsByTagName("html")[0].style.display = "none";
+
+    window.onload = function () {
+
+        //делаем запрос к настройкам, хранящимся в background.js
+        chrome.runtime.sendMessage({ data: 'settings' }, (response) => {
+            //всевозможные сценарии работы плагина
+            if (response.answer.checkbox1 == 'true') {
+                removeTrash()
+            }
+            if (response.answer.checkbox2 == 'true') {
+                darkTheme()
+            }
+            if (response.answer.checkbox3 == 'true') {
+                //
+            }
+        })
+
+        document.getElementsByTagName("html")[0].style.display = "block"
+
     }
-    if (response.answer.checkbox2 == 'true') {
-        darkTheme()
-    }
-    if (response.answer.checkbox3 == 'true') {
-        //
-    }
-})
+
+}
+
 
 //функционал плагина
 function removeTrash() {
