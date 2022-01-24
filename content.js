@@ -234,3 +234,63 @@ function darkTheme() {
         document.querySelectorAll('.list-group-item').forEach(el => el.style.backgroundColor = black)
     }
 }
+
+
+
+/*функция смены правил css
+допустимые аргументы:
+
+(свойство, знач1, знач2, дебаг)
+([свойство, знач1, знач2, дебаг])
+(
+    {
+        rule: свойство,
+        from: знач1,
+        to: знач2,
+        debug: дебаг
+    }
+)
+
+(возможно, стоит убрать дебаг мод, но он может быть полезен при создании рулесета)
+*/
+function changeRule(rule, from, to, debug){
+    if(Array.isArray(rule)){
+        from = rule[1] || rule.from
+        to = rule[2] || rule.to
+        debug = rule[3] || rule.debug
+        rule = rule[0] || rule.rule
+    }
+    for(let i=0; i<document.styleSheets.length; i++){
+        if(debug) console.log ("~~~~~~~~~~~~~~~~~~~~~~~~~~~\ni" + i + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        try{
+            document.styleSheets[i].cssRules
+        }
+        catch(e){
+            document.styleSheets[i].disabled = true;
+        }
+        
+        if(!document.styleSheets[i].disabled) for(let j=0; j<document.styleSheets[i].cssRules.length; j++){
+            
+            
+            if(document.styleSheets[i].cssRules[j].style) {
+                if((document.styleSheets[i].cssRules[j].style[rule]) && debug) {
+                    console.log ("j" + j)
+                    console.log(document.styleSheets[i].cssRules[j].style[rule])
+                }
+                if(document.styleSheets[i].cssRules[j].style[rule]==from) document.styleSheets[i].cssRules[j].style[rule] = to;
+            }
+        }
+    }
+}
+
+//неоконченный рулесет для демонического орокса. можно попробовать ради шутки или теста. подтверждена работа новостей, остальные блоки хз
+rules = [
+    ["backgroundColor", "rgb(0, 140, 186)", "rgb(200, 0, 0)"],
+    ["backgroundColor", "rgb(255, 255, 255)", "rgb(0, 0, 0)"],
+    ["color", "rgb(79, 79, 79)", "rgb(176, 176, 176)"],
+    ["backgroundColor", "rgb(0, 102, 135)", "rgb(150, 0, 0)"],
+    ["backgroundColor", "rgb(0, 102, 135)", "rgb(150, 0, 0)"],
+    ["backgroundColor", "rgb(238, 238, 238)", "rgb(30, 30, 30)"],
+    ["color", "rgb(0, 140, 186)", "rgb(135, 0, 0)"],
+    ["color", "rgb(0, 82, 110)", "rgb(100, 0, 0)"]
+]
