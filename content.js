@@ -64,254 +64,364 @@ function darkTheme() {
 
     //инструкции
     changeRule('backgroundColor', 'rgb(255, 255, 255)', 'rgb(30, 30, 30)')
-    //(DONE)! темная тема для корневой страницы
-    if (path == '/') {
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        changeRule("backgroundColor", "rgb(255, 255, 255)", "rgb(30, 30, 30)")
-        changeRule("backgroundColor", "rgb(238, 238, 238)", "rgb(30, 30, 30)")
-    }
-    //(DONE)! темная тема для страницы ЧаВо
-    if (path == '/faq' || path == '/faq/index') {
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('select').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('input').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        //если нажата кнопка искать
-        if (document.querySelectorAll('.newColor').length > 0) {
-            document.querySelectorAll('.panel-heading').forEach((el) => {
+    switch (path) {
+        //(DONE)! темная тема для главной страницы
+        case '/':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            changeRule("backgroundColor", "rgb(255, 255, 255)", "rgb(30, 30, 30)")
+            changeRule("backgroundColor", "rgb(238, 238, 238)", "rgb(30, 30, 30)")
+            break
+        //(DONE)! темная тема для страницы с баллами
+        case '/student/student':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+
+            document.styleSheets[1].cssRules[7].style.background = '#1FA5F7'
+            document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
+            document.styleSheets[1].cssRules[5].style.background = '#7D919E'
+            document.styleSheets[1].cssRules[4].style.background = '#fff'
+            document.styleSheets[1].cssRules[3].style.background = '#C49068'
+            document.styleSheets[1].cssRules[2].style.color = 'black'
+
+            //динамические блоки
+            document.styleSheets[3].cssRules[1324].style.backgroundColor = black
+            document.styleSheets[3].cssRules[1288].style.backgroundColor = black
+
+            document.querySelectorAll('.list-group-item').forEach(el => el.style.backgroundColor = black)
+
+            document.querySelectorAll('.panel-heading').forEach(el => el.style.color = white)
+
+            changeRule('backgroundColor', 'rgb(245, 245, 245)', 'rgb(30, 30, 30)')
+            changeRule('backgroundColor', 'rgb(217, 237, 247)', 'rgb(30, 30, 30)')
+            changeRule('backgroundColor', 'rgb(196, 227, 243)', 'rgb(30, 30, 30)')
+            changeRule('backgroundColor', 'rgb(223, 240, 216)', 'rgb(41, 67, 43)')
+            changeRule('backgroundColor', 'rgb(208, 233, 198)', 'rgb(30, 30, 30)')
+
+            //колокольчик fix для некоторых страниц
+            changeRule('backgroundColor', 'rgb(221, 221, 221)', 'rgb(0, 113, 150)')
+            changeRule('backgroundColor', 'rgb(238, 238, 238)', black)
+            break
+        //(DONE)! темная тема для страницы практика
+        case '/student/practice/index':
+            document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            break
+        //(DONE)! темная тема для страницы отдельной новости
+        case '/main/view-news':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('span').forEach((el) => {
+                if (el.style.color == 'rgb(51, 51, 51)' || el.style.color == 'black') el.style.color = white
+            })
+            break
+        //(DONE)! темная тема для страницы новости через уведомления
+        case '/student/news/view':
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('div').forEach((el) => {
+                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
+            })
+            document.querySelectorAll('p').forEach((el) => {
+                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
+            })
+            document.querySelectorAll('span').forEach((el) => {
+                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
+            })
+            document.querySelectorAll('font').forEach((el) => {
+                if (el.style.color == '') el.style.color = white
+            })
+            document.querySelectorAll('b').forEach((el) => {
+                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
+            })
+            break
+        //(DONE)! темная тема для страницы новости дисциплины
+        case '/student/news/index':
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('.post_footer').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('div').forEach((el) => {
+                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
+            })
+            document.querySelectorAll('p').forEach((el) => {
+                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
+            })
+            document.querySelectorAll('span').forEach((el) => {
+                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
+            })
+            document.querySelectorAll('font').forEach((el) => {
+                if (el.style.color == '') el.style.color = white
+            })
+            document.querySelectorAll('b').forEach((el) => {
+                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
+            })
+            break
+        //(DONE)! темная тема для страницы портфолио
+        case '/portfolio/view-project/':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('li.active')[2].style.color = purple
+            document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('.alert')[1].style.color = 'black'
+            document.getElementById('add_comment').style.backgroundColor = black
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('input').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            break
+        //(DONE)! темная тема для страницы внеучебное портфолио
+        case '/portfolio/list-vneuchebnie-project':
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            break
+        //(DONE)! темная тема для страницы домашние задания
+        case '/student/homework/list':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('input').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            break
+        //(DONE)! темная тема для конкретного ДЗ
+        case '/student/homework/view':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('li.active')[1].style.color = purple
+
+            let textarea = document.getElementById('comment-text')
+            textarea.style.backgroundColor = black
+            textarea.style.color = white
+
+            document.querySelector('.resumable-drop').style.backgroundColor = black
+            document.querySelector('.resumable-drop').style.color = white
+
+            document.querySelectorAll('.author').forEach(el => el.style.color = white)
+            document.querySelectorAll('.list-group-item').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            break
+        //(DONE)! темная тема для страницы проекта из вкладки портфолио
+        case '/portfolio/view-project':
+            document.querySelectorAll('input').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('li.active')[2].style.color = '#b63dd2'
+
+            textarea = document.getElementById('add_comment')
+            textarea.style.backgroundColor = black
+            textarea.style.color = white
+            break
+        //(DONE)! темная тема для страницы помощь
+        case '/support/list':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            break
+        //(DONE)! темная тема для страницы электронные библиотеки
+        case '/other/libraries':
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            break
+        //(DONE)! темная тема для страницы профиль
+        case '/user/profile':
+            document.querySelector('.panel').style.backgroundColor = black
+            document.querySelector('.panel-footer').style.backgroundColor = black
+            document.querySelector('h3').style.color = 'black'
+            document.querySelectorAll('img')[1].src = 'https://lordmyrnya.ru/orioks/resources/img/logo3.png'
+            break
+        //(DONE)! темная тема для страницы ресурсы
+        case '/student/ir/':
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('.list-group-item').forEach(el => el.style.backgroundColor = black)
+            changeRule('backgroundColor', 'rgb(245, 245, 245)', 'rgb(30, 30, 30)')
+            break
+        //(DONE)! темная тема для страницы результата теста
+        case '/student/student/testresult':
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            break
+        //(DONE)! темная тема для страницы ЧаВо
+        case '/faq':
+        case '/faq/index':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('input').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            //если нажата кнопка искать
+            if (document.querySelectorAll('.newColor').length > 0) {
+                document.querySelectorAll('.panel-heading').forEach((el) => {
+                    el.style.backgroundColor = black
+                    el.style.color = white
+                })
+
+                document.getElementById('collapse_cat1').style.backgroundColor = black
+
+                document.styleSheets[2].cssRules[1329].style.removeProperty('color')
+                document.styleSheets[0].cssRules[0].style.removeProperty('color')
+            }
+            break
+        //(DONE)! темная тема для страницы учебное портфолио
+        case '/portfolio/list-uchebnie-project':
+        case '/portfolio/list-uchebnie-project/index':
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('input').forEach((el) => {
                 el.style.backgroundColor = black
                 el.style.color = white
             })
 
-            document.getElementById('collapse_cat1').style.backgroundColor = black
-
-            document.styleSheets[2].cssRules[1329].style.removeProperty('color')
-            document.styleSheets[0].cssRules[0].style.removeProperty('color')
-        }
-
-    }
-    //(DONE)! темная тема для страницы с баллами
-    if (path == '/student/student') {
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('select').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-
-        document.styleSheets[1].cssRules[7].style.background = '#1FA5F7'
-        document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
-        document.styleSheets[1].cssRules[5].style.background = '#7D919E'
-        document.styleSheets[1].cssRules[4].style.background = '#fff'
-        document.styleSheets[1].cssRules[3].style.background = '#C49068'
-        document.styleSheets[1].cssRules[2].style.color = 'black'
-
-        //динамические блоки
-        document.styleSheets[3].cssRules[1324].style.backgroundColor = black
-        document.styleSheets[3].cssRules[1288].style.backgroundColor = black
-
-        document.querySelectorAll('.list-group-item').forEach(el => el.style.backgroundColor = black)
-
-        document.querySelectorAll('.panel-heading').forEach(el => el.style.color = white)
-
-        changeRule('backgroundColor', 'rgb(245, 245, 245)', 'rgb(30, 30, 30)')
-        changeRule('backgroundColor', 'rgb(217, 237, 247)', 'rgb(30, 30, 30)')
-        changeRule('backgroundColor', 'rgb(196, 227, 243)', 'rgb(30, 30, 30)')
-        changeRule('backgroundColor', 'rgb(223, 240, 216)', 'rgb(41, 67, 43)')
-        changeRule('backgroundColor', 'rgb(208, 233, 198)', 'rgb(30, 30, 30)')
-
-        //колокольчик fix для некоторых страниц
-        changeRule('backgroundColor', 'rgb(221, 221, 221)', 'rgb(0, 113, 150)')
-        changeRule('backgroundColor', 'rgb(238, 238, 238)', black)
-    }
-    //(DONE)! темная тема для страницы практика
-    if (path == '/student/practice/index') {
-        document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-    }
-    //(DONE)! темная тема для страницы отдельной новости
-    if (path == '/main/view-news') {
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('li.active')[1].style.color = purple
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-        document.querySelectorAll('span').forEach((el) => {
-            if (el.style.color == 'rgb(51, 51, 51)' || el.style.color == 'black') el.style.color = white
-        })
-    }
-    //(DONE)! темная тема для страницы портфолио
-    if (path == '/portfolio/view-project') {
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('li.active')[1].style.color = purple
-        document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-        document.querySelectorAll('.alert')[1].style.color = 'black'
-    }
-    //(DONE)! темная тема для страницы учебное портфолио
-    if (path == '/portfolio/list-uchebnie-project' || path == '/portfolio/list-uchebnie-project/index') {
-        document.querySelectorAll('select').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('input').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('li.active')[1].style.color = purple
-        document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-    }
-    //(DONE)! темная тема для страницы внеучебное портфолио
-    if (path == '/portfolio/list-vneuchebnie-project') {
-        document.querySelectorAll('li.active')[1].style.color = purple
-        document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-    }
-    //(DONE)!темная тема для страницы заявки
-    if (path.split('/')[1] == 'request') {
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('li.active')[2].style.color = purple
-        document.querySelectorAll('select').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-        //темная тема для страниц добавления заявок
-        if (path == '/request/doc/create' || path == '/request/reference/create') {
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
             document.querySelectorAll('li.active')[1].style.color = purple
-        }
-        //темная тема для страницы добавления справки
-        if (path == '/request/reference/create') {
+            document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            break
+        //(DONE)! темная тема для страницы проектная работа
+        case '/social/project_work/project-list':
+        case '/social/project_work/project-list/index':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('input').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+
+            //колокольчик fix для некоторых страниц
+            changeRule('backgroundColor', 'rgb(221, 221, 221)', 'rgb(0, 113, 150)')
+            changeRule('backgroundColor', 'rgb(238, 238, 238)', black)
+            changeRule('backgroundColor', 'rgb(223, 240, 216)', black)
+            break
+        //(DONE)! темная тема для страницы личные файлы
+        case '/personal/files':
+        case '/personal/files/index':
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+
+            let li = document.querySelectorAll('li.active')
+            li[2].style.color = purple
+            li[3].style.color = purple
+
+            document.querySelector('.resumable-drop').style.backgroundColor = black
+            document.querySelector('.resumable-drop').style.color = white
+            break
+        //темная тема для страниц обходной лист
+        case '/request/questionnaire/list':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('li.active')[2].style.color = purple
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            break
+        //темная тема для страниц добавления заявлений
+        case '/request/doc/list':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('li.active')[2].style.color = purple
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            break
+        case '/request/doc/create':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('li.active')[2].style.color = purple
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('li.active')[1].style.color = purple
+            break
+        //темная тема для страниц справки
+        case '/request/reference/list':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('li.active')[2].style.color = purple
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            break
+        case '/request/reference/create':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('li.active')[2].style.color = purple
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+
             let input = document.getElementById('referencethreadform-place')
             input.style.backgroundColor = black
             input.style.color = white
 
-            let textarea = document.getElementById('referencethreadform-message')
-            textarea.style.backgroundColor = black
-            textarea.style.color = white
+            document.getElementById('referencethreadform-message').style.backgroundColor = black
+            document.getElementById('referencethreadform-message').style.color = white
 
-            let dragnDrop = document.querySelector('.resumable-drop')
-            dragnDrop.style.backgroundColor = black
-            dragnDrop.style.color = white
-        }
+            document.querySelector('.resumable-drop').style.backgroundColor = black
+            document.querySelector('.resumable-drop').style.color = white
+            break
+        //темная тема для страниц последипломный отпуск
+        case '/request/holiday/create':
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('li.active')[2].style.color = purple
+            break
+        //темная тема для помощь заявка
+        case '/support/create':
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('input').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.getElementById('supportthreadform-message').style.backgroundColor = black
+            document.getElementById('supportthreadform-message').style.color = white
+            document.querySelector('.resumable-drop').style.backgroundColor = black
+            document.querySelector('.resumable-drop').style.color = white
+            break
     }
-    //(DONE)! темная тема для страницы домашние задания
-    if (path == '/student/homework/list') {
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('select').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('input').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-    }
-    //(DONE)! темная тема для конкретного ДЗ
-    if (path == '/student/homework/view') {
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('li.active')[1].style.color = purple
 
-        let textarea = document.getElementById('comment-text')
-        textarea.style.backgroundColor = black
-        textarea.style.color = white
-
-        let dragnDrop = document.querySelector('.resumable-drop')
-        dragnDrop.style.backgroundColor = black
-        dragnDrop.style.color = white
-
-        document.querySelectorAll('.author').forEach(el => el.style.color = white)
-        document.querySelectorAll('.list-group-item').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-    }
-    //(DONE)! темная тема для страницы проекта из вкладки портфолио
-    if (path == '/portfolio/view-project') {
-        document.querySelectorAll('input').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('select').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('li.active')[2].style.color = '#b63dd2'
-
-        let textarea = document.getElementById('add_comment')
-        textarea.style.backgroundColor = black
-        textarea.style.color = white
-    }
-    //(DONE)! темная тема для страницы проектная работа
-    if (path == '/social/project_work/project-list' || path == '/social/project_work/project-list/index') {
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('select').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('input').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-
-        //колокольчик fix для некоторых страниц
-        changeRule('backgroundColor', 'rgb(221, 221, 221)', 'rgb(0, 113, 150)')
-        changeRule('backgroundColor', 'rgb(238, 238, 238)', black)
-    }
-    //(DONE)! темная тема для страницы помощь
-    if (path == '/support/list') {
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-        document.querySelectorAll('select').forEach((el) => {
-            el.style.backgroundColor = black
-            el.style.color = white
-        })
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-    }
-    //(DONE)! темная тема для страницы электронные библиотеки
-    if (path == '/other/libraries') {
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-    }
-    //(DONE)! темная тема для страницы профиль
-    if (path == '/user/profile') {
-        document.querySelector('.panel').style.backgroundColor = black
-        document.querySelector('.panel-footer').style.backgroundColor = black
-        document.querySelector('h3').style.color = 'black'
-        document.querySelectorAll('img')[1].src = 'https://lordmyrnya.ru/orioks/resources/img/logo3.png'
-    }
-    //(DONE)! темная тема для страницы личные файлы
-    if (path == '/personal/files' || path == '/personal/files/index') {
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-        document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-
-        let li = document.querySelectorAll('li.active')
-        li[2].style.color = purple
-        li[3].style.color = purple
-
-        let dragnDrop = document.querySelector('.resumable-drop')
-        dragnDrop.style.backgroundColor = black
-        dragnDrop.style.color = white
-    }
-    //(DONE)! темная тема для страницы ресурсы
-    if (path == '/student/ir/') {
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-        document.querySelectorAll('li.active')[1].style.color = purple
-        document.querySelectorAll('.list-group-item').forEach(el => el.style.backgroundColor = black)
-        changeRule('backgroundColor', 'rgb(245, 245, 245)', 'rgb(30, 30, 30)')
-    }
-    //темная тема для страницы результата теста
-    if (path == '/student/student/testresult') {
-        document.querySelectorAll('ul')[5].style.backgroundColor = black
-        //changeRule('backgroundColor', 'rgb(250, 250, 250)', 'rgb(30, 30, 30)')
-    }
     //TODO: страница с тестами, РК (структура полностью одинаковая)
 }
 
