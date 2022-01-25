@@ -13,14 +13,36 @@
 <body>
     <div>
         <h2>ORIOKS tweaker v0.9</h2>
+        <h3>Basic Settings</h3>
         <div class="switcher">
             <input type='checkbox' class='ios8-switch' id='checkbox-1'>
-            <label for='checkbox-1'>Fix score</label>
+            <label for='checkbox-1'>Fix Score</label>
         </div>
         <br>
         <div class="switcher">
             <input type='checkbox' class='ios8-switch' id='checkbox-2'>
-            <label for='checkbox-2'>Dark theme</label>
+            <label for='checkbox-2'>Dark Theme</label>
+        </div>
+        <h3>Theme settings</h3>
+        <div class="switcher">
+            <input type='checkbox' class='ios8-switch' id='checkbox-3'>
+            <label for='checkbox-3'>Black Theme</label>
+        </div>
+        <div id="color"></div>
+        <div class="slider">
+            <input type='range' min="0" max="255" value="0" step="1" id='color1_r'>
+            <input type='text' value="0" id="color1_rt" class="color-show"></input>
+        </div>
+        <div class="slider">
+            <input type='range' min="0" max="255" value="0" step="1" id='color1_g'>
+            <input type='text' value="0" id="color1_gt" class="color-show"></input>
+        </div>
+        <div class="slider">
+            <input type='range' min="0" max="255" value="0" step="1" id='color1_b'>
+            <input type='text' value="0" id="color1_bt" class="color-show"></input>
+        </div>
+        <div class="button" id="applybutt">
+            Apply theme
         </div>
         <br>
     </div>
