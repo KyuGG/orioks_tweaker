@@ -177,6 +177,7 @@ function darkTheme() {
             document.querySelectorAll('ul')[5].style.backgroundColor = black
             document.querySelectorAll('.alert')[1].style.color = 'black'
             document.getElementById('add_comment').style.backgroundColor = black
+            document.querySelectorAll('.author').forEach(el => el.style.color = white)
             document.querySelectorAll('select').forEach((el) => {
                 el.style.backgroundColor = black
                 el.style.color = white
@@ -248,6 +249,17 @@ function darkTheme() {
                 el.style.color = white
             })
             document.querySelectorAll('ul')[5].style.backgroundColor = black
+            break
+        //(DONE)! конкретная заявка в разделе помощь
+        case '/support/view':
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('.author').forEach(el => el.style.color = white)
+            document.querySelector('.resumable-drop').style.backgroundColor = black
+            document.querySelector('.resumable-drop').style.color = white
+            document.getElementById('comment-text').style.backgroundColor = black
+            document.getElementById('comment-text').style.color = white
             break
         //(DONE)! темная тема для страницы электронные библиотеки
         case '/other/libraries':
