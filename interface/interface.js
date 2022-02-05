@@ -45,7 +45,7 @@ const onClick = () => {
     })
 }
 
-function changeColor(){
+function changeColor() {
     color.style.backgroundColor = "rgb(" + color1[0].value + ", " + color1[1].value + ", " + color1[2].value + ")"
     console.log(color.style.backgroundColor)
 }
@@ -57,8 +57,7 @@ checkbox2.onclick = () => onClick()
 
 //  БЛОК НИЖЕ НАДО БЫ КАК-НИБУДЬ ПОЛУЧШЕ СДЕЛАТЬ
 
-color1[0].addEventListener("input", () => 
-{
+color1[0].addEventListener("input", () => {
     color1t[0].value = color1[0].value
     changeColor()
 })
@@ -67,8 +66,7 @@ color1t[0].addEventListener("input", () => {
     color1[0].value = color1t[0].value
     changeColor()
 })
-color1[1].addEventListener("input", () => 
-{
+color1[1].addEventListener("input", () => {
     color1t[1].value = color1[1].value
     changeColor()
 })
@@ -77,8 +75,7 @@ color1t[1].addEventListener("input", () => {
     color1[1].value = color1t[1].value
     changeColor()
 })
-color1[2].addEventListener("input", () => 
-{
+color1[2].addEventListener("input", () => {
     color1t[2].value = color1[2].value
     changeColor()
 })

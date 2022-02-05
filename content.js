@@ -62,6 +62,10 @@ function darkTheme() {
     document.styleSheets[3].cssRules[38].style.background = black
     changeRule('backgroundColor', 'rgb(247, 247, 247)', 'rgb(30, 30, 30)')
 
+    //колокольчик fix для некоторых страниц
+    changeRule('backgroundColor', 'rgb(221, 221, 221)', 'rgb(0, 113, 150)')
+    changeRule('backgroundColor', 'rgb(238, 238, 238)', black)
+
     //инструкции
     changeRule('backgroundColor', 'rgb(255, 255, 255)', 'rgb(30, 30, 30)')
     switch (path) {
@@ -70,6 +74,7 @@ function darkTheme() {
             document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
             changeRule("backgroundColor", "rgb(255, 255, 255)", "rgb(30, 30, 30)")
             changeRule("backgroundColor", "rgb(238, 238, 238)", "rgb(30, 30, 30)")
+            changeRule("color", "rgb(111, 111, 111)", white)
             break
         //(DONE)! темная тема для страницы с баллами
         case '/student/student':
@@ -100,10 +105,6 @@ function darkTheme() {
             changeRule('backgroundColor', 'rgb(196, 227, 243)', 'rgb(30, 30, 30)')
             changeRule('backgroundColor', 'rgb(223, 240, 216)', 'rgb(41, 67, 43)')
             changeRule('backgroundColor', 'rgb(208, 233, 198)', 'rgb(30, 30, 30)')
-
-            //колокольчик fix для некоторых страниц
-            changeRule('backgroundColor', 'rgb(221, 221, 221)', 'rgb(0, 113, 150)')
-            changeRule('backgroundColor', 'rgb(238, 238, 238)', black)
             break
         //(DONE)! темная тема для страницы практика
         case '/student/practice/index':
@@ -162,7 +163,7 @@ function darkTheme() {
             })
             break
         //(DONE)! темная тема для страницы портфолио
-        case '/portfolio/view-project/':
+        case '/portfolio/view-project':
             document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
             document.querySelectorAll('li.active')[1].style.color = purple
             document.querySelectorAll('li.active')[2].style.color = purple
@@ -319,11 +320,6 @@ function darkTheme() {
                 el.style.color = white
             })
             document.querySelectorAll('ul')[5].style.backgroundColor = black
-
-            //колокольчик fix для некоторых страниц
-            changeRule('backgroundColor', 'rgb(221, 221, 221)', 'rgb(0, 113, 150)')
-            changeRule('backgroundColor', 'rgb(238, 238, 238)', black)
-            changeRule('backgroundColor', 'rgb(223, 240, 216)', black)
             break
         //(DONE)! темная тема для страницы личные файлы
         case '/personal/files':
@@ -337,6 +333,7 @@ function darkTheme() {
 
             document.querySelector('.resumable-drop').style.backgroundColor = black
             document.querySelector('.resumable-drop').style.color = white
+            changeRule('backgroundColor', 'rgb(245, 245, 245)', 'rgb(30, 30, 30)')
             break
         //темная тема для страниц обходной лист
         case '/request/questionnaire/list':
@@ -419,6 +416,14 @@ function darkTheme() {
             document.getElementById('supportthreadform-message').style.color = white
             document.querySelector('.resumable-drop').style.backgroundColor = black
             document.querySelector('.resumable-drop').style.color = white
+            break
+        //темная тема для страницы списка уведомлений
+        case '/notification':
+        case '/notification/index':
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
             break
     }
 
