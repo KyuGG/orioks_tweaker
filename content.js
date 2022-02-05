@@ -270,7 +270,7 @@ function darkTheme() {
             document.querySelector('.panel').style.backgroundColor = black
             document.querySelector('.panel-footer').style.backgroundColor = black
             document.querySelector('h3').style.color = 'black'
-            document.querySelectorAll('img')[1].src = 'https://lordmyrnya.ru/orioks/resources/img/logo3.png'
+            document.querySelectorAll('img')[1].src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
             break
         //(DONE)! темная тема для страницы ресурсы
         case '/student/ir/':
