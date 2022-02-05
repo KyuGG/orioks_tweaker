@@ -1,26 +1,28 @@
 _ini()
 
 function _ini() {
+    //плагин не работает в moodle
+    if (document.location.pathname.split('/')[1] != 'moodle') {
 
-    document.getElementsByTagName('html')[0].style.display = 'none'
+        document.getElementsByTagName('html')[0].style.display = 'none'
 
-    window.onload = function () {
+        window.onload = function () {
 
-        //делаем запрос к настройкам, хранящимся в background.js
-        chrome.runtime.sendMessage({ data: 'settings' }, (response) => {
-            //всевозможные сценарии работы плагина
-            if (response.answer.checkbox1 == 'true') {
-                removeTrash()
-            }
-            if (response.answer.checkbox2 == 'true') {
-                darkTheme()
-            }
-        })
+            //делаем запрос к настройкам, хранящимся в background.js
+            chrome.runtime.sendMessage({ data: 'settings' }, (response) => {
+                //всевозможные сценарии работы плагина
+                if (response.answer.checkbox1 == 'true') {
+                    removeTrash()
+                }
+                if (response.answer.checkbox2 == 'true') {
+                    darkTheme()
+                }
+            })
 
-        document.getElementsByTagName('html')[0].style.display = 'block'
+            document.getElementsByTagName('html')[0].style.display = 'block'
 
+        }
     }
-
 }
 
 
@@ -28,7 +30,7 @@ function _ini() {
 function removeTrash() {
     //добавление лого
     let logo = document.createElement('img')
-    logo.src = 'https://lordmyrnya.ru/orioks/resources/img/logo3.png'
+    logo.src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
     logo.width = 50
     logo.className = 'navbar-header'
     let orioks = document.getElementsByClassName('container')[0]
