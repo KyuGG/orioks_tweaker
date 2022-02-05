@@ -107,6 +107,8 @@ function darkTheme() {
             changeRule('backgroundColor', 'rgb(196, 227, 243)', 'rgb(30, 30, 30)')
             changeRule('backgroundColor', 'rgb(223, 240, 216)', 'rgb(41, 67, 43)')
             changeRule('backgroundColor', 'rgb(208, 233, 198)', 'rgb(30, 30, 30)')
+            changeRule('backgroundColor', 'rgb(242, 222, 222)', black)
+            changeRule('backgroundColor', 'rgb(235, 204, 204)', black)
             break
         //(DONE)! темная тема для страницы практика
         case '/student/practice/index':
