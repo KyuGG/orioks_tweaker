@@ -19,12 +19,44 @@ function _ini() {
                 }
             })
 
+            if (document.location.pathname == '/bugreport') {
+                bugReport()
+            }
+
             document.getElementsByTagName('html')[0].style.display = 'block'
 
         }
     }
 }
 
+function bugReport() {
+    document.getElementsByClassName('row')[0].remove()
+    let myDiv = document.createElement('div')
+    let h1 = document.createElement('h1')
+    h1.innerText = 'Orioks Tweaker'
+    let h2 = document.createElement('h2')
+    h2.innerText = 'Напишите об ошибке'
+
+    let gitHub = document.createElement('a')
+    gitHub.href = 'https://github.com/KyuGG/orioks_tweaker/issues'
+    gitHub.innerText = 'GitHub'
+    gitHub.style.fontSize = '22pt'
+
+    let vk = document.createElement('a')
+    vk.href = 'https://vk.me/kyugg'
+    vk.innerText = 'VK'
+    vk.style.fontSize = '22pt'
+
+    let br = document.createElement('br')
+
+    myDiv.append(gitHub)
+    myDiv.append(br)
+    myDiv.append(vk)
+    document.getElementsByClassName('site-error')[0].append(h1)
+    document.getElementsByClassName('site-error')[0].append(h2)
+    document.getElementsByClassName('site-error')[0].append(myDiv)
+
+}
 
 //функционал плагина
 function removeTrash() {

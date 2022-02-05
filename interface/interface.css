@@ -100,3 +100,18 @@ label {
 label:hover {
     color: #5581d3;
 }
+
+#bugreport {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid;
+    background: #353535;
+    color: #fff;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#bugreport:hover {
+    background: #5581d3;
+    color: black;
+}

@@ -1,5 +1,6 @@
 let checkbox1 = document.getElementById('checkbox-1')
 let checkbox2 = document.getElementById('checkbox-2')
+let bugreport = document.getElementById('bugreport')
 
 //загрузка настроек из background.js
 chrome.runtime.sendMessage({ data: 'settings' }, (response) => {
@@ -14,8 +15,13 @@ const onClick = () => {
         'checkbox1': checkbox1.checked,
         'checkbox2': checkbox2.checked
     }
-    console.log(settings)
     chrome.runtime.sendMessage({ data: 'changeSettings', settings: settings }, (response) => {
+        console.log(response.answer)
+    })
+}
+
+const openBugReport = () => {
+    chrome.runtime.sendMessage({ data: 'bugReport' }, (response) => {
         console.log(response.answer)
     })
 }
@@ -23,3 +29,4 @@ const onClick = () => {
 
 checkbox1.onclick = () => onClick()
 checkbox2.onclick = () => onClick()
+bugreport.onclick = () => openBugReport()

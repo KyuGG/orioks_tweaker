@@ -14,5 +14,9 @@ chrome.runtime.onMessage.addListener(
             localStorage.setItem('checkbox2', request.settings.checkbox2)
             sendResponse({ answer: 'settings have been changed' })
         }
+        if (request.data === 'bugReport') {
+            chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
+            sendResponse({ answer: 'page was opened successfully' })
+        }
     }
 )
