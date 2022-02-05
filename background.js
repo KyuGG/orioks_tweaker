@@ -1,7 +1,7 @@
 //конструктор с дефолтными настройками
 if (localStorage.length == 0) {
-    localStorage.setItem('checkbox1', false)
-    localStorage.setItem('checkbox2', false)
+    localStorage.setItem('checkbox1', true)
+    localStorage.setItem('checkbox2', true)
 }
 
 //связь между content.js и router.js
