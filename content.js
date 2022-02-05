@@ -125,6 +125,8 @@ function darkTheme() {
             document.querySelectorAll('li.active')[1].style.color = purple
             document.querySelectorAll('ul')[5].style.backgroundColor = black
             document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.getElementById('commentform-body').style.backgroundColor = black
+            document.getElementById('commentform-body').style.color = white
             document.querySelectorAll('div').forEach((el) => {
                 if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
             })
