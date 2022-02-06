@@ -1,10 +1,13 @@
 {
     "manifest_version": 2,
-    "name": "orioks_tweaker",
+    "name": "ORIOKS tweaker",
     "version": "0.9",
+    "icons": {
+        "128": "interface/logo3.png"
+    },
     "browser_action": {
         "default_title": "ORIOKS tweaker",
-        "default_icon": "interface/logo.png",
+        "default_icon": "interface/logo3.png",
         "default_popup": "interface/interface.html"
     },
     "content_scripts": [
