@@ -119,7 +119,7 @@ function darkTheme() {
             })
             document.querySelectorAll('ul')[5].style.backgroundColor = black
 
-            document.styleSheets[1].cssRules[7].style.background = '#1FA5F7'
+            document.styleSheets[1].cssRules[7].style.background = '#007ECB'
             document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
             document.styleSheets[1].cssRules[5].style.background = '#7D919E'
             document.styleSheets[1].cssRules[4].style.background = '#fff'
