@@ -68,12 +68,16 @@ function removeTrash() {
     let orioks = document.getElementsByClassName('container')[0]
     orioks.prepend(logo)
     if (document.location.pathname == '/student/student') {
+        let black = '#353535'
         //смена балл на сум
         let span = document.getElementById('bp')
         let clack = new Event('click')
         span.dispatchEvent(clack)
         span.dispatchEvent(clack)
         span.remove()
+
+        document.styleSheets[1].cssRules[8].style.color = black
+        document.styleSheets[1].cssRules[8].style.display = 'block'
         //удаление красных точек
         document.querySelectorAll('.bad').forEach(el => el.remove())
         //удаление надписей типа "из 100"
@@ -126,6 +130,9 @@ function darkTheme() {
             document.styleSheets[1].cssRules[3].style.background = '#C49068'
             document.styleSheets[1].cssRules[2].style.color = 'black'
 
+            document.styleSheets[1].cssRules[8].style.color = white
+            document.styleSheets[1].cssRules[8].style.display = 'block'
+
             //динамические блоки
             document.styleSheets[3].cssRules[1324].style.backgroundColor = black
             document.styleSheets[3].cssRules[1288].style.backgroundColor = black
@@ -159,6 +166,7 @@ function darkTheme() {
         //(DONE)! темная тема для страницы новости через уведомления
         case '/student/news/view':
             document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('li.active')[2].style.color = purple
             document.querySelectorAll('ul')[5].style.backgroundColor = black
             document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
             document.getElementById('commentform-body').style.backgroundColor = black
@@ -257,6 +265,23 @@ function darkTheme() {
             })
             document.querySelectorAll('ul')[5].style.backgroundColor = black
             break
+        case '/student/homework/create':
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('select').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+            document.querySelectorAll('input').forEach((el) => {
+                el.style.backgroundColor = black
+                el.style.color = white
+            })
+
+            document.getElementById('homeworktreadform-message').style.backgroundColor = black
+            document.getElementById('homeworktreadform-message').style.color = white
+            document.querySelector('.resumable-drop').style.backgroundColor = black
+            document.querySelector('.resumable-drop').style.color = white
+            break
         //(DONE)! темная тема для страницы проекта из вкладки портфолио
         case '/portfolio/view-project':
             document.querySelectorAll('input').forEach((el) => {
@@ -312,6 +337,8 @@ function darkTheme() {
             changeRule('backgroundColor', 'rgb(245, 245, 245)', 'rgb(30, 30, 30)')
             break
         //(DONE)! темная тема для страницы результата теста
+        case '/student/student/test':
+        case '/student/student/test/':
         case '/student/student/testresult':
             document.querySelectorAll('ul')[5].style.backgroundColor = black
             break
@@ -476,8 +503,6 @@ function darkTheme() {
             document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
             break
     }
-
-    //TODO: страница с тестами, РК (структура полностью одинаковая)
 }
 
 function changeRule(rule, from, to, debug) {
