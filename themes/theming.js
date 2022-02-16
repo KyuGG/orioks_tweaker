@@ -1,3 +1,11 @@
+let globalRules
+let globalActualRules
+let currentRule
+let globalTo
+let globalProperty
+let globalFrom
+let rulesCount
+
 function getRules(property, value) {
     let results = {}
     for (let i = 0; i < document.styleSheets.length; i++) {
@@ -22,12 +30,73 @@ function getRules(property, value) {
     return results;
 }
 
+function next(steps = 1){
+    setById(currentRule, globalFrom)
+    currentRule+=steps
+    setById(currentRule, globalTo)
+}
+
+function success(steps = 1){
+    globalActualRules[currentRule] = true
+    next(steps)
+}
+
+function fail(steps = 1){
+    globalActualRules[currentRule] = false
+    next(steps)
+}
+
+function previous(steps = 1){
+    return next(-steps)
+}
+
+function setById(id, value){
+    let rule = asNumber(globalRules, id)
+    let a = {}
+    a[rule[0]] = [rule[1]]
+    setRules(a, globalProperty, value)
+}
+
+function getRulesPrecise(property, value, toTest) {
+    globalRules = getRules(property, value)
+    globalActualRules = {}
+    currentRule = 0;
+    globalFrom = value;
+    globalTo = toTest;
+    globalProperty = property;
+    rulesCount = countAll(globalRules)
+    setById(currentRule, globalTo)
+}
+
 function setRules(rules, property, value){
     for(let i in document.styleSheets){
         if(rules[document.styleSheets[i].href]){
-            for(let j in rules[document.styleSheets[i].href]) document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property] = value
+            console.log(rules)
+            for(let j in rules[document.styleSheets[i].href]) {
+                document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property] = value
+                console.log(document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property])
+            }
+            
+
         }
     }
+}
+
+function asNumber(rules, id){
+    let count = 0
+    for(let i in rules){
+        if(rules[i].length+count>=id+1){
+            return [i, rules[i][id-count]]
+        } else count+=rules[i].length
+    }
+}
+
+function countAll(rules){
+    let count = 0
+    for(let i in rules){
+        count+=rules[i].length
+    }
+    return count
 }
 
 //      RULE-SETS
@@ -40,7 +109,12 @@ rulesets = {
     scndBg:{"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[307,316,470,500,569,574,582,589,596,603,610,632,727,826,839,844,853,857,879,890,941,976,1023,1062,1093,1136],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[245,254,404,434,685,694,844,873,943,948,953,958,963,985,1053,1080,1157,1176,1196,1231,1240,1288,1324,1367,1372,1377,1382,1387,1406,1479]},
     redbell:{"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[34]},
     bg250:{"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[1233,1393]},
-    bg245:{"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[393,476,477,636,833,915,952,982,1016,1049],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[332,410,413,772,850,853,1185,1265,1295,1330,1360],"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[15]},
+
+
+    plashka:{"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [850]},
+    hvrdisc:{"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [1185]},
+
+
     deftxt: {"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[0]},
     notificationBg: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[503,700,717,720,840,854,883,944],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[437,876,989,1070,1073,1194,1206,1296],"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[36,38]},
     notificationBgHvr: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[1109],"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[39,41]},
@@ -56,6 +130,9 @@ rulesets = {
     discChosenBgHvr: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[482,962],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[418,858,1310]},
     profileFrame: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[590,595,868,921],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[949,952,1220,1254,1273,1311,1375,1554]}
 }
+
+//    bg245:{"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[393,476,477,636,833,915,952,982,1016,1049],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[332,410,413,772,850,853,1185,1265,1295,1330,1360],"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[15]},
+
 
 function test(){
     setRules(rulesets.mainBg, "backgroundColor", "rgb(255, 0, 0)")
@@ -90,7 +167,9 @@ function test(){
     setRules(rulesets.notificationTxtDays, "color", "rgb(200, 200, 200)")
     setRules(rulesets.notificationTitle, "color", "rgb(200, 0, 0)")
 
-    setRules(rulesets.bg245, "backgroundColor", "rgb(10, 10, 10)")
+    //setRules(rulesets.bg245, "backgroundColor", "rgb(10, 10, 10)")
+    setRules(rulesets.plashka, "backgroundColor", "rgb(255, 255, 0)")
+    setRules(rulesets.hvrdisc, "backgroundColor", "rgb(0, 255, 255)")
     setRules(rulesets.redbell, "backgroundColor", "rgb(0, 0, 255)")
     setRules(rulesets.deftxt, "color", "rgb(200, 200, 200)")
 }
