@@ -245,7 +245,7 @@ async function automod(timeout = 3000){
     set(0)
     let skipCache = globalSkip
     globalSkip = false
-    while(currentRule<rulesCount){
+    while(currentRule<rulesCount-1){
         await sleep(timeout)
         next()
     }
@@ -285,11 +285,7 @@ function outputNeededRules(){
 function setRules(rules, property, value){
     for(let i in document.styleSheets){
         if(rules[document.styleSheets[i].href]){
-            //console.log(rules)
-            for(let j in rules[document.styleSheets[i].href]) {
-                document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property] = value
-                //console.log(document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property])
-            }
+            for(let j in rules[document.styleSheets[i].href]) {document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property] = value}
         }
     }
 }
