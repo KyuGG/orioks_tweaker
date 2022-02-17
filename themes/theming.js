@@ -1,10 +1,58 @@
-let globalRules
-let globalActualRules
-let currentRule
-let globalTo
-let globalProperty
-let globalFrom
-let rulesCount
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Subscript for theming
+Just paste it into console browser
+
+Author: lordmyrnya
+Last update: 17.02.22
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+let globalRules             // кэш правил для использования в precise
+let globalActualRules       // кэш выделенных пользователем правил
+let currentRule             // кэш номера правила
+let globalTo                // кэш состояния свойства на которое необходимо менять
+let globalProperty          // кэш названия свойства
+let globalFrom              // кэш изначального состояния свойства
+let rulesCount              // количество правил в globalRules
+let globalGUIInit           // bool показывающие, инициализацию GUI
+let GUI                     // объект с элементами GUI
+let globalSkip = true       // при true функции success и fail автоматически переходят на следующее правило
+
+/*
+Функции Precise режима
+
+- Ищет правила в связи с входящими данными
+- getRulesPrecise(
+    property,       - свойство по которому осуществляется поиск
+    value,          - значение свойства, по которому осуществляется поиск
+    toTest,         - значение свойства, которое будет заменять то, что использовалось по умолчанию. Рекомендуется брать контрастный цвет.
+    GUI = true      - включает или отключает вспомогательное GUI
+)
+
+- Подгружает ruleset и готовит Precise режим (скорее всего потом будет deprecated)
+- loadRulesetPrecise(
+    ruleset,        - готовый рулесет
+    property,       - свойство по которому осуществляется поиск
+    value,          - значение свойства, по которому осуществляется поиск
+    toTest,         - значение свойства, которое будет заменять то, что использовалось по умолчанию. Рекомендуется брать контрастный цвет.
+    GUI = true      - включает или отключает вспомогательное GUI
+)
+
+- автоматически переключает правило со временем
+- automod(
+    timeout = 3000  - timeout (хаха)
+)
+
+- next, previous - переходит вперёд или назад по списку
+
+- success - ставит метку true на правиле и переходит дальше (если стоит globalSkip=true)
+- fail - ставит метку false на правиле и переходит дальше (если стоит globalSkip=true)
+
+- set(id) - переходит на определённое правило под номером id
+
+- outputNeededRules - выводит правила с меткой true в двух режимах
+*/
 
 function getRules(property, value) {
     let results = {}
@@ -33,62 +81,177 @@ function getRules(property, value) {
 function next(steps = 1){
     setById(currentRule, globalFrom)
     currentRule+=steps
-    setById(currentRule, globalTo)
+    if(currentRule>=rulesCount-1) currentRule = rulesCount-1
+    else if(currentRule<0) currentRule = 0
+    else setById(currentRule, globalTo)
+
+    updateGUI()
+}
+
+function set(id){
+    setById(currentRule, globalFrom)
+    currentRule = id
+    if(currentRule>=rulesCount-1) currentRule = rulesCount-1
+    else if(currentRule<0) currentRule = 0
+    else setById(currentRule, globalTo)
+
+    updateGUI()
 }
 
 function success(steps = 1){
     globalActualRules[currentRule] = true
-    next(steps)
+    if(globalSkip) next(steps)
 }
 
 function fail(steps = 1){
     globalActualRules[currentRule] = false
-    next(steps)
+    if(globalSkip) next(steps)
 }
 
 function previous(steps = 1){
-    return next(-steps)
+    return next(steps*-1)
 }
 
 function setById(id, value){
     let rule = asNumber(globalRules, id)
-    let a = {}
-    a[rule[0]] = [rule[1]]
-    setRules(a, globalProperty, value)
+    //console.log(rule)
+    setRules(rule, globalProperty, value)
 }
 
-function getRulesPrecise(property, value, toTest) {
+function initGUI(){
+    if(globalGUIInit) return true
+
+    GUI = {}
+    
+    GUI.backbutt = document.createElement("div")
+
+    GUI.nextbutt = document.createElement("div")
+
+    GUI.counter = document.createElement("div")
+
+    GUI.status = document.createElement("div")
+
+    GUI.approve = document.createElement("div")
+
+    GUI.reject = document.createElement("div")
+
+    for(let i in GUI){
+        GUI[i].id = "styler-" + i
+        if((i!="counter") && (i!="status")) {
+            GUI[i].style.width = "35px"
+            GUI[i].style.cursor = "pointer"
+        }
+        GUI[i].style.userSelect = "none"
+        GUI[i].style.height = "35px"
+        GUI[i].style.borderRadius = "10px"
+        GUI[i].style.position = "fixed"
+        GUI[i].style.backgroundColor = "black"
+        GUI[i].style.color = "white"
+        GUI[i].style.textAlign = "center"
+        GUI[i].style.paddingTop = "7px"
+        document.body.appendChild(GUI[i])
+    }
+
+    GUI.counter.style.bottom = "20px"
+    GUI.counter.style.right = "20px"
+    GUI.counter.style.width = "70px"
+
+    GUI.backbutt.innerText = "<"
+    GUI.backbutt.style.right = "135px"
+    GUI.backbutt.style.bottom = "20px"
+    GUI.backbutt.addEventListener("click", () => {previous()})
+
+    GUI.nextbutt.innerText = ">"
+    GUI.nextbutt.style.right = "95px"
+    GUI.nextbutt.style.bottom = "20px"
+    GUI.nextbutt.addEventListener("click", () => {next()})
+
+    GUI.approve.innerText = "✅"
+    GUI.approve.style.right = "135px"
+    GUI.approve.style.bottom = "60px"
+    GUI.approve.addEventListener("click", () => {success()})
+
+    GUI.reject.innerText = "❌"
+    GUI.reject.style.right = "95px"
+    GUI.reject.style.bottom = "60px"
+    GUI.reject.addEventListener("click", () => {fail()})
+
+    GUI.status.style.bottom = "60px"
+    GUI.status.style.right = "20px"
+    GUI.status.style.width = "70px"
+
+    globalGUIInit = true
+
+    updateGUI()
+
+    //GUI.counter.style.padding = "7px"
+}
+
+function updateGUI(){
+    if(!globalGUIInit) return false
+    GUI.counter.innerText = currentRule + "/" + (rulesCount-1)
+    if(globalActualRules[currentRule]) GUI.status.style.backgroundColor = "rgb(0, 255, 0)"
+    else GUI.status.style.backgroundColor = "rgb(255, 0, 0)"
+}
+
+function getRulesPrecise(property, value, toTest, GUI = true) {
     globalRules = getRules(property, value)
-    globalActualRules = {}
+    globalActualRules = []
     currentRule = 0;
     globalFrom = value;
     globalTo = toTest;
     globalProperty = property;
     rulesCount = countAll(globalRules)
+
+    for(let i=0; i<rulesCount; i++) globalActualRules[i] = false
+
     setById(currentRule, globalTo)
+
+    if(GUI) initGUI()
 }
 
-function setRules(rules, property, value){
-    for(let i in document.styleSheets){
-        if(rules[document.styleSheets[i].href]){
-            console.log(rules)
-            for(let j in rules[document.styleSheets[i].href]) {
-                document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property] = value
-                console.log(document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property])
-            }
-            
+function loadRulesetPrecise(ruleset, property, value, toTest, GUI = true){
+    globalRules = ruleset
+    globalActualRules = []
+    currentRule = 0;
+    globalFrom = value;
+    globalTo = toTest;
+    globalProperty = property;
+    rulesCount = countAll(globalRules)
 
-        }
-    }
+    for(let i=0; i<rulesCount; i++) globalActualRules[i] = false
+
+    setById(currentRule, globalTo)
+
+    if(GUI) initGUI()
 }
 
 function asNumber(rules, id){
     let count = 0
     for(let i in rules){
         if(rules[i].length+count>=id+1){
-            return [i, rules[i][id-count]]
+            let rule = {}
+            rule[i] = [rules[i][id-count]]
+            return rule
         } else count+=rules[i].length
     }
+}
+
+function sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+async function automod(timeout = 3000){
+    set(0)
+    let skipCache = globalSkip
+    globalSkip = false
+    while(currentRule<rulesCount){
+        await sleep(timeout)
+        next()
+    }
+    console.log("automod stopped")
+    globalSkip = skipCache
+    return true
 }
 
 function countAll(rules){
@@ -97,6 +260,38 @@ function countAll(rules){
         count+=rules[i].length
     }
     return count
+}
+
+function outputNeededRules(){
+    console.log("~~~~~~ splitted list: ~~~~~~")
+    let output = {}
+    let rule
+    let key
+    for(let i in globalActualRules){
+        
+        if(globalActualRules[i]) {
+            rule = asNumber(globalRules, Number(i))
+            key = Object.keys(rule)
+            console.log(rule)
+            if(!output[key]) output[key] = rule[key]
+            else output[key].push(rule[key][0])
+        }
+    }
+    console.log("~~~~~~ splitted list end ~~~~~~")
+    return output
+}
+//      PRODUCTION SCRIPT
+
+function setRules(rules, property, value){
+    for(let i in document.styleSheets){
+        if(rules[document.styleSheets[i].href]){
+            //console.log(rules)
+            for(let j in rules[document.styleSheets[i].href]) {
+                document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property] = value
+                //console.log(document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property])
+            }
+        }
+    }
 }
 
 //      RULE-SETS
