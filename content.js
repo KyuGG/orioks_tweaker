@@ -161,6 +161,9 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     setRules(rulesets.debt, 'backgroundColor', bg2)
     setRules(rulesets.debtHvr, 'backgroundColor', bg2)
 
+    if (document.location.pathname == '/user/profile') {
+        document.querySelectorAll('img')[1].src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
+    }
     if (document.location.pathname == '/student/student') {
         document.styleSheets[1].cssRules[7].style.background = '#007ECB'
         document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
