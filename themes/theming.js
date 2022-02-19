@@ -318,7 +318,7 @@ function addRule(selector, params){
 }
 
 
-//      PRODUCTION SCRIPT
+//      PRODUCTION SCRIPTS
 
 function setRules(rules, property, value){
     for(let i in document.styleSheets){
@@ -329,10 +329,10 @@ function setRules(rules, property, value){
 }
 
 function addRules(rules){
+    if(!document.getElementById("styler")) document.head.appendChild(document.createElement("style")).id = "styler"
+    let styler = document.styleSheets[document.styleSheets.length-1]
+    let cssrule
     for(let rule of rules){
-        if(!document.getElementById("styler")) document.head.appendChild(document.createElement("style")).id = "styler"
-        let styler = document.styleSheets[document.styleSheets.length-1]
-        let cssrule
         for(let i of styler.cssRules){
             if(i.selectorText==rule[0]) {cssrule = i; break;}
         }
@@ -353,33 +353,50 @@ function addRules(rules){
 //      RULE-SETS
 
 rulesets = {
-    mainBg: {"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[296,736,939,942,990,1092,1166,1195,1216,1266,1299,1365,1536,1548],"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[8]},
-    mainBgHvr: {"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[297,737,940,1171,1172,1178,1217,1538]},
-    mainTxt: {"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[247,286,687,726,943,964,1191,1231,1367]},
-    mainTxtHvr: {"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[248,688,967,1194]},
-    scndBg:{"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[307,316,470,500,569,574,582,589,596,603,610,632,727,826,839,844,853,857,879,890,941,976,1023,1062,1093,1136],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[245,254,404,434,685,694,844,873,943,948,953,958,963,985,1053,1080,1157,1176,1196,1231,1240,1288,1324,1367,1372,1377,1382,1387,1406,1479]},
-    redbell:{"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[34]},
-    bg250:{"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[1233,1393]},
+    mainBg: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [296, 736, 939, 942, 990, 1092, 1166, 1195, 1216, 1266, 1299, 1365, 1536, 1548], 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [8] },
+    mainBgHvr: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [297, 737, 940, 1171, 1172, 1178, 1217, 1538] },
+    mainTxt: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [247, 286, 687, 726, 943, 964, 1191, 1231, 1367] },
+    mainTxtHvr: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [248, 688, 967, 1194] },
+    scndBg: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [307, 316, 470, 500, 569, 574, 582, 589, 596, 603, 610, 632, 727, 826, 839, 844, 853, 857, 879, 890, 941, 976, 1023, 1062, 1093, 1136], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [245, 254, 404, 434, 685, 694, 844, 873, 943, 948, 953, 958, 963, 985, 1053, 1080, 1157, 1176, 1196, 1231, 1240, 1288, 1324, 1367, 1372, 1377, 1382, 1387, 1406, 1479] },
+    redbell: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [34] },
+    bg250: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1233, 1393] },
 
 
-    plashka:{"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [850]},
-    hvrdisc:{"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [1185]},
+    hvrdisc: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [850] },
+    plashka: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1185] },
 
 
-    deftxt: {"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[0]},
-    notificationBg: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[503,700,717,720,840,854,883,944],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[437,876,989,1070,1073,1194,1206,1296],"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[36,38]},
-    notificationBgHvr: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[1109],"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[39,41]},
-    notificationTxt: {"https://orioks.miet.ru/controller/orioks.css?v=1622198733": [46]},
-    notificationTxtDays: {"https://orioks.miet.ru/controller/orioks.css?v=1622198733": [47]},
-    notificationTitle: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[596],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[290,730,953,1307,1308,1310,1377]},
-    activePath: {"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[332,425,772,865,930,931,936,1188,1294,1360,1546,1586]},
-    scoreButton: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[801,803],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[930,933,1226,1545,1586],"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[19]},
-    injuryNoteBg: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[360,479,540,901,954,1026],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[298,415,738,855,908,1302]},
-    injuryNoteTxt: {"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[288,728,905,908,909,948,1302,1303,1305,1372]},
-    gradesHvr: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[480,957],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[416,856,1305]},
-    discChosenBg: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[362,481,904,959,1031],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[300,417,740,857,1307]},
-    discChosenBgHvr: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[482,962],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[418,858,1310]},
-    profileFrame: {"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[590,595,868,921],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[949,952,1220,1254,1273,1311,1375,1554]}
+    deftxt: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [0] },
+    notificationBg: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [503, 700, 717, 720, 840, 854, 883, 944], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [437, 876, 989, 1070, 1073, 1194, 1206, 1296], 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [36, 38] },
+    notificationBgHvr: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [1109], 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [39, 41] },
+    notificationTxt: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [46] },
+    notificationTxtDays: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [47] },
+    notificationTitle: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [596], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [290, 730, 953, 1307, 1308, 1310, 1377] },
+    activePath: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [332, 425, 772, 865, 930, 931, 936, 1188, 1294, 1360, 1546, 1586] },
+    scoreButton: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [801, 803], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [930, 933, 1226, 1545, 1586], 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [19] },
+    injuryNoteBg: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [360, 479, 540, 901, 954, 1026], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [298, 415, 738, 855, 908, 1302] },
+    injuryNoteTxt: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [288, 728, 905, 908, 909, 948, 1302, 1303, 1305, 1372] },
+    gradesHvr: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [480, 957], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [416, 856, 1305] },
+    discChosenBg: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [362, 481, 904, 959, 1031], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [300, 417, 740, 857, 1307] },
+    discChosenBgHvr: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [482, 962], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [418, 858, 1310] },
+    profileFrame: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [590, 595, 868, 921], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [949, 952, 1220, 1254, 1273, 1311, 1375, 1554] },
+
+    trPortfolio: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [849] },
+    tdPractice: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [853] },
+    printedTxt: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [321, 433, 434, 761, 872, 873, 1053, 1080, 1563, 1565] },
+    profileFooter: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1330] },
+    dragNDrop: { 'https://orioks.miet.ru/widgets/filePicker.css?v=1619569307': [1] },
+    invisibleGrades: { 'https://orioks.miet.ru/controller/student/student.css?v=1571396836': [8] },
+    visibleGrades: { 'https://orioks.miet.ru/controller/student/student.css?v=1571396836': [2] },
+    author: { 'https://orioks.miet.ru/controller/comment.css?v=1571396836': [0] },
+    dzItem: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1293] },
+    dzItemHvr: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1295] },
+    grayHvr: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [931] },
+    notificationEmpty: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [37] },
+    faqPlashki: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1360] },
+    faqBlackLinks: { 'https://orioks.miet.ru/controller/faq/index.css?v=1571396836': [0] },
+    resource: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [15] },
+    resourceHvr: { null: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] }
 }
 
 //    bg245:{"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[393,476,477,636,833,915,952,982,1016,1049],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[332,410,413,772,850,853,1185,1265,1295,1330,1360],"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[15]},
