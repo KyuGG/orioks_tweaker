@@ -164,6 +164,10 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     document.styleSheets[1].cssRules[5].style.background = '#7D919E'
     document.styleSheets[1].cssRules[4].style.background = '#fff'
     document.styleSheets[1].cssRules[3].style.background = '#C49068'
+
+    if (document.location.pathname == '/student/student/test' || document.location.pathname == '/student/student/test/') {
+        document.querySelectorAll('img').forEach(img => img.style.filter = 'invert(1)')
+    }
 }
 
 rulesets = {
