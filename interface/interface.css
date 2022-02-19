@@ -1,6 +1,6 @@
 html{
     width: 250px;
-    height: 300px;
+    height: 350px;
     background-color: #353535;
     color: white;
 }
@@ -30,14 +30,6 @@ h2 {
 
 .slider .color-show{
     width: 30px;
-}
-
-#color{
-    height: 10px;
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    background-color: wheat;
 }
 
 input[type="checkbox"].ios8-switch {

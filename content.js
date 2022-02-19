@@ -15,6 +15,9 @@ function _ini() {
                     removeTrash()
                 }
                 if (response.answer.checkbox2 == 'true') {
+                    download()
+                }
+                if (response.answer.checkbox3 == 'true') {
                     darkTheme()
                 }
             })
@@ -56,6 +59,22 @@ function bugReport() {
     document.getElementsByClassName('site-error')[0].append(h2)
     document.getElementsByClassName('site-error')[0].append(myDiv)
 
+}
+
+function download() {
+    if (document.location.pathname == '/student/ir/') {
+        let links = document.querySelectorAll('a')
+        links.forEach((link) => {
+            let type = link.href.split('.')
+            if (type[type.length - 1] == 'docx') {
+                link.addEventListener('click', () => {
+                    chrome.runtime.sendMessage({ data: 'download', link: link.href }, (response) => {
+                        console.log(response.answer)
+                    })
+                })
+            }
+        })
+    }
 }
 
 //функционал плагина
@@ -163,14 +182,14 @@ function darkTheme() {
                 if (el.style.color == 'rgb(51, 51, 51)' || el.style.color == 'black') el.style.color = white
             })
             break
-        //(DONE)! темная тема для страницы новости через уведомления
+        //Есть ошибки
         case '/student/news/view':
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('li.active')[2].style.color = purple
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
             document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
+            document.querySelectorAll('ul')[5].style.backgroundColor = black
             document.getElementById('commentform-body').style.backgroundColor = black
             document.getElementById('commentform-body').style.color = white
+            document.querySelectorAll('li.active')[1].style.color = purple
+            document.querySelectorAll('li.active')[2].style.color = purple
             document.querySelectorAll('div').forEach((el) => {
                 if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
             })
