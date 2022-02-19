@@ -67,10 +67,24 @@ function getRules(property, value) {
 
 
             if (document.styleSheets[i].cssRules[j].style) {
-                if (document.styleSheets[i].cssRules[j].style[property] == value) {
-                    let href = document.styleSheets[i].href
-                    if(!results[href]) results[href] = []
-                    results[href].push(j);
+                if(property.toLowerCase()!="selector"){
+                    if (document.styleSheets[i].cssRules[j].style[property] == value) {
+                        let href = document.styleSheets[i].href
+                        if(!results[href]) results[href] = []
+                        results[href].push(j);
+                    }
+                }
+                else{
+                    if(document.styleSheets[i].cssRules[j].selectorText){
+                        let selectors = document.styleSheets[i].cssRules[j].selectorText.split(", ")
+                        for(let k of selectors) {
+                            if(k==value){
+                                let href = document.styleSheets[i].href
+                                if(!results[href]) results[href] = []
+                                results[href].push(j);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -185,8 +199,6 @@ function initGUI(){
     globalGUIInit = true
 
     updateGUI()
-
-    //GUI.counter.style.padding = "7px"
 }
 
 function updateGUI(){
@@ -283,15 +295,57 @@ function outputNeededRules(){
     return output
 }
 
+function addRule(selector, params){
+    if(!document.getElementById("styler")) document.head.appendChild(document.createElement("style")).id = "styler"
+    let styler = document.styleSheets[document.styleSheets.length-1]
+    let rule
+    for(let i of styler.cssRules){
+        if(i.selectorText==selector) {rule = i; break;}
+    }
+    if(!rule) {
+        //document.getElementById("styler").innerHTML = document.getElementById("styler").innerHTML += selector + "{} "
+        styler.insertRule(selector + "{}")
+        //styler = ghostStylesheet
+        styler = document.styleSheets[document.styleSheets.length-1]
+        rule = styler.cssRules[0]
+    }
+
+    for(let i in params){
+        if(!Array.isArray(params[i])) params[i] = [params[i]]
+        if(params[i][1]) params[i][1] = "important"
+        rule.style.setProperty(i, params[i][0], params[i][1])
+    }
+}
+
 
 //      PRODUCTION SCRIPT
 
 function setRules(rules, property, value){
-    console.log(property)
-    console.log(value)
     for(let i in document.styleSheets){
         if(rules[document.styleSheets[i].href]){
             for(let j in rules[document.styleSheets[i].href]) {document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property] = value}
+        }
+    }
+}
+
+function addRules(rules){
+    for(let rule of rules){
+        if(!document.getElementById("styler")) document.head.appendChild(document.createElement("style")).id = "styler"
+        let styler = document.styleSheets[document.styleSheets.length-1]
+        let cssrule
+        for(let i of styler.cssRules){
+            if(i.selectorText==rule[0]) {cssrule = i; break;}
+        }
+        if(!cssrule) {
+            styler.insertRule(rule[0] + "{}")
+            styler = document.styleSheets[document.styleSheets.length-1]
+            cssrule = styler.cssRules[0]
+        }
+    
+        for(let i in rule[1]){
+            if(!Array.isArray(rule[1][i])) rule[1][i] = [rule[1][i]]
+            if(rule[1][i][1]) rule[1][i][1] = "important"
+            cssrule.style.setProperty(i, rule[1][i][0], rule[1][i][1])
         }
     }
 }
@@ -371,12 +425,46 @@ function test(){
     setRules(rulesets.deftxt, "color", "rgb(200, 200, 200)")
 }
 
+// работает только в обычном ороксе без тёмных тем. требуется заменять background-color для поддержки разных тем
+function hover(){
+    //хитрый способ. просто добавляет транзишн на все элементы, вроде работает как надо
+    addRules([
+        ["*", {"transition": "background-color linear 0.3s"}]
+    ])
+}
+
+
+function oldHover(){
+    //дисциплины оценки и тд
+    addRules("tr.ng-scope td", {
+        "background-color": "white",
+        "transition": "background-color linear 0.3s"
+    })
+
+    //кнопки в навбаре
+    addRules(".navbar-inverse .navbar-nav>li>a", {
+        "background-color": "#008cba",
+        "transition": "background-color linear 0.3s"
+    })
+
+    //выпадающие списки в навбаре
+    addRules(".navbar-inverse .dropdown-menu>li>a", {
+        "background-color": "#008cba",
+        "transition": "background-color linear 0.3s"
+    })
+
+    //кнопки
+    addRules("button", {
+        "transition": "background-color linear 0.3s"
+    })
+
+    addRules(".notification-more", {
+        "transition": "background-color linear 0.3s"
+    })
+}
+
 //TODO
 /*
-РАМКИ
-ПУНКТ С ДЗ (поправить выделение имён)
-ЧЕКНУТЬ ДРУГИЕ РАЗДЕЛЫ
-
 НАПИСАТЬ КОД, КОТОРЫЙ САМ ОБНАРУЖИТ НЕОБХОДИМЫЕ RULESETS
 НАПИСАТЬ УСЛОВИЯ ПРИ КОТОРОМ МОЖНО НАЙТИ ЭТОТ RULESET
 
