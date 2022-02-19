@@ -159,12 +159,13 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     setRules(rulesets.resource, 'backgroundColor', bg)
     setRules(rulesets.resourceHvr, 'backgroundColor', bg2)
 
-    document.styleSheets[1].cssRules[7].style.background = '#007ECB'
-    document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
-    document.styleSheets[1].cssRules[5].style.background = '#7D919E'
-    document.styleSheets[1].cssRules[4].style.background = '#fff'
-    document.styleSheets[1].cssRules[3].style.background = '#C49068'
-
+    if (document.location.pathname == '/student/student') {
+        document.styleSheets[1].cssRules[7].style.background = '#007ECB'
+        document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
+        document.styleSheets[1].cssRules[5].style.background = '#7D919E'
+        document.styleSheets[1].cssRules[4].style.background = '#fff'
+        document.styleSheets[1].cssRules[3].style.background = '#C49068'
+    }
     if (document.location.pathname == '/student/student/test' || document.location.pathname == '/student/student/test/') {
         document.querySelectorAll('img').forEach(img => img.style.filter = 'invert(1)')
     }
