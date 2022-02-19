@@ -83,7 +83,8 @@ function next(steps = 1){
     currentRule+=steps
     if(currentRule>=rulesCount-1) currentRule = rulesCount-1
     else if(currentRule<0) currentRule = 0
-    else setById(currentRule, globalTo)
+    
+    setById(currentRule, globalTo)
 
     updateGUI()
 }
@@ -93,7 +94,8 @@ function set(id){
     currentRule = id
     if(currentRule>=rulesCount-1) currentRule = rulesCount-1
     else if(currentRule<0) currentRule = 0
-    else setById(currentRule, globalTo)
+    
+    setById(currentRule, globalTo)
 
     updateGUI()
 }
@@ -280,9 +282,13 @@ function outputNeededRules(){
     console.log("~~~~~~ splitted list end ~~~~~~")
     return output
 }
+
+
 //      PRODUCTION SCRIPT
 
 function setRules(rules, property, value){
+    console.log(property)
+    console.log(value)
     for(let i in document.styleSheets){
         if(rules[document.styleSheets[i].href]){
             for(let j in rules[document.styleSheets[i].href]) {document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property] = value}
