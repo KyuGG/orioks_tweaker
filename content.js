@@ -158,6 +158,8 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     setRules(rulesets.faqBlackLinks, 'color', 'rgb(91, 192, 222)')
     setRules(rulesets.resource, 'backgroundColor', bg)
     setRules(rulesets.resourceHvr, 'backgroundColor', bg2)
+    setRules(rulesets.debt, 'backgroundColor', bg2)
+    setRules(rulesets.debtHvr, 'backgroundColor', bg2)
 
     if (document.location.pathname == '/student/student') {
         document.styleSheets[1].cssRules[7].style.background = '#007ECB'
@@ -181,7 +183,7 @@ rulesets = {
     bg250: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1233, 1393] },
 
 
-    hvrdisc: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [850] },
+    hvrdisc: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [850], 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [476] },
     plashka: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1185] },
 
 
@@ -215,5 +217,7 @@ rulesets = {
     faqPlashki: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1360] },
     faqBlackLinks: { 'https://orioks.miet.ru/controller/faq/index.css?v=1571396836': [0] },
     resource: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [15] },
-    resourceHvr: { null: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] }
+    resourceHvr: { null: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+    debt: { "https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [861] },
+    debtHvr: { "https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [862] }
 }
