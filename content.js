@@ -18,7 +18,7 @@ function _ini() {
                     download()
                 }
                 if (response.answer.checkbox3 == 'true') {
-                    darkTheme()
+                    changeTheme()
                 }
             })
 
@@ -32,6 +32,7 @@ function _ini() {
     }
 }
 
+//функционал плагина
 function bugReport() {
     document.getElementsByClassName('row')[0].remove()
     let myDiv = document.createElement('div')
@@ -77,7 +78,6 @@ function download() {
     }
 }
 
-//функционал плагина
 function removeTrash() {
     //добавление лого
     let logo = document.createElement('img')
@@ -99,457 +99,116 @@ function removeTrash() {
         document.styleSheets[1].cssRules[8].style.display = 'block'
         //удаление красных точек
         document.querySelectorAll('.bad').forEach(el => el.remove())
-        //удаление надписей типа "из 100"
+        //удаление надписей типа 'из 100'
         document.querySelectorAll('.mvb').forEach(el => el.remove())
     }
 }
 
-function darkTheme() {
-    let black = '#353535'
-    let purple = '#b63dd2'
-    let white = '#fff'
-    document.body.style.backgroundColor = black
-    document.body.style.color = white
-    let path = document.location.pathname
-
-    changeRule('color', 'rgb(0, 82, 110)', purple)
-
-    //колокольчик
-    document.styleSheets[3].cssRules[37].style.background = '#007196'
-    document.styleSheets[3].cssRules[38].style.background = black
-    changeRule('backgroundColor', 'rgb(247, 247, 247)', 'rgb(30, 30, 30)')
-
-    //колокольчик fix для некоторых страниц
-    changeRule('backgroundColor', 'rgb(221, 221, 221)', 'rgb(0, 113, 150)')
-    changeRule('backgroundColor', 'rgb(238, 238, 238)', black)
-
-    //инструкции
-    changeRule('backgroundColor', 'rgb(255, 255, 255)', 'rgb(30, 30, 30)')
-    switch (path) {
-        //(DONE)! темная тема для главной страницы
-        case '/':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            changeRule("backgroundColor", "rgb(255, 255, 255)", "rgb(30, 30, 30)")
-            changeRule("backgroundColor", "rgb(238, 238, 238)", "rgb(30, 30, 30)")
-            changeRule("color", "rgb(111, 111, 111)", white)
-            break
-        //(DONE)! темная тема для страницы с баллами
-        case '/student/student':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-
-            document.styleSheets[1].cssRules[7].style.background = '#007ECB'
-            document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
-            document.styleSheets[1].cssRules[5].style.background = '#7D919E'
-            document.styleSheets[1].cssRules[4].style.background = '#fff'
-            document.styleSheets[1].cssRules[3].style.background = '#C49068'
-            document.styleSheets[1].cssRules[2].style.color = 'black'
-
-            document.styleSheets[1].cssRules[8].style.color = white
-            document.styleSheets[1].cssRules[8].style.display = 'block'
-
-            //динамические блоки
-            document.styleSheets[3].cssRules[1324].style.backgroundColor = black
-            document.styleSheets[3].cssRules[1288].style.backgroundColor = black
-
-            document.querySelectorAll('.list-group-item').forEach(el => el.style.backgroundColor = black)
-
-            document.querySelectorAll('.panel-heading').forEach(el => el.style.color = white)
-
-            changeRule('backgroundColor', 'rgb(245, 245, 245)', 'rgb(30, 30, 30)')
-            changeRule('backgroundColor', 'rgb(217, 237, 247)', 'rgb(30, 30, 30)')
-            changeRule('backgroundColor', 'rgb(196, 227, 243)', 'rgb(30, 30, 30)')
-            changeRule('backgroundColor', 'rgb(223, 240, 216)', 'rgb(41, 67, 43)')
-            changeRule('backgroundColor', 'rgb(208, 233, 198)', 'rgb(30, 30, 30)')
-            changeRule('backgroundColor', 'rgb(242, 222, 222)', black)
-            changeRule('backgroundColor', 'rgb(235, 204, 204)', black)
-            break
-        //(DONE)! темная тема для страницы практика
-        case '/student/practice/index':
-            document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            break
-        //(DONE)! темная тема для страницы отдельной новости
-        case '/main/view-news':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('span').forEach((el) => {
-                if (el.style.color == 'rgb(51, 51, 51)' || el.style.color == 'black') el.style.color = white
-            })
-            break
-        //Есть ошибки
-        case '/student/news/view':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.getElementById('commentform-body').style.backgroundColor = black
-            document.getElementById('commentform-body').style.color = white
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('li.active')[2].style.color = purple
-            document.querySelectorAll('div').forEach((el) => {
-                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
-            })
-            document.querySelectorAll('p').forEach((el) => {
-                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
-            })
-            document.querySelectorAll('span').forEach((el) => {
-                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
-            })
-            document.querySelectorAll('font').forEach((el) => {
-                if (el.style.color == '') el.style.color = white
-            })
-            document.querySelectorAll('b').forEach((el) => {
-                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
-            })
-            break
-        //(DONE)! темная тема для страницы новости дисциплины
-        case '/student/news/index':
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('.post_footer').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('div').forEach((el) => {
-                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
-            })
-            document.querySelectorAll('p').forEach((el) => {
-                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
-            })
-            document.querySelectorAll('span').forEach((el) => {
-                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
-            })
-            document.querySelectorAll('font').forEach((el) => {
-                if (el.style.color == '') el.style.color = white
-            })
-            document.querySelectorAll('b').forEach((el) => {
-                if (el.style.color == 'rgb(79, 79, 79)') el.style.color = white
-            })
-            break
-        //(DONE)! темная тема для страницы портфолио
-        case '/portfolio/view-project':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('li.active')[2].style.color = purple
-            document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('.alert')[1].style.color = 'black'
-            document.getElementById('add_comment').style.backgroundColor = black
-            document.querySelectorAll('.author').forEach(el => el.style.color = white)
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('input').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            break
-        //(DONE)! темная тема для страницы внеучебное портфолио
-        case '/portfolio/list-vneuchebnie-project':
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            break
-        //(DONE)! темная тема для страницы домашние задания
-        case '/student/homework/list':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('input').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            break
-        //(DONE)! темная тема для конкретного ДЗ
-        case '/student/homework/view':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('li.active')[1].style.color = purple
-
-            let textarea = document.getElementById('comment-text')
-            textarea.style.backgroundColor = black
-            textarea.style.color = white
-
-            document.querySelector('.resumable-drop').style.backgroundColor = black
-            document.querySelector('.resumable-drop').style.color = white
-
-            document.querySelectorAll('.author').forEach(el => el.style.color = white)
-            document.querySelectorAll('.list-group-item').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            break
-        case '/student/homework/create':
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('input').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-
-            document.getElementById('homeworktreadform-message').style.backgroundColor = black
-            document.getElementById('homeworktreadform-message').style.color = white
-            document.querySelector('.resumable-drop').style.backgroundColor = black
-            document.querySelector('.resumable-drop').style.color = white
-            break
-        //(DONE)! темная тема для страницы проекта из вкладки портфолио
-        case '/portfolio/view-project':
-            document.querySelectorAll('input').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('li.active')[2].style.color = '#b63dd2'
-
-            textarea = document.getElementById('add_comment')
-            textarea.style.backgroundColor = black
-            textarea.style.color = white
-            break
-        //(DONE)! темная тема для страницы помощь
-        case '/support/list':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            break
-        //(DONE)! конкретная заявка в разделе помощь
-        case '/support/view':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('.author').forEach(el => el.style.color = white)
-            document.querySelector('.resumable-drop').style.backgroundColor = black
-            document.querySelector('.resumable-drop').style.color = white
-            document.getElementById('comment-text').style.backgroundColor = black
-            document.getElementById('comment-text').style.color = white
-            break
-        //(DONE)! темная тема для страницы электронные библиотеки
-        case '/other/libraries':
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            break
-        //(DONE)! темная тема для страницы профиль
-        case '/user/profile':
-            document.querySelector('.panel').style.backgroundColor = black
-            document.querySelector('.panel-footer').style.backgroundColor = black
-            document.querySelector('h3').style.color = 'black'
-            document.querySelectorAll('img')[1].src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
-            break
-        //(DONE)! темная тема для страницы ресурсы
-        case '/student/ir/':
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('.list-group-item').forEach(el => el.style.backgroundColor = black)
-            changeRule('backgroundColor', 'rgb(245, 245, 245)', 'rgb(30, 30, 30)')
-            break
-        //(DONE)! темная тема для страницы результата теста
-        case '/student/student/test':
-        case '/student/student/test/':
-        case '/student/student/testresult':
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            break
-        //(DONE)! темная тема для страницы ЧаВо
-        case '/faq':
-        case '/faq/index':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('input').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            //если нажата кнопка искать
-            if (document.querySelectorAll('.newColor').length > 0) {
-                document.querySelectorAll('.panel-heading').forEach((el) => {
-                    el.style.backgroundColor = black
-                    el.style.color = white
-                })
-
-                document.getElementById('collapse_cat1').style.backgroundColor = black
-
-                document.styleSheets[2].cssRules[1329].style.removeProperty('color')
-                document.styleSheets[0].cssRules[0].style.removeProperty('color')
-            }
-            break
-        //(DONE)! темная тема для страницы учебное портфолио
-        case '/portfolio/list-uchebnie-project':
-        case '/portfolio/list-uchebnie-project/index':
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('input').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            break
-        //(DONE)! темная тема для страницы проектная работа
-        case '/social/project_work/project-list':
-        case '/social/project_work/project-list/index':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('input').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            break
-        //(DONE)! темная тема для страницы личные файлы
-        case '/personal/files':
-        case '/personal/files/index':
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-
-            let li = document.querySelectorAll('li.active')
-            li[2].style.color = purple
-            li[3].style.color = purple
-
-            document.querySelector('.resumable-drop').style.backgroundColor = black
-            document.querySelector('.resumable-drop').style.color = white
-            changeRule('backgroundColor', 'rgb(245, 245, 245)', 'rgb(30, 30, 30)')
-            break
-        //темная тема для страниц обходной лист
-        case '/request/questionnaire/list':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('li.active')[2].style.color = purple
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            break
-        //темная тема для страниц добавления заявлений
-        case '/request/doc/list':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('li.active')[2].style.color = purple
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            break
-        case '/request/doc/create':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('li.active')[2].style.color = purple
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('li.active')[1].style.color = purple
-            break
-        //темная тема для страниц справки
-        case '/request/reference/list':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('li.active')[2].style.color = purple
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            break
-        case '/request/reference/create':
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('li.active')[2].style.color = purple
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-
-            let input = document.getElementById('referencethreadform-place')
-            input.style.backgroundColor = black
-            input.style.color = white
-
-            document.getElementById('referencethreadform-message').style.backgroundColor = black
-            document.getElementById('referencethreadform-message').style.color = white
-
-            document.querySelector('.resumable-drop').style.backgroundColor = black
-            document.querySelector('.resumable-drop').style.color = white
-            break
-        //темная тема для страниц последипломный отпуск
-        case '/request/holiday/create':
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('li.active')[2].style.color = purple
-            break
-        //темная тема для помощь заявка
-        case '/support/create':
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('select').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.querySelectorAll('input').forEach((el) => {
-                el.style.backgroundColor = black
-                el.style.color = white
-            })
-            document.getElementById('supportthreadform-message').style.backgroundColor = black
-            document.getElementById('supportthreadform-message').style.color = white
-            document.querySelector('.resumable-drop').style.backgroundColor = black
-            document.querySelector('.resumable-drop').style.color = white
-            break
-        //темная тема для страницы списка уведомлений
-        case '/notification':
-        case '/notification/index':
-            document.querySelectorAll('ul')[5].style.backgroundColor = black
-            document.querySelectorAll('li.active')[1].style.color = purple
-            document.querySelectorAll('.well').forEach(el => el.style.backgroundColor = black)
-            document.querySelectorAll('td').forEach(el => el.style.backgroundColor = black)
-            break
+function setRules(rules, property, value) {
+    for (let i in document.styleSheets) {
+        if (rules[document.styleSheets[i].href]) {
+            for (let j in rules[document.styleSheets[i].href]) { document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property] = value }
+        }
     }
 }
 
-function changeRule(rule, from, to, debug) {
-    if (Array.isArray(rule)) {
-        from = rule[1] || rule.from
-        to = rule[2] || rule.to
-        debug = rule[3] || rule.debug
-        rule = rule[0] || rule.rule
-    }
-    for (let i = 0; i < document.styleSheets.length; i++) {
-        if (debug) console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~\ni" + i + "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        try {
-            document.styleSheets[i].cssRules
-        }
-        catch (e) {
-            document.styleSheets[i].disabled = true;
-        }
+function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2') {
+    setRules(rulesets.mainBgHvr, 'transition', 'background-color 0.25s linear')
+    setRules(rulesets.mainTxtHvr, 'color', links)
+    setRules(rulesets.scndBg, 'backgroundColor', bg)
+    setRules(rulesets.bg250, 'backgroundColor', bg)
+    setRules(rulesets.activePath, 'color', links)
+    setRules(rulesets.scoreButton, 'backgroundColor', bg2)
+    setRules(rulesets.discChosenBg, 'backgroundColor', bg2)
+    setRules(rulesets.discChosenBgHvr, 'backgroundColor', bg2)
+    setRules(rulesets.gradesHvr, 'backgroundColor', bg2)
+    setRules(rulesets.profileFrame, 'color', 'black')
+    setRules(rulesets.injuryNoteBg, 'backgroundColor', bg)
 
-        if (!document.styleSheets[i].disabled) for (let j = 0; j < document.styleSheets[i].cssRules.length; j++) {
+    //NOTIFICATION
+    setRules(rulesets.notificationBg, 'backgroundColor', bg)
+    setRules(rulesets.notificationBg, 'transition', 'background-color 0.15s linear')
+    setRules(rulesets.notificationBgHvr, 'backgroundColor', bg2)
+    setRules(rulesets.notificationTxt, 'color', 'white')
+    setRules(rulesets.notificationTxtDays, 'color', 'white')
+
+    setRules(rulesets.plashka, 'backgroundColor', bg)
+    setRules(rulesets.hvrdisc, 'backgroundColor', bg2)
+    setRules(rulesets.redbell, 'backgroundColor', bg2)
+    setRules(rulesets.deftxt, 'color', 'white')
+
+    setRules(rulesets.trPortfolio, 'backgroundColor', bg)
+    setRules(rulesets.tdPractice, 'backgroundColor', bg)
+    setRules(rulesets.printedTxt, 'color', 'white')
+    setRules(rulesets.profileFooter, 'backgroundColor', 'rgb(91, 192, 222)')
+    setRules(rulesets.profileFooter, 'borderTop', 'rgb(91, 192, 222)')
+    setRules(rulesets.profileFooter, 'color', 'black')
+    setRules(rulesets.dragNDrop, 'backgroundColor', bg)
+    setRules(rulesets.dragNDrop, 'color', 'white')
+    setRules(rulesets.invisibleGrades, 'color', 'white')
+    setRules(rulesets.visibleGrades, 'color', 'black')
+    setRules(rulesets.author, 'color', 'white')
+    setRules(rulesets.dzItem, 'color', 'rgb(91, 192, 222)')
+    setRules(rulesets.dzItemHvr, 'color', links)
+    setRules(rulesets.dzItemHvr, 'backgroundColor', bg2)
+    setRules(rulesets.grayHvr, 'backgroundColor', bg)
+    setRules(rulesets.notificationEmpty, 'backgroundColor', 'rgb(91, 192, 222)')
+    setRules(rulesets.notificationEmpty, 'color', 'black')
+    setRules(rulesets.faqPlashki, 'backgroundColor', bg)
+    setRules(rulesets.faqBlackLinks, 'color', 'rgb(91, 192, 222)')
+    setRules(rulesets.resource, 'backgroundColor', bg)
+    setRules(rulesets.resourceHvr, 'backgroundColor', bg2)
+
+    document.styleSheets[1].cssRules[7].style.background = '#007ECB'
+    document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
+    document.styleSheets[1].cssRules[5].style.background = '#7D919E'
+    document.styleSheets[1].cssRules[4].style.background = '#fff'
+    document.styleSheets[1].cssRules[3].style.background = '#C49068'
+}
+
+rulesets = {
+    mainBg: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [296, 736, 939, 942, 990, 1092, 1166, 1195, 1216, 1266, 1299, 1365, 1536, 1548], 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [8] },
+    mainBgHvr: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [297, 737, 940, 1171, 1172, 1178, 1217, 1538] },
+    mainTxt: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [247, 286, 687, 726, 943, 964, 1191, 1231, 1367] },
+    mainTxtHvr: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [248, 688, 967, 1194] },
+    scndBg: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [307, 316, 470, 500, 569, 574, 582, 589, 596, 603, 610, 632, 727, 826, 839, 844, 853, 857, 879, 890, 941, 976, 1023, 1062, 1093, 1136], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [245, 254, 404, 434, 685, 694, 844, 873, 943, 948, 953, 958, 963, 985, 1053, 1080, 1157, 1176, 1196, 1231, 1240, 1288, 1324, 1367, 1372, 1377, 1382, 1387, 1406, 1479] },
+    redbell: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [34] },
+    bg250: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1233, 1393] },
 
 
-            if (document.styleSheets[i].cssRules[j].style) {
-                if ((document.styleSheets[i].cssRules[j].style[rule]) && debug) {
-                    console.log("j" + j)
-                    console.log(document.styleSheets[i].cssRules[j].style[rule])
-                }
-                if (document.styleSheets[i].cssRules[j].style[rule] == from) document.styleSheets[i].cssRules[j].style[rule] = to;
-            }
-        }
-    }
+    hvrdisc: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [850] },
+    plashka: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1185] },
+
+
+    deftxt: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [0] },
+    notificationBg: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [503, 700, 717, 720, 840, 854, 883, 944], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [437, 876, 989, 1070, 1073, 1194, 1206, 1296], 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [36, 38] },
+    notificationBgHvr: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [1109], 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [39, 41] },
+    notificationTxt: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [46] },
+    notificationTxtDays: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [47] },
+    notificationTitle: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [596], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [290, 730, 953, 1307, 1308, 1310, 1377] },
+    activePath: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [332, 425, 772, 865, 930, 931, 936, 1188, 1294, 1360, 1546, 1586] },
+    scoreButton: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [801, 803], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [930, 933, 1226, 1545, 1586], 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [19] },
+    injuryNoteBg: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [360, 479, 540, 901, 954, 1026], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [298, 415, 738, 855, 908, 1302] },
+    injuryNoteTxt: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [288, 728, 905, 908, 909, 948, 1302, 1303, 1305, 1372] },
+    gradesHvr: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [480, 957], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [416, 856, 1305] },
+    discChosenBg: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [362, 481, 904, 959, 1031], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [300, 417, 740, 857, 1307] },
+    discChosenBgHvr: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [482, 962], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [418, 858, 1310] },
+    profileFrame: { 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [590, 595, 868, 921], 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [949, 952, 1220, 1254, 1273, 1311, 1375, 1554] },
+
+    trPortfolio: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [849] },
+    tdPractice: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [853] },
+    printedTxt: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [321, 433, 434, 761, 872, 873, 1053, 1080, 1563, 1565] },
+    profileFooter: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1330] },
+    dragNDrop: { 'https://orioks.miet.ru/widgets/filePicker.css?v=1619569307': [1] },
+    invisibleGrades: { 'https://orioks.miet.ru/controller/student/student.css?v=1571396836': [8] },
+    visibleGrades: { 'https://orioks.miet.ru/controller/student/student.css?v=1571396836': [2] },
+    author: { 'https://orioks.miet.ru/controller/comment.css?v=1571396836': [0] },
+    dzItem: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1293] },
+    dzItemHvr: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1295] },
+    grayHvr: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [931] },
+    notificationEmpty: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [37] },
+    faqPlashki: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1360] },
+    faqBlackLinks: { 'https://orioks.miet.ru/controller/faq/index.css?v=1571396836': [0] },
+    resource: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [15] },
+    resourceHvr: { null: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] }
 }
