@@ -362,7 +362,7 @@ rulesets = {
     bg250: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1233, 1393] },
 
 
-    hvrdisc: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [850] },
+    hvrdisc: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [850], 'https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854': [476] },
     plashka: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1185] },
 
 
@@ -396,7 +396,11 @@ rulesets = {
     faqPlashki: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1360] },
     faqBlackLinks: { 'https://orioks.miet.ru/controller/faq/index.css?v=1571396836': [0] },
     resource: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [15] },
-    resourceHvr: { null: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] }
+    resourceHvr: { null: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+
+    debt: {"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [861]},
+    debtHvr: {"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [862]}
+
 }
 
 //    bg245:{"https://orioks.miet.ru/assets/331678d7/css/bootstrap.css?v=1635897854":[393,476,477,636,833,915,952,982,1016,1049],"https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836":[332,410,413,772,850,853,1185,1265,1295,1330,1360],"https://orioks.miet.ru/controller/orioks.css?v=1622198733":[15]},
