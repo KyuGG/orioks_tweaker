@@ -105,14 +105,16 @@ function removeTrash() {
 }
 
 function setRules(rules, property, value) {
-    for (let i in document.styleSheets) {
-        if (rules[document.styleSheets[i].href]) {
-            for (let j in rules[document.styleSheets[i].href]) { document.styleSheets[i].cssRules[rules[document.styleSheets[i].href][j]].style[property] = value }
+    for (let styleSheet of document.styleSheets) {
+        if (rules[styleSheet.href]) {
+            for (let rule of rules[styleSheet.href]) { styleSheet.cssRules[rule].style[property] = value }
         }
     }
 }
 
 function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2') {
+    setRules(rulesets.mainBg, 'backgroundColor', bg2)
+    setRules(rulesets.mainBgHvr, 'backgroundColor', bg)
     setRules(rulesets.mainBgHvr, 'transition', 'background-color 0.25s linear')
     setRules(rulesets.mainTxtHvr, 'color', links)
     setRules(rulesets.scndBg, 'backgroundColor', bg)
@@ -123,7 +125,7 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     setRules(rulesets.discChosenBgHvr, 'backgroundColor', bg2)
     setRules(rulesets.gradesHvr, 'backgroundColor', bg2)
     setRules(rulesets.profileFrame, 'color', 'black')
-    setRules(rulesets.injuryNoteBg, 'backgroundColor', bg)
+    setRules(rulesets.injuryNoteBg, 'backgroundColor', 'rgb(0, 36, 52)')
 
     //NOTIFICATION
     setRules(rulesets.notificationBg, 'backgroundColor', bg)
@@ -134,7 +136,7 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
 
     setRules(rulesets.plashka, 'backgroundColor', bg)
     setRules(rulesets.hvrdisc, 'backgroundColor', bg2)
-    setRules(rulesets.redbell, 'backgroundColor', bg2)
+    setRules(rulesets.redbell, 'backgroundColor', 'rgb(0, 140, 186)')
     setRules(rulesets.deftxt, 'color', 'white')
 
     setRules(rulesets.trPortfolio, 'backgroundColor', bg)
@@ -157,9 +159,9 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     setRules(rulesets.faqPlashki, 'backgroundColor', bg)
     setRules(rulesets.faqBlackLinks, 'color', 'rgb(91, 192, 222)')
     setRules(rulesets.resource, 'backgroundColor', bg)
-    setRules(rulesets.resourceHvr, 'backgroundColor', bg2)
     setRules(rulesets.debt, 'backgroundColor', bg2)
     setRules(rulesets.debtHvr, 'backgroundColor', bg2)
+    setRules(rulesets.spravkiTxt, 'color', 'rgb(0, 140, 186)')
 
     if (document.location.pathname == '/user/profile') {
         document.querySelectorAll('img')[1].src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
@@ -173,6 +175,9 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     }
     if (document.location.pathname == '/student/student/test' || document.location.pathname == '/student/student/test/') {
         document.querySelectorAll('img').forEach(img => img.style.filter = 'invert(1)')
+    }
+    if (document.location.pathname == '/student/ir/') {
+        setRules(rulesets.resourceHvr, 'backgroundColor', bg2) // плохой рул
     }
 }
 
@@ -220,7 +225,8 @@ rulesets = {
     faqPlashki: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1360] },
     faqBlackLinks: { 'https://orioks.miet.ru/controller/faq/index.css?v=1571396836': [0] },
     resource: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [15] },
-    resourceHvr: { null: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] },
+    resourceHvr: { null: [1] },
     debt: { "https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [861] },
-    debtHvr: { "https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [862] }
+    debtHvr: { "https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [862] },
+    spravkiTxt: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1302] }
 }

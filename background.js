@@ -21,9 +21,7 @@ chrome.runtime.onMessage.addListener(
             sendResponse({ answer: 'page was opened successfully' })
         }
         if (request.data === 'download') {
-            chrome.tabs.create({
-                url: request.link
-            }, null);
+            chrome.tabs.create({ url: request.link })
             sendResponse({ answer: 'downloaded' })
         }
     }
