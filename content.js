@@ -212,8 +212,7 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
                         document.querySelectorAll('.modal-body div.ng-binding *').forEach(el => el.style.color = shadeColor(el.style.color, 1))
                     })
                 })
-            }
-            )
+            })
         })
     }
     if (document.location.pathname == '/student/student/test' || document.location.pathname == '/student/student/test/') {
@@ -222,9 +221,19 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     if (document.location.pathname == '/student/ir/') {
         setRules(rulesets.resourceHvr, 'backgroundColor', bg2) // плохой рул
     }
-    if (document.location.pathname == '/main/view-news' || document.location.pathname == '/student/news/view') {
-        document.querySelectorAll('*').forEach(el => el.style.color = shadeColor(el.style.color, 1))
+    if (document.location.pathname == '/main/view-news') {
+        document.querySelectorAll('.well *').forEach(el => {
+            el.style.color = shadeColor(el.style.color, 1)
+            el.style.background = bg
+        })
     }
+    if (document.location.pathname == '/student/news/view') {
+        document.querySelectorAll('.container div.margin-top *').forEach(el => {
+            el.style.color = shadeColor(el.style.color, 1)
+            el.style.background = bg
+        })
+    }
+
 }
 
 //ссылки на правила, относящиеся к некоторым элементам
