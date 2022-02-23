@@ -32,6 +32,10 @@ function _ini() {
     }
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 //функционал плагина
 function bugReport() {
     document.getElementsByClassName('row')[0].remove()
@@ -104,12 +108,34 @@ function removeTrash() {
     }
 }
 
+//вспомогательные функции для тем
 function setRules(rules, property, value) {
     for (let styleSheet of document.styleSheets) {
         if (rules[styleSheet.href]) {
             for (let rule of rules[styleSheet.href]) { styleSheet.cssRules[rule].style[property] = value }
         }
     }
+}
+
+function shadeColor(color, percent) {
+
+    var R = parseInt(color.substring(1, 3), 16)
+    var G = parseInt(color.substring(3, 5), 16)
+    var B = parseInt(color.substring(5, 7), 16)
+
+    R = parseInt(R * (100 + percent) / 100)
+    G = parseInt(G * (100 + percent) / 100)
+    B = parseInt(B * (100 + percent) / 100)
+
+    R = (R < 255) ? R : 255
+    G = (G < 255) ? G : 255
+    B = (B < 255) ? B : 255
+
+    var RR = ((R.toString(16).length == 1) ? '0' + R.toString(16) : R.toString(16))
+    var GG = ((G.toString(16).length == 1) ? '0' + G.toString(16) : G.toString(16))
+    var BB = ((B.toString(16).length == 1) ? '0' + B.toString(16) : B.toString(16))
+
+    return '#' + RR + GG + BB
 }
 
 function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2') {
@@ -162,6 +188,8 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     setRules(rulesets.debt, 'backgroundColor', bg2)
     setRules(rulesets.debtHvr, 'backgroundColor', bg2)
     setRules(rulesets.spravkiTxt, 'color', 'rgb(0, 140, 186)')
+    setRules(rulesets.dragNDropDragOver, 'backgroundColor', bg2)
+    setRules(rulesets.dragNDropDragOver, 'color', links)
 
     if (document.location.pathname == '/user/profile') {
         document.querySelectorAll('img')[1].src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
@@ -172,6 +200,21 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
         document.styleSheets[1].cssRules[5].style.background = '#7D919E'
         document.styleSheets[1].cssRules[4].style.background = '#fff'
         document.styleSheets[1].cssRules[3].style.background = '#C49068'
+
+        // добираемся с помощью листнеров до кликов по новостям
+        let dises = document.getElementsByClassName('pointer ng-scope')
+        Array.prototype.forEach.call(dises, dis => {
+            dis.addEventListener('click', async () => {
+                await sleep(500)
+                document.querySelectorAll('div.list-group-item a.ng-binding').forEach(a => {
+                    a.addEventListener('click', async () => {
+                        await sleep(300)
+                        document.querySelectorAll('.modal-body div.ng-binding *').forEach(el => el.style.color = shadeColor(el.style.color, 1))
+                    })
+                })
+            }
+            )
+        })
     }
     if (document.location.pathname == '/student/student/test' || document.location.pathname == '/student/student/test/') {
         document.querySelectorAll('img').forEach(img => img.style.filter = 'invert(1)')
@@ -179,8 +222,12 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     if (document.location.pathname == '/student/ir/') {
         setRules(rulesets.resourceHvr, 'backgroundColor', bg2) // плохой рул
     }
+    if (document.location.pathname == '/main/view-news' || document.location.pathname == '/student/news/view') {
+        document.querySelectorAll('*').forEach(el => el.style.color = shadeColor(el.style.color, 1))
+    }
 }
 
+//ссылки на правила, относящиеся к некоторым элементам
 rulesets = {
     mainBg: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [296, 736, 939, 942, 990, 1092, 1166, 1195, 1216, 1266, 1299, 1365, 1536, 1548], 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [8] },
     mainBgHvr: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [297, 737, 940, 1171, 1172, 1178, 1217, 1538] },
@@ -226,7 +273,8 @@ rulesets = {
     faqBlackLinks: { 'https://orioks.miet.ru/controller/faq/index.css?v=1571396836': [0] },
     resource: { 'https://orioks.miet.ru/controller/orioks.css?v=1622198733': [15] },
     resourceHvr: { null: [1] },
-    debt: { "https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [861] },
-    debtHvr: { "https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836": [862] },
-    spravkiTxt: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1302] }
+    debt: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [861] },
+    debtHvr: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [862] },
+    spravkiTxt: { 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1302] },
+    dragNDropDragOver: { 'https://orioks.miet.ru/widgets/filePicker.css?v=1619569307': [2] }
 }
