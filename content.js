@@ -68,15 +68,10 @@ function bugReport() {
 
 function download() {
     if (document.location.pathname == '/student/ir/') {
-        let links = document.querySelectorAll('a')
-        links.forEach((link) => {
-            let type = link.href.split('.')
-            if (type[type.length - 1] == 'docx' || type[type.length - 1] == 'pptx') {
-                link.addEventListener('click', () => {
-                    chrome.runtime.sendMessage({ data: 'download', link: link.href }, (response) => {
-                        console.log(response.answer)
-                    })
-                })
+        document.querySelectorAll('.list-group a').forEach(a => {
+            if (a.href.split(':')[0] == 'http') {
+                a.href = 'https' + a.href.slice(4)
+                a.removeAttribute('target')
             }
         })
     }
@@ -90,13 +85,9 @@ function download() {
                     link.addEventListener('click', async () => {
                         await sleep(300)
                         document.querySelectorAll('.modal-body .table a').forEach(a => {
-                            let type = a.href.split('.')
-                            if (type[type.length - 1] == 'docx' || type[type.length - 1] == 'pptx') {
-                                a.addEventListener('click', () => {
-                                    chrome.runtime.sendMessage({ data: 'download', link: a.href }, (response) => {
-                                        console.log(response.answer)
-                                    })
-                                })
+                            if (a.href.split(':')[0] == 'http') {
+                                a.href = 'https' + a.href.slice(4)
+                                a.removeAttribute('target')
                             }
                         })
                     })
