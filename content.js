@@ -71,13 +71,37 @@ function download() {
         let links = document.querySelectorAll('a')
         links.forEach((link) => {
             let type = link.href.split('.')
-            if (type[type.length - 1] == 'docx') {
+            if (type[type.length - 1] == 'docx' || type[type.length - 1] == 'pptx') {
                 link.addEventListener('click', () => {
                     chrome.runtime.sendMessage({ data: 'download', link: link.href }, (response) => {
                         console.log(response.answer)
                     })
                 })
             }
+        })
+    }
+    if (document.location.pathname == '/student/student') {
+        // добираемся с помощью листнеров до кликов по новостям
+        let dises = document.getElementsByClassName('pointer ng-scope')
+        Array.prototype.forEach.call(dises, dis => {
+            dis.addEventListener('click', async () => {
+                await sleep(500)
+                document.querySelectorAll('.discussion-label-span .pointer').forEach(link => {
+                    link.addEventListener('click', async () => {
+                        await sleep(300)
+                        document.querySelectorAll('.modal-body .table a').forEach(a => {
+                            let type = a.href.split('.')
+                            if (type[type.length - 1] == 'docx' || type[type.length - 1] == 'pptx') {
+                                a.addEventListener('click', () => {
+                                    chrome.runtime.sendMessage({ data: 'download', link: a.href }, (response) => {
+                                        console.log(response.answer)
+                                    })
+                                })
+                            }
+                        })
+                    })
+                })
+            })
         })
     }
 }
