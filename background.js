@@ -20,9 +20,5 @@ chrome.runtime.onMessage.addListener(
             chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
             sendResponse({ answer: 'page was opened successfully' })
         }
-        if (request.data === 'download') {
-            chrome.tabs.create({ url: request.link })
-            sendResponse({ answer: 'downloaded' })
-        }
     }
 )
