@@ -1,6 +1,6 @@
 html{
     width: 250px;
-    height: 500px;
+    height: 350px;
     background-color: #353535;
     color: white;
 }
@@ -30,14 +30,6 @@ h2 {
 
 .slider .color-show{
     width: 30px;
-}
-
-#color{
-    height: 10px;
-    width: 100%;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    background-color: wheat;
 }
 
 input[type="checkbox"].ios8-switch {
@@ -99,4 +91,19 @@ label {
 
 label:hover {
     color: #5581d3;
+}
+
+#bugreport {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid;
+    background: #353535;
+    color: #fff;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+#bugreport:hover {
+    background: #5581d3;
+    color: black;
 }
