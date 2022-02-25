@@ -18,12 +18,28 @@ function _ini() {
                     download()
                 }
                 if (response.answer.checkbox3 == 'true') {
+                    discNameChanger()
+                }
+                if (response.answer.checkbox4 == 'true') {
                     changeTheme()
                 }
             })
 
             if (document.location.pathname == '/bugreport') {
                 bugReport()
+            }
+
+            if (localStorage.discNames) {
+                let dises = document.querySelectorAll('tr.pointer')
+                let newNames = JSON.parse(localStorage.getItem('discNames'))
+                for (let disc of dises) {
+                    let name = disc.querySelector(':nth-child(2)').innerText
+                    for (let n in newNames) {
+                        if (name == n) {
+                            disc.querySelector(':nth-child(2)').innerText = newNames[n]
+                        }
+                    }
+                }
             }
 
             document.getElementsByTagName('html')[0].style.display = 'block'
@@ -120,6 +136,54 @@ function removeTrash() {
         document.querySelectorAll('.bad').forEach(el => el.remove())
         //удаление надписей типа 'из 100'
         document.querySelectorAll('.mvb').forEach(el => el.remove())
+    }
+}
+
+function discNameChanger() {
+    if (document.location.pathname == '/student/student') {
+        if (!localStorage.getItem('discNames')) {
+            localStorage.setItem('discNames', '{}')
+        }
+        document.querySelectorAll('.bad').forEach(el => el.remove())
+        let clearSettings = document.createElement('input')
+        clearSettings.type = 'button'
+        clearSettings.value = 'Обнулить изменения'
+        document.querySelector('table').before(clearSettings)
+        clearSettings.onclick = () => {
+            localStorage.removeItem('discNames')
+            alert('Все изменения сброшены')
+            location.reload()
+        }
+        let dises = document.querySelectorAll('tr.pointer')
+        dises.forEach(disc => {
+            let td = disc.querySelector(':first-child')
+            let button = document.createElement('input')
+            button.type = 'image'
+            button.src = 'https://cdn-icons-png.flaticon.com/512/4277/4277132.png'
+            button.width = 17
+            td.prepend(button)
+            button.onclick = () => {
+                let newName = prompt('Новое название дисциплины')
+                let key = disc.querySelector(':nth-child(2)').innerText
+                let discNames = JSON.parse(localStorage.getItem('discNames'))
+                console.log(discNames)
+                let isChanged = false
+                for (let discName in discNames) {
+                    if (key == discNames[discName]) {
+                        discNames[discName] = newName
+                        isChanged = true
+                    }
+                }
+                if (!isChanged) {
+                    discNames[key] = newName
+                }
+                disc.querySelector(':nth-child(2)').innerText = newName
+                discNames = JSON.stringify(discNames)
+                console.log(discNames)
+                localStorage.setItem('discNames', discNames)
+                button.remove()
+            }
+        })
     }
 }
 
@@ -229,6 +293,8 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
                 })
             })
         })
+
+        document.querySelectorAll('input[type=image]').forEach(input => input.style.filter = 'invert(1)')
     }
     if (document.location.pathname == '/student/student/test' || document.location.pathname == '/student/student/test/') {
         document.querySelectorAll('img').forEach(img => img.style.filter = 'invert(1)')

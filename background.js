@@ -1,8 +1,9 @@
 //конструктор с дефолтными настройками
-if (localStorage.length == 0) {
+if (!localStorage.length) {
     localStorage.setItem('checkbox1', true)
     localStorage.setItem('checkbox2', true)
     localStorage.setItem('checkbox3', true)
+    localStorage.setItem('checkbox4', true)
 }
 
 //связь между content.js и router.js
@@ -14,6 +15,7 @@ chrome.runtime.onMessage.addListener(
             localStorage.setItem('checkbox1', request.settings.checkbox1)
             localStorage.setItem('checkbox2', request.settings.checkbox2)
             localStorage.setItem('checkbox3', request.settings.checkbox3)
+            localStorage.setItem('checkbox4', request.settings.checkbox4)
             sendResponse({ answer: 'settings have been changed' })
         }
         if (request.data === 'bugReport') {
