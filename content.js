@@ -29,7 +29,7 @@ function _ini() {
                 bugReport()
             }
 
-            if (localStorage.discNames) {
+            if (localStorage.discNames != '{}') {
                 let dises = document.querySelectorAll('tr.pointer')
                 let newNames = JSON.parse(localStorage.getItem('discNames'))
                 for (let disc of dises) {
@@ -166,7 +166,6 @@ function discNameChanger() {
                 let newName = prompt('Новое название дисциплины')
                 let key = disc.querySelector(':nth-child(2)').innerText
                 let discNames = JSON.parse(localStorage.getItem('discNames'))
-                console.log(discNames)
                 let isChanged = false
                 for (let discName in discNames) {
                     if (key == discNames[discName]) {
@@ -179,7 +178,6 @@ function discNameChanger() {
                 }
                 disc.querySelector(':nth-child(2)').innerText = newName
                 discNames = JSON.stringify(discNames)
-                console.log(discNames)
                 localStorage.setItem('discNames', discNames)
                 button.remove()
             }
