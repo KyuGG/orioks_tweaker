@@ -29,7 +29,7 @@ function _ini() {
                 bugReport()
             }
 
-            if (localStorage.discNames != '{}') {
+            if (document.location.pathname == '/student/student' && localStorage.discNames != '{}') {
                 let dises = document.querySelectorAll('tr.pointer')
                 let newNames = JSON.parse(localStorage.getItem('discNames'))
                 for (let disc of dises) {
