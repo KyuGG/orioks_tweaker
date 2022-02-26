@@ -25,21 +25,12 @@ function _ini() {
                 }
             })
 
+            logo()
+
+            discNameLoader()
+
             if (document.location.pathname == '/bugreport') {
                 bugReport()
-            }
-
-            if (document.location.pathname == '/student/student' && localStorage.discNames != '{}') {
-                let dises = document.querySelectorAll('tr.pointer')
-                let newNames = JSON.parse(localStorage.getItem('discNames'))
-                for (let disc of dises) {
-                    let name = disc.querySelector(':nth-child(2)').innerText
-                    for (let n in newNames) {
-                        if (name == n) {
-                            disc.querySelector(':nth-child(2)').innerText = newNames[n]
-                        }
-                    }
-                }
             }
 
             document.getElementsByTagName('html')[0].style.display = 'block'
@@ -53,6 +44,15 @@ function sleep(ms) {
 }
 
 //функционал плагина
+function logo() {
+    //добавление лого
+    let logo = document.createElement('img')
+    logo.src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
+    logo.width = 40
+    logo.className = 'navbar-header'
+    document.getElementsByClassName('container')[0].prepend(logo)
+}
+
 function bugReport() {
     document.getElementsByClassName('row')[0].remove()
     let myDiv = document.createElement('div')
@@ -114,13 +114,6 @@ function download() {
 }
 
 function removeTrash() {
-    //добавление лого
-    let logo = document.createElement('img')
-    logo.src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
-    logo.width = 50
-    logo.className = 'navbar-header'
-    let orioks = document.getElementsByClassName('container')[0]
-    orioks.prepend(logo)
     if (document.location.pathname == '/student/student') {
         let black = '#353535'
         //смена балл на сум
@@ -163,28 +156,48 @@ function discNameChanger() {
             button.width = 17
             td.prepend(button)
             button.onclick = () => {
-                let newName = prompt('Новое название дисциплины')
-                let key = disc.querySelector(':nth-child(2)').innerText
-                let discNames = JSON.parse(localStorage.getItem('discNames'))
-                let isChanged = false
-                for (let discName in discNames) {
-                    if (key == discNames[discName]) {
-                        discNames[discName] = newName
-                        isChanged = true
+                let newName = prompt('Новое название дисциплины').trim()
+                if (newName) {
+                    let key = disc.querySelector(':nth-child(2)').innerText
+                    let discNames = JSON.parse(localStorage.getItem('discNames'))
+                    let isChanged = false
+                    for (let discName in discNames) {
+                        if (key == discNames[discName]) {
+                            discNames[discName] = newName
+                            isChanged = true
+                        }
                     }
+                    if (!isChanged) {
+                        discNames[key] = newName
+                    }
+                    disc.querySelector(':nth-child(2)').innerText = newName
+                    discNames = JSON.stringify(discNames)
+                    localStorage.setItem('discNames', discNames)
+                    button.remove()
                 }
-                if (!isChanged) {
-                    discNames[key] = newName
+                else {
+                    alert('Название не может быть пустым')
                 }
-                disc.querySelector(':nth-child(2)').innerText = newName
-                discNames = JSON.stringify(discNames)
-                localStorage.setItem('discNames', discNames)
-                button.remove()
             }
         })
     }
 }
 
+function discNameLoader() {
+    if (localStorage.discNames != '{}' && document.location.pathname == '/student/student') {
+        //загрузка измененных названий дисциплин
+        let dises = document.querySelectorAll('tr.pointer td:nth-child(2)')
+        let newNames = JSON.parse(localStorage.getItem('discNames'))
+        for (let disc of dises) {
+            let name = disc.innerText
+            for (let n in newNames) {
+                if (name == n) {
+                    disc.innerText = newNames[n]
+                }
+            }
+        }
+    }
+}
 //вспомогательные функции для тем
 function setRules(rules, property, value) {
     for (let styleSheet of document.styleSheets) {
