@@ -158,22 +158,12 @@ function discNameChanger() {
             button.onclick = () => {
                 let newName = prompt('Новое название дисциплины').trim()
                 if (newName) {
-                    let key = disc.querySelector(':nth-child(2)').innerText
+                    let prevName = disc.querySelector(':nth-child(2)').getAttribute('prevname')
                     let discNames = JSON.parse(localStorage.getItem('discNames'))
-                    let isChanged = false
-                    for (let discName in discNames) {
-                        if (key == discNames[discName]) {
-                            discNames[discName] = newName
-                            isChanged = true
-                        }
-                    }
-                    if (!isChanged) {
-                        discNames[key] = newName
-                    }
+                    discNames[prevName] = newName
                     disc.querySelector(':nth-child(2)').innerText = newName
                     discNames = JSON.stringify(discNames)
                     localStorage.setItem('discNames', discNames)
-                    button.remove()
                 }
                 else {
                     alert('Название не может быть пустым')
@@ -184,6 +174,9 @@ function discNameChanger() {
 }
 
 function discNameLoader() {
+    if (location.pathname == '/student/student') {
+        document.querySelectorAll('tr.pointer td:nth-child(2)').forEach(td => td.setAttribute('prevname', td.innerHTML))
+    }
     if (localStorage.discNames != '{}') {
         let selector = ''
         switch (location.pathname) {
@@ -218,7 +211,7 @@ function discNameLoader() {
             var dises = document.querySelectorAll(selector)
             var newNames = JSON.parse(localStorage.getItem('discNames'))
             for (let disc of dises) {
-                let name = disc.innerText
+                let name = disc.innerText.trim()
                 for (let n in newNames) {
                     if (name == n) {
                         disc.innerText = newNames[n]
