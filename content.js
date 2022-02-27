@@ -2,7 +2,7 @@ _ini()
 
 function _ini() {
     //плагин не работает в moodle
-    if (document.location.pathname.split('/')[1] != 'moodle') {
+    if (location.pathname.split('/')[1] != 'moodle') {
 
         document.getElementsByTagName('html')[0].style.display = 'none'
 
@@ -29,7 +29,7 @@ function _ini() {
 
             discNameLoader()
 
-            if (document.location.pathname == '/bugreport') {
+            if (location.pathname == '/bugreport') {
                 bugReport()
             }
 
@@ -83,7 +83,7 @@ function bugReport() {
 }
 
 function download() {
-    if (document.location.pathname == '/student/ir/') {
+    if (location.pathname == '/student/ir/') {
         document.querySelectorAll('.list-group a').forEach(a => {
             if (a.href.split(':')[0] == 'http') {
                 a.href = 'https' + a.href.slice(4)
@@ -91,7 +91,7 @@ function download() {
             }
         })
     }
-    if (document.location.pathname == '/student/student') {
+    if (location.pathname == '/student/student') {
         // добираемся с помощью листнеров до кликов по новостям
         let dises = document.getElementsByClassName('pointer ng-scope')
         Array.prototype.forEach.call(dises, dis => {
@@ -114,7 +114,7 @@ function download() {
 }
 
 function removeTrash() {
-    if (document.location.pathname == '/student/student') {
+    if (location.pathname == '/student/student') {
         let black = '#353535'
         //смена балл на сум
         let span = document.getElementById('bp')
@@ -133,7 +133,7 @@ function removeTrash() {
 }
 
 function discNameChanger() {
-    if (document.location.pathname == '/student/student') {
+    if (location.pathname == '/student/student') {
         if (!localStorage.getItem('discNames')) {
             localStorage.setItem('discNames', '{}')
         }
@@ -184,15 +184,45 @@ function discNameChanger() {
 }
 
 function discNameLoader() {
-    if (localStorage.discNames != '{}' && document.location.pathname == '/student/student') {
-        //загрузка измененных названий дисциплин
-        let dises = document.querySelectorAll('tr.pointer td:nth-child(2)')
-        let newNames = JSON.parse(localStorage.getItem('discNames'))
-        for (let disc of dises) {
-            let name = disc.innerText
-            for (let n in newNames) {
-                if (name == n) {
-                    disc.innerText = newNames[n]
+    if (localStorage.discNames != '{}') {
+        let selector = ''
+        switch (location.pathname) {
+            case '/student/news/view':
+                var disc = document.querySelector('strong')
+                var newNames = JSON.parse(localStorage.getItem('discNames'))
+                let name = disc.innerText
+                for (let n in newNames) {
+                    if (name == n) {
+                        disc.innerText = newNames[n]
+                    }
+                }
+                break
+            case '/portfolio/view-project':
+                selector = 'div.ng-binding .ng-scope'
+                break
+            case '/student/student':
+                selector = 'tr.pointer td:nth-child(2)'
+                break
+            case '/student/homework/list':
+                selector = 'tr td:nth-child(4)'
+                break
+            case '/portfolio/list-uchebnie-project':
+            case '/portfolio/list-uchebnie-project/index':
+                selector = 'tr[class*=project]:nth-child(2n-1) td:nth-child(3)'
+                break
+            case '/student/homework/create':
+                selector = 'select#homework-discipline-field option'
+                break
+        }
+        if (selector) {
+            var dises = document.querySelectorAll(selector)
+            var newNames = JSON.parse(localStorage.getItem('discNames'))
+            for (let disc of dises) {
+                let name = disc.innerText
+                for (let n in newNames) {
+                    if (name == n) {
+                        disc.innerText = newNames[n]
+                    }
                 }
             }
         }
@@ -281,10 +311,10 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     setRules(rulesets.dragNDropDragOver, 'backgroundColor', bg2)
     setRules(rulesets.dragNDropDragOver, 'color', links)
 
-    if (document.location.pathname == '/user/profile') {
+    if (location.pathname == '/user/profile') {
         document.querySelectorAll('img')[1].src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
     }
-    if (document.location.pathname == '/student/student') {
+    if (location.pathname == '/student/student') {
         document.styleSheets[1].cssRules[7].style.background = '#007ECB'
         document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
         document.styleSheets[1].cssRules[5].style.background = '#7D919E'
@@ -307,19 +337,19 @@ function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
 
         document.querySelectorAll('input[type=image]').forEach(input => input.style.filter = 'invert(1)')
     }
-    if (document.location.pathname == '/student/student/test' || document.location.pathname == '/student/student/test/') {
+    if (location.pathname == '/student/student/test' || location.pathname == '/student/student/test/') {
         document.querySelectorAll('img').forEach(img => img.style.filter = 'invert(1)')
     }
-    if (document.location.pathname == '/student/ir/') {
+    if (location.pathname == '/student/ir/') {
         setRules(rulesets.resourceHvr, 'backgroundColor', bg2) // плохой рул
     }
-    if (document.location.pathname == '/main/view-news') {
+    if (location.pathname == '/main/view-news') {
         document.querySelectorAll('.well *').forEach(el => {
             el.style.color = shadeColor(el.style.color, 1)
             el.style.background = bg
         })
     }
-    if (document.location.pathname == '/student/news/view') {
+    if (location.pathname == '/student/news/view') {
         document.querySelectorAll('.container div.margin-top *').forEach(el => {
             el.style.color = shadeColor(el.style.color, 1)
             el.style.background = bg
