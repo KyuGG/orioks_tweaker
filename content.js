@@ -49,18 +49,18 @@ function bugReport() {
     document.getElementsByClassName('row')[0].remove()
     let myDiv = document.createElement('div')
     let h1 = document.createElement('h1')
-    h1.innerText = 'Orioks Tweaker'
+    h1.textContent = 'Orioks Tweaker'
     let h2 = document.createElement('h2')
-    h2.innerText = 'Напишите об ошибке'
+    h2.textContent = 'Напишите об ошибке'
 
     let gitHub = document.createElement('a')
     gitHub.href = 'https://github.com/KyuGG/orioks_tweaker/issues'
-    gitHub.innerText = 'GitHub'
+    gitHub.textContent = 'GitHub'
     gitHub.style.fontSize = '22pt'
 
     let vk = document.createElement('a')
     vk.href = 'https://vk.me/kyugg'
-    vk.innerText = 'VK'
+    vk.textContent = 'VK'
     vk.style.fontSize = '22pt'
 
     let br = document.createElement('br')
@@ -117,13 +117,13 @@ function fixScore() {
         document.querySelectorAll('.mvb').forEach(el => el.remove())
         let dises = document.querySelectorAll('tr.pointer td:nth-child(3) span')
         let counter = 0
-        const json = JSON.parse(document.getElementById('forang').innerText).dises
+        const json = JSON.parse(document.getElementById('forang').textContent).dises
         json.forEach(disc => {
             let realScore = 0
             disc.segments[0].allKms.forEach(segment => {
                 if (segment.grade.b != 'н' && segment.grade.b != '-') realScore += segment.grade.b
             })
-            dises[counter].innerText = Math.round(realScore * 100) / 100
+            dises[counter].textContent = Math.round(realScore * 100) / 100
             counter += 1
         })
     }
@@ -158,7 +158,7 @@ function discNameChanger() {
                     let prevName = disc.querySelector(':nth-child(2)').getAttribute('prevname')
                     let discNames = JSON.parse(localStorage.getItem('discNames'))
                     discNames[prevName] = newName
-                    disc.querySelector(':nth-child(2)').innerText = newName
+                    disc.querySelector(':nth-child(2)').textContent = newName
                     discNames = JSON.stringify(discNames)
                     localStorage.setItem('discNames', discNames)
                 }
@@ -180,10 +180,10 @@ function discNameLoader() {
             case '/student/news/view':
                 var disc = document.querySelector('strong')
                 var newNames = JSON.parse(localStorage.getItem('discNames'))
-                let name = disc.innerText
+                let name = disc.textContent
                 for (let n in newNames) {
                     if (name == n) {
-                        disc.innerText = newNames[n]
+                        disc.textContent = newNames[n]
                     }
                 }
                 break
@@ -208,10 +208,10 @@ function discNameLoader() {
             var dises = document.querySelectorAll(selector)
             var newNames = JSON.parse(localStorage.getItem('discNames'))
             for (let disc of dises) {
-                let name = disc.innerText.trim()
+                let name = disc.textContent.trim()
                 for (let n in newNames) {
                     if (name == n) {
-                        disc.innerText = newNames[n]
+                        disc.textContent = newNames[n]
                     }
                 }
             }
