@@ -115,20 +115,23 @@ function download() {
 
 function removeTrash() {
     if (location.pathname == '/student/student') {
-        let black = '#353535'
-        //смена балл на сум
-        let span = document.getElementById('bp')
-        let clack = new Event('click')
-        span.dispatchEvent(clack)
-        span.dispatchEvent(clack)
-        span.remove()
-
-        document.styleSheets[1].cssRules[8].style.color = black
+        document.styleSheets[1].cssRules[8].style.color = '#353535'
         document.styleSheets[1].cssRules[8].style.display = 'block'
         //удаление красных точек
         document.querySelectorAll('.bad').forEach(el => el.remove())
         //удаление надписей типа 'из 100'
         document.querySelectorAll('.mvb').forEach(el => el.remove())
+        let dises = document.querySelectorAll('tr.pointer td:nth-child(3) span')
+        let counter = 0
+        const json = JSON.parse(document.getElementById('forang').innerText).dises
+        json.forEach(disc => {
+            let realScore = 0
+            disc.segments[0].allKms.forEach(segment => {
+                if (segment.grade.b != 'н' && segment.grade.b != '-') realScore += segment.grade.b
+            })
+            dises[counter].innerText = Math.round(realScore * 100) / 100
+            counter += 1
+        })
     }
 }
 
