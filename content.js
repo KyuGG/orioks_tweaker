@@ -111,6 +111,8 @@ function fixScore() {
         document.styleSheets[1].cssRules[8].style.display = 'block'
         //удаление кнопки переключения режима отображения баллов
         document.getElementById('bp').remove()
+        //удаление th под кнопкой
+        document.querySelector('tr th:nth-child(2)').remove()
         //удаление красных точек
         document.querySelectorAll('.bad').forEach(el => el.remove())
         //удаление надписей типа 'из 100'
