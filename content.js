@@ -11,18 +11,10 @@ function _ini() {
             //делаем запрос к настройкам, хранящимся в background.js
             chrome.runtime.sendMessage({ data: 'settings' }, (response) => {
                 //всевозможные сценарии работы плагина
-                if (response.answer.checkbox1 == 'true') {
-                    removeTrash()
-                }
-                if (response.answer.checkbox2 == 'true') {
-                    download()
-                }
-                if (response.answer.checkbox3 == 'true') {
-                    discNameChanger()
-                }
-                if (response.answer.checkbox4 == 'true') {
-                    changeTheme()
-                }
+                if (response.answer.checkbox1 == 'true') fixScore()
+                if (response.answer.checkbox2 == 'true') download()
+                if (response.answer.checkbox3 == 'true') discNameChanger()
+                if (response.answer.checkbox4 == 'true') changeTheme()
             })
 
             logo()
@@ -113,10 +105,12 @@ function download() {
     }
 }
 
-function removeTrash() {
+function fixScore() {
     if (location.pathname == '/student/student') {
         document.styleSheets[1].cssRules[8].style.color = '#353535'
         document.styleSheets[1].cssRules[8].style.display = 'block'
+        //удаление кнопки переключения режима отображения баллов
+        document.getElementById('bp').remove()
         //удаление красных точек
         document.querySelectorAll('.bad').forEach(el => el.remove())
         //удаление надписей типа 'из 100'
