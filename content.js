@@ -121,11 +121,21 @@ function fixScore() {
         let counter = 0
         const json = JSON.parse(document.getElementById('forang').textContent).dises
         json.forEach(disc => {
+            let realMaxScore = 0
             let realScore = 0
             disc.segments[0].allKms.forEach(segment => {
-                if (segment.grade.b != 'н' && segment.grade.b != '-') realScore += segment.grade.b
+                if (segment.grade.b != '-') {
+                    realMaxScore += segment.max_ball
+                    if (!isNaN(segment.grade.b)) realScore += segment.grade.b
+                }
             })
             dises[counter].textContent = Math.round(realScore * 100) / 100
+            let percent = Math.round(realScore / realMaxScore * 100)
+            console.log(percent);
+            if (percent >= 86) dises[counter].className = 'grade_5 grade'
+            else if (percent >= 70) dises[counter].className = 'grade_4 grade'
+            else if (percent >= 50) dises[counter].className = 'grade_3 grade'
+            else dises[counter].className = 'grade_1 grade'
             counter += 1
         })
     }
@@ -176,6 +186,7 @@ function discNameLoader() {
     if (location.pathname == '/student/student') {
         document.querySelectorAll('tr.pointer td:nth-child(2)').forEach(td => td.setAttribute('prevname', td.innerHTML))
         document.querySelectorAll('tr.pointer td:last-child').forEach(td => td.style = 'text-align: right')
+        document.querySelectorAll('tr.pointer span').forEach(span => span.style = 'margin-right: 15px')
     }
     if (localStorage.discNames != '{}') {
         let selector = ''
