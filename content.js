@@ -117,7 +117,7 @@ function fixScore() {
         document.querySelectorAll('.bad').forEach(el => el.remove())
         //удаление надписей типа 'из 100'
         document.querySelectorAll('.mvb').forEach(el => el.remove())
-        let dises = document.querySelectorAll('tr.pointer td:nth-child(3) span')
+        let dises = document.querySelectorAll('tr.pointer span')
         let counter = 0
         const json = JSON.parse(document.getElementById('forang').textContent).dises
         json.forEach(disc => {
@@ -175,6 +175,7 @@ function discNameChanger() {
 function discNameLoader() {
     if (location.pathname == '/student/student') {
         document.querySelectorAll('tr.pointer td:nth-child(2)').forEach(td => td.setAttribute('prevname', td.innerHTML))
+        document.querySelectorAll('tr.pointer td:last-child').forEach(td => td.style = 'text-align: right')
     }
     if (localStorage.discNames != '{}') {
         let selector = ''
