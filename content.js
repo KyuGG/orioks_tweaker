@@ -9,15 +9,13 @@ function _ini() {
         window.onload = function () {
 
             //делаем запрос к настройкам, хранящимся в background.js
-            chrome.runtime.sendMessage({ data: 'settings' }, (response) => {
+            chrome.runtime.sendMessage({ data: 'settings' }, response => {
                 //всевозможные сценарии работы плагина
-                if (response.answer.checkbox1 == 'true') fixScore()
-                if (response.answer.checkbox2 == 'true') download()
-                if (response.answer.checkbox3 == 'true') discNameChanger()
-                if (response.answer.checkbox4 == 'true') changeTheme()
+                if (response.answer.checkbox1) fixScore()
+                if (response.answer.checkbox2) download()
+                if (response.answer.checkbox3) discNameChanger()
+                if (response.answer.checkbox4) changeTheme()
             })
-
-            logo()
 
             discNameLoader()
 
@@ -25,7 +23,7 @@ function _ini() {
                 bugReport()
             }
 
-            document.getElementsByTagName('html')[0].style.display = 'block'
+            document.getElementsByTagName('html')[0].style.display = ''
 
         }
     }
@@ -36,14 +34,6 @@ function sleep(ms) {
 }
 
 //функционал плагина
-function logo() {
-    //добавление лого
-    let logo = document.createElement('img')
-    logo.src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
-    logo.width = 40
-    logo.className = 'navbar-header'
-    document.getElementsByClassName('container')[0].prepend(logo)
-}
 
 function bugReport() {
     document.getElementsByClassName('row')[0].remove()
@@ -131,7 +121,6 @@ function fixScore() {
             })
             dises[counter].textContent = Math.round(realScore * 100) / 100
             let percent = Math.round(realScore / realMaxScore * 100)
-            console.log(percent);
             if (percent >= 86) dises[counter].className = 'grade_5 grade'
             else if (percent >= 70) dises[counter].className = 'grade_4 grade'
             else if (percent >= 50) dises[counter].className = 'grade_3 grade'
@@ -262,7 +251,7 @@ function shadeColor(color, percent) {
     return '#' + RR + GG + BB
 }
 
-function changeTheme(bg = '#353535', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2') {
+function changeTheme(bg = '#202124', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2') {
     setRules(rulesets.mainBg, 'backgroundColor', bg2)
     setRules(rulesets.mainBgHvr, 'backgroundColor', bg)
     setRules(rulesets.mainBgHvr, 'transition', 'background-color 0.25s linear')
