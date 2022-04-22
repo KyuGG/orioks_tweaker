@@ -12,7 +12,7 @@
     text-align: center !important;
     width: 14.28%;
     height: 110px;
-    border: 1px solid white;
+    border: 1px solid black;
     font-size: 9pt !important;
 }
 
@@ -31,11 +31,37 @@
     justify-content: center;
     width: 100%;
     height: 50%;
-    border-bottom: 1px dashed white;
+    border-bottom: 1px dashed black;
 }
 
-@media (min-width: 1200px) {
-    .container {
-        width: 1400px !important;
+.lecture {
+    background-color: #b6c6e7 !important
+}
+
+.lab {
+    background-color: #fdd677 !important
+}
+
+.sem {
+    background-color: white !important;
+}
+
+.holiday {
+    background-color: #c5e0b5
+}
+
+@media (max-width: 990px) {
+
+    .schedule-td,
+    .schedule th {
+        font-size: 7pt !important;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .schedule-td,
+    .schedule th {
+        font-size: 5pt !important;
     }
 }

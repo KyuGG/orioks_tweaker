@@ -15,7 +15,7 @@ function _ini() {
                     if (response.answer.checkbox1) fixScore()
                     if (response.answer.checkbox2) download()
                     if (response.answer.checkbox3) discNameChanger()
-                    if (response.answer.checkbox4) changeTheme()
+                    if (response.answer.checkbox4 && location.pathname != '/schedule') changeTheme()
                     if (response.answer.checkbox5) schedule()
                 }
                 else {
@@ -113,21 +113,47 @@ async function schedule() {
             tableZn.append(tr)
         }
 
+        const time = [
+            'Пара №1\n9:00-10:30',
+            'Пара №2\n10:40-12:10',
+            'Пара №3\n12:20-13:50\n12:50-14:20',
+            'Пара №4\n14:30-16:00',
+            'Пара №5\n16:10-17:40',
+            'Пара №6\n18:20-19:50',
+            'Пара №7\n20:00-21:30'
+        ]
+        const tdsFirst = document.querySelectorAll('.schedule tr :first-child:not(th)')
+        for (const i in time) {
+            tdsFirst[i].innerText = time[i]
+            tdsFirst[7 + Number(i)].innerText = time[i]
+        }
+
         scheduleBtn.onclick = async () => {
             const schedule = await fetchSchedule(prompt('Введите вашу группу\nНапример: П-22').trim())
-            document.querySelectorAll('.schedule-td').forEach(child => child.textContent = '')
+            document.querySelectorAll('.schedule td:not(:first-child)').forEach(child => {
+                child.textContent = ''
+                child.classList.add('holiday')
+                child.classList.remove('lecture')
+                child.classList.remove('lab')
+                child.classList.remove('sem')
+            })
 
             for (const ch of schedule[0]) {
-                document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`).textContent = ch[1] + '\n' + ch[3]
+                const week = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+                week.innerText = ch[1] + '\n' + ch[3]
+                colorizeTable(week, ch[1])
             }
             for (const ch of schedule[3]) {
-                document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`).textContent = ch[1] + '\n' + ch[3]
+                const week = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+                week.innerText = ch[1] + '\n' + ch[3]
+                colorizeTable(week, ch[1])
             }
 
             for (const ch of schedule[1]) {
                 document.querySelectorAll(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`).forEach(td => {
                     const div = document.createElement('div')
-                    div.textContent = ch[1] + '\n' + ch[3]
+                    div.innerText = ch[1] + '\n' + ch[3]
+                    colorizeTable(div, ch[1])
                     td.append(div)
                     td.append(document.createElement('div'))
                 })
@@ -136,25 +162,40 @@ async function schedule() {
             for (const ch of schedule[2]) {
                 const tds = document.querySelectorAll(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
                 tds.forEach(td => {
-                    console.log(td.children.length);
                     if (td.children.length == 0) td.append(document.createElement('div'))
-                    if (td.children.length == 2) td.children[1].textContent = ch[1] + '\n' + ch[3]
+                    if (td.children.length == 2) {
+                        td.children[1].innerText = ch[1] + '\n' + ch[3]
+                        colorizeTable(td.children[1], ch[1])
+                    }
                     else {
                         const div = document.createElement('div')
-                        div.textContent = ch[1] + '\n' + ch[3]
+                        div.innerText = ch[1] + '\n' + ch[3]
+                        colorizeTable(div, ch[1])
                         td.append(div)
                     }
                 })
             }
         }
-        // for (const ch of schedule[1]) {
-        //     document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`).textContent = ch[1]
-        // }
+
 
     }
 
 }
 
+function colorizeTable(block, name) {
+    const type = name.split(' ')
+    switch (type[type.length - 1]) {
+        case '[Лек]':
+            block.classList.add('lecture')
+            break
+        case '[Лаб]':
+            block.classList.add('lab')
+            break
+        default:
+            if (block.textContent != '')
+                block.classList.add('sem')
+    }
+}
 
 async function fetchSchedule(group) {
     const scheduleAPI = `https://miet.ru/schedule/data?group=${group}`

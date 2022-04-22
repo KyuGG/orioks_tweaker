@@ -26,7 +26,8 @@
             ],
             "css": [
                 "schedule.css"
-            ]
+            ],
+            "run_at": "document_start"
         }
     ],
     "background": {
