@@ -3,8 +3,14 @@
     flex-direction: column;
 }
 
-.schedule {
-    margin-top: 40px;
+.hints {
+    margin-top: 10px;
+}
+
+.hints td {
+    padding: 10px 0;
+    text-align: center;
+    border: 1px solid black;
 }
 
 .schedule-td,
@@ -17,7 +23,8 @@
 }
 
 .schedule tr td:first-child,
-.schedule tr th:first-child {
+.schedule tr th:first-child,
+.hints td {
     width: 7% !important;
 }
 

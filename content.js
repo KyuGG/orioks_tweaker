@@ -57,12 +57,39 @@ async function schedule() {
         const scheduleHeader = document.createElement('div')
         const scheduleH2 = document.createElement('h3')
         const scheduleBtn = document.createElement('button')
+        const scheduleSave = document.createElement('button')
+        const scheduleHints = document.createElement('div')
+        const scheduleHintsTable = document.createElement('table')
+        const scheduleHintsTr = document.createElement('tr')
+        const scheduleCh = document.createElement('h3')
+        const scheduleZn = document.createElement('h3')
 
         scheduleH2.textContent = 'Группа:'
         scheduleBtn.textContent = 'Выбрать'
+        scheduleSave.textContent = 'Сделать по умолчанию'
         scheduleHeader.classList.add('.col-md-6')
-        scheduleHeader.append(scheduleH2, scheduleBtn)
-        content.append(scheduleHeader)
+        scheduleCh.textContent = 'Числитель'
+        scheduleZn.textContent = 'Знаменатель'
+        scheduleHeader.append(scheduleH2, scheduleBtn, scheduleSave)
+
+        scheduleHintsTable.classList.add('hints')
+        const scheduleHintsTd1 = document.createElement('td')
+        scheduleHintsTd1.textContent = 'Лекция'
+        scheduleHintsTd1.classList.add('lecture')
+        const scheduleHintsTd2 = document.createElement('td')
+        scheduleHintsTd2.textContent = 'Лабораторная работа'
+        scheduleHintsTd2.classList.add('lab')
+        const scheduleHintsTd3 = document.createElement('td')
+        scheduleHintsTd3.textContent = 'Семинар'
+        scheduleHintsTd3.classList.add('sem')
+        const scheduleHintsTd4 = document.createElement('td')
+        scheduleHintsTd4.textContent = 'Окно'
+        scheduleHintsTd4.classList.add('holiday')
+        scheduleHintsTr.append(scheduleHintsTd1, scheduleHintsTd2, scheduleHintsTd3, scheduleHintsTd4)
+        scheduleHintsTable.append(scheduleHintsTr)
+        scheduleHints.append(scheduleHintsTable)
+
+        content.append(scheduleHeader, scheduleHints, scheduleCh)
 
         const tableCh = document.createElement('table')
         const trCh = document.createElement('tr')
@@ -75,7 +102,7 @@ async function schedule() {
             trCh.append(th)
         }
         tableCh.append(trCh)
-        content.append(tableCh)
+        content.append(tableCh, scheduleZn)
 
         for (let i = 0; i < 7; i++) {
             const tr = document.createElement('tr')
@@ -126,84 +153,99 @@ async function schedule() {
             tdsFirst[7 + Number(i)].innerText = time[i]
         }
 
-        scheduleBtn.onclick = async () => {
+        const localStorageGroup = localStorage.getItem('group')
+        if (localStorageGroup) {
+            loadSchedule(localStorageGroup)
+        }
+
+        scheduleSave.onclick = () => {
             const group = prompt('Введите вашу группу\nНапример: П-22')
             if (group) {
-                scheduleH2.textContent = 'Загрузка...'
-                const schedule = await fetchSchedule(group.trim())
-                document.querySelectorAll('.schedule td:not(:first-child)').forEach(child => {
-                    child.textContent = ''
-                    child.classList.add('holiday')
-                    child.classList.remove('lecture')
-                    child.classList.remove('lab')
-                    child.classList.remove('sem')
-                })
-
-                //числитель
-                for (const ch of schedule[0]) {
-                    const week = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-                    week.innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
-                    colorizeTable(week, ch[1])
-                }
-                //знаменатель
-                for (const ch of schedule[3]) {
-                    const week = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-                    week.innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
-                    colorizeTable(week, ch[1])
-                }
-                //первый числитель
-                for (const ch of schedule[1]) {
-                    const td = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-                    if (td.children.length == 0) {
-                        td.append(document.createElement('div'))
-                        td.append(document.createElement('div'))
-                    }
-                    td.children[0].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
-                    colorizeTable(td.children[0], ch[1])
-                }
-                //второй числитель
-                for (const ch of schedule[2]) {
-                    const td = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-
-                    if (td.children.length == 0)
-                        td.append(document.createElement('div'))
-                    if (td.children.length == 1)
-                        td.append(document.createElement('div'))
-
-                    td.children[1].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
-                    colorizeTable(td.children[1], ch[1])
-                }
-
-                //первый знаменатель
-                for (const ch of schedule[4]) {
-                    const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-                    if (td.children.length == 0) {
-                        td.append(document.createElement('div'))
-                        td.append(document.createElement('div'))
-                    }
-                    td.children[0].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
-                    colorizeTable(td.children[0], ch[1])
-                }
-
-                //второй знаменатель
-                for (const ch of schedule[5]) {
-                    const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-
-                    if (td.children.length == 0)
-                        td.append(document.createElement('div'))
-                    if (td.children.length == 1)
-                        td.append(document.createElement('div'))
-
-                    td.children[1].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
-                    colorizeTable(td.children[1], ch[1])
-                }
-
-                scheduleH2.textContent = `Группа: ${group.toUpperCase()}`
+                localStorage.setItem('group', group.trim())
+                location.reload()
             }
         }
+
+        scheduleBtn.onclick = () => {
+            const group = prompt('Введите вашу группу\nНапример: П-22')
+            loadSchedule(group)
+        }
     }
+}
 
+async function loadSchedule(group) {
+    if (group) {
+        document.querySelector('.row h3').textContent = 'Загрузка...'
+        const schedule = await fetchSchedule(group.trim())
+        document.querySelectorAll('.schedule td:not(:first-child)').forEach(child => {
+            child.textContent = ''
+            child.classList.add('holiday')
+            child.classList.remove('lecture')
+            child.classList.remove('lab')
+            child.classList.remove('sem')
+        })
 
+        //числитель
+        for (const ch of schedule[0]) {
+            const week = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+            week.innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
+            colorizeTable(week, ch[1])
+        }
+        //знаменатель
+        for (const ch of schedule[3]) {
+            const week = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+            week.innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
+            colorizeTable(week, ch[1])
+        }
+        //первый числитель
+        for (const ch of schedule[1]) {
+            const td = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+            if (td.children.length == 0) {
+                td.append(document.createElement('div'))
+                td.append(document.createElement('div'))
+            }
+            td.children[0].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
+            colorizeTable(td.children[0], ch[1])
+        }
+        //второй числитель
+        for (const ch of schedule[2]) {
+            const td = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+
+            if (td.children.length == 0)
+                td.append(document.createElement('div'))
+            if (td.children.length == 1)
+                td.append(document.createElement('div'))
+
+            td.children[1].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
+            colorizeTable(td.children[1], ch[1])
+        }
+
+        //первый знаменатель
+        for (const ch of schedule[4]) {
+            const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+            if (td.children.length == 0) {
+                td.append(document.createElement('div'))
+                td.append(document.createElement('div'))
+            }
+            td.children[0].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
+            colorizeTable(td.children[0], ch[1])
+        }
+
+        //второй знаменатель
+        for (const ch of schedule[5]) {
+            const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+
+            if (td.children.length == 0)
+                td.append(document.createElement('div'))
+            if (td.children.length == 1)
+                td.append(document.createElement('div'))
+
+            td.children[1].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
+            colorizeTable(td.children[1], ch[1])
+        }
+
+        document.querySelector('.row h3').textContent = `Группа: ${group.toUpperCase()}`
+    }
 }
 
 function withoutLessonType(name) {
