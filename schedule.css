@@ -1,0 +1,41 @@
+.row {
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule {
+    margin-top: 40px;
+}
+
+.schedule-td,
+.schedule th {
+    text-align: center !important;
+    width: 14.28%;
+    height: 110px;
+    border: 1px solid white;
+    font-size: 9pt !important;
+}
+
+.schedule tr td:first-child,
+.schedule tr th:first-child {
+    width: 7% !important;
+}
+
+.schedule th {
+    height: 50px !important;
+}
+
+.schedule-td div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50%;
+    border-bottom: 1px dashed white;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1400px !important;
+    }
+}

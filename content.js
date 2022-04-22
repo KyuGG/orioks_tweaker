@@ -10,11 +10,17 @@ function _ini() {
 
             //делаем запрос к настройкам, хранящимся в background.js
             chrome.runtime.sendMessage({ data: 'settings' }, response => {
-                //всевозможные сценарии работы плагина
-                if (response.answer.checkbox1) fixScore()
-                if (response.answer.checkbox2) download()
-                if (response.answer.checkbox3) discNameChanger()
-                if (response.answer.checkbox4) changeTheme()
+                if (!chrome.runtime.lastError) {
+                    //всевозможные сценарии работы плагина
+                    if (response.answer.checkbox1) fixScore()
+                    if (response.answer.checkbox2) download()
+                    if (response.answer.checkbox3) discNameChanger()
+                    if (response.answer.checkbox4) changeTheme()
+                    if (response.answer.checkbox5) schedule()
+                }
+                else {
+                    location.reload()
+                }
             })
 
             discNameLoader()
@@ -34,6 +40,206 @@ function sleep(ms) {
 }
 
 //функционал плагина
+
+async function schedule() {
+    const nav = document.querySelector('.navbar-nav')
+    const scheduleButton = document.createElement('li')
+    const scheduleButtonLink = document.createElement('a')
+    scheduleButtonLink.textContent = 'Расписание'
+    scheduleButtonLink.href = '/schedule'
+    scheduleButton.append(scheduleButtonLink)
+    nav.children[1].after(scheduleButton)
+    setRules({ 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1069] }, 'padding', '10px 14px')
+
+    if (location.pathname == '/schedule') {
+        const content = document.querySelector('.row')
+        document.querySelectorAll('.col-md-6').forEach(block => block.remove())
+        const scheduleHeader = document.createElement('div')
+        const scheduleH1 = document.createElement('h1')
+        const scheduleH2 = document.createElement('h3')
+        const scheduleBtn = document.createElement('button')
+
+        scheduleH1.textContent = 'Расписание'
+        scheduleH2.textContent = 'Группа:'
+        scheduleBtn.textContent = 'Выбрать'
+        scheduleHeader.classList.add('.col-md-6')
+        scheduleHeader.append(scheduleH1, scheduleH2, scheduleBtn)
+        content.append(scheduleHeader)
+
+        const tableCh = document.createElement('table')
+        const trCh = document.createElement('tr')
+        tableCh.classList.add('schedule')
+        tableCh.classList.add('ch')
+        const ths = window.innerWidth > 767 ? ['Время', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'] : ['Время', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ']
+        for (let i = 0; i < 7; i++) {
+            const th = document.createElement('th')
+            th.textContent = ths[i]
+            trCh.append(th)
+        }
+        tableCh.append(trCh)
+        content.append(tableCh)
+
+        for (let i = 0; i < 7; i++) {
+            const tr = document.createElement('tr')
+            for (let j = 0; j < 7; j++) {
+                const td = document.createElement('td')
+                td.classList.add(`schedule-${i}-${j}`)
+                td.classList.add('schedule-td')
+                tr.append(td)
+            }
+            tableCh.append(tr)
+        }
+
+        const tableZn = document.createElement('table')
+        const trZn = document.createElement('tr')
+        tableZn.classList.add('schedule')
+        tableZn.classList.add('zn')
+        for (let i = 0; i < 7; i++) {
+            const th = document.createElement('th')
+            th.textContent = ths[i]
+            trZn.append(th)
+        }
+        tableZn.append(trZn)
+        content.append(tableZn)
+
+        for (let i = 0; i < 7; i++) {
+            const tr = document.createElement('tr')
+            for (let j = 0; j < 7; j++) {
+                const td = document.createElement('td')
+                td.classList.add(`schedule-${i}-${j}`)
+                td.classList.add('schedule-td')
+                tr.append(td)
+            }
+            tableZn.append(tr)
+        }
+
+        scheduleBtn.onclick = async () => {
+            const schedule = await fetchSchedule(prompt('Введите вашу группу\nНапример: П-22').trim())
+            document.querySelectorAll('.schedule-td').forEach(child => child.textContent = '')
+
+            for (const ch of schedule[0]) {
+                document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`).textContent = ch[1] + '\n' + ch[3]
+            }
+            for (const ch of schedule[3]) {
+                document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`).textContent = ch[1] + '\n' + ch[3]
+            }
+
+            for (const ch of schedule[1]) {
+                document.querySelectorAll(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`).forEach(td => {
+                    const div = document.createElement('div')
+                    div.textContent = ch[1] + '\n' + ch[3]
+                    td.append(div)
+                    td.append(document.createElement('div'))
+                })
+            }
+
+            for (const ch of schedule[2]) {
+                const tds = document.querySelectorAll(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+                tds.forEach(td => {
+                    console.log(td.children.length);
+                    if (td.children.length == 0) td.append(document.createElement('div'))
+                    if (td.children.length == 2) td.children[1].textContent = ch[1] + '\n' + ch[3]
+                    else {
+                        const div = document.createElement('div')
+                        div.textContent = ch[1] + '\n' + ch[3]
+                        td.append(div)
+                    }
+                })
+            }
+        }
+        // for (const ch of schedule[1]) {
+        //     document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`).textContent = ch[1]
+        // }
+
+    }
+
+}
+
+
+async function fetchSchedule(group) {
+    const scheduleAPI = `https://miet.ru/schedule/data?group=${group}`
+    const schedule = await (await fetch(scheduleAPI)).json()
+    if (schedule.Data) {
+        const identifyWeek = {
+            0: 'ch1',
+            1: 'zn1',
+            2: 'ch2',
+            3: 'zn2'
+        }
+        const simpleSchedule = schedule.Data.map(el => [el.Day, el.Class.Name, el.Time.Time, el.Room.Name, identifyWeek[el.DayNumber]])
+        let ch1 = simpleSchedule.filter(el => el[4] == 'ch1')
+        let zn1 = simpleSchedule.filter(el => el[4] == 'zn1')
+        let ch2 = simpleSchedule.filter(el => el[4] == 'ch2')
+        let zn2 = simpleSchedule.filter(el => el[4] == 'zn2')
+
+        ch1.forEach(el => el.pop())
+        ch2.forEach(el => el.pop())
+        zn1.forEach(el => el.pop())
+        zn2.forEach(el => el.pop())
+
+        ch1 = ch1.map(el => el.join('|'))
+        ch2 = ch2.map(el => el.join('|'))
+        zn1 = zn1.map(el => el.join('|'))
+        zn2 = zn2.map(el => el.join('|'))
+
+        let ch = []
+        let zn = []
+        let ch1Indexes = []
+        let ch2Indexes = []
+        let zn1Indexes = []
+        let zn2Indexes = []
+
+        for (const item in ch1) {
+            for (const segment in ch2) {
+                if (ch1[item] == ch2[segment]) {
+                    ch.push(ch1[item])
+                    ch1Indexes.push(Number(item))
+                    ch2Indexes.push(Number(segment))
+                }
+            }
+        }
+
+        for (const item in zn1) {
+            for (const segment in zn2) {
+                if (zn1[item] == zn2[segment]) {
+                    zn.push(zn1[item])
+                    zn1Indexes.push(Number(item))
+                    zn2Indexes.push(Number(segment))
+                }
+            }
+        }
+
+        ch1Indexes = ch1Indexes.sort((a, b) => b - a)
+        ch2Indexes = ch2Indexes.sort((a, b) => b - a)
+        zn1Indexes = zn1Indexes.sort((a, b) => b - a)
+        zn2Indexes = zn2Indexes.sort((a, b) => b - a)
+
+        for (const i of ch1Indexes) {
+            ch1.splice(i, 1)
+        }
+
+        for (const i of ch2Indexes) {
+            ch2.splice(i, 1)
+        }
+
+        for (const i of zn1Indexes) {
+            zn1.splice(i, 1)
+        }
+
+        for (const i of zn2Indexes) {
+            zn2.splice(i, 1)
+        }
+
+        ch = ch.map(el => el = el.split('|'))
+        ch1 = ch1.map(el => el = el.split('|'))
+        ch2 = ch2.map(el => el = el.split('|'))
+        zn = zn.map(el => el = el.split('|'))
+        zn1 = zn1.map(el => el = el.split('|'))
+        zn2 = zn2.map(el => el = el.split('|'))
+
+        return [ch, ch1, ch2, zn, zn1, zn2]
+    }
+}
 
 function bugReport() {
     document.getElementsByClassName('row')[0].remove()
@@ -305,7 +511,7 @@ function changeTheme(bg = '#202124', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     setRules(rulesets.dragNDropDragOver, 'color', links)
 
     if (location.pathname == '/user/profile') {
-        document.querySelectorAll('img')[1].src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
+        document.querySelector('img').src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
     }
     if (location.pathname == '/student/student') {
         document.styleSheets[1].cssRules[7].style.background = '#007ECB'

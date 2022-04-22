@@ -19,6 +19,14 @@
                 "content.js"
             ],
             "run_at": "document_start"
+        },
+        {
+            "matches":[
+                "https://orioks.miet.ru/schedule"
+            ],
+            "css": [
+                "schedule.css"
+            ]
         }
     ],
     "background": {

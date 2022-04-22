@@ -30,7 +30,7 @@ const onClick = () => {
 }
 
 const openBugReport = () => {
-    chrome.runtime.sendMessage({ data: 'bugReport' }, (response) => {
+    chrome.runtime.sendMessage({ data: 'bugReport' }, response => {
         console.log(response.answer)
     })
 }
