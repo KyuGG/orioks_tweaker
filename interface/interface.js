@@ -7,11 +7,16 @@ let bugreport = document.getElementById('bugreport')
 
 //загрузка настроек из background.js
 chrome.runtime.sendMessage({ data: 'settings' }, response => {
-    checkbox1.checked = response.answer.checkbox1
-    checkbox2.checked = response.answer.checkbox2
-    checkbox3.checked = response.answer.checkbox3
-    checkbox4.checked = response.answer.checkbox4
-    checkbox5.checked = response.answer.checkbox5
+    if (!chrome.runtime.lastError) {
+        checkbox1.checked = response.answer.checkbox1
+        checkbox2.checked = response.answer.checkbox2
+        checkbox3.checked = response.answer.checkbox3
+        checkbox4.checked = response.answer.checkbox4
+        checkbox5.checked = response.answer.checkbox5
+    }
+    else {
+        location.reload()
+    }
 })
 
 
