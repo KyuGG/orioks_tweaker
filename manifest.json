@@ -16,7 +16,13 @@
                 "https://orioks.miet.ru/*"
             ],
             "js": [
-                "content.js"
+                "content.js",
+                "functions/schedule.js",
+                "functions/download.js",
+                "functions/fixScore.js",
+                "functions/discNameChanger.js",
+                "functions/changeTheme.js",
+                "functions/bugReport.js"
             ],
             "run_at": "document_start"
         },
