@@ -239,20 +239,26 @@ async function fetchSchedule(group) {
             3: 'zn2'
         }
         const simpleSchedule = schedule.Data.map(el => [el.Day, el.Class.Name, el.Time.Time, el.Room.Name, identifyWeek[el.DayNumber]])
-        let ch1 = simpleSchedule.filter(el => el[4] == 'ch1')
-        let zn1 = simpleSchedule.filter(el => el[4] == 'zn1')
-        let ch2 = simpleSchedule.filter(el => el[4] == 'ch2')
-        let zn2 = simpleSchedule.filter(el => el[4] == 'zn2')
+        let ch1 = []
+        let zn1 = []
+        let ch2 = []
+        let zn2 = []
 
-        ch1.forEach(el => el.pop())
-        ch2.forEach(el => el.pop())
-        zn1.forEach(el => el.pop())
-        zn2.forEach(el => el.pop())
-
-        ch1 = ch1.map(el => el.join('|'))
-        ch2 = ch2.map(el => el.join('|'))
-        zn1 = zn1.map(el => el.join('|'))
-        zn2 = zn2.map(el => el.join('|'))
+        for (const el of simpleSchedule) {
+            switch (el.pop()) {
+                case 'ch1':
+                    ch1.push(el.join('|'))
+                    break
+                case 'ch2':
+                    ch2.push(el.join('|'))
+                    break
+                case 'zn1':
+                    zn1.push(el.join('|'))
+                    break
+                case 'zn2':
+                    zn2.push(el.join('|'))
+            }
+        }
 
         let ch = []
         let zn = []
