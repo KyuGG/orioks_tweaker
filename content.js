@@ -13,7 +13,7 @@ function _ini() {
                 if (!chrome.runtime.lastError) {
                     //всевозможные сценарии работы плагина
                     if (response.answer.checkbox1) fixScore()
-                    if (response.answer.checkbox2) download()
+                    if (response.answer.checkbox2) runDownload()
                     if (response.answer.checkbox3) discNameChanger()
                     if (response.answer.checkbox4 && location.pathname != '/schedule') changeTheme()
                     if (response.answer.checkbox5) schedule()

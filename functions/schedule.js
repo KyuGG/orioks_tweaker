@@ -121,6 +121,9 @@ async function schedule() {
                 localStorage.setItem('group', group.trim())
                 location.reload()
             }
+            else {
+                alert('Название не может быть пустым')
+            }
         }
 
         scheduleBtn.onclick = () => {
@@ -176,7 +179,6 @@ async function loadSchedule(group) {
             td.children[1].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
             colorizeTable(td.children[1], ch[1])
         }
-
         //первый знаменатель
         for (const ch of schedule[4]) {
             const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
@@ -187,7 +189,6 @@ async function loadSchedule(group) {
             td.children[0].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
             colorizeTable(td.children[0], ch[1])
         }
-
         //второй знаменатель
         for (const ch of schedule[5]) {
             const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)

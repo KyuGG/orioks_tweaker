@@ -1,18 +1,16 @@
 function fixScore() {
     if (location.pathname == '/student/student') {
-        document.styleSheets[1].cssRules[8].style.color = '#353535'
-        document.styleSheets[1].cssRules[8].style.display = 'block'
         //удаление кнопки переключения режима отображения баллов
-        document.getElementById('bp').remove()
+        document.querySelector('#bp').remove()
         //удаление th под кнопкой
         document.querySelector('tr th:nth-child(2)').remove()
         //удаление красных точек
         document.querySelectorAll('.bad').forEach(el => el.remove())
         //удаление надписей типа 'из 100'
         document.querySelectorAll('.mvb').forEach(el => el.remove())
-        let dises = document.querySelectorAll('tr.pointer span')
+        const dises = document.querySelectorAll('tr.pointer span')
         let counter = 0
-        const json = JSON.parse(document.getElementById('forang').textContent).dises
+        const json = JSON.parse(document.querySelector('#forang').textContent).dises
         json.forEach(disc => {
             let realMaxScore = 0
             let realScore = 0
@@ -23,7 +21,7 @@ function fixScore() {
                 }
             })
             dises[counter].textContent = Math.round(realScore * 100) / 100
-            let percent = Math.round(realScore / realMaxScore * 100)
+            const percent = Math.round(realScore / realMaxScore * 100)
             if (percent >= 86) dises[counter].className = 'grade_5 grade'
             else if (percent >= 70) dises[counter].className = 'grade_4 grade'
             else if (percent >= 50) dises[counter].className = 'grade_3 grade'

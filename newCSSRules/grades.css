@@ -1,0 +1,4 @@
+tr.pointer td:last-child {
+    text-align: right;
+    margin-right: 15px;
+}

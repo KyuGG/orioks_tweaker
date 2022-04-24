@@ -1,30 +1,32 @@
-function download() {
+function runDownload() {
+    if (location.pathname == '/student/student')
+        downloadFromModal()
     if (location.pathname == '/student/ir/') {
-        document.querySelectorAll('.list-group a').forEach(a => {
-            if (a.href.split(':')[0] == 'http') {
-                a.href = 'https' + a.href.slice(4)
-                a.removeAttribute('target')
-            }
-        })
+        const resourseLinks = document.querySelectorAll('.list-group a')
+        download(resourseLinks)
     }
-    if (location.pathname == '/student/student') {
-        // добираемся с помощью листнеров до кликов по новостям
-        let dises = document.getElementsByClassName('pointer ng-scope')
-        Array.prototype.forEach.call(dises, dis => {
-            dis.addEventListener('click', async () => {
-                await sleep(500)
-                document.querySelectorAll('.discussion-label-span .pointer').forEach(link => {
-                    link.addEventListener('click', async () => {
-                        await sleep(300)
-                        document.querySelectorAll('.modal-body .table a').forEach(a => {
-                            if (a.href.split(':')[0] == 'http') {
-                                a.href = 'https' + a.href.slice(4)
-                                a.removeAttribute('target')
-                            }
-                        })
-                    })
-                })
-            })
-        })
+}
+
+function download(links) {
+    links.forEach(a => {
+        if (a.href.split(':')[0] == 'http') {
+            a.href = 'https' + a.href.slice(4)
+            a.removeAttribute('target')
+        }
+    })
+}
+
+function downloadFromModal() {
+    const tbody = document.querySelector('.table tbody')
+    tbody.onclick = () => {
+        const segmentsTbody = document.querySelectorAll('.table tbody')[1]
+        segmentsTbody.onclick = evt => {
+            if (evt.target.tagName == 'A') {
+                let links = document.querySelectorAll('.modal-body .table a')
+                while (links.length == 0)
+                    setTimeout(links = document.querySelectorAll('.modal-body .table a'), 1000)
+                download(links)
+            }
+        }
     }
 }

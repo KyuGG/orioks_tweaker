@@ -12,9 +12,7 @@
     },
     "content_scripts": [
         {
-            "matches": [
-                "https://orioks.miet.ru/*"
-            ],
+            "matches": ["https://orioks.miet.ru/*"],
             "js": [
                 "content.js",
                 "functions/schedule.js",
@@ -27,12 +25,13 @@
             "run_at": "document_start"
         },
         {
-            "matches":[
-                "https://orioks.miet.ru/schedule"
-            ],
-            "css": [
-                "schedule.css"
-            ],
+            "matches": ["https://orioks.miet.ru/student/student*"],
+            "css": ["newCSSRules/grades.css"],
+            "run_at": "document_start"
+        },
+        {
+            "matches":["https://orioks.miet.ru/schedule"],
+            "css": ["newCSSRules/schedule.css"],
             "run_at": "document_start"
         }
     ],
