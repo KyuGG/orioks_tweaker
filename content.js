@@ -1,36 +1,36 @@
-_ini()
+document.documentElement.style.visibility = 'hidden'
 
-function _ini() {
-    //плагин не работает в moodle
-    if (location.pathname.split('/')[1] != 'moodle') {
-
-        document.getElementsByTagName('html')[0].style.display = 'none'
-
-        window.onload = function () {
-
-            //делаем запрос к настройкам, хранящимся в background.js
-            chrome.runtime.sendMessage({ data: 'settings' }, response => {
-                if (!chrome.runtime.lastError) {
-                    //всевозможные сценарии работы плагина
-                    if (response.answer.checkbox1) fixScore()
-                    if (response.answer.checkbox2) runDownload()
-                    if (response.answer.checkbox3) discNameChanger()
-                    if (response.answer.checkbox4 && location.pathname != '/schedule') changeTheme()
-                    if (response.answer.checkbox5) schedule()
-                }
-                else location.reload()
-            })
-
-            discNameLoader()
-
-            if (location.pathname == '/bugreport') {
-                bugReport()
-            }
-
-            document.getElementsByTagName('html')[0].style.display = ''
-
-        }
+getSettings().then(settings => {
+    if (settings.answer.checkbox4) {
+        document.documentElement.style.setProperty('--color1', '#202124')
+        document.documentElement.style.setProperty('--color2', '#353535')
+        document.documentElement.style.setProperty('--color3', 'rgb(30, 30, 30)')
+        document.documentElement.style.setProperty('--color4', 'rgb(20, 33, 41)')
+        document.documentElement.style.setProperty('--color5', 'rgb(0, 140, 186)')
+        document.documentElement.style.setProperty('--navbar', '#202124')
+        document.documentElement.style.setProperty('--text-color', 'white')
     }
+
+    window.onload = () => {
+        if (settings.answer.checkbox1) fixScore()
+        if (settings.answer.checkbox2) runDownload()
+        if (settings.answer.checkbox3) discNameChanger()
+        if (settings.answer.checkbox5) schedule()
+        discNameLoader()
+        bugReport()
+        document.documentElement.style.visibility = 'visible'
+    }
+})
+
+
+function getSettings() {
+    return new Promise(resolve => {
+        chrome.runtime.sendMessage({ data: 'settings' }, response => {
+            if (!chrome.runtime.lastError)
+                resolve(response)
+            else location.reload()
+        })
+    })
 }
 
 function sleep(ms) {

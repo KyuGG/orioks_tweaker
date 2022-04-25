@@ -1,17 +1,15 @@
 //вспомогательные функции для тем
 function setRules(rules, property, value) {
-    for (let styleSheet of document.styleSheets) {
-        if (rules[styleSheet.href]) {
-            for (let rule of rules[styleSheet.href]) { styleSheet.cssRules[rule].style[property] = value }
-        }
-    }
+    for (const styleSheet of document.styleSheets)
+        if (rules[styleSheet.href])
+            for (const rule of rules[styleSheet.href]) styleSheet.cssRules[rule].style[property] = value
 }
 
 function shadeColor(color, percent) {
 
-    var R = parseInt(color.substring(1, 3), 16)
-    var G = parseInt(color.substring(3, 5), 16)
-    var B = parseInt(color.substring(5, 7), 16)
+    let R = parseInt(color.substring(1, 3), 16)
+    let G = parseInt(color.substring(3, 5), 16)
+    let B = parseInt(color.substring(5, 7), 16)
 
     R = parseInt(R * (100 + percent) / 100)
     G = parseInt(G * (100 + percent) / 100)
@@ -21,9 +19,9 @@ function shadeColor(color, percent) {
     G = (G < 255) ? G : 255
     B = (B < 255) ? B : 255
 
-    var RR = ((R.toString(16).length == 1) ? '0' + R.toString(16) : R.toString(16))
-    var GG = ((G.toString(16).length == 1) ? '0' + G.toString(16) : G.toString(16))
-    var BB = ((B.toString(16).length == 1) ? '0' + B.toString(16) : B.toString(16))
+    const RR = ((R.toString(16).length == 1) ? '0' + R.toString(16) : R.toString(16))
+    const GG = ((G.toString(16).length == 1) ? '0' + G.toString(16) : G.toString(16))
+    const BB = ((B.toString(16).length == 1) ? '0' + B.toString(16) : B.toString(16))
 
     return '#' + RR + GG + BB
 }
@@ -80,11 +78,14 @@ function changeTheme(bg = '#202124', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
     setRules(rulesets.spravkiTxt, 'color', 'rgb(0, 140, 186)')
     setRules(rulesets.dragNDropDragOver, 'backgroundColor', bg2)
     setRules(rulesets.dragNDropDragOver, 'color', links)
+    setRules(rulesets.resourceHvr, 'backgroundColor', bg2)
 
     if (location.pathname == '/user/profile') {
         document.querySelector('img').src = 'https://user-images.githubusercontent.com/47709593/152651901-fa62c8c3-b8a2-42ee-99ca-6de646746a9e.png'
     }
+
     if (location.pathname == '/student/student') {
+        //цвета баллов
         document.styleSheets[1].cssRules[7].style.background = '#007ECB'
         document.styleSheets[1].cssRules[6].style.background = '#71C0F0'
         document.styleSheets[1].cssRules[5].style.background = '#7D919E'
@@ -92,27 +93,31 @@ function changeTheme(bg = '#202124', bg2 = 'rgb(30, 30, 30)', links = '#b63dd2')
         document.styleSheets[1].cssRules[3].style.background = '#C49068'
 
         // добираемся с помощью листнеров до кликов по новостям
-        let dises = document.getElementsByClassName('pointer ng-scope')
-        Array.prototype.forEach.call(dises, dis => {
-            dis.addEventListener('click', async () => {
-                await sleep(500)
-                document.querySelectorAll('div.list-group-item a.ng-binding').forEach(a => {
-                    a.addEventListener('click', async () => {
-                        await sleep(300)
-                        document.querySelectorAll('.modal-body div.ng-binding *').forEach(el => el.style.color = shadeColor(el.style.color, 1))
-                    })
-                })
-            })
-        })
+
+        const tbody = document.querySelector('.table tbody')
+        tbody.onclick = () => {
+            const infoTable = document.querySelectorAll('.list-group')[1]
+            infoTable.onclick = async evt => {
+                if (evt.target.tagName == 'A' && evt.target.className == 'ng-binding') {
+                    await sleep(100)
+                    let paragraphs = document.querySelectorAll('.modal-body div.ng-binding *')
+                    while (paragraphs.length == 0) {
+                        await sleep(1000)
+                        paragraphs = document.querySelectorAll('.modal-body div.ng-binding *')
+                    }
+                    paragraphs.forEach(p => p.style.color = shadeColor(p.style.color, 1))
+                }
+            }
+        }
 
         document.querySelectorAll('input[type=image]').forEach(input => input.style.filter = 'invert(1)')
     }
     if (location.pathname == '/student/student/test' || location.pathname == '/student/student/test/') {
         document.querySelectorAll('img').forEach(img => img.style.filter = 'invert(1)')
     }
-    if (location.pathname == '/student/ir/') {
-        setRules(rulesets.resourceHvr, 'backgroundColor', bg2) // плохой рул
-    }
+
+
+
     if (location.pathname == '/main/view-news') {
         document.querySelectorAll('.well *').forEach(el => {
             el.style.color = shadeColor(el.style.color, 1)

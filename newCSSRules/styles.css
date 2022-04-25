@@ -1,0 +1,124 @@
+html {
+    --color1: white;
+    --color2: #006687;
+    --color3: #f5f5f5;
+    --color4: #dff0d8;
+    --color5: #43ac6a;
+    --text-color: black;
+    --navbar: rgb(0, 140, 186);
+}
+
+
+body,
+.table>tbody>tr.active>td,
+.table-condensed>tbody>tr>td,
+.list-group-item,
+.notification-more,
+textarea,
+.form-control,
+.notifications-list,
+.table>tbody>tr.warning>td,
+.modal-content,
+.panel-body,
+/* .col-md-9 a, */
+.breadcrumb,
+.well,
+.panel-default>.panel-heading,
+.resumable-drop,
+input[type="text"],
+select {
+    background-color: var(--color1) !important;
+}
+
+/* все, что связано с хедером */
+.nav-tabs>li.active>a,
+.nav-tabs>li>a:hover,
+.notification-more:hover,
+.navbar-inverse .dropdown-menu>li>a:hover,
+.notifications-list .notification:hover,
+.navbar-inverse .navbar-nav>.active>a:hover,
+.navbar-inverse .dropdown-menu>li>a:hover,
+.navbar-inverse .navbar-nav>.open>a:hover,
+.navbar-inverse .navbar-nav>li>a:focus,
+.small,
+nav a:hover {
+    background-color: var(--color2) !important;
+}
+
+.navbar-inverse,
+.navbar-inverse .dropdown-menu,
+.navbar-inverse .navbar-nav>.active>a,
+.navbar-inverse .dropdown-menu>li>a,
+.navbar-inverse .navbar-nav>.open>a,
+.notifications-empty,
+.notification-more {
+    background-color: var(--navbar) !important;
+}
+
+
+/* элементы таблиц при наведении */
+.table>tbody>tr.info>td,
+#to_top:hover,
+.list-group-item:hover,
+.panel-default>.panel-heading:hover,
+.collapser:hover,
+.table-hover>tbody>tr:hover td,
+.list-group .panel-collapse>div:hover,
+.table-hover>tbody>tr:hover,
+.table-hover>tbody>tr:hover>td,
+.table>tbody>tr.success:hover>td {
+    background-color: var(--color3) !important;
+}
+
+/* шрифты и текстовые поля */
+.resumable-drop,
+input[type="text"],
+select,
+.author,
+body {
+    color: var(--text-color) !important;
+}
+
+.notification-more,
+.notifications-empty {
+    color: white;
+}
+
+/* справки и бонусные сегменты */
+.list-group-item-success,
+.table>tbody>tr.success>td {
+    background-color: var(--color4) !important;
+    color: var(--color5) !important;
+}
+
+/* постоянные правила */
+a:hover {
+    text-decoration: none !important;
+}
+
+.navbar {
+    border-bottom: 1px solid white !important;
+}
+
+.breadcrumb>.active {
+    color: purple !important;
+}
+
+.divider {
+    background-color: white !important;
+}
+
+.grade {
+    color: black !important;
+}
+
+.btn-primary,
+.btn-primary:hover {
+    background-color: #008cba !important;
+}
+
+.panel-footer,
+h3.panel-title {
+    background-color: #5bc0de !important;
+    color: black !important;
+}

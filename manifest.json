@@ -13,6 +13,7 @@
     "content_scripts": [
         {
             "matches": ["https://orioks.miet.ru/*"],
+            "exclude_matches": ["https://orioks.miet.ru/moodle*"],
             "js": [
                 "content.js",
                 "functions/schedule.js",
@@ -22,11 +23,12 @@
                 "functions/changeTheme.js",
                 "functions/bugReport.js"
             ],
+            "css": ["newCSSRules/styles.css"],
             "run_at": "document_start"
         },
         {
             "matches": ["https://orioks.miet.ru/student/student*"],
-            "css": ["newCSSRules/grades.css"],
+            "css": ["newCSSRules/fixScoreGrades.css"],
             "run_at": "document_start"
         },
         {
