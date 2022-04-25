@@ -3,6 +3,15 @@
     flex-direction: column;
 }
 
+table {
+    color: black;
+}
+
+th,
+td {
+    background-color: white;
+}
+
 .hints {
     margin-top: 10px;
 }
