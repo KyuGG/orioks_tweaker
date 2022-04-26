@@ -22,6 +22,7 @@
                 "functions/discNameChanger.js",
                 "functions/changeTheme.js",
                 "functions/logo.js",
+                "functions/coloredTestImages.js",
                 "functions/bugReport.js"
             ],
             "css": ["newCSSRules/styles.css"],

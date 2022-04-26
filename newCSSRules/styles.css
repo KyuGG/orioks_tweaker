@@ -5,7 +5,7 @@ html {
     --color4: #dff0d8;
     --color5: #43ac6a;
     --text-color: black;
-    --navbar: rgb(0, 140, 186);
+    --navbar: #008cba;
     --transition: none;
 }
 
@@ -73,7 +73,8 @@ select,
 .table-hover>tbody>tr:hover>td,
 .table>tbody>tr.success:hover>td,
 .nav-tabs>li.active>a:hover,
-.nav-tabs>li>a:hover {
+.nav-tabs>li>a:hover,
+.my-btn:hover {
     background-color: var(--color3) !important;
 }
 
@@ -88,8 +89,12 @@ body,
     color: var(--text-color) !important;
 }
 
-.marker {
+.green-img {
     filter: invert(59%) sepia(71%) saturate(2640%) hue-rotate(68deg) brightness(100%) contrast(109%);
+}
+
+.logo {
+    filter: invert(36%) sepia(88%) saturate(852%) hue-rotate(159deg) brightness(96%) contrast(102%);
 }
 
 .notification-more,
@@ -136,8 +141,7 @@ a:hover {
 }
 
 .btn-primary,
-.btn-primary:hover,
-.my-btn:hover {
+.btn-primary:hover {
     background-color: #008cba !important;
 }
 

@@ -21,7 +21,7 @@ function discNameChanger() {
             button.type = 'image'
             button.src = 'https://cdn-icons-png.flaticon.com/512/4277/4277132.png'
             button.width = 17
-            button.classList.add('marker')
+            button.classList.add('green-img')
             td.prepend(button)
             button.onclick = () => {
                 const newName = prompt('Новое название дисциплины')

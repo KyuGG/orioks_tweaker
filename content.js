@@ -4,7 +4,7 @@ getSettings().then(settings => {
     if (settings.answer.checkbox4) {
         document.documentElement.style.setProperty('--color1', '#202124')
         document.documentElement.style.setProperty('--color2', '#353535')
-        document.documentElement.style.setProperty('--color3', 'rgb(30, 30, 30)')
+        document.documentElement.style.setProperty('--color3', '#1c1b18')
         document.documentElement.style.setProperty('--color4', 'rgb(20, 33, 41)')
         document.documentElement.style.setProperty('--color5', 'rgb(0, 140, 186)')
         document.documentElement.style.setProperty('--navbar', '#1c1b18')
@@ -15,8 +15,9 @@ getSettings().then(settings => {
         if (settings.answer.checkbox1) fixScore()
         if (settings.answer.checkbox2) runDownload()
         if (settings.answer.checkbox3) discNameChanger()
-        if (settings.answer.checkbox4) logo()
+        if (settings.answer.checkbox4) coloredTestImages()
         if (settings.answer.checkbox5) schedule()
+        logo()
         discNameLoader()
         bugReport()
         document.documentElement.style.visibility = 'visible'
