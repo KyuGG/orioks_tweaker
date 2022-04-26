@@ -24,6 +24,8 @@ async function schedule() {
         scheduleH2.textContent = 'Группа:'
         scheduleBtn.textContent = 'Выбрать'
         scheduleSave.textContent = 'Сделать по умолчанию'
+        scheduleBtn.classList.add('my-btn')
+        scheduleSave.classList.add('my-btn')
         scheduleHeader.classList.add('.col-md-6')
         scheduleCh.textContent = 'Числитель'
         scheduleZn.textContent = 'Знаменатель'

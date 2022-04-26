@@ -7,7 +7,7 @@ getSettings().then(settings => {
         document.documentElement.style.setProperty('--color3', 'rgb(30, 30, 30)')
         document.documentElement.style.setProperty('--color4', 'rgb(20, 33, 41)')
         document.documentElement.style.setProperty('--color5', 'rgb(0, 140, 186)')
-        document.documentElement.style.setProperty('--navbar', '#202124')
+        document.documentElement.style.setProperty('--navbar', '#1c1b18')
         document.documentElement.style.setProperty('--text-color', 'white')
     }
 

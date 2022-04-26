@@ -7,6 +7,7 @@ function discNameChanger() {
         const clearSettings = document.createElement('input')
         clearSettings.type = 'button'
         clearSettings.value = 'Обнулить изменения'
+        clearSettings.classList.add('my-btn')
         document.querySelector('table').before(clearSettings)
         clearSettings.onclick = () => {
             localStorage.removeItem('discNames')
@@ -20,14 +21,15 @@ function discNameChanger() {
             button.type = 'image'
             button.src = 'https://cdn-icons-png.flaticon.com/512/4277/4277132.png'
             button.width = 17
+            button.classList.add('marker')
             td.prepend(button)
             button.onclick = () => {
-                const newName = prompt('Новое название дисциплины').trim()
+                const newName = prompt('Новое название дисциплины')
                 if (newName) {
                     const prevName = disc.querySelector(':nth-child(2)').getAttribute('prevname')
                     let discNames = JSON.parse(localStorage.getItem('discNames'))
-                    discNames[prevName] = newName
-                    disc.querySelector(':nth-child(2)').textContent = newName
+                    discNames[prevName] = newName.trim()
+                    disc.querySelector(':nth-child(2)').textContent = discNames[prevName]
                     discNames = JSON.stringify(discNames)
                     localStorage.setItem('discNames', discNames)
                 }

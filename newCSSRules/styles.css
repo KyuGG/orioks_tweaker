@@ -75,8 +75,13 @@ nav a:hover {
 input[type="text"],
 select,
 .author,
-body {
+body,
+.list-group-item {
     color: var(--text-color) !important;
+}
+
+.marker {
+    filter: invert(59%) sepia(71%) saturate(2640%) hue-rotate(68deg) brightness(100%) contrast(109%);
 }
 
 .notification-more,
@@ -89,6 +94,11 @@ body {
 .table>tbody>tr.success>td {
     background-color: var(--color4) !important;
     color: var(--color5) !important;
+}
+
+.my-btn {
+    background-color: var(--navbar) !important;
+    color: var(--text-color) !important;
 }
 
 /* постоянные правила */
