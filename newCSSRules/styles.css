@@ -26,13 +26,12 @@ textarea,
 .panel-default>.panel-heading,
 .resumable-drop,
 input[type="text"],
-select {
+select,
+.nav-tabs>li.active>a {
     background-color: var(--color1) !important;
 }
 
 /* все, что связано с хедером */
-.nav-tabs>li.active>a,
-.nav-tabs>li>a:hover,
 .notification-more:hover,
 .navbar-inverse .dropdown-menu>li>a:hover,
 .notifications-list .notification:hover,
@@ -41,7 +40,7 @@ select {
 .navbar-inverse .navbar-nav>.open>a:hover,
 .navbar-inverse .navbar-nav>li>a:focus,
 .small,
-nav a:hover {
+.navbar-nav a:hover {
     background-color: var(--color2) !important;
 }
 
@@ -66,7 +65,9 @@ nav a:hover {
 .list-group .panel-collapse>div:hover,
 .table-hover>tbody>tr:hover,
 .table-hover>tbody>tr:hover>td,
-.table>tbody>tr.success:hover>td {
+.table>tbody>tr.success:hover>td,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li>a:hover {
     background-color: var(--color3) !important;
 }
 
@@ -76,7 +77,8 @@ input[type="text"],
 select,
 .author,
 body,
-.list-group-item {
+.list-group-item,
+.nav-tabs>li.active>a {
     color: var(--text-color) !important;
 }
 
@@ -120,6 +122,11 @@ a:hover {
 
 .grade {
     color: black !important;
+}
+
+.panel-default>.panel-heading,
+.newColor {
+    color: #008cba !important;
 }
 
 .btn-primary,
