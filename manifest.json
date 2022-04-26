@@ -13,7 +13,12 @@
     "content_scripts": [
         {
             "matches": ["https://orioks.miet.ru/*"],
-            "exclude_matches": ["https://orioks.miet.ru/moodle*"],
+            "exclude_matches": [
+                "https://orioks.miet.ru/moodle*",
+                "https://orioks.miet.ru/user/login",
+                "https://orioks.miet.ru/manuals/*",
+                "https://orioks.miet.ru/storage/*"
+            ],
             "js": [
                 "content.js",
                 "functions/schedule.js",
