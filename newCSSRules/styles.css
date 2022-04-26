@@ -26,7 +26,6 @@ textarea,
 .table>tbody>tr.warning>td,
 .modal-content,
 .panel-body,
-/* .col-md-9 a, */
 .breadcrumb,
 .well,
 .panel-default>.panel-heading,
@@ -121,6 +120,10 @@ a:hover {
 
 .navbar {
     border-bottom: 1px solid white !important;
+}
+
+.nav>li>a {
+    padding: 10px 14px !important;
 }
 
 .breadcrumb>.active {

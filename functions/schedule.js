@@ -6,8 +6,7 @@ async function schedule() {
     scheduleButtonLink.href = '/schedule'
     scheduleButton.append(scheduleButtonLink)
     nav.children[1].after(scheduleButton)
-    setRules({ 'https://orioks.miet.ru/libs/bootstrap/bootstrap.min.css?v=1571396836': [1069] }, 'padding', '10px 14px')
-
+    
     if (location.pathname == '/schedule') {
         const content = document.querySelector('.row')
         document.querySelectorAll('.col-md-6').forEach(block => block.remove())
