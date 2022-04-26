@@ -1,11 +1,11 @@
-let checkbox1 = document.getElementById('checkbox-1')
-let checkbox2 = document.getElementById('checkbox-2')
-let checkbox3 = document.getElementById('checkbox-3')
-let checkbox4 = document.getElementById('checkbox-4')
-let checkbox5 = document.getElementById('checkbox-5')
-let bugreport = document.getElementById('bugreport')
+const checkbox1 = document.getElementById('checkbox-1')
+const checkbox2 = document.getElementById('checkbox-2')
+const checkbox3 = document.getElementById('checkbox-3')
+const checkbox4 = document.getElementById('checkbox-4')
+const checkbox5 = document.getElementById('checkbox-5')
+const bugreport = document.getElementById('bugreport')
+window.onload = () => document.body.style.opacity = '100%'
 
-//загрузка настроек из background.js
 chrome.runtime.sendMessage({ data: 'settings' }, response => {
     if (!chrome.runtime.lastError) {
         checkbox1.checked = response.answer.checkbox1
@@ -14,30 +14,23 @@ chrome.runtime.sendMessage({ data: 'settings' }, response => {
         checkbox4.checked = response.answer.checkbox4
         checkbox5.checked = response.answer.checkbox5
     }
-    else {
-        location.reload()
-    }
+    else location.reload()
 })
 
 
 const onClick = () => {
-    //меняем настройки в background.js
-    let settings = {
+    const settings = {
         checkbox1: checkbox1.checked,
         checkbox2: checkbox2.checked,
         checkbox3: checkbox3.checked,
         checkbox4: checkbox4.checked,
         checkbox5: checkbox5.checked
     }
-    chrome.runtime.sendMessage({ data: 'changeSettings', settings: settings }, response => {
-        console.log(response.answer)
-    })
+    chrome.runtime.sendMessage({ data: 'changeSettings', settings: settings }, response => console.log(response.answer))
 }
 
 const openBugReport = () => {
-    chrome.runtime.sendMessage({ data: 'bugReport' }, response => {
-        console.log(response.answer)
-    })
+    chrome.runtime.sendMessage({ data: 'bugReport' }, response => console.log(response.answer))
 }
 
 
