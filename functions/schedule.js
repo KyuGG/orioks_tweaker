@@ -6,7 +6,7 @@ async function schedule() {
     scheduleButtonLink.href = '/schedule'
     scheduleButton.append(scheduleButtonLink)
     nav.children[1].after(scheduleButton)
-    
+
     if (location.pathname == '/schedule') {
         const content = document.querySelector('.row')
         document.querySelectorAll('.col-md-6').forEach(block => block.remove())
@@ -204,6 +204,9 @@ async function loadSchedule(group) {
         }
 
         document.querySelector('.row h3').textContent = `Группа: ${group.toUpperCase()}`
+    }
+    else {
+        alert('Название не может быть пустым')
     }
 }
 
