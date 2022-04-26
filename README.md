@@ -1,13 +1,14 @@
 # ORIOKS Tweaker - расширение для Chrome!
 ***
 ## Меню расширения
-![oQYXY4jQhy](https://user-images.githubusercontent.com/47709593/155840400-a044fac3-e785-499f-9821-4bc781199d20.png)
+![HkjAPlPkkw](https://user-images.githubusercontent.com/47709593/165359311-7a6d756a-d587-4352-8df1-b4dd98e591b4.png)
 ***
 ## Функционал
  Название | Описание
  :-------:|:--------:|
  Fix Score | [Описание](#fixscore)
  Fix Download | [Описание](#fixdownload)
+ Schedule | [Описание](#schedule)
  Discipline Names | [Описание](#disciplinenames)
  Dark Theme | [Описание](#darktheme)
  Report a Bug | [Описание](#bugreport)
@@ -34,6 +35,16 @@
     ###### Пояснение
     > В браузере Chrome наблюдаются проблемы при скачивании некоторых файлов из раздела ресурсы, если в вашем браузере все файлы скачиваются нормально, то отключите эту опцию
 ***
+<a id="schedule"></a>
+#### Schedule
+- [x] Добавляет раздел "Расписание"
+    ###### Пояснение
+    > В этом разделе вы можете открыть расписание любой группы или сохранить свое, чтобы после перезагрузки страницы оно автоматически подгружалось
+    ###### Это удобно!
+    > Расписание для удобства разбивается на 2 таблицы: числитель и знаменатель. Лекции окрашиваются в синий цвет, лабораторные в желтый, а семинары в белый. Все это в совокупности улучшает восприятие и позволяет смотреть расписание прямо в ОРИОКСе
+
+    ![chrome_0LvohzIHvN](https://user-images.githubusercontent.com/47709593/165358970-c9a197f9-bf31-49f5-98f9-2cb8397b34b6.png)
+***
 <a id="disciplinenames"></a>
 #### Discipline Names
 ##### Внимание: данная опция является режимом редактирования, вы можете отключить ее после того, как вы измените названия нужных вам дисциплин!
@@ -50,9 +61,9 @@
 #### Dark Theme
 - [x] Включает авторскую темную тему для всего сайта
     ##### Было
-    ![chrome_HZyhVTCTRS](https://user-images.githubusercontent.com/47709593/155850527-4294a1fb-95ab-498e-a85a-016fe050fd73.png)
+    ![chrome_MEsRPrbEQ0](https://user-images.githubusercontent.com/47709593/165357932-5882b8ff-16f7-4cef-be32-31b7ac2d8224.png)
     ##### Стало
-    ![chrome_IFe3sNRt1a](https://user-images.githubusercontent.com/47709593/155850562-3f3f7d1f-a6fd-42e1-aa44-896a88756e85.png)
+    ![chrome_MWKGPXFjhW](https://user-images.githubusercontent.com/47709593/165358094-a92216bc-d27e-467d-baf1-bcdc9bed9f21.png)
 ***
 <a id="bugreport"></a>
 #### Report a Bug
