@@ -17,7 +17,8 @@ function fixScore() {
             disc.segments[0].allKms.forEach(segment => {
                 if (segment.grade.b != '-') {
                     realMaxScore += segment.max_ball
-                    if (!isNaN(segment.grade.b)) realScore += segment.grade.b
+                    if (!isNaN(segment.grade.b))
+                        realScore += segment.grade.b
                 }
             })
             dises[counter].textContent = Math.round(realScore * 100) / 100

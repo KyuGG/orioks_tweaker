@@ -1,4 +1,3 @@
-//конструктор с дефолтными настройками
 (async () => {
     let storage = await chrome.storage.local.get()
     if (storage.settings == undefined) {
@@ -7,12 +6,12 @@
         storage = storageTemplate
     }
 
-    //связь между content.js и router.js
-    chrome.runtime.onMessage.addListener(
-        function (request, sender, sendResponse) {
-            if (request.data === 'settings')
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        switch (request.data) {
+            case 'settings':
                 sendResponse({ answer: storage.settings })
-            if (request.data === 'changeSettings') {
+                break
+            case 'changeSettings':
                 storage.settings.checkbox1 = request.settings.checkbox1
                 storage.settings.checkbox2 = request.settings.checkbox2
                 storage.settings.checkbox3 = request.settings.checkbox3
@@ -20,11 +19,11 @@
                 storage.settings.checkbox5 = request.settings.checkbox5
                 chrome.storage.local.set(storage)
                 sendResponse({ answer: 'settings have been changed' })
-            }
-            if (request.data === 'bugReport') {
+                break
+            case 'bugReport':
                 chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
                 sendResponse({ answer: 'page was opened successfully' })
-            }
+                break
         }
-    )
+    })
 })()
