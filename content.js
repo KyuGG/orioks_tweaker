@@ -15,6 +15,7 @@ getSettings().then(settings => {
         if (settings.answer.checkbox1) fixScore()
         if (settings.answer.checkbox2) runDownload()
         if (settings.answer.checkbox3) discNameChanger()
+        if (settings.answer.checkbox4) logo()
         if (settings.answer.checkbox5) schedule()
         discNameLoader()
         bugReport()

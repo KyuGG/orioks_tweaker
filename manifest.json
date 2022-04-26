@@ -21,6 +21,7 @@
                 "functions/fixScore.js",
                 "functions/discNameChanger.js",
                 "functions/changeTheme.js",
+                "functions/logo.js",
                 "functions/bugReport.js"
             ],
             "css": ["newCSSRules/styles.css"],
@@ -42,5 +43,9 @@
     },
     "permissions": [
         "storage"
-    ]
+    ],
+    "web_accessible_resources": [{
+        "matches": ["https://orioks.miet.ru/*"],
+        "resources": ["interface/logo.png"]
+    }]
 }
