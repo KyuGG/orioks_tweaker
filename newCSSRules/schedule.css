@@ -10,6 +10,7 @@ table {
 th,
 td {
     background-color: white;
+    transition: .3s;
 }
 
 .hints {

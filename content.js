@@ -11,7 +11,7 @@ getSettings().then(settings => {
         document.documentElement.style.setProperty('--text-color', 'white')
     }
 
-    window.onload = () => {
+    window.onload = async () => {
         if (settings.answer.checkbox1) fixScore()
         if (settings.answer.checkbox2) runDownload()
         if (settings.answer.checkbox3) discNameChanger()
@@ -19,6 +19,8 @@ getSettings().then(settings => {
         discNameLoader()
         bugReport()
         document.documentElement.style.visibility = 'visible'
+        await sleep(500)
+        document.documentElement.style.setProperty('--transition', '.3s')
     }
 })
 

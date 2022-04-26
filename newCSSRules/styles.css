@@ -6,6 +6,12 @@ html {
     --color5: #43ac6a;
     --text-color: black;
     --navbar: rgb(0, 140, 186);
+    --transition: none;
+}
+
+
+* {
+    transition: var(--transition);
 }
 
 
@@ -99,7 +105,7 @@ body,
 }
 
 .my-btn {
-    background-color: var(--navbar) !important;
+    background-color: var(--color1) !important;
     color: var(--text-color) !important;
 }
 
@@ -130,7 +136,8 @@ a:hover {
 }
 
 .btn-primary,
-.btn-primary:hover {
+.btn-primary:hover,
+.my-btn:hover {
     background-color: #008cba !important;
 }
 
