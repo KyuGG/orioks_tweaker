@@ -8,7 +8,7 @@ function fixScore() {
         document.querySelectorAll('.bad').forEach(el => el.remove())
         //удаление надписей типа 'из 100'
         document.querySelectorAll('.mvb').forEach(el => el.remove())
-        const dises = document.querySelectorAll('tr.pointer span')
+        const dises = document.querySelectorAll('span.grade')
         let counter = 0
         const json = JSON.parse(document.querySelector('#forang').textContent).dises
         json.forEach(disc => {
