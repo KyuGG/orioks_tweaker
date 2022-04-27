@@ -29,7 +29,7 @@
                 "functions/logo.js",
                 "functions/bugReport.js"
             ],
-            "css": ["newCSSRules/styles.css"],
+            "css": ["newCSSRules/default.css"],
             "run_at": "document_start"
         },
         {
@@ -51,6 +51,9 @@
     ],
     "web_accessible_resources": [{
         "matches": ["https://orioks.miet.ru/*"],
-        "resources": ["interface/logo.png"]
+        "resources": [
+            "interface/logo.png",
+            "newCSSRules/styles.css"
+        ]
     }]
 }

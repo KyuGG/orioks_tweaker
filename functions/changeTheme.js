@@ -1,4 +1,8 @@
 function changeTheme() {
+    const css = document.createElement('link')
+    css.rel = 'stylesheet'
+    css.href = chrome.runtime.getURL('newCSSRules/styles.css')
+    document.head.append(css)
     document.documentElement.style.setProperty('--color1', '#202124')
     document.documentElement.style.setProperty('--color2', '#353535')
     document.documentElement.style.setProperty('--color3', '#1c1b18')
