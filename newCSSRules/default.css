@@ -1,3 +1,4 @@
 .nav>li>a {
-    padding: 10px 14px !important;
+    padding-right: 14px !important;
+    padding-left: 14px !important;
 }

@@ -85,7 +85,8 @@ select,
 .author,
 body,
 .list-group-item,
-.nav-tabs>li.active>a {
+.nav-tabs>li.active>a,
+textarea {
     color: var(--text-color) !important;
 }
 
