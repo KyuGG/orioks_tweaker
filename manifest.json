@@ -3,11 +3,11 @@
     "name": "ORIOKS tweaker",
     "version": "1.0",
     "icons": {
-        "128": "interface/logo.png"
+        "128": "interface/logo-blue.png"
     },
     "action": {
         "default_title": "ORIOKS tweaker",
-        "default_icon": "interface/logo.png",
+        "default_icon": "interface/logo-blue.png",
         "default_popup": "interface/interface.html"
     },
     "content_scripts": [
