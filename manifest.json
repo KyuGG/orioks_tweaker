@@ -2,12 +2,13 @@
     "manifest_version": 3,
     "name": "ORIOKS tweaker",
     "version": "1.0.1",
+    "description": "Модификация для ОРИОКСа. Правильное отображение баллов, интеграция расписания занятий и кастомизация!",
     "icons": {
-        "128": "interface/logo-blue.png"
+        "128": "interface/logo-blue128.png"
     },
     "action": {
         "default_title": "ORIOKS tweaker",
-        "default_icon": "interface/logo-blue.png",
+        "default_icon": "interface/logo-blue128.png",
         "default_popup": "interface/interface.html"
     },
     "content_scripts": [

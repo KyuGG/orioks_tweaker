@@ -1,5 +1,4 @@
-(async () => {
-    let storage = await chrome.storage.local.get()
+chrome.storage.local.get().then(storage => {
     if (storage.settings == undefined) {
         const storageTemplate = { settings: { checkbox1: true, checkbox2: true, checkbox3: true, checkbox4: true, checkbox5: true } }
         chrome.storage.local.set(storageTemplate)
@@ -26,4 +25,4 @@
                 break
         }
     })
-})()
+})
