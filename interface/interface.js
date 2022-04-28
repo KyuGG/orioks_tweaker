@@ -6,7 +6,7 @@ const checkbox5 = document.getElementById('checkbox-5')
 const bugreport = document.getElementById('bugreport')
 window.onload = () => document.body.style.opacity = '100%'
 
-chrome.runtime.sendMessage({ data: 'settings' }, response => {
+chrome.runtime.sendMessage({ data: 'settingsPopup' }, response => {
     if (!chrome.runtime.lastError) {
         checkbox1.checked = response.answer.checkbox1
         checkbox2.checked = response.answer.checkbox2

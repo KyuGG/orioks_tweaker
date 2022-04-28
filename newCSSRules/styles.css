@@ -94,10 +94,6 @@ textarea {
     filter: invert(59%) sepia(71%) saturate(2640%) hue-rotate(68deg) brightness(100%) contrast(109%);
 }
 
-.logo {
-    filter: invert(36%) sepia(88%) saturate(852%) hue-rotate(159deg) brightness(96%) contrast(102%);
-}
-
 .notification-more,
 .notifications-empty {
     color: white;

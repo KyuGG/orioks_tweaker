@@ -7,9 +7,6 @@ chrome.storage.local.get().then(storage => {
 
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         switch (request.data) {
-            case 'settings':
-                sendResponse({ answer: storage.settings })
-                break
             case 'changeSettings':
                 storage.settings.checkbox1 = request.settings.checkbox1
                 storage.settings.checkbox2 = request.settings.checkbox2
@@ -22,6 +19,17 @@ chrome.storage.local.get().then(storage => {
             case 'bugReport':
                 chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
                 sendResponse({ answer: 'page was opened successfully' })
+                break
+            case 'settings':
+                chrome.tabs.query({ url: 'https://orioks.miet.ru/*', active: true }, tabs => {
+                    if (storage.settings.checkbox4)
+                        chrome.scripting.insertCSS({
+                            target: { tabId: tabs[0].id },
+                            files: ['newCSSRules/styles.css']
+                        })
+                })
+            case 'settingsPopup':
+                sendResponse({ answer: storage.settings })
                 break
         }
     })

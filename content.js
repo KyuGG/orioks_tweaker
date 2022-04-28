@@ -1,7 +1,7 @@
 document.documentElement.style.visibility = 'hidden'
 
 getSettings().then(settings => {
-    if (settings.answer.checkbox4) changeTheme()
+    changeTheme()
 
     window.onload = async () => {
         if (settings.answer.checkbox1) fixScore()
