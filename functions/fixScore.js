@@ -24,7 +24,7 @@ function fixScore() {
             if (percent >= 86) dises[counter].className = 'grade_5 grade'
             else if (percent >= 70) dises[counter].className = 'grade_4 grade'
             else if (percent >= 50) dises[counter].className = 'grade_3 grade'
-            else dises[counter].className = 'grade_2 grade'
+            else dises[counter].className = 'grade_1 grade'
             counter += 1
         })
     }
