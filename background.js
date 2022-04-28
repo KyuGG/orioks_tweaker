@@ -21,13 +21,13 @@ chrome.storage.local.get().then(storage => {
                 sendResponse({ answer: 'page was opened successfully' })
                 break
             case 'settings':
-                chrome.tabs.query({ url: 'https://orioks.miet.ru/*', active: true }, tabs => {
-                    if (storage.settings.checkbox4)
+                if (storage.settings.checkbox4)
+                    chrome.tabs.query({ url: 'https://orioks.miet.ru/*', active: true }, tabs => {
                         chrome.scripting.insertCSS({
                             target: { tabId: tabs[0].id },
                             files: ['newCSSRules/styles.css']
                         })
-                })
+                    })
             case 'settingsPopup':
                 sendResponse({ answer: storage.settings })
                 break

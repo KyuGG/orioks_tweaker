@@ -4,6 +4,7 @@ getSettings().then(settings => {
     changeTheme()
 
     window.onload = async () => {
+        await sleep(100)
         if (settings.answer.checkbox1) fixScore()
         if (settings.answer.checkbox2) runDownload()
         if (settings.answer.checkbox3) discNameChanger()
