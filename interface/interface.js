@@ -13,6 +13,7 @@ chrome.runtime.sendMessage({ data: 'settingsPopup' }, response => {
         checkbox3.checked = response.answer.checkbox3
         checkbox4.checked = response.answer.checkbox4
         checkbox5.checked = response.answer.checkbox5
+        setTimeout(() => document.documentElement.style.setProperty('--setting-transition', 'all .3s'), 100)
     }
     else location.reload()
 })
