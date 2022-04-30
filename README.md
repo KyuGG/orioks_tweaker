@@ -1,7 +1,7 @@
 # ORIOKS Tweaker - расширение для Chrome!
 ***
 ## Меню расширения
-![HkjAPlPkkw](https://user-images.githubusercontent.com/47709593/165359311-7a6d756a-d587-4352-8df1-b4dd98e591b4.png)
+![s1SgZmX6BK](https://user-images.githubusercontent.com/47709593/166122797-b8241fa7-a803-48b7-9d5c-d3ccf2d88280.png)
 ***
 ## Функционал
  Название | Описание
@@ -43,7 +43,7 @@
     ###### Это удобно!
     > Расписание для удобства разбивается на 2 таблицы: числитель и знаменатель. Лекции окрашиваются в синий цвет, лабораторные в желтый, а семинары в белый. Все это в совокупности улучшает восприятие и позволяет смотреть расписание прямо в ОРИОКСе
 
-    ![chrome_0LvohzIHvN](https://user-images.githubusercontent.com/47709593/165358970-c9a197f9-bf31-49f5-98f9-2cb8397b34b6.png)
+    ![chrome_YE1WCinEuu](https://user-images.githubusercontent.com/47709593/166122778-6e8aa07e-e8ac-4ba7-a99b-cfb888e48502.png)
 ***
 <a id="disciplinenames"></a>
 #### Discipline Names
@@ -61,9 +61,9 @@
 #### Dark Theme
 - [x] Включает авторскую темную тему для всего сайта
     ##### Было
-    ![chrome_MEsRPrbEQ0](https://user-images.githubusercontent.com/47709593/165357932-5882b8ff-16f7-4cef-be32-31b7ac2d8224.png)
+    ![chrome_YPc3Dvn7zm](https://user-images.githubusercontent.com/47709593/166122621-e3e8981b-dbe2-4cfd-8c69-88e77dc36291.png)
     ##### Стало
-    ![chrome_MWKGPXFjhW](https://user-images.githubusercontent.com/47709593/165358094-a92216bc-d27e-467d-baf1-bcdc9bed9f21.png)
+    ![chrome_wfzdEUTHQA](https://user-images.githubusercontent.com/47709593/166122624-994c37c5-c766-4986-8579-3e3eed472ac8.png)
 ***
 <a id="bugreport"></a>
 #### Report a Bug
