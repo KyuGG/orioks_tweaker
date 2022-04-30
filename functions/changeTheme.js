@@ -1,11 +1,12 @@
 function changeTheme() {
-    document.documentElement.style.setProperty('--color1', '#202124')
-    document.documentElement.style.setProperty('--color2', '#353535')
-    document.documentElement.style.setProperty('--color3', '#1c1b18')
+    document.documentElement.style.setProperty('--color1', '#0f1010')
+    document.documentElement.style.setProperty('--color2', 'black')
+    document.documentElement.style.setProperty('--color3', '#0b0c0c')
     document.documentElement.style.setProperty('--color4', 'rgb(20, 33, 41)')
     document.documentElement.style.setProperty('--color5', 'rgb(0, 140, 186)')
-    document.documentElement.style.setProperty('--navbar', '#1c1b18')
-    document.documentElement.style.setProperty('--text-color', 'white')
+    document.documentElement.style.setProperty('--navbar', '#0e0e0c')
+    document.documentElement.style.setProperty('--text-color', 'rgba(255, 255, 255, 0.8)')
+    document.documentElement.style.setProperty('--border-color', '#2f2f33')
 }
 
 function coloredElements() {
