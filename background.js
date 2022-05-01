@@ -22,11 +22,12 @@ chrome.storage.local.get().then(storage => {
                 break
             case 'settings':
                 if (storage.settings.checkbox4)
-                    chrome.tabs.query({ url: 'https://orioks.miet.ru/*', active: true }, tabs => {
-                        chrome.scripting.insertCSS({
-                            target: { tabId: tabs[0].id },
-                            files: ['newCSSRules/styles.css']
-                        })
+                    chrome.tabs.query({ url: 'https://orioks.miet.ru/*' }, tabs => {
+                        for (const tab of tabs)
+                            chrome.scripting.insertCSS({
+                                target: { tabId: tab.id },
+                                files: ['newCSSRules/styles.css']
+                            })
                     })
             case 'settingsPopup':
                 sendResponse({ answer: storage.settings })
