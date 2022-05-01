@@ -17,12 +17,16 @@ function download(links) {
 }
 
 function downloadFromModal() {
-    document.body.onclick = evt => {
-        if (evt.target.tagName == 'A' && evt.target.className == 'pointer ng-binding') {
-            let links = document.querySelectorAll('.modal-body .table a')
-            while (links.length == 0)
-                setTimeout(links = document.querySelectorAll('.modal-body .table a'), 1000)
-            download(links)
+    const tbody = document.querySelector('.table tbody')
+    tbody.onclick = () => {
+        const segmentsTbody = document.querySelectorAll('.table tbody')[1]
+        segmentsTbody.onclick = evt => {
+            if (evt.target.tagName == 'A') {
+                let links = document.querySelectorAll('.modal-body .table a')
+                while (links.length == 0)
+                    setTimeout(links = document.querySelectorAll('.modal-body .table a'), 1000)
+                download(links)
+            }
         }
     }
 }
