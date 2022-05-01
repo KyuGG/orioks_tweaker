@@ -1,3 +1,7 @@
+.my-btn {
+    width: 160px;
+}
+
 .row {
     display: flex;
     flex-direction: column;

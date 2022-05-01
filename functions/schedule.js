@@ -13,7 +13,6 @@ async function schedule() {
         const scheduleHeader = document.createElement('div')
         const scheduleH2 = document.createElement('h3')
         const scheduleBtn = document.createElement('button')
-        const scheduleSave = document.createElement('button')
         const scheduleHints = document.createElement('div')
         const scheduleHintsTable = document.createElement('table')
         const scheduleHintsTr = document.createElement('tr')
@@ -22,13 +21,11 @@ async function schedule() {
 
         scheduleH2.textContent = 'Группа:'
         scheduleBtn.textContent = 'Выбрать'
-        scheduleSave.textContent = 'Сделать по умолчанию'
         scheduleBtn.classList.add('my-btn')
-        scheduleSave.classList.add('my-btn')
         scheduleHeader.classList.add('.col-md-6')
         scheduleCh.textContent = 'Числитель'
         scheduleZn.textContent = 'Знаменатель'
-        scheduleHeader.append(scheduleH2, scheduleBtn, scheduleSave)
+        scheduleHeader.append(scheduleH2, scheduleBtn)
 
         scheduleHintsTable.classList.add('hints')
         const scheduleHintsTd1 = document.createElement('td')
@@ -112,20 +109,8 @@ async function schedule() {
         }
 
         const localStorageGroup = localStorage.getItem('group')
-        if (localStorageGroup) {
+        if (localStorageGroup)
             loadSchedule(localStorageGroup)
-        }
-
-        scheduleSave.onclick = () => {
-            const group = prompt('Введите вашу группу\nНапример: П-22')
-            if (group) {
-                localStorage.setItem('group', group.trim())
-                location.reload()
-            }
-            else {
-                alert('Название не может быть пустым')
-            }
-        }
 
         scheduleBtn.onclick = () => {
             const group = prompt('Введите вашу группу\nНапример: П-22')
@@ -136,6 +121,7 @@ async function schedule() {
 
 async function loadSchedule(group) {
     if (group) {
+        localStorage.setItem('group', group.trim())
         document.querySelector('.row h3').textContent = 'Загрузка...'
         const schedule = await fetchSchedule(group.trim())
         document.querySelectorAll('.schedule td:not(:first-child)').forEach(child => {
