@@ -1,11 +1,7 @@
 function fixScore() {
     if (location.pathname == '/student/student') {
-        //удаление кнопки переключения режима отображения баллов
-        document.querySelector('tr th:nth-child(2)').remove()
-        //удаление красных точек
-        document.querySelectorAll('.bad').forEach(el => el.remove())
-        //удаление надписей типа 'из 100'
-        document.querySelectorAll('.mvb').forEach(el => el.remove())
+        //удаление красных точек (.bad), надписей типа 'из 100' (.mvb) и кнопки 'балл' (thead.ng-scope th:last-child)
+        document.querySelectorAll('.bad, .mvb, thead.ng-scope th:last-child').forEach(el => el.remove())
         const dises = document.querySelectorAll('tr.pointer span.grade')
         let counter = 0
         const json = JSON.parse(document.querySelector('#forang').textContent).dises
@@ -19,6 +15,7 @@ function fixScore() {
                         realScore += segment.grade.b
                 }
             })
+            if (realMaxScore > 100) realMaxScore = 100
             dises[counter].textContent = Math.round(realScore * 100) / 100
             const percent = Math.round(realScore / realMaxScore * 100)
             if (percent >= 86) dises[counter].className = 'grade_5 grade'
