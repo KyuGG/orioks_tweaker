@@ -37,7 +37,8 @@ textarea,
 input[type="text"],
 select,
 .nav-tabs>li.active>a,
-.danger td {
+.danger td,
+tbody {
     background-color: var(--color1) !important;
 }
 
