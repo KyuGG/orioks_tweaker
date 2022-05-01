@@ -9,10 +9,8 @@ function runDownload() {
 
 function download(links) {
     links.forEach(a => {
-        if (a.href.split(':')[0] == 'http') {
+        if (a.href.split(':')[0] == 'http')
             a.href = 'https' + a.href.slice(4)
-            a.removeAttribute('target')
-        }
     })
 }
 
