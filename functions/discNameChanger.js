@@ -57,19 +57,24 @@ function discNameLoader() {
                     }
                 }
                 break
+
             case '/portfolio/view-project':
                 selector = 'div.ng-binding .ng-scope'
                 break
+
             case '/student/student':
                 selector = 'tr.pointer td:nth-child(2)'
                 break
+
             case '/student/homework/list':
                 selector = 'tr td:nth-child(4)'
                 break
+
             case '/portfolio/list-uchebnie-project':
             case '/portfolio/list-uchebnie-project/index':
                 selector = 'tr[class*=project]:nth-child(2n-1) td:nth-child(3)'
                 break
+                
             case '/student/homework/create':
                 selector = 'select#homework-discipline-field option'
         }

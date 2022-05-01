@@ -253,12 +253,15 @@ async function fetchSchedule(group) {
                 case 'ch1':
                     ch1.push(el.join('|'))
                     break
+
                 case 'ch2':
                     ch2.push(el.join('|'))
                     break
+
                 case 'zn1':
                     zn1.push(el.join('|'))
                     break
+
                 case 'zn2':
                     zn2.push(el.join('|'))
             }

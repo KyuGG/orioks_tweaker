@@ -20,19 +20,32 @@ function coloredTestImages() {
 }
 
 function coloredNewsText() {
-    if (location.pathname == '/main/view-news')
-        document.querySelectorAll('.well *').forEach(el => el.style.color = shadeColor(el.style.color, 1))
-    if (location.pathname == '/student/news/view')
-        document.querySelectorAll('.container div.margin-top *').forEach(el => el.style.color = shadeColor(el.style.color, 1))
-    if (location.pathname == '/student/student') {
-        document.body.onclick = async evt => {
-            if (evt.target.tagName == 'A' && evt.target.href == location.href + '#') {
-                await sleep(1000)
-                const modalText = document.querySelectorAll('.modal-body div.ng-binding *:not(a)')
-                modalText.forEach(el => el.style.color = shadeColor(el.style.color, 1))
+    let selector
+    switch (location.pathname) {
+        case '/student/student':
+            document.body.onclick = async evt => {
+                if (evt.target.tagName == 'A' && evt.target.href == location.href + '#') {
+                    await sleep(1000)
+                    const modalText = document.querySelectorAll('.modal-body div.ng-binding *:not(a)')
+                    modalText.forEach(el => el.style.color = shadeColor(el.style.color, 1))
+                }
             }
-        }
+            break
+
+        case '/main/view-news':
+            selector = '.well *:not(a)'
+            break
+
+        case '/student/news/view':
+            selector = '.container div.margin-top *:not(a)'
+            break
+
+        case '/student/news/index':
+            selector = '.list-view div *:not(a)'
+            break
     }
+    if (selector)
+        document.querySelectorAll(selector).forEach(el => el.style.color = shadeColor(el.style.color, 1))
 }
 
 function shadeColor(color, percent) {

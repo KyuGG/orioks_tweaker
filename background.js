@@ -16,10 +16,12 @@ chrome.storage.local.get().then(storage => {
                 chrome.storage.local.set(storage)
                 sendResponse({ answer: 'settings have been changed' })
                 break
+
             case 'bugReport':
                 chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
                 sendResponse({ answer: 'page was opened successfully' })
                 break
+
             case 'settings':
                 if (storage.settings.checkbox4)
                     chrome.tabs.query({ url: 'https://orioks.miet.ru/*' }, tabs => {
@@ -29,6 +31,7 @@ chrome.storage.local.get().then(storage => {
                                 files: ['newCSSRules/styles.css']
                             })
                     })
+
             case 'settingsPopup':
                 sendResponse({ answer: storage.settings })
                 break
