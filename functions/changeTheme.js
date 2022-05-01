@@ -24,6 +24,17 @@ function coloredNewsText() {
         document.querySelectorAll('.well *').forEach(el => el.style.color = shadeColor(el.style.color, 1))
     if (location.pathname == '/student/news/view')
         document.querySelectorAll('.container div.margin-top *').forEach(el => el.style.color = shadeColor(el.style.color, 1))
+    if (location.pathname == '/student/student') {
+        document.body.onclick = async evt => {
+            if (evt.target.tagName == 'A' && evt.target.href == 'https://orioks.miet.ru/student/student#') {
+                await sleep(1000)
+                let modalText = document.querySelectorAll('.modal-body div.ng-binding *:not(a)')
+                while (modalText.length == 0)
+                    modalText = document.querySelectorAll('.modal-body div.ng-binding *:not(a)')
+                modalText.forEach(el => el.style.color = shadeColor(el.style.color, 1))
+            }
+        }
+    }
 }
 
 function shadeColor(color, percent) {
