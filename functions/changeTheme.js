@@ -26,7 +26,7 @@ function coloredNewsText() {
         document.querySelectorAll('.container div.margin-top *').forEach(el => el.style.color = shadeColor(el.style.color, 1))
     if (location.pathname == '/student/student') {
         document.body.onclick = async evt => {
-            if (evt.target.tagName == 'A' && evt.target.href == 'https://orioks.miet.ru/student/student#') {
+            if (evt.target.tagName == 'A' && evt.target.href == location.href + '#') {
                 await sleep(1000)
                 let modalText = document.querySelectorAll('.modal-body div.ng-binding *:not(a)')
                 while (modalText.length == 0)
