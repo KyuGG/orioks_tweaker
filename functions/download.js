@@ -22,9 +22,7 @@ function downloadFromModal() {
         const segmentsTbody = document.querySelectorAll('.table tbody')[1]
         segmentsTbody.onclick = evt => {
             if (evt.target.tagName == 'A') {
-                let links = document.querySelectorAll('.modal-body .table a')
-                while (links.length == 0)
-                    setTimeout(links = document.querySelectorAll('.modal-body .table a'), 1000)
+                const links = document.querySelectorAll('.modal-body .table a')
                 download(links)
             }
         }

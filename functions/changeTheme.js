@@ -28,9 +28,7 @@ function coloredNewsText() {
         document.body.onclick = async evt => {
             if (evt.target.tagName == 'A' && evt.target.href == location.href + '#') {
                 await sleep(1000)
-                let modalText = document.querySelectorAll('.modal-body div.ng-binding *:not(a)')
-                while (modalText.length == 0)
-                    modalText = document.querySelectorAll('.modal-body div.ng-binding *:not(a)')
+                const modalText = document.querySelectorAll('.modal-body div.ng-binding *:not(a)')
                 modalText.forEach(el => el.style.color = shadeColor(el.style.color, 1))
             }
         }
