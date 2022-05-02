@@ -22,6 +22,11 @@ chrome.storage.local.get().then(storage => {
                 sendResponse({ answer: 'page was opened successfully' })
                 break
 
+            case 'description':
+                chrome.tabs.create({ url: 'https://github.com/KyuGG/orioks_tweaker#функционал' })
+                sendResponse({ answer: 'page was opened successfully' })
+                break
+
             case 'settings':
                 if (storage.settings.checkbox4)
                     chrome.tabs.query({ url: 'https://orioks.miet.ru/*' }, tabs => {

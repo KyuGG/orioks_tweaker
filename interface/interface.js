@@ -4,6 +4,7 @@ const checkbox3 = document.getElementById('checkbox-3')
 const checkbox4 = document.getElementById('checkbox-4')
 const checkbox5 = document.getElementById('checkbox-5')
 const bugreport = document.getElementById('bugreport')
+const description = document.getElementById('description')
 window.onload = () => document.body.style.opacity = '100%'
 
 chrome.runtime.sendMessage({ data: 'settingsPopup' }, response => {
@@ -34,6 +35,10 @@ const openBugReport = () => {
     chrome.runtime.sendMessage({ data: 'bugReport' }, response => console.log(response.answer))
 }
 
+const openDescription = () => {
+    chrome.runtime.sendMessage({ data: 'description' }, response => console.log(response.answer))
+}
+
 
 checkbox1.onclick = () => onClick()
 checkbox2.onclick = () => onClick()
@@ -41,3 +46,4 @@ checkbox3.onclick = () => onClick()
 checkbox4.onclick = () => onClick()
 checkbox5.onclick = () => onClick()
 bugreport.onclick = () => openBugReport()
+description.onclick = () => openDescription()

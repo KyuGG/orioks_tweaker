@@ -105,7 +105,8 @@ label:hover {
     color: #5581d3;
 }
 
-#bugreport {
+#bugreport,
+#description {
     margin-top: 20px;
     padding: 10px;
     border: 1px solid;
@@ -115,7 +116,8 @@ label:hover {
     cursor: pointer;
 }
 
-#bugreport:hover {
+#bugreport:hover,
+#description:hover {
     background: #5581d3;
     color: black;
 }
