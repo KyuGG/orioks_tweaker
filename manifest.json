@@ -4,11 +4,11 @@
     "version": "1.0.3",
     "description": "Модификация для ОРИОКСа. Правильное отображение баллов, интеграция расписания занятий и кастомизация!",
     "icons": {
-        "128": "interface/logo128.png"
+        "128": "interface/logo.png"
     },
     "action": {
         "default_title": "ORIOKS tweaker",
-        "default_icon": "interface/logo128.png",
+        "default_icon": "interface/logo.png",
         "default_popup": "interface/interface.html"
     },
     "content_scripts": [
@@ -53,7 +53,10 @@
     ],
     "web_accessible_resources": [{
         "matches": ["https://orioks.miet.ru/*"],
-        "resources": ["interface/logo.png"]
+        "resources": [
+            "interface/logo.png",
+            "images/marker.png"
+        ]
     }],
     "host_permissions": [
         "https://orioks.miet.ru/*"

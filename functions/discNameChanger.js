@@ -19,8 +19,7 @@ function discNameChanger() {
             const td = disc.querySelector(':first-child')
             const button = document.createElement('input')
             button.type = 'image'
-            button.src = 'https://cdn-icons-png.flaticon.com/512/4277/4277132.png'
-            button.width = 17
+            button.src = chrome.runtime.getURL('images/marker.png')
             button.classList.add('green-img')
             td.prepend(button)
             button.onclick = () => {
@@ -74,7 +73,7 @@ function discNameLoader() {
             case '/portfolio/list-uchebnie-project/index':
                 selector = 'tr[class*=project]:nth-child(2n-1) td:nth-child(3)'
                 break
-                
+
             case '/student/homework/create':
                 selector = 'select#homework-discipline-field option'
         }
