@@ -7,7 +7,7 @@ async function schedule() {
     scheduleButton.append(scheduleButtonLink)
     nav.children[1].after(scheduleButton)
 
-    if (location.pathname == '/schedule') {
+    if (location.pathname === '/schedule') {
         const content = document.querySelector('.row')
         document.querySelectorAll('.col-md-6').forEach(block => block.remove())
         const scheduleHeader = document.createElement('div')
@@ -147,46 +147,24 @@ async function loadSchedule(group) {
         //первый числитель
         for (const ch of schedule[1]) {
             const td = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-            if (td.children.length == 0) {
-                td.append(document.createElement('div'))
-                td.append(document.createElement('div'))
-            }
-            td.children[0].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
-            colorizeTable(td.children[0], ch[1])
+            appendCell(td, ch)
         }
         //второй числитель
         for (const ch of schedule[2]) {
             const td = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
 
-            if (td.children.length == 0)
-                td.append(document.createElement('div'))
-            if (td.children.length == 1)
-                td.append(document.createElement('div'))
-
-            td.children[1].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
-            colorizeTable(td.children[1], ch[1])
+            appendSecondRowInCell(td, ch)
         }
         //первый знаменатель
         for (const ch of schedule[4]) {
             const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-            if (td.children.length == 0) {
-                td.append(document.createElement('div'))
-                td.append(document.createElement('div'))
-            }
-            td.children[0].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
-            colorizeTable(td.children[0], ch[1])
+            appendCell(td, ch)
         }
         //второй знаменатель
         for (const ch of schedule[5]) {
             const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
 
-            if (td.children.length == 0)
-                td.append(document.createElement('div'))
-            if (td.children.length == 1)
-                td.append(document.createElement('div'))
-
-            td.children[1].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
-            colorizeTable(td.children[1], ch[1])
+            appendSecondRowInCell(td, ch)
         }
 
         document.querySelector('.row h3').textContent = `Группа: ${group.toUpperCase()}`
@@ -196,9 +174,28 @@ async function loadSchedule(group) {
     }
 }
 
+const appendCell = (td, ch) => {
+    if (td.children.length === 0) {
+        td.append(document.createElement('div'))
+        td.append(document.createElement('div'))
+    }
+    td.children[0].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
+    colorizeTable(td.children[0], ch[1])
+}
+
+const appendSecondRowInCell = (td, ch) => {
+    if (td.children.length === 0)
+        td.append(document.createElement('div'))
+    if (td.children.length === 1)
+        td.append(document.createElement('div'))
+
+    td.children[1].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
+    colorizeTable(td.children[1], ch[1])
+}
+
 function withoutLessonType(name) {
     const n = name.split(' ')
-    if (n[n.length - 1] == '[Пр]' || n[n.length - 1] == '[Лек]' || n[n.length - 1] == '[Лаб]')
+    if (n[n.length - 1] === '[Пр]' || n[n.length - 1] === '[Лек]' || n[n.length - 1] === '[Лаб]')
         n.pop()
     return n.join(' ')
 }
@@ -213,10 +210,12 @@ function colorizeTable(block, name) {
             block.classList.add('lab')
             break
         default:
-            if (block.textContent != '')
+            if (block.textContent !== '')
                 block.classList.add('sem')
     }
 }
+
+const splitByVerticalLine = el => el.split('|')
 
 async function fetchSchedule(group) {
     const scheduleAPI = `https://miet.ru/schedule/data?group=${group}`
@@ -262,7 +261,7 @@ async function fetchSchedule(group) {
 
         for (const item in ch1) {
             for (const segment in ch2) {
-                if (ch1[item] == ch2[segment]) {
+                if (ch1[item] === ch2[segment]) {
                     ch.push(ch1[item])
                     ch1Indexes.push(Number(item))
                     ch2Indexes.push(Number(segment))
@@ -272,7 +271,7 @@ async function fetchSchedule(group) {
 
         for (const item in zn1) {
             for (const segment in zn2) {
-                if (zn1[item] == zn2[segment]) {
+                if (zn1[item] === zn2[segment]) {
                     zn.push(zn1[item])
                     zn1Indexes.push(Number(item))
                     zn2Indexes.push(Number(segment))
@@ -301,15 +300,13 @@ async function fetchSchedule(group) {
             zn2.splice(i, 1)
         }
 
-        ch = ch.map(el => el = el.split('|'))
-        ch1 = ch1.map(el => el = el.split('|'))
-        ch2 = ch2.map(el => el = el.split('|'))
-        zn = zn.map(el => el = el.split('|'))
-        zn1 = zn1.map(el => el = el.split('|'))
-        zn2 = zn2.map(el => el = el.split('|'))
+        ch = ch.map(splitByVerticalLine)
+        ch1 = ch1.map(splitByVerticalLine)
+        ch2 = ch2.map(splitByVerticalLine)
+        zn = zn.map(splitByVerticalLine)
+        zn1 = zn1.map(splitByVerticalLine)
+        zn2 = zn2.map(splitByVerticalLine)
 
-        const parsedSchedule = [ch, ch1, ch2, zn, zn1, zn2]
-
-        return parsedSchedule
+        return [ch, ch1, ch2, zn, zn1, zn2]
     }
 }
