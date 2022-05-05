@@ -40,10 +40,10 @@ const openDescription = () => {
 }
 
 
-checkbox1.onclick = () => onClick()
-checkbox2.onclick = () => onClick()
-checkbox3.onclick = () => onClick()
-checkbox4.onclick = () => onClick()
-checkbox5.onclick = () => onClick()
-bugreport.onclick = () => openBugReport()
-description.onclick = () => openDescription()
+checkbox1.onclick = onClick
+checkbox2.onclick = onClick
+checkbox3.onclick = onClick
+checkbox4.onclick = onClick
+checkbox5.onclick = onClick
+bugreport.onclick = openBugReport
+description.onclick = openDescription
