@@ -20,6 +20,14 @@ chrome.runtime.sendMessage({ data: 'settingsPopup' }, response => {
 })
 
 
+bugreport.onclick = () => {
+    chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
+}
+
+description.onclick = () => {
+    chrome.tabs.create({ url: 'https://github.com/KyuGG/orioks_tweaker#функционал' })
+}
+
 const onClick = () => {
     const settings = {
         checkbox1: checkbox1.checked,
@@ -31,19 +39,9 @@ const onClick = () => {
     chrome.runtime.sendMessage({ data: 'changeSettings', settings: settings }, response => console.log(response.answer))
 }
 
-const openBugReport = () => {
-    chrome.runtime.sendMessage({ data: 'bugReport' }, response => console.log(response.answer))
-}
-
-const openDescription = () => {
-    chrome.runtime.sendMessage({ data: 'description' }, response => console.log(response.answer))
-}
-
 
 checkbox1.onclick = onClick
 checkbox2.onclick = onClick
 checkbox3.onclick = onClick
 checkbox4.onclick = onClick
 checkbox5.onclick = onClick
-bugreport.onclick = openBugReport
-description.onclick = openDescription
