@@ -28,7 +28,7 @@ chrome.storage.local.get().then(storage => {
                 break
 
             case 'settings':
-                if (storage.settings.checkbox4)
+                if (storage.settings.checkbox5)
                     chrome.tabs.query({ url: 'https://orioks.miet.ru/*' }, tabs => {
                         for (const tab of tabs)
                             chrome.scripting.insertCSS({
