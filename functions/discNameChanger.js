@@ -1,8 +1,8 @@
 function discNameChanger() {
     if (location.pathname == '/student/student') {
-        if (!localStorage.getItem('discNames')) {
+        if (!localStorage.getItem('discNames'))
             localStorage.setItem('discNames', '{}')
-        }
+
         document.querySelectorAll('.bad').forEach(el => el.remove())
         const clearSettings = document.createElement('input')
         clearSettings.type = 'button'
@@ -33,9 +33,7 @@ function discNameChanger() {
                     discNames = JSON.stringify(discNames)
                     localStorage.setItem('discNames', discNames)
                 }
-                else {
-                    alert('Название не может быть пустым')
-                }
+                else alert('Название не может быть пустым')
             }
         })
     }
@@ -51,11 +49,9 @@ function discNameLoader() {
                 const disc = document.querySelector('strong')
                 const newsNewNames = JSON.parse(localStorage.getItem('discNames'))
                 const name = disc.textContent
-                for (const n in newsNewNames) {
-                    if (name == n) {
+                for (const n in newsNewNames)
+                    if (name == n)
                         disc.textContent = newsNewNames[n]
-                    }
-                }
                 break
 
             case '/portfolio/view-project':
@@ -84,9 +80,8 @@ function discNameLoader() {
             for (const disc of dises) {
                 const name = disc.textContent.trim()
                 for (const n in newNames) {
-                    if (name == n) {
+                    if (name == n)
                         disc.textContent = newNames[n]
-                    }
                 }
             }
         }

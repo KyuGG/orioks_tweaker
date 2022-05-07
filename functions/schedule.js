@@ -171,9 +171,7 @@ async function loadSchedule(group) {
 
         document.querySelector('.row h3').textContent = `Группа: ${group.toUpperCase()}`
     }
-    else {
-        alert('Название не может быть пустым')
-    }
+    else alert('Название не может быть пустым')
 }
 
 function appendCell(td, ch) {
