@@ -20,7 +20,7 @@ chrome.runtime.sendMessage({ data: 'settingsPopup' }, response => {
 })
 
 
-const onClick = () => {
+function onClick () {
     const settings = {
         checkbox1: checkbox1.checked,
         checkbox2: checkbox2.checked,

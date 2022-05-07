@@ -174,7 +174,7 @@ async function loadSchedule(group) {
     }
 }
 
-const appendCell = (td, ch) => {
+function appendCell(td, ch) {
     if (td.children.length === 0) {
         td.append(document.createElement('div'))
         td.append(document.createElement('div'))
@@ -183,7 +183,7 @@ const appendCell = (td, ch) => {
     colorizeTable(td.children[0], ch[1])
 }
 
-const appendSecondRowInCell = (td, ch) => {
+function appendSecondRowInCell (td, ch) {
     if (td.children.length === 0)
         td.append(document.createElement('div'))
     if (td.children.length === 1)
@@ -215,7 +215,9 @@ function colorizeTable(block, name) {
     }
 }
 
-const splitByVerticalLine = el => el.split('|')
+function splitByVerticalLine (el) {
+    return el.split('|')
+}
 
 async function fetchSchedule(group) {
     const scheduleAPI = `https://miet.ru/schedule/data?group=${group}`
