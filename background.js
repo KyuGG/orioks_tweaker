@@ -17,18 +17,8 @@ chrome.storage.local.get().then(storage => {
                 sendResponse({ answer: 'settings have been changed' })
                 break
 
-            case 'bugReport':
-                chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
-                sendResponse({ answer: 'page was opened successfully' })
-                break
-
-            case 'description':
-                chrome.tabs.create({ url: 'https://github.com/KyuGG/orioks_tweaker#функционал' })
-                sendResponse({ answer: 'page was opened successfully' })
-                break
-
             case 'settings':
-                if (storage.settings.checkbox4)
+                if (storage.settings.checkbox5)
                     chrome.tabs.query({ url: 'https://orioks.miet.ru/*' }, tabs => {
                         for (const tab of tabs)
                             chrome.scripting.insertCSS({

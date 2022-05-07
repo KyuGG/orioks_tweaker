@@ -1,0 +1,22 @@
+## Установка на телефон (Android)
+
+> Поскольку браузер Chrome не поддерживает расширения,
+> предлагаю использовать компромиссный вариант,
+> заключающийся в установке браузера Kiwi.
+> Этот браузер поддерживает расширения
+> и имеет ряд преимуществ над Chrome.
+> Подробнее о нем можете почитать [тут](https://kiwibrowser.com)
+
+- [Установите](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) Kiwi Browser из Google Play
+- [Установите](https://chrome.google.com/webstore/detail/orioks-tweaker/efgdenjhcmladhmbjcmmeobggibfogep) расширение из Chrome Web Store
+- [Зайдите](https://orioks.miet.ru) в ОРИОКС (оставьте галочку "запомнить меня")
+- Перейдите во вкладку "Обучение"
+- Откройте настройки браузера (скриншот ниже)
+
+![photo_2022-05-07_06-18-31](https://user-images.githubusercontent.com/47709593/167236170-0e2291ed-387b-4e23-912f-04fc6bb65c3d.jpg)
+- Нажмите "Добавить на гл. экран" и укажите удобное для вас название ярлыка (скриншот ниже)
+> В самом низу можно перейти в меню расширения ORIOKS tweaker
+
+![photo_2022-05-07_06-33-01](https://user-images.githubusercontent.com/47709593/167236562-ae5dac33-50a5-4c10-aa3d-aa4bb71aba82.jpg)
+> Теперь модифицированный ориокс доступен
+> прямо на главном экране вашего телефона!
