@@ -8,6 +8,8 @@
 > Подробнее о нем можете почитать [тут](https://kiwibrowser.com)
 
 - [Установите](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) Kiwi Browser из Google Play
+- Зайдите в Kiwi Browser
+(следующие пункты выполняются внутри этого браузера)
 - [Установите](https://chrome.google.com/webstore/detail/orioks-tweaker/efgdenjhcmladhmbjcmmeobggibfogep) расширение из Chrome Web Store
 - [Зайдите](https://orioks.miet.ru) в ОРИОКС (оставьте галочку "запомнить меня")
 - Перейдите во вкладку "Обучение"
