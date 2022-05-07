@@ -103,4 +103,12 @@ table.mobile-visible td {
     table.mobile-visible {
         display: inline-table !important;
     }
+
+    .schedule tr td:first-child {
+        min-width: 100px !important;
+    }
+
+    .schedule-td, .schedule-th {
+        width: 100% !important;
+    }
 }
