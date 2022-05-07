@@ -171,7 +171,7 @@ async function loadSchedule(group) {
 
         document.querySelector('.row h3').textContent = `Группа: ${group.toUpperCase()}`
     }
-    else alert('Название не может быть пустым')
+    else if (group != null) alert('Название не может быть пустым')
 }
 
 function appendCell(td, ch) {
@@ -341,7 +341,6 @@ function mobileSchedule(scheduleHeader) {
     scheduleHeader.append(table)
 
     let today = new Date().getDay()
-    today = 100
     if (today >= 7) today = 1
     const mobileHidden = document.querySelectorAll(`.schedule :not(tr, :first-child, :nth-child(${today + 1}))`)
     mobileHidden.forEach(tr => tr.classList.add('mobile-hidden'))

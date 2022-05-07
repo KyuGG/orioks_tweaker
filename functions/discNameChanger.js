@@ -33,7 +33,7 @@ function discNameChanger() {
                     discNames = JSON.stringify(discNames)
                     localStorage.setItem('discNames', discNames)
                 }
-                else alert('Название не может быть пустым')
+                else if (newName != null) alert('Название не может быть пустым')
             }
         })
     }
