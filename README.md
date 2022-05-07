@@ -4,8 +4,8 @@
 ![s1SgZmX6BK](https://user-images.githubusercontent.com/47709593/166122797-b8241fa7-a803-48b7-9d5c-d3ccf2d88280.png)
 ***
 ## Установка
-[Установка на ПК](README_PC.md)
-[Установка на телефон](README_MOBILE.md)
+[Установка на ПК](README_PC.md)<br>
+[Установка на телефон (Android)](README_MOBILE.md)
 ***
 ## Функционал
  Название | Описание
