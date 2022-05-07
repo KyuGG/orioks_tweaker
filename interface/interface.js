@@ -19,7 +19,6 @@ chrome.runtime.sendMessage({ data: 'settingsPopup' }, response => {
     else location.reload()
 })
 
-
 bugreport.onclick = () => {
     chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
 }
@@ -28,7 +27,7 @@ description.onclick = () => {
     chrome.tabs.create({ url: 'https://github.com/KyuGG/orioks_tweaker#функционал' })
 }
 
-const onClick = () => {
+function onClick () {
     const settings = {
         checkbox1: checkbox1.checked,
         checkbox2: checkbox2.checked,
