@@ -16,7 +16,7 @@ function coloredElements() {
 
 function coloredTestImages() {
     if (location.pathname == '/student/student/test' || location.pathname == '/student/student/test/')
-        document.querySelectorAll('img').forEach(img => img.classList.add('green-img'))
+        document.querySelectorAll('img').forEach(img => img.classList.add('invert-img'))
 }
 
 function coloredNewsText() {

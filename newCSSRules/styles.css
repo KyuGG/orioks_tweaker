@@ -95,8 +95,8 @@ textarea {
     color: var(--text-color) !important;
 }
 
-.green-img {
-    filter: invert(59%) sepia(71%) saturate(2640%) hue-rotate(68deg) brightness(100%) contrast(109%);
+.invert-img {
+    filter: invert(1);
 }
 
 .notification-more,

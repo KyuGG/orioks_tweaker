@@ -20,7 +20,7 @@ function discNameChanger() {
             const button = document.createElement('input')
             button.type = 'image'
             button.src = chrome.runtime.getURL('images/marker.png')
-            button.classList.add('green-img')
+            button.classList.add('invert-img')
             td.prepend(button)
             button.onclick = () => {
                 const newName = prompt('Новое название дисциплины')
