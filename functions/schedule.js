@@ -50,7 +50,7 @@ async function schedule() {
         const trCh = document.createElement('tr')
         tableCh.classList.add('schedule')
         tableCh.classList.add('ch')
-        const ths = window.innerWidth > 767 ? ['Время', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'] : ['Время', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ']
+        const ths = ['Время', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
         for (let i = 0; i < 7; i++) {
             const th = document.createElement('th')
             th.textContent = ths[i]
@@ -107,6 +107,8 @@ async function schedule() {
             tdsFirst[i].innerText = time[i]
             tdsFirst[7 + Number(i)].innerText = time[i]
         }
+
+        mobileSchedule(scheduleHints)
 
         const localStorageGroup = localStorage.getItem('group')
         if (localStorageGroup)
@@ -183,7 +185,7 @@ function appendCell(td, ch) {
     colorizeTable(td.children[0], ch[1])
 }
 
-function appendSecondRowInCell (td, ch) {
+function appendSecondRowInCell(td, ch) {
     if (td.children.length === 0)
         td.append(document.createElement('div'))
     if (td.children.length === 1)
@@ -215,7 +217,7 @@ function colorizeTable(block, name) {
     }
 }
 
-function splitByVerticalLine (el) {
+function splitByVerticalLine(el) {
     return el.split('|')
 }
 
@@ -311,4 +313,41 @@ async function fetchSchedule(group) {
 
         return [ch, ch1, ch2, zn, zn1, zn2]
     }
+}
+
+function mobileSchedule(scheduleHeader) {
+    const table = document.createElement('table')
+    table.classList.add('hints')
+    const tr = document.createElement('tr')
+    const days = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ']
+    for (const day in days) {
+        const td = document.createElement('td')
+        const button = document.createElement('button')
+        button.textContent = days[day]
+        button.classList.add('switcher')
+
+        const visibleTds = document.querySelectorAll('.schedule :not(tr, .mobile-hidden, :first-child, br, div)')
+        const neededTds = [...document.querySelectorAll(`.schedule th:nth-child(${Number(day) + 2})`)]
+        for (let i = 0; i < 7; i++)
+            neededTds.push(...document.querySelectorAll(`.schedule-${i}-${Number(day) + 1}`))
+
+        button.onclick = () => {
+            visibleTds.forEach(td => td.classList.add('mobile-hidden'))
+            neededTds.forEach(td => td.classList.remove('mobile-hidden'))
+        }
+
+        td.append(button)
+        tr.append(td)
+    }
+    table.append(tr)
+    scheduleHeader.append(table)
+
+    let today = new Date().getDay()
+    today = 100
+    if (today >= 7) today = 1
+    const mobileHidden = document.querySelectorAll(`.schedule :not(tr, :first-child, :nth-child(${today + 1}))`)
+    mobileHidden.forEach(tr => tr.classList.add('mobile-hidden'))
+
+    const mobileVisible = document.querySelector('.hints:nth-child(2)')
+    mobileVisible.classList.add('mobile-visible')
 }

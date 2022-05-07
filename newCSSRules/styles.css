@@ -111,7 +111,8 @@ textarea {
     color: var(--color5) !important;
 }
 
-.my-btn {
+.my-btn,
+.switcher {
     background-color: var(--color1) !important;
     color: var(--text-color) !important;
 }
