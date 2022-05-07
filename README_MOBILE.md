@@ -9,7 +9,7 @@
 
 - [Установите](https://play.google.com/store/apps/details?id=com.kiwibrowser.browser) Kiwi Browser из Google Play
 - [Установите](https://chrome.google.com/webstore/detail/orioks-tweaker/efgdenjhcmladhmbjcmmeobggibfogep) расширение из Chrome Web Store
-- [Зайдите](https://orioks.miet.ru) в ОРИОКС (оставьте галочку "запомнить пароль")
+- [Зайдите](https://orioks.miet.ru) в ОРИОКС (оставьте галочку "запомнить меня")
 - Перейдите во вкладку "Обучение"
 - Откройте настройки браузера (скриншот ниже)
 
