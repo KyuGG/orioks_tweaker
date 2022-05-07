@@ -22,7 +22,8 @@ function discNameChanger() {
             button.src = chrome.runtime.getURL('images/marker.png')
             button.classList.add('invert-img')
             td.prepend(button)
-            button.onclick = () => {
+            button.onclick = evt => {
+                evt.stopPropagation()
                 const newName = prompt('Новое название дисциплины')
                 if (newName) {
                     const prevName = disc.querySelector(':nth-child(2)').getAttribute('prevname')
