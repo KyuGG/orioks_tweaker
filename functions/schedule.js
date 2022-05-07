@@ -8,6 +8,14 @@ async function schedule() {
     nav.children[1].after(scheduleButton)
 
     if (location.pathname === '/schedule') {
+        const container = document.querySelector('.container.margin-top')
+        container.insertAdjacentHTML('afterbegin', `
+        <ul class="breadcrumb">
+            <li><a href="/">Главная</a></li>
+            <li><a href="https://orioks.miet.ru/schedule">Расписание</a></li>
+        </ul>
+        `)
+
         const content = document.querySelector('.row')
         document.querySelectorAll('.col-md-6').forEach(block => block.remove())
         const scheduleHeader = document.createElement('div')
@@ -341,8 +349,8 @@ function mobileSchedule(scheduleHeader) {
     scheduleHeader.append(table)
 
     let today = new Date().getDay()
-    if (today >= 7) today = 1
-    const mobileHidden = document.querySelectorAll(`.schedule :not(tr, :first-child, :nth-child(${today + 1}))`)
+    if (today == 0) today = 1
+    const mobileHidden = document.querySelectorAll(`.schedule :not(tr, br, :first-child, :nth-child(${today + 1}))`)
     mobileHidden.forEach(tr => tr.classList.add('mobile-hidden'))
 
     const mobileVisible = document.querySelector('.hints:nth-child(2)')
