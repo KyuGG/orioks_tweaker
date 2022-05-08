@@ -3,7 +3,7 @@
     padding-left: 14px !important;
 }
 
-@media (max-width: 990px) {
+@media (max-width: 1300px) {
     #to_top {
         display: none;
     }
