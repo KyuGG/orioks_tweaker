@@ -93,6 +93,11 @@ table.mobile-visible button {
 
 table.mobile-visible td {
     padding: 0 !important;
+    height: 60px;
+}
+
+.today-column {
+    background-color: rgb(61, 140, 177);
 }
 
 @media (max-width: 768px) {
@@ -108,7 +113,8 @@ table.mobile-visible td {
         min-width: 100px !important;
     }
 
-    .schedule-td, .schedule-th {
+    .schedule-td,
+    .schedule-th {
         width: 100% !important;
     }
 }

@@ -353,6 +353,17 @@ function mobileSchedule(scheduleHeader) {
     const mobileHidden = document.querySelectorAll(`.schedule :not(tr, br, :first-child, :nth-child(${today + 1}))`)
     mobileHidden.forEach(tr => tr.classList.add('mobile-hidden'))
 
+    const identifyWeek = {
+        'числитель': 'ch',
+        'знаменатель': 'zn'
+    }
+    let whichWeek = document.querySelector('.small').textContent.trim().split(' ')
+    
+    whichWeek = identifyWeek[whichWeek[3]]
+    
+    const todayColumn = document.querySelector(`.${whichWeek} th:not(:first-child, .mobile-hidden)`)
+    todayColumn.classList.add('today-column')
+
     const mobileVisible = document.querySelector('.hints:nth-child(2)')
     mobileVisible.classList.add('mobile-visible')
 }
