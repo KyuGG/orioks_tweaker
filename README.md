@@ -34,7 +34,7 @@
  <td><a href="darktheme">Описание</td>
 </tr>
 <tr>
- <td style="text-align:center;" colspan="3"><a href="#">Дополнительные изменения, вносимые расширением</a></td>
+ <td style="text-align:center;" colspan="3"><a href="#more">Дополнительные изменения, вносимые расширением</a></td>
 </tr>
 </table>
 
@@ -91,6 +91,7 @@
     ##### Стало
     ![chrome_wfzdEUTHQA](https://user-images.githubusercontent.com/47709593/166122624-994c37c5-c766-4986-8579-3e3eed472ac8.png)
 ***
+<a id="more"></a>
 ## Дополнительные изменения
 - Меняет иконку сайта на вкладках
 - Меняет логотип в профиле
