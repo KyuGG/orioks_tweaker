@@ -1,21 +1,43 @@
-# ORIOKS Tweaker - расширение для Chrome!
-***
-## Меню расширения
-![s1SgZmX6BK](https://user-images.githubusercontent.com/47709593/166122797-b8241fa7-a803-48b7-9d5c-d3ccf2d88280.png)
+# ORIOKS Tweaker - расширение для ОРИОКС`а!
 ***
 ## Установка
-[Установка на ПК](README_PC.md)<br>
-[Установка на телефон (Android)](README_MOBILE.md)
+[Установка на ПК](README_PC.md)
+> Поддерживается браузерами
+> на базе движка Chromium
+> (Chrome, Yandex, Opera/GX, др.)
+
+[Установка на Android](README_MOBILE.md)
+> Поддерживается браузером Kiwi
+
 ***
 ## Функционал
- Название | Описание
- :-------:|:--------:|
- Fix Score | [Описание](#fixscore)
- Fix Download | [Описание](#fixdownload)
- Schedule | [Описание](#schedule)
- Discipline Names | [Описание](#disciplinenames)
- Dark Theme | [Описание](#darktheme)
- Report a Bug | [Описание](#bugreport)
+<table>
+<tr>
+ <td rowspan="5"><img src="https://user-images.githubusercontent.com/47709593/167301868-d801cc92-4b96-4d18-ad79-a9b90b1f7919.png"></td>
+ <td>Fix Score</td>
+ <td><a href="#fixscore">Описание</td>
+</tr>
+<tr>
+ <td>Fix Download</td>
+ <td><a href="#fixdownload">Описание</a></td>
+</tr>
+<tr> 
+ <td>Schedule</td>
+ <td><a href="#schedule">Описание</a></td>
+</tr> 
+<tr>
+ <td>Discipline Names</td>
+ <td><a href="#disciplinenames">Описание</a></td>
+</tr>
+<tr> 
+ <td>Dark Theme</td>
+ <td><a href="darktheme">Описание</td>
+</tr>
+<tr>
+ <td style="text-align:center;" colspan="3"><a href="#">Дополнительные изменения, вносимые расширением</a></td>
+</tr>
+</table>
+
  > Любой функционал вступает
  > в силу после перезагрузки страницы
 ***
@@ -47,7 +69,7 @@
     ###### Это удобно!
     > Расписание для удобства разбивается на 2 таблицы: числитель и знаменатель. Лекции окрашиваются в синий цвет, лабораторные в желтый, а семинары в белый. Все это в совокупности улучшает восприятие и позволяет смотреть расписание прямо в ОРИОКСе
 
-    ![chrome_YE1WCinEuu](https://user-images.githubusercontent.com/47709593/166122778-6e8aa07e-e8ac-4ba7-a99b-cfb888e48502.png)
+    ![chrome_a03uyXzy7h](https://user-images.githubusercontent.com/47709593/167303775-1e28f6ee-0d89-4f2b-bfa1-c88a29f98e43.png)
 ***
 <a id="disciplinenames"></a>
 #### Discipline Names
@@ -69,6 +91,9 @@
     ##### Стало
     ![chrome_wfzdEUTHQA](https://user-images.githubusercontent.com/47709593/166122624-994c37c5-c766-4986-8579-3e3eed472ac8.png)
 ***
-<a id="bugreport"></a>
-#### Report a Bug
-> Если вы столкнулись с ошибкой в работе плагина, имеете замечания или предложения, сообщите нам, нажав на эту кнопку в меню
+## Дополнительные изменения
+- Меняет иконку сайта на вкладках
+- Меняет логотип в профиле
+- Убирает блок прокрутки вверх для маленьких разрешений
+- Текст в футере профиля теперь влезает в блок для маленьких разрешений
+- "Незачтено" в итогах дисциплины теперь влезает в блок по ширине
