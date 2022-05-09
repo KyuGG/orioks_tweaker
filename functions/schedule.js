@@ -7,180 +7,183 @@ async function schedule() {
     scheduleButton.append(scheduleButtonLink)
     nav.children[1].after(scheduleButton)
 
-    if (location.pathname === '/schedule') {
-        const container = document.querySelector('.container.margin-top')
-        container.insertAdjacentHTML('afterbegin', `
+    if (!(location.pathname === '/schedule'))
+        return
+
+    const container = document.querySelector('.container.margin-top')
+    container.insertAdjacentHTML('afterbegin', `
         <ul class="breadcrumb">
             <li><a href="/">Главная</a></li>
             <li><a href="https://orioks.miet.ru/schedule">Расписание</a></li>
         </ul>
         `)
 
-        const content = document.querySelector('.row')
-        document.querySelectorAll('.col-md-6').forEach(block => block.remove())
-        const scheduleHeader = document.createElement('div')
-        const scheduleH2 = document.createElement('h3')
-        const scheduleBtn = document.createElement('button')
-        const scheduleHints = document.createElement('div')
-        const scheduleHintsTable = document.createElement('table')
-        const scheduleHintsTr = document.createElement('tr')
-        const scheduleCh = document.createElement('h3')
-        const scheduleZn = document.createElement('h3')
+    const content = document.querySelector('.row')
+    document.querySelectorAll('.col-md-6').forEach(block => block.remove())
+    const scheduleHeader = document.createElement('div')
+    const scheduleH2 = document.createElement('h3')
+    const scheduleBtn = document.createElement('button')
+    const scheduleHints = document.createElement('div')
+    const scheduleHintsTable = document.createElement('table')
+    const scheduleHintsTr = document.createElement('tr')
+    const scheduleCh = document.createElement('h3')
+    const scheduleZn = document.createElement('h3')
 
-        scheduleH2.textContent = 'Группа:'
-        scheduleBtn.textContent = 'Выбрать'
-        scheduleBtn.classList.add('my-btn')
-        scheduleHeader.classList.add('.col-md-6')
-        scheduleCh.textContent = 'Числитель'
-        scheduleZn.textContent = 'Знаменатель'
-        scheduleHeader.append(scheduleH2, scheduleBtn)
+    scheduleH2.textContent = 'Группа:'
+    scheduleBtn.textContent = 'Выбрать'
+    scheduleBtn.classList.add('my-btn')
+    scheduleHeader.classList.add('.col-md-6')
+    scheduleCh.textContent = 'Числитель'
+    scheduleZn.textContent = 'Знаменатель'
+    scheduleHeader.append(scheduleH2, scheduleBtn)
 
-        scheduleHintsTable.classList.add('hints')
-        const scheduleHintsTd1 = document.createElement('td')
-        scheduleHintsTd1.textContent = 'Лекция'
-        scheduleHintsTd1.classList.add('lecture')
-        const scheduleHintsTd2 = document.createElement('td')
-        scheduleHintsTd2.textContent = 'Лабораторная работа'
-        scheduleHintsTd2.classList.add('lab')
-        const scheduleHintsTd3 = document.createElement('td')
-        scheduleHintsTd3.textContent = 'Семинар'
-        scheduleHintsTd3.classList.add('sem')
-        const scheduleHintsTd4 = document.createElement('td')
-        scheduleHintsTd4.textContent = 'Окно'
-        scheduleHintsTd4.classList.add('holiday')
-        scheduleHintsTr.append(scheduleHintsTd1, scheduleHintsTd2, scheduleHintsTd3, scheduleHintsTd4)
-        scheduleHintsTable.append(scheduleHintsTr)
-        scheduleHints.append(scheduleHintsTable)
+    scheduleHintsTable.classList.add('hints')
+    const scheduleHintsTd1 = document.createElement('td')
+    scheduleHintsTd1.textContent = 'Лекция'
+    scheduleHintsTd1.classList.add('lecture')
+    const scheduleHintsTd2 = document.createElement('td')
+    scheduleHintsTd2.textContent = 'Лабораторная работа'
+    scheduleHintsTd2.classList.add('lab')
+    const scheduleHintsTd3 = document.createElement('td')
+    scheduleHintsTd3.textContent = 'Семинар'
+    scheduleHintsTd3.classList.add('sem')
+    const scheduleHintsTd4 = document.createElement('td')
+    scheduleHintsTd4.textContent = 'Окно'
+    scheduleHintsTd4.classList.add('holiday')
+    scheduleHintsTr.append(scheduleHintsTd1, scheduleHintsTd2, scheduleHintsTd3, scheduleHintsTd4)
+    scheduleHintsTable.append(scheduleHintsTr)
+    scheduleHints.append(scheduleHintsTable)
 
-        content.append(scheduleHeader, scheduleHints, scheduleCh)
+    content.append(scheduleHeader, scheduleHints, scheduleCh)
 
-        const tableCh = document.createElement('table')
-        const trCh = document.createElement('tr')
-        tableCh.classList.add('schedule')
-        tableCh.classList.add('ch')
-        const ths = ['Время', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
-        for (let i = 0; i < 7; i++) {
-            const th = document.createElement('th')
-            th.textContent = ths[i]
-            trCh.append(th)
+    const tableCh = document.createElement('table')
+    const trCh = document.createElement('tr')
+    tableCh.classList.add('schedule')
+    tableCh.classList.add('ch')
+    const ths = ['Время', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
+    for (let i = 0; i < 7; i++) {
+        const th = document.createElement('th')
+        th.textContent = ths[i]
+        trCh.append(th)
+    }
+    tableCh.append(trCh)
+    content.append(tableCh, scheduleZn)
+
+    for (let i = 0; i < 7; i++) {
+        const tr = document.createElement('tr')
+        for (let j = 0; j < 7; j++) {
+            const td = document.createElement('td')
+            td.classList.add(`schedule-${i}-${j}`)
+            td.classList.add('schedule-td')
+            tr.append(td)
         }
-        tableCh.append(trCh)
-        content.append(tableCh, scheduleZn)
+        tableCh.append(tr)
+    }
 
-        for (let i = 0; i < 7; i++) {
-            const tr = document.createElement('tr')
-            for (let j = 0; j < 7; j++) {
-                const td = document.createElement('td')
-                td.classList.add(`schedule-${i}-${j}`)
-                td.classList.add('schedule-td')
-                tr.append(td)
-            }
-            tableCh.append(tr)
+    const tableZn = document.createElement('table')
+    const trZn = document.createElement('tr')
+    tableZn.classList.add('schedule')
+    tableZn.classList.add('zn')
+    for (let i = 0; i < 7; i++) {
+        const th = document.createElement('th')
+        th.textContent = ths[i]
+        trZn.append(th)
+    }
+    tableZn.append(trZn)
+    content.append(tableZn)
+
+    for (let i = 0; i < 7; i++) {
+        const tr = document.createElement('tr')
+        for (let j = 0; j < 7; j++) {
+            const td = document.createElement('td')
+            td.classList.add(`schedule-${i}-${j}`)
+            td.classList.add('schedule-td')
+            tr.append(td)
         }
+        tableZn.append(tr)
+    }
 
-        const tableZn = document.createElement('table')
-        const trZn = document.createElement('tr')
-        tableZn.classList.add('schedule')
-        tableZn.classList.add('zn')
-        for (let i = 0; i < 7; i++) {
-            const th = document.createElement('th')
-            th.textContent = ths[i]
-            trZn.append(th)
-        }
-        tableZn.append(trZn)
-        content.append(tableZn)
+    const time = [
+        'Пара №1\n9:00-10:30',
+        'Пара №2\n10:40-12:10',
+        'Пара №3\n12:20-13:50\n12:50-14:20',
+        'Пара №4\n14:30-16:00',
+        'Пара №5\n16:10-17:40',
+        'Пара №6\n18:20-19:50',
+        'Пара №7\n20:00-21:30'
+    ]
+    const tdsFirst = document.querySelectorAll('.schedule tr :first-child:not(th)')
+    for (const i in time) {
+        tdsFirst[i].innerText = time[i]
+        tdsFirst[7 + Number(i)].innerText = time[i]
+    }
 
-        for (let i = 0; i < 7; i++) {
-            const tr = document.createElement('tr')
-            for (let j = 0; j < 7; j++) {
-                const td = document.createElement('td')
-                td.classList.add(`schedule-${i}-${j}`)
-                td.classList.add('schedule-td')
-                tr.append(td)
-            }
-            tableZn.append(tr)
-        }
+    mobileSchedule(scheduleHints)
 
-        const time = [
-            'Пара №1\n9:00-10:30',
-            'Пара №2\n10:40-12:10',
-            'Пара №3\n12:20-13:50\n12:50-14:20',
-            'Пара №4\n14:30-16:00',
-            'Пара №5\n16:10-17:40',
-            'Пара №6\n18:20-19:50',
-            'Пара №7\n20:00-21:30'
-        ]
-        const tdsFirst = document.querySelectorAll('.schedule tr :first-child:not(th)')
-        for (const i in time) {
-            tdsFirst[i].innerText = time[i]
-            tdsFirst[7 + Number(i)].innerText = time[i]
-        }
+    const localStorageGroup = localStorage.getItem('group')
+    if (localStorageGroup)
+        loadSchedule(localStorageGroup)
 
-        mobileSchedule(scheduleHints)
-
-        const localStorageGroup = localStorage.getItem('group')
-        if (localStorageGroup)
-            loadSchedule(localStorageGroup)
-
-        scheduleBtn.onclick = () => {
-            const group = prompt('Введите вашу группу\nНапример: П-22')
-            loadSchedule(group)
-        }
+    scheduleBtn.onclick = () => {
+        const group = prompt('Введите вашу группу\nНапример: П-22')
+        loadSchedule(group)
     }
 }
+
 
 async function loadSchedule(group) {
-    if (group) {
-        localStorage.setItem('group', group.trim())
-        document.querySelector('.row h3').textContent = 'Загрузка...'
-        const schedule = await fetchSchedule(group.trim())
-        document.querySelectorAll('.schedule td:not(:first-child)').forEach(child => {
-            child.textContent = ''
-            child.classList.add('holiday')
-            child.classList.remove('lecture')
-            child.classList.remove('lab')
-            child.classList.remove('sem')
-        })
-
-        //числитель
-        for (const ch of schedule[0]) {
-            const week = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-            week.innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
-            colorizeTable(week, ch[1])
-        }
-        //знаменатель
-        for (const ch of schedule[3]) {
-            const week = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-            week.innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
-            colorizeTable(week, ch[1])
-        }
-        //первый числитель
-        for (const ch of schedule[1]) {
-            const td = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-            appendCell(td, ch)
-        }
-        //второй числитель
-        for (const ch of schedule[2]) {
-            const td = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-
-            appendSecondRowInCell(td, ch)
-        }
-        //первый знаменатель
-        for (const ch of schedule[4]) {
-            const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-            appendCell(td, ch)
-        }
-        //второй знаменатель
-        for (const ch of schedule[5]) {
-            const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
-
-            appendSecondRowInCell(td, ch)
-        }
-
-        document.querySelector('.row h3').textContent = `Группа: ${group.toUpperCase()}`
+    if (!group) {
+        if (group != null)
+            alert('Название не может быть пустым')
+        return
     }
-    else if (group != null) alert('Название не может быть пустым')
+    localStorage.setItem('group', group.trim())
+    document.querySelector('.row h3').textContent = 'Загрузка...'
+    const schedule = await fetchSchedule(group.trim())
+    document.querySelectorAll('.schedule td:not(:first-child)').forEach(child => {
+        child.textContent = ''
+        child.classList.add('holiday')
+        child.classList.remove('lecture')
+        child.classList.remove('lab')
+        child.classList.remove('sem')
+    })
+
+    //числитель
+    for (const ch of schedule[0]) {
+        const week = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+        week.innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
+        colorizeTable(week, ch[1])
+    }
+    //знаменатель
+    for (const ch of schedule[3]) {
+        const week = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+        week.innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
+        colorizeTable(week, ch[1])
+    }
+    //первый числитель
+    for (const ch of schedule[1]) {
+        const td = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+        appendCell(td, ch)
+    }
+    //второй числитель
+    for (const ch of schedule[2]) {
+        const td = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+        appendSecondRowInCell(td, ch)
+    }
+    //первый знаменатель
+    for (const ch of schedule[4]) {
+        const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+        appendCell(td, ch)
+    }
+    //второй знаменатель
+    for (const ch of schedule[5]) {
+        const td = document.querySelector(`.zn .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
+        appendSecondRowInCell(td, ch)
+    }
+
+    document.querySelector('.row h3').textContent = `Группа: ${group.toUpperCase()}`
 }
+
 
 function appendCell(td, ch) {
     if (td.children.length === 0) {
@@ -230,98 +233,99 @@ function splitByVerticalLine(el) {
 async function fetchSchedule(group) {
     const scheduleAPI = `https://miet.ru/schedule/data?group=${group}`
     const schedule = await (await fetch(scheduleAPI)).json()
-    if (schedule.Data) {
-        const identifyWeek = {
-            0: 'ch1',
-            1: 'zn1',
-            2: 'ch2',
-            3: 'zn2'
-        }
-        const simpleSchedule = schedule.Data.map(el => [el.Day, el.Class.Name, el.Time.Time, el.Room.Name, identifyWeek[el.DayNumber]])
-        let ch1 = []
-        let zn1 = []
-        let ch2 = []
-        let zn2 = []
-
-        for (const el of simpleSchedule) {
-            switch (el.pop()) {
-                case 'ch1':
-                    ch1.push(el.join('|'))
-                    break
-
-                case 'ch2':
-                    ch2.push(el.join('|'))
-                    break
-
-                case 'zn1':
-                    zn1.push(el.join('|'))
-                    break
-
-                case 'zn2':
-                    zn2.push(el.join('|'))
-            }
-        }
-
-        let ch = []
-        let zn = []
-        let ch1Indexes = []
-        let ch2Indexes = []
-        let zn1Indexes = []
-        let zn2Indexes = []
-
-        for (const item in ch1) {
-            for (const segment in ch2) {
-                if (ch1[item] === ch2[segment]) {
-                    ch.push(ch1[item])
-                    ch1Indexes.push(Number(item))
-                    ch2Indexes.push(Number(segment))
-                }
-            }
-        }
-
-        for (const item in zn1) {
-            for (const segment in zn2) {
-                if (zn1[item] === zn2[segment]) {
-                    zn.push(zn1[item])
-                    zn1Indexes.push(Number(item))
-                    zn2Indexes.push(Number(segment))
-                }
-            }
-        }
-
-        ch1Indexes = ch1Indexes.sort((a, b) => b - a)
-        ch2Indexes = ch2Indexes.sort((a, b) => b - a)
-        zn1Indexes = zn1Indexes.sort((a, b) => b - a)
-        zn2Indexes = zn2Indexes.sort((a, b) => b - a)
-
-        for (const i of ch1Indexes) {
-            ch1.splice(i, 1)
-        }
-
-        for (const i of ch2Indexes) {
-            ch2.splice(i, 1)
-        }
-
-        for (const i of zn1Indexes) {
-            zn1.splice(i, 1)
-        }
-
-        for (const i of zn2Indexes) {
-            zn2.splice(i, 1)
-        }
-
-        ch = ch.map(splitByVerticalLine)
-        ch1 = ch1.map(splitByVerticalLine)
-        ch2 = ch2.map(splitByVerticalLine)
-        zn = zn.map(splitByVerticalLine)
-        zn1 = zn1.map(splitByVerticalLine)
-        zn2 = zn2.map(splitByVerticalLine)
-
-        return [ch, ch1, ch2, zn, zn1, zn2]
+    if (!schedule.Data)
+        return
+    const identifyWeek = {
+        0: 'ch1',
+        1: 'zn1',
+        2: 'ch2',
+        3: 'zn2'
     }
+    const simpleSchedule = schedule.Data.map(el => [el.Day, el.Class.Name, el.Time.Time, el.Room.Name, identifyWeek[el.DayNumber]])
+    let ch1 = []
+    let zn1 = []
+    let ch2 = []
+    let zn2 = []
+
+    for (const el of simpleSchedule) {
+        switch (el.pop()) {
+            case 'ch1':
+                ch1.push(el.join('|'))
+                break
+
+            case 'ch2':
+                ch2.push(el.join('|'))
+                break
+
+            case 'zn1':
+                zn1.push(el.join('|'))
+                break
+
+            case 'zn2':
+                zn2.push(el.join('|'))
+        }
+    }
+
+    let ch = []
+    let zn = []
+    let ch1Indexes = []
+    let ch2Indexes = []
+    let zn1Indexes = []
+    let zn2Indexes = []
+
+    for (const item in ch1) {
+        for (const segment in ch2) {
+            if (ch1[item] === ch2[segment]) {
+                ch.push(ch1[item])
+                ch1Indexes.push(Number(item))
+                ch2Indexes.push(Number(segment))
+            }
+        }
+    }
+
+    for (const item in zn1) {
+        for (const segment in zn2) {
+            if (zn1[item] === zn2[segment]) {
+                zn.push(zn1[item])
+                zn1Indexes.push(Number(item))
+                zn2Indexes.push(Number(segment))
+            }
+        }
+    }
+
+    ch1Indexes = ch1Indexes.sort((a, b) => b - a)
+    ch2Indexes = ch2Indexes.sort((a, b) => b - a)
+    zn1Indexes = zn1Indexes.sort((a, b) => b - a)
+    zn2Indexes = zn2Indexes.sort((a, b) => b - a)
+
+    for (const i of ch1Indexes) {
+        ch1.splice(i, 1)
+    }
+
+    for (const i of ch2Indexes) {
+        ch2.splice(i, 1)
+    }
+
+    for (const i of zn1Indexes) {
+        zn1.splice(i, 1)
+    }
+
+    for (const i of zn2Indexes) {
+        zn2.splice(i, 1)
+    }
+
+    ch = ch.map(splitByVerticalLine)
+    ch1 = ch1.map(splitByVerticalLine)
+    ch2 = ch2.map(splitByVerticalLine)
+    zn = zn.map(splitByVerticalLine)
+    zn1 = zn1.map(splitByVerticalLine)
+    zn2 = zn2.map(splitByVerticalLine)
+
+    return [ch, ch1, ch2, zn, zn1, zn2]
 }
 
-function mobileSchedule(scheduleHeader) {
+
+function mobileSchedule(scheduleHints) {
     const table = document.createElement('table')
     table.classList.add('hints')
     const tr = document.createElement('tr')
@@ -346,7 +350,7 @@ function mobileSchedule(scheduleHeader) {
         tr.append(td)
     }
     table.append(tr)
-    scheduleHeader.append(table)
+    scheduleHints.append(table)
 
     let today = new Date().getDay()
     if (today == 0) today = 1
@@ -358,9 +362,8 @@ function mobileSchedule(scheduleHeader) {
         'знаменатель': 'zn'
     }
     let whichWeek = document.querySelector('.small').textContent.trim().split(' ')
-    
     whichWeek = identifyWeek[whichWeek[3]]
-    
+
     const todayColumn = document.querySelector(`.${whichWeek} th:not(:first-child, .mobile-hidden)`)
     todayColumn.classList.add('today-column')
 
