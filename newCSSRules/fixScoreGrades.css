@@ -9,9 +9,6 @@ tr.pointer td:last-child {
     text-align: center;
 }
 
-.row .col-md-4:first-child table {
-    word-break: break-word;
-}
 
 .click.hidden-md.hidden-lg span.grade,
 .click.hidden-md.hidden-lg div {

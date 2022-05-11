@@ -3,6 +3,10 @@
     padding-left: 14px !important;
 }
 
+table {
+    word-break: break-word;
+}
+
 @media (max-width: 1300px) {
     #to_top {
         display: none;
