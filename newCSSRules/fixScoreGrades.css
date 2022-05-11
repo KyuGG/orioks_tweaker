@@ -8,3 +8,7 @@ tr.pointer td:last-child {
     padding-bottom: 5px;
     text-align: center;
 }
+
+.row .col-md-4:first-child table {
+    word-break: break-word;
+}
