@@ -28,7 +28,7 @@ async function schedule() {
     const scheduleHintsTr = document.createElement('tr')
     const scheduleCh = document.createElement('h3')
     const scheduleZn = document.createElement('h3')
-
+    
     scheduleH2.textContent = 'Группа:'
     scheduleBtn.textContent = 'Выбрать'
     scheduleBtn.classList.add('my-btn')
@@ -52,9 +52,9 @@ async function schedule() {
     scheduleHintsTd4.classList.add('holiday')
     scheduleHintsTr.append(scheduleHintsTd1, scheduleHintsTd2, scheduleHintsTd3, scheduleHintsTd4)
     scheduleHintsTable.append(scheduleHintsTr)
-    scheduleHints.append(scheduleHintsTable)
+    //scheduleHints.append(scheduleHintsTable)
 
-    content.append(scheduleHeader, scheduleHints, scheduleCh)
+    content.append(scheduleHeader, scheduleHintsTable, scheduleCh)
 
     const tableCh = document.createElement('table')
     const trCh = document.createElement('tr')
@@ -118,7 +118,7 @@ async function schedule() {
         tdsFirst[7 + Number(i)].innerText = time[i]
     }
 
-    mobileSchedule(scheduleHints)
+    mobileSchedule()
 
     const localStorageGroup = localStorage.getItem('group')
     if (localStorageGroup)
@@ -325,7 +325,7 @@ async function fetchSchedule(group) {
 }
 
 
-function mobileSchedule(scheduleHints) {
+function mobileSchedule() {
     const table = document.createElement('table')
     table.classList.add('hints')
     const tr = document.createElement('tr')
@@ -350,7 +350,7 @@ function mobileSchedule(scheduleHints) {
         tr.append(td)
     }
     table.append(tr)
-    scheduleHints.append(table)
+    document.querySelector('.hints').after(table)
 
     let today = new Date().getDay()
     if (today == 0) today = 1
@@ -367,6 +367,6 @@ function mobileSchedule(scheduleHints) {
     const todayColumn = document.querySelector(`.${whichWeek} th:not(:first-child, .mobile-hidden)`)
     todayColumn.classList.add('today-column')
 
-    const mobileVisible = document.querySelector('.hints:nth-child(2)')
+    const mobileVisible = document.querySelector('.hints:nth-child(3)')
     mobileVisible.classList.add('mobile-visible')
 }
