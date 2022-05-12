@@ -26,18 +26,26 @@ function discNameChanger() {
         td.prepend(button)
         button.onclick = evt => {
             evt.stopPropagation()
-            const newName = prompt('Новое название дисциплины')
+            let newName = prompt('Новое название дисциплины')
             if (!newName) {
                 if (newName != null)
                     alert('Название не может быть пустым')
                 return
             }
+            newName = newName.trim()
             if (checkNameLength(newName))
                 alert(`Слова в названии дисциплины слишком длинные.\nРасширение не гарантирует корректность работы в таком случае`)
             const prevName = disc.querySelector(':nth-child(2)').getAttribute('prevname')
             let discNames = JSON.parse(localStorage.getItem('discNames'))
-            discNames[prevName] = newName.trim()
-            disc.querySelector(':nth-child(2)').textContent = discNames[prevName]
+            if (isPhysicalEducation(prevName)) {
+                discNames['Физическая культура'] = newName
+                discNames['Физическая культура и спорт'] = newName
+                discNames['Практическая физическая культура и спорт (индивидуальные виды спорта)'] = newName
+                discNames['Практическая физическая культура и спорт (командные виды спорта)'] = newName
+            }
+            else
+                discNames[prevName] = newName
+            disc.querySelector(':nth-child(2)').textContent = newName
             discNames = JSON.stringify(discNames)
             localStorage.setItem('discNames', discNames)
         }
@@ -104,5 +112,11 @@ function checkNameLength(name) {
         if (word.length > 14)
             return true
     }
+    return false
+}
+
+function isPhysicalEducation(name) {
+    if (name == 'Физическая культура и спорт' || name == 'Практическая физическая культура и спорт (индивидуальные виды спорта)' || name == 'Практическая физическая культура и спорт (командные виды спорта)')
+        return true
     return false
 }
