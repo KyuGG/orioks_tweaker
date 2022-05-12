@@ -126,20 +126,18 @@ async function schedule() {
 
     scheduleBtn.onclick = async () => {
         const group = prompt('Введите вашу группу\nНапример: П-22')
-        await loadSchedule(group)
-        discNameLoader()
+        if (!group) {
+            if (group != null)
+                alert('Название не может быть пустым')
+            return
+        }
+        localStorage.setItem('group', group.trim())
+        location.reload()
     }
 }
 
 
 async function loadSchedule(group) {
-    if (!group) {
-        if (group != null)
-            alert('Название не может быть пустым')
-        return
-    }
-    localStorage.setItem('group', group.trim())
-    document.querySelector('.row h3').textContent = 'Загрузка...'
     const schedule = await fetchSchedule(group.trim())
     document.querySelectorAll('.schedule td:not(:first-child)').forEach(child => {
         child.textContent = ''
