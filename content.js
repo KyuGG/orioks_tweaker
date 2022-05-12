@@ -7,7 +7,7 @@ getSettings().then(settings => {
         await sleep(100)
         if (settings.answer.checkbox1) fixScore()
         if (settings.answer.checkbox2) runDownload()
-        if (settings.answer.checkbox3) schedule()
+        if (settings.answer.checkbox3) await schedule()
         if (settings.answer.checkbox4) discNameChanger()
         if (settings.answer.checkbox5) coloredElements()
         logo()

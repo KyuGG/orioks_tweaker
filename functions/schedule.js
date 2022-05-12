@@ -28,7 +28,7 @@ async function schedule() {
     const scheduleHintsTr = document.createElement('tr')
     const scheduleCh = document.createElement('h3')
     const scheduleZn = document.createElement('h3')
-    
+
     scheduleH2.textContent = 'Группа:'
     scheduleBtn.textContent = 'Выбрать'
     scheduleBtn.classList.add('my-btn')
@@ -122,11 +122,12 @@ async function schedule() {
 
     const localStorageGroup = localStorage.getItem('group')
     if (localStorageGroup)
-        loadSchedule(localStorageGroup)
+        await loadSchedule(localStorageGroup)
 
-    scheduleBtn.onclick = () => {
+    scheduleBtn.onclick = async () => {
         const group = prompt('Введите вашу группу\nНапример: П-22')
-        loadSchedule(group)
+        await loadSchedule(group)
+        discNameLoader()
     }
 }
 
@@ -190,7 +191,8 @@ function appendCell(td, ch) {
         td.append(document.createElement('div'))
         td.append(document.createElement('div'))
     }
-    td.children[0].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
+    td.classList.add('includes-div')
+    td.children[0].innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
     colorizeTable(td.children[0], ch[1])
 }
 
@@ -199,8 +201,8 @@ function appendSecondRowInCell(td, ch) {
         td.append(document.createElement('div'))
     if (td.children.length === 1)
         td.append(document.createElement('div'))
-
-    td.children[1].innerText = withoutLessonType(ch[1]) + ' ' + ch[3]
+    td.classList.add('includes-div')
+    td.children[1].innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
     colorizeTable(td.children[1], ch[1])
 }
 

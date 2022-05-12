@@ -33,8 +33,7 @@ function discNameChanger() {
                 return
             }
             if (checkNameLength(newName))
-                alert(`Слова в названии дисциплины слишком длинные.
-                       Расширение не гарантирует корректность работы в таком случае`)
+                alert(`Слова в названии дисциплины слишком длинные.\nРасширение не гарантирует корректность работы в таком случае`)
             const prevName = disc.querySelector(':nth-child(2)').getAttribute('prevname')
             let discNames = JSON.parse(localStorage.getItem('discNames'))
             discNames[prevName] = newName.trim()
@@ -47,8 +46,7 @@ function discNameChanger() {
 
 function discNameLoader() {
     if (location.pathname == '/student/student')
-        document.querySelectorAll('tr.pointer td:nth-child(2)')
-            .forEach(td => td.setAttribute('prevname', td.textContent))
+        document.querySelectorAll('tr.pointer td:nth-child(2)').forEach(td => td.setAttribute('prevname', td.textContent))
 
     if (!(localStorage.discNames != '{}'))
         return
@@ -60,8 +58,8 @@ function discNameLoader() {
             const newsNewNames = JSON.parse(localStorage.getItem('discNames'))
             const name = disc.textContent
             for (const n in newsNewNames)
-                if (name == n)
-                    disc.textContent = newsNewNames[n]
+                if (name.includes(n))
+                    disc.innerText = name.replace(n, newsNewNames[n])
             break
 
         case '/portfolio/view-project':
@@ -69,7 +67,7 @@ function discNameLoader() {
             break
 
         case '/student/student':
-            selector = 'tr.pointer td:nth-child(2)'
+            selector = 'tr.pointer td:nth-child(2), div.table tr td:last-child span:first-child'
             break
 
         case '/student/homework/list':
@@ -83,6 +81,9 @@ function discNameLoader() {
 
         case '/student/homework/create':
             selector = 'select#homework-discipline-field option'
+            break
+        case '/schedule':
+            selector = '.schedule-td:not(:first-child, .includes-div), .includes-div *:not(br)'
     }
     if (!selector)
         return
@@ -91,8 +92,8 @@ function discNameLoader() {
     for (const disc of dises) {
         const name = disc.textContent.trim()
         for (const n in newNames) {
-            if (name == n)
-                disc.textContent = newNames[n]
+            if (name.includes(n))
+                disc.innerText = name.replace(n, newNames[n] + '\n')
         }
     }
 }
