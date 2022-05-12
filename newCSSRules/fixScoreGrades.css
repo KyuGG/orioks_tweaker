@@ -2,6 +2,10 @@ tr.pointer td:last-child {
     text-align: right;
 }
 
+table {
+    word-break: break-word;
+}
+
 .text-right span {
     width: 120px !important;
     padding-top: 5px;
@@ -13,4 +17,8 @@ tr.pointer td:last-child {
 .click.hidden-md.hidden-lg span.grade,
 .click.hidden-md.hidden-lg div {
     display: none;
+}
+
+.well table td:first-child {
+    width: 20%;
 }
