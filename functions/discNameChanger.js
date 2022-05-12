@@ -1,7 +1,7 @@
 function discNameChanger() {
     if (!(location.pathname == '/student/student'))
         return
-        
+
     if (!localStorage.getItem('discNames'))
         localStorage.setItem('discNames', '{}')
 
@@ -32,6 +32,9 @@ function discNameChanger() {
                     alert('Название не может быть пустым')
                 return
             }
+            if (checkNameLength(newName))
+                alert(`Слова в названии дисциплины слишком длинные.
+                       Расширение не гарантирует корректность работы в таком случае`)
             const prevName = disc.querySelector(':nth-child(2)').getAttribute('prevname')
             let discNames = JSON.parse(localStorage.getItem('discNames'))
             discNames[prevName] = newName.trim()
@@ -44,7 +47,8 @@ function discNameChanger() {
 
 function discNameLoader() {
     if (location.pathname == '/student/student')
-        document.querySelectorAll('tr.pointer td:nth-child(2)').forEach(td => td.setAttribute('prevname', td.textContent))
+        document.querySelectorAll('tr.pointer td:nth-child(2)')
+            .forEach(td => td.setAttribute('prevname', td.textContent))
 
     if (!(localStorage.discNames != '{}'))
         return
@@ -91,4 +95,13 @@ function discNameLoader() {
                 disc.textContent = newNames[n]
         }
     }
+}
+
+function checkNameLength(name) {
+    const nameArr = name.split(' ')
+    for (const word of nameArr) {
+        if (word.length > 14)
+            return true
+    }
+    return false
 }
