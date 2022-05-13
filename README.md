@@ -31,7 +31,7 @@
 </tr>
 <tr> 
  <td>Dark Theme</td>
- <td><a href="darktheme">Описание</td>
+ <td><a href="#darktheme">Описание</td>
 </tr>
 <tr>
  <td style="text-align:center;" colspan="3"><a href="#more">Дополнительные изменения, вносимые расширением</a></td>
