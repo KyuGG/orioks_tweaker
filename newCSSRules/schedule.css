@@ -131,3 +131,8 @@ table.mobile-visible td {
         width: 100% !important;
     }
 }
+
+.current-lesson {
+    background-color: rgb(61, 140, 177) !important;
+    font-weight: bold;
+}
