@@ -28,7 +28,7 @@ async function schedule() {
     const scheduleHintsTr = document.createElement('tr')
     const scheduleCh = document.createElement('h3')
     const scheduleZn = document.createElement('h3')
-    
+
     scheduleH2.textContent = 'Группа:'
     scheduleBtn.textContent = 'Выбрать'
     scheduleBtn.classList.add('my-btn')
@@ -352,10 +352,12 @@ function mobileSchedule() {
     table.append(tr)
     document.querySelector('.hints').after(table)
 
-    let today = new Date().getDay()
-    if (today == 0) today = 1
-    const mobileHidden = document.querySelectorAll(`.schedule :not(tr, br, :first-child, :nth-child(${today + 1}))`)
-    mobileHidden.forEach(tr => tr.classList.add('mobile-hidden'))
+    setCurrentDates()
+}
+
+function setCurrentDates() {
+    const currentDate = new Date()
+    let today = currentDate.getDay()
 
     const identifyWeek = {
         'числитель': 'ch',
@@ -363,6 +365,35 @@ function mobileSchedule() {
     }
     let whichWeek = document.querySelector('.small').textContent.trim().split(' ')
     whichWeek = identifyWeek[whichWeek[3]]
+
+    const time = [
+        ['9:00', '10:30'],
+        ['10:40', '12:10'],
+        ['12:20', '14:20'],
+        ['14:30', '16:00'],
+        ['16:10', '17:40'],
+        ['18:20', '19:50'],
+        ['20:00', '21:30']
+    ]
+
+    const lessonNumber = time.findIndex(([start, end]) => {
+        const [startHours, startMinutes] = start.split(':')
+        const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), +startHours, +startMinutes)
+        const [endHours, endMinutes] = end.split(':')
+        const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), +endHours, +endMinutes)
+        return startDate < currentDate && currentDate < endDate
+    })
+    if (lessonNumber !== -1) {
+        const currentLesson = document.querySelector(`.${whichWeek} td.schedule-${lessonNumber}-${today}:not(:first-child)`)
+        if (currentLesson)
+            currentLesson.classList.add('current-lesson')
+    }
+
+    if (today === 0)
+        today = 1
+
+    const mobileHidden = document.querySelectorAll(`.schedule :not(tr, br, :first-child, :nth-child(${today + 1}))`)
+    mobileHidden.forEach(tr => tr.classList.add('mobile-hidden'))
 
     const todayColumn = document.querySelector(`.${whichWeek} th:not(:first-child, .mobile-hidden)`)
     todayColumn.classList.add('today-column')
