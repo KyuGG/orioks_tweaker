@@ -23,7 +23,6 @@ async function schedule() {
     const scheduleHeader = document.createElement('div')
     const scheduleH2 = document.createElement('h3')
     const scheduleBtn = document.createElement('button')
-    const scheduleHints = document.createElement('div')
     const scheduleHintsTable = document.createElement('table')
     const scheduleHintsTr = document.createElement('tr')
     const scheduleCh = document.createElement('h3')
@@ -42,7 +41,7 @@ async function schedule() {
     scheduleHintsTd1.textContent = 'Лекция'
     scheduleHintsTd1.classList.add('lecture')
     const scheduleHintsTd2 = document.createElement('td')
-    scheduleHintsTd2.textContent = 'Лабораторная работа'
+    scheduleHintsTd2.textContent = 'Лаба'
     scheduleHintsTd2.classList.add('lab')
     const scheduleHintsTd3 = document.createElement('td')
     scheduleHintsTd3.textContent = 'Семинар'
@@ -50,9 +49,11 @@ async function schedule() {
     const scheduleHintsTd4 = document.createElement('td')
     scheduleHintsTd4.textContent = 'Окно'
     scheduleHintsTd4.classList.add('holiday')
-    scheduleHintsTr.append(scheduleHintsTd1, scheduleHintsTd2, scheduleHintsTd3, scheduleHintsTd4)
+    const scheduleHintsTd5 = document.createElement('td')
+    scheduleHintsTd5.textContent = 'Сейчас'
+    scheduleHintsTd5.classList.add('current-lesson')
+    scheduleHintsTr.append(scheduleHintsTd1, scheduleHintsTd2, scheduleHintsTd3, scheduleHintsTd4, scheduleHintsTd5)
     scheduleHintsTable.append(scheduleHintsTr)
-    //scheduleHints.append(scheduleHintsTable)
 
     content.append(scheduleHeader, scheduleHintsTable, scheduleCh)
 

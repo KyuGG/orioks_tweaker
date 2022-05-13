@@ -15,7 +15,7 @@ html {
     transition: var(--transition);
 }
 
-*:not(.caret, .has-success .form-control, .has-error .form-control) {
+*:not(.caret, .has-success .form-control, .has-error .form-control, .schedule *, .hints:not(.mobile-visible) *) {
     border-color: var(--border-color) !important;
 }
 
