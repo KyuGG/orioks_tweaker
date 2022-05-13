@@ -34,7 +34,7 @@ function discNameChanger() {
             }
             newName = newName.trim()
             if (checkNameLength(newName))
-                alert(`Слова в названии дисциплины слишком длинные.\nРасширение не гарантирует корректность работы в таком случае`)
+                alert('Слова в названии дисциплины слишком длинные.\nРасширение не гарантирует корректность работы в таком случае')
             const prevName = disc.querySelector(':nth-child(2)').getAttribute('prevname')
             let discNames = JSON.parse(localStorage.getItem('discNames'))
             if (isPhysicalEducation(prevName)) {
