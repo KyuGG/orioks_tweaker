@@ -131,6 +131,10 @@ async function schedule() {
                 alert('Название не может быть пустым')
             return
         }
+        if (group.length > 14) {
+            alert('Слишком длинное название')
+            return
+        }
         localStorage.setItem('group', group.trim())
         location.reload()
     }
