@@ -42,7 +42,7 @@ td:not(.mobile-visible td) {
     border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.schedule-td,
+.schedule-td:not(.current-lesson),
 .schedule th {
     text-align: center !important;
     width: 14.28%;
@@ -133,6 +133,8 @@ table.mobile-visible td {
 }
 
 .current-lesson {
-    background-color: rgb(61, 140, 177) !important;
-    font-weight: bold;
+    border-radius: 7px;
+    filter: drop-shadow(0px 0px 7px black);
+    transform: scale(1.05);
+    text-align: center;
 }

@@ -185,6 +185,8 @@ async function loadSchedule(group) {
         appendSecondRowInCell(td, ch)
     }
 
+    setCurrentDates()
+
     document.querySelector('.row h3').textContent = `Группа: ${group.toUpperCase()}`
 }
 
@@ -192,7 +194,9 @@ async function loadSchedule(group) {
 function appendCell(td, ch) {
     if (td.children.length === 0) {
         td.append(document.createElement('div'))
-        td.append(document.createElement('div'))
+        const div = document.createElement('div')
+        div.classList.add('holiday')
+        td.append(div)
     }
     td.classList.add('includes-div')
     td.children[0].innerText = withoutLessonType(ch[1]) + '\n' + ch[3]
@@ -200,8 +204,11 @@ function appendCell(td, ch) {
 }
 
 function appendSecondRowInCell(td, ch) {
-    if (td.children.length === 0)
-        td.append(document.createElement('div'))
+    if (td.children.length === 0) {
+        const div = document.createElement('div')
+        div.classList.add('holiday')
+        td.append(div)
+    }
     if (td.children.length === 1)
         td.append(document.createElement('div'))
     td.classList.add('includes-div')
@@ -356,8 +363,6 @@ function mobileSchedule() {
     }
     table.append(tr)
     document.querySelector('.hints').after(table)
-
-    setCurrentDates()
 }
 
 function setCurrentDates() {
@@ -368,8 +373,8 @@ function setCurrentDates() {
         'числитель': 'ch',
         'знаменатель': 'zn'
     }
-    let whichWeek = document.querySelector('.small').textContent.trim().split(' ')
-    whichWeek = identifyWeek[whichWeek[3]]
+    const whichWeek = document.querySelector('.small').textContent.trim().split(' ')
+    const weekNumber = identifyWeek[whichWeek[3]]
 
     const time = [
         ['9:00', '10:30'],
@@ -389,18 +394,23 @@ function setCurrentDates() {
         return startDate < currentDate && currentDate < endDate
     })
     if (lessonNumber !== -1) {
-        const currentLesson = document.querySelector(`.${whichWeek} td.schedule-${lessonNumber}-${today}:not(:first-child)`)
-        if (currentLesson)
+        const currentLesson = document.querySelector(`.${weekNumber} td.schedule-${lessonNumber}-${today}:not(:first-child)`)
+        if (!currentLesson)
+            return
+
+        if (currentLesson.children.length == 2)
+            currentLesson.children[Number(whichWeek[2]) - 1].classList.add('current-lesson')
+        else
             currentLesson.classList.add('current-lesson')
     }
 
     if (today === 0)
         today = 1
 
-    const mobileHidden = document.querySelectorAll(`.schedule :not(tr, br, :first-child, :nth-child(${today + 1}))`)
+    const mobileHidden = document.querySelectorAll(`.schedule :not(tr, br, div, :first-child, :nth-child(${today + 1}))`)
     mobileHidden.forEach(tr => tr.classList.add('mobile-hidden'))
 
-    const todayColumn = document.querySelector(`.${whichWeek} th:not(:first-child, .mobile-hidden)`)
+    const todayColumn = document.querySelector(`.${weekNumber} th:not(:first-child, .mobile-hidden)`)
     todayColumn.classList.add('today-column')
 
     const mobileVisible = document.querySelector('.hints:nth-child(3)')
