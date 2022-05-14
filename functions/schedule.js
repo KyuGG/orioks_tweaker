@@ -23,6 +23,7 @@ async function schedule() {
     const scheduleHeader = document.createElement('div')
     const scheduleH2 = document.createElement('h3')
     const scheduleBtn = document.createElement('button')
+    const HintsBtn = document.createElement('button')
     const scheduleHintsTable = document.createElement('table')
     const scheduleHintsTr = document.createElement('tr')
     const scheduleCh = document.createElement('h3')
@@ -31,10 +32,15 @@ async function schedule() {
     scheduleH2.textContent = 'Группа:'
     scheduleBtn.textContent = 'Выбрать'
     scheduleBtn.classList.add('my-btn')
+    HintsBtn.textContent = 'Подсказки'
+    HintsBtn.classList.add('my-btn')
     scheduleHeader.classList.add('.col-md-6')
     scheduleCh.textContent = 'Числитель'
     scheduleZn.textContent = 'Знаменатель'
-    scheduleHeader.append(scheduleH2, scheduleBtn)
+    scheduleHeader.append(scheduleH2, scheduleBtn, HintsBtn)
+
+    const scheduleContents = document.createElement('div')
+    scheduleContents.classList.add('schedule-contents')
 
     scheduleHintsTable.classList.add('hints')
     const scheduleHintsTd1 = document.createElement('td')
@@ -55,7 +61,7 @@ async function schedule() {
     scheduleHintsTr.append(scheduleHintsTd1, scheduleHintsTd2, scheduleHintsTd3, scheduleHintsTd4, scheduleHintsTd5)
     scheduleHintsTable.append(scheduleHintsTr)
 
-    content.append(scheduleHeader, scheduleHintsTable, scheduleCh)
+    content.append(scheduleHeader, scheduleHintsTable)
 
     const tableCh = document.createElement('table')
     const trCh = document.createElement('tr')
@@ -68,7 +74,6 @@ async function schedule() {
         trCh.append(th)
     }
     tableCh.append(trCh)
-    content.append(tableCh, scheduleZn)
 
     for (let i = 0; i < 7; i++) {
         const tr = document.createElement('tr')
@@ -91,7 +96,6 @@ async function schedule() {
         trZn.append(th)
     }
     tableZn.append(trZn)
-    content.append(tableZn)
 
     for (let i = 0; i < 7; i++) {
         const tr = document.createElement('tr')
@@ -103,6 +107,9 @@ async function schedule() {
         }
         tableZn.append(tr)
     }
+
+    scheduleContents.append(scheduleCh, tableCh, scheduleZn, tableZn)
+    content.append(scheduleContents)
 
     const time = [
         'Пара №1\n9:00-10:30',
@@ -125,6 +132,17 @@ async function schedule() {
     if (localStorageGroup)
         await loadSchedule(localStorageGroup)
 
+    const localStorageHints = localStorage.getItem('hints')
+    if (localStorageHints == null) {
+        localStorage.setItem('hints', true)
+        scheduleHintsTable.classList.toggle('hints-active')
+        scheduleContents.classList.toggle('hints-active')
+    }
+    if (localStorageHints === 'true') {
+        scheduleHintsTable.classList.toggle('hints-active')
+        scheduleContents.classList.toggle('hints-active')
+    }
+
     scheduleBtn.onclick = async () => {
         const group = prompt('Введите вашу группу\nНапример: П-22')
         if (!group) {
@@ -138,6 +156,12 @@ async function schedule() {
         }
         localStorage.setItem('group', group.trim())
         location.reload()
+    }
+
+    HintsBtn.onclick = () => {
+        localStorage.setItem('hints', localStorage.getItem('hints') !== 'true')
+        scheduleHintsTable.classList.toggle('hints-active')
+        scheduleContents.classList.toggle('hints-active')
     }
 }
 
@@ -362,7 +386,7 @@ function mobileSchedule() {
         tr.append(td)
     }
     table.append(tr)
-    document.querySelector('.hints').after(table)
+    document.querySelector('.schedule-contents').prepend(table)
 }
 
 function setCurrentDates() {
@@ -413,6 +437,6 @@ function setCurrentDates() {
     const todayColumn = document.querySelector(`.${weekNumber} th:not(:first-child, .mobile-hidden)`)
     todayColumn.classList.add('today-column')
 
-    const mobileVisible = document.querySelector('.hints:nth-child(3)')
+    const mobileVisible = document.querySelector('.schedule-contents :first-child')
     mobileVisible.classList.add('mobile-visible')
 }

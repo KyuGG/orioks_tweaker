@@ -1,5 +1,6 @@
 .my-btn {
     width: 160px;
+    margin-right: 2px;
 }
 
 .breadcrumb {
@@ -40,6 +41,27 @@ td:not(.mobile-visible td) {
     padding: 10px 0;
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.hints:not(.mobile-visible) {
+    opacity: 0;
+    transition: .3s;
+}
+
+.hints.hints-active:not(.mobile-visible) {
+    opacity: 1 !important;
+}
+
+.schedule {
+    width: 100%;
+}
+
+.schedule-contents {
+    transform: translateY(-50px);
+}
+
+.schedule-contents.hints-active {
+    transform: translateY(0) !important;
 }
 
 .schedule-td:not(.current-lesson),
@@ -89,13 +111,17 @@ td:not(.mobile-visible td) {
     background-color: #c5e0b5
 }
 
-.mobile-visible {
+table.mobile-visible {
     display: none;
 }
 
 table.mobile-visible {
     position: sticky;
-    top: 0;
+    top: 50px;
+}
+
+.schedule-contents.hints-active table.mobile-visible {
+    top: 0 !important;
 }
 
 table.mobile-visible button {
@@ -111,6 +137,13 @@ table.mobile-visible td {
 
 .today-column {
     background-color: rgb(61, 140, 177);
+}
+
+.current-lesson {
+    border-radius: 7px;
+    filter: drop-shadow(0px 0px 7px black);
+    transform: scale(1.05);
+    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -130,11 +163,8 @@ table.mobile-visible td {
     .schedule-th {
         width: 100% !important;
     }
-}
 
-.current-lesson {
-    border-radius: 7px;
-    filter: drop-shadow(0px 0px 7px black);
-    transform: scale(1.05);
-    text-align: center;
+    .current-lesson {
+        transform: scale(1.03);
+    }
 }
