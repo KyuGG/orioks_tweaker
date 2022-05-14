@@ -58,6 +58,7 @@ td:not(.mobile-visible td) {
 
 .schedule-contents {
     transform: translateY(-50px);
+    transition: .3s;
 }
 
 .schedule-contents.hints-active {
