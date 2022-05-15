@@ -63,6 +63,7 @@ td:not(.mobile-visible td) {
 
 .schedule-contents.hints-active {
     transform: translateY(0) !important;
+    transition: .3s;
 }
 
 .schedule-td:not(.current-lesson),
