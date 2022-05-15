@@ -419,13 +419,12 @@ function setCurrentDates() {
     })
     if (lessonNumber !== -1) {
         const currentLesson = document.querySelector(`.${weekNumber} td.schedule-${lessonNumber}-${today}:not(:first-child)`)
-        if (!currentLesson)
-            return
-
-        if (currentLesson.children.length == 2)
-            currentLesson.children[Number(whichWeek[2]) - 1].classList.add('current-lesson')
-        else
-            currentLesson.classList.add('current-lesson')
+        if (currentLesson) {
+            if (currentLesson.children.length == 2)
+                currentLesson.children[Number(whichWeek[2]) - 1].classList.add('current-lesson')
+            else
+                currentLesson.classList.add('current-lesson')
+        }
     }
 
     if (today === 0)
