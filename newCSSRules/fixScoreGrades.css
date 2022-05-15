@@ -2,7 +2,7 @@ tr.pointer td:last-child {
     text-align: right;
 }
 
-table {
+table:not(.modal-body table) {
     word-break: break-word;
 }
 
@@ -21,4 +21,16 @@ table {
 
 .well table td:first-child {
     width: 20%;
+}
+
+@media (max-width: 768px) {
+    .modal-body tr {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 2px solid white !important;
+    }
+
+    .modal-body td {
+        border: none !important;
+    }
 }
