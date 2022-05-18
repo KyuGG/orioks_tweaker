@@ -13,6 +13,10 @@ table:not(.modal-body table) {
     text-align: center;
 }
 
+td.ng-binding {
+    min-width: 45px;
+}
+
 
 .click.hidden-md.hidden-lg span.grade,
 .click.hidden-md.hidden-lg div {
