@@ -15,7 +15,7 @@ function coloredElements() {
 }
 
 function coloredTestImages() {
-    if (location.pathname == '/student/student/test' || location.pathname == '/student/student/test/')
+    if (location.pathname === '/student/student/test' || location.pathname === '/student/student/test/')
         document.querySelectorAll('img').forEach(img => img.classList.add('invert-img'))
 }
 
@@ -24,7 +24,7 @@ function coloredNewsText() {
     switch (location.pathname) {
         case '/student/student':
             document.body.onclick = async evt => {
-                if (evt.target.tagName == 'A' && evt.target.href == location.href + '#') {
+                if (evt.target.tagName === 'A' && evt.target.href === location.href + '#') {
                     await sleep(1000)
                     const modalText = document.querySelectorAll('.modal-body div.ng-binding *:not(a)')
                     modalText.forEach(el => el.style.color = shadeColor(el.style.color, 1))
@@ -62,9 +62,8 @@ function shadeColor(color, percent) {
     G = (G < 255) ? G : 255
     B = (B < 255) ? B : 255
 
-    const RR = ((R.toString(16).length == 1) ? '0' + R.toString(16) : R.toString(16))
-    const GG = ((G.toString(16).length == 1) ? '0' + G.toString(16) : G.toString(16))
-    const BB = ((B.toString(16).length == 1) ? '0' + B.toString(16) : B.toString(16))
-
+    const RR = R.toString(16).padStart(2, '0')
+    const GG = G.toString(16).padStart(2, '0')
+    const BB = B.toString(16).padStart(2, '0')
     return '#' + RR + GG + BB
 }

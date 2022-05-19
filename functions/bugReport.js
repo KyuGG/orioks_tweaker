@@ -1,5 +1,5 @@
 function bugReport() {
-    if (!(location.pathname == '/bugreport'))
+    if (!(location.pathname === '/bugreport'))
         return
     document.querySelector('.row').remove()
     const myDiv = document.createElement('div')

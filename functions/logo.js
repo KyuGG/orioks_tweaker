@@ -6,7 +6,7 @@ function logo() {
     icon.href = logoLink
     document.querySelector('head').append(icon)
 
-    if (location.pathname == '/user/profile') {
+    if (location.pathname === '/user/profile') {
         const logo = document.querySelector('.img-responsive')
         logo.src = logoLink
     }

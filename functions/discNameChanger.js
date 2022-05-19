@@ -1,5 +1,5 @@
 function discNameChanger() {
-    if (!(location.pathname == '/student/student'))
+    if (!(location.pathname === '/student/student'))
         return
 
     if (!localStorage.getItem('discNames'))
@@ -53,10 +53,10 @@ function discNameChanger() {
 }
 
 function discNameLoader() {
-    if (location.pathname == '/student/student')
+    if (location.pathname === '/student/student')
         document.querySelectorAll('tr.pointer td:nth-child(2)').forEach(td => td.setAttribute('prevname', td.textContent))
 
-    if (!(localStorage.discNames != '{}'))
+    if (!(localStorage.discNames !== '{}'))
         return
 
     let selector = ''
@@ -116,7 +116,5 @@ function checkNameLength(name) {
 }
 
 function isPhysicalEducation(name) {
-    if (name == 'Физическая культура и спорт' || name == 'Практическая физическая культура и спорт (индивидуальные виды спорта)' || name == 'Практическая физическая культура и спорт (командные виды спорта)')
-        return true
-    return false
+    return name === 'Физическая культура и спорт' || name === 'Практическая физическая культура и спорт (индивидуальные виды спорта)' || name == 'Практическая физическая культура и спорт (командные виды спорта)';
 }
