@@ -12,6 +12,7 @@ getSettings().then(settings => {
         if (settings.answer.checkbox3) await schedule()
         if (settings.answer.checkbox4) discNameChanger()
         if (settings.answer.checkbox5) coloredElements()
+        if (settings.answer.checkbox6) homeworks()
         discNameLoader()
         document.documentElement.style.visibility = 'visible'
         await sleep(500)

@@ -28,7 +28,8 @@
                 "functions/discNameChanger.js",
                 "functions/changeTheme.js",
                 "functions/logo.js",
-                "functions/bugReport.js"
+                "functions/bugReport.js",
+                "functions/homeworks.js"
             ],
             "css": ["newCSSRules/default.css"],
             "run_at": "document_start"

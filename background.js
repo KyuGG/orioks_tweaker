@@ -13,6 +13,7 @@ chrome.storage.local.get().then(storage => {
                 storage.settings.checkbox3 = request.settings.checkbox3
                 storage.settings.checkbox4 = request.settings.checkbox4
                 storage.settings.checkbox5 = request.settings.checkbox5
+                storage.settings.checkbox6 = request.settings.checkbox6
                 chrome.storage.local.set(storage)
                 sendResponse({ answer: 'settings have been changed' })
                 break
