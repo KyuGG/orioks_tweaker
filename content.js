@@ -2,17 +2,17 @@ document.documentElement.style.visibility = 'hidden'
 
 getSettings().then(settings => {
     changeTheme()
+    logo()
 
     window.onload = async () => {
+        bugReport()
         await sleep(100)
         if (settings.answer.checkbox1) fixScore()
         if (settings.answer.checkbox2) runDownload()
         if (settings.answer.checkbox3) await schedule()
         if (settings.answer.checkbox4) discNameChanger()
         if (settings.answer.checkbox5) coloredElements()
-        logo()
         discNameLoader()
-        bugReport()
         document.documentElement.style.visibility = 'visible'
         await sleep(500)
         document.documentElement.style.setProperty('--transition', '.3s')
