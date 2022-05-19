@@ -2,9 +2,9 @@ document.documentElement.style.visibility = 'hidden'
 
 getSettings().then(settings => {
     changeTheme()
-    logo()
 
     window.onload = async () => {
+        logo()
         bugReport()
         await sleep(100)
         if (settings.answer.checkbox1) fixScore()
