@@ -115,6 +115,7 @@ td:not(.mobile-visible td) {
 
 table.mobile-visible {
     display: none;
+    z-index: 1;
 }
 
 table.mobile-visible {
@@ -167,6 +168,6 @@ table.mobile-visible td {
     }
 
     .current-lesson {
-        transform: scale(1.03);
+        transform: translateX(-2px) scale(1.01);
     }
 }
