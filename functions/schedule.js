@@ -209,7 +209,8 @@ async function loadSchedule(group) {
         appendSecondRowInCell(td, ch)
     }
 
-    setCurrentDates()
+    if (document.querySelector('.small') !== null)
+        setCurrentDates()
 
     document.querySelector('.row h3').textContent = `Группа: ${group.toUpperCase()}`
 }
