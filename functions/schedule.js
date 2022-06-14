@@ -209,8 +209,8 @@ async function loadSchedule(group) {
         appendSecondRowInCell(td, ch)
     }
 
-    if (document.querySelector('.small') !== null)
-        setCurrentDates()
+
+    setCurrentDates()
 
     document.querySelector('.row h3').textContent = `Группа: ${group.toUpperCase()}`
 }
@@ -398,8 +398,16 @@ function setCurrentDates() {
         'числитель': 'ch',
         'знаменатель': 'zn'
     }
-    const whichWeek = document.querySelector('.small').textContent.trim().split(' ')
-    const weekNumber = identifyWeek[whichWeek[3]]
+
+    let whichWeek,
+        weekNumber
+
+    if (document.querySelector('.small') !== null) {
+        whichWeek = document.querySelector('.small').textContent.trim().split(' ')
+        weekNumber = identifyWeek[whichWeek[3]]
+    }
+    else
+        weekNumber = 'ch'
 
     const time = [
         ['9:00', '10:30'],
