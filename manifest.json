@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "ORIOKS tweaker",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "description": "Модификация для ОРИОКСа. Правильное отображение баллов, интеграция расписания занятий и кастомизация!",
     "icons": {
         "128": "interface/logo.png"
