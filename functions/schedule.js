@@ -269,7 +269,7 @@ function splitByVerticalLine(el) {
 
 async function fetchSchedule(group) {
     const scheduleAPI = `https://miet.ru/schedule/data?group=${group}`
-    const schedule = await (await fetch(scheduleAPI)).json()
+    const schedule = await (await fetch(scheduleAPI).catch(err => fetchError())).json()
     if (!schedule.Data)
         return
     const identifyWeek = {
@@ -359,6 +359,58 @@ async function fetchSchedule(group) {
     zn2 = zn2.map(splitByVerticalLine)
 
     return [ch, ch1, ch2, zn, zn1, zn2]
+
+
+    function fetchError() {
+        document.documentElement.style.visibility = 'visible'
+        document.body.innerHTML = `
+            <nav id="w0" class="navbar-inverse navbar"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w0-collapse"><span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span></button><a class="navbar-brand" href="/">ОРИОКС</a></div><div id="w0-collapse" class="collapse navbar-collapse"><ul id="w1" class="navbar-nav nav"><li><a href="https://orioks.miet.ru/student/practice/index">Практика</a></li>
+            <li><a href="https://orioks.miet.ru/student/student">Обучение</a></li><li><a href="/schedule">Расписание</a></li>
+            <li><a href="https://orioks.miet.ru/student/homework/list">Домашние задания</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" href="https://orioks.miet.ru/" data-toggle="dropdown">Портфолио <span class="caret"></span></a><ul id="w2" class="dropdown-menu"><li><a href="https://orioks.miet.ru/portfolio/list-uchebnie-project" tabindex="-1">Учебное</a></li>
+            <li><a href="https://orioks.miet.ru/portfolio/list-vneuchebnie-project" tabindex="-1">Внеучебное</a></li></ul></li>
+            <li><a href="https://orioks.miet.ru/social/project_work/project-list">Проектная работа</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" href="https://orioks.miet.ru/" data-toggle="dropdown">Заявки <span class="caret"></span></a><ul id="w3" class="dropdown-menu"><li><a href="https://orioks.miet.ru/request/questionnaire/list" tabindex="-1">Обходной лист</a></li>
+            <li><a href="https://orioks.miet.ru/request/doc/list" tabindex="-1">Заявления (мат.помощь, соц стипендия, копии док-тов)</a></li>
+            <li><a href="https://orioks.miet.ru/request/reference/list" tabindex="-1">Справки</a></li>
+            <li><a href="https://orioks.miet.ru/request/holiday/create" tabindex="-1">Последипломный отпуск</a></li></ul></li>
+            <li><a href="https://orioks.miet.ru/other/libraries">Электронные библиотеки</a></li>
+            <li><a href="https://orioks.miet.ru/support/list">Помощь</a></li></ul><ul id="w4" class="navbar-nav navbar-right nav"><li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Уведомления и объявления">
+                    <i class="nav-icon fa fa-bell" id="notification-bell"></i>
+                    <span class="badge btn-xs count-messages-top-menu" id="notification-counter"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-left" style="width: 300px;">
+                    <div class="notifications-list" id="notifications">
+                    </div>
+                    <div class="notifications-empty">
+                        Нет новых уведомлений
+                    </div>
+            
+                    <a href="/notification/index">
+                        <div class="notification-more notification-more-all" style="">
+                            Отобразить все
+                        </div>
+                        <div class="notification-more notification-more-hidden" style="display: none;">
+                            Еще&nbsp;<span id="notification-more-counter"></span>
+                        </div>
+                    </a>
+                </div>
+            </li>
+            <li class="active"><a><span class="glyphicon glyphicon-calendar"></span> Сессия</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Якубовский А.Я. <span class="caret"></span></a><ul id="w5" class="dropdown-menu"><li><a href="https://orioks.miet.ru/user/profile" tabindex="-1">Профиль</a></li>
+            <li><a href="https://orioks.miet.ru/personal/files/index" tabindex="-1">Личные файлы</a></li>
+            <li class="divider" style="margin: 0;"></li>
+            <li><a href="https://orioks.miet.ru/user/logout" data-method="post" tabindex="-1">Выход</a></li></ul></li></ul></div></div></nav>
+            <div class="schedule-not-found">
+            <h2>Расписание будет доступно во время семестра</h2>
+            <a href="https://orioks.miet.ru/">Назад<a/>
+            </div>
+            `
+    }
 }
 
 
