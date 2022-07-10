@@ -401,7 +401,7 @@ async function fetchSchedule(group) {
                 </div>
             </li>
             <li class="active"><a><span class="glyphicon glyphicon-calendar"></span> Сессия</a></li>
-            <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Якубовский А.Я. <span class="caret"></span></a><ul id="w5" class="dropdown-menu"><li><a href="https://orioks.miet.ru/user/profile" tabindex="-1">Профиль</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Профиль<span class="caret"></span></a><ul id="w5" class="dropdown-menu"><li><a href="https://orioks.miet.ru/user/profile" tabindex="-1">Профиль</a></li>
             <li><a href="https://orioks.miet.ru/personal/files/index" tabindex="-1">Личные файлы</a></li>
             <li class="divider" style="margin: 0;"></li>
             <li><a href="https://orioks.miet.ru/user/logout" data-method="post" tabindex="-1">Выход</a></li></ul></li></ul></div></div></nav>
