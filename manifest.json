@@ -34,6 +34,11 @@
             "run_at": "document_start"
         },
         {
+            "matches": ["https://miet.ru/*"],
+            "js": ["functions/scheduleFetch.js"],
+            "run_at": "document_start"
+        },
+        {
             "matches": ["https://orioks.miet.ru/student/student*"],
             "css": ["newCSSRules/fixScoreGrades.css"],
             "run_at": "document_start"

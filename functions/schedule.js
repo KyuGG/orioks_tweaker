@@ -127,10 +127,7 @@ async function schedule() {
     }
 
     mobileSchedule()
-
-    const localStorageGroup = localStorage.getItem('group')
-    if (localStorageGroup)
-        await loadSchedule(localStorageGroup)
+    await loadSchedule()
 
     const localStorageHints = localStorage.getItem('hints')
     if (localStorageHints == null) {
@@ -144,18 +141,8 @@ async function schedule() {
     }
 
     scheduleBtn.onclick = async () => {
-        const group = prompt('Введите вашу группу\nНапример: П-22')
-        if (!group) {
-            if (group != null)
-                alert('Название не может быть пустым')
-            return
-        }
-        if (group.length > 14) {
-            alert('Слишком длинное название')
-            return
-        }
-        localStorage.setItem('group', group.trim())
-        location.reload()
+        alert('Вы будете перенаправлены на сайт МИЭТа, выберите нужную группу а затем нажмите "Сохранить в ОРИОКС"')
+        location.href = 'https://miet.ru/schedule'
     }
 
     HintsBtn.onclick = () => {
@@ -166,8 +153,12 @@ async function schedule() {
 }
 
 
-async function loadSchedule(group) {
-    const schedule = await fetchSchedule(group.trim())
+async function loadSchedule() {
+    const [schedule, group] = await new Promise(resolve => chrome.runtime.sendMessage({ data: 'getSchedule' }, response => {
+        if (!chrome.runtime.lastError)
+            resolve([response.answer, response.group])
+        else fetchError()
+    }))
     document.querySelectorAll('.schedule td:not(:first-child)').forEach(child => {
         child.textContent = ''
         child.classList.add('holiday')
@@ -263,107 +254,10 @@ function colorizeTable(block, name) {
     }
 }
 
-function splitByVerticalLine(el) {
-    return el.split('|')
-}
 
-async function fetchSchedule(group) {
-    const scheduleAPI = `https://miet.ru/schedule/data?group=${group}`
-    const schedule = await (await fetch(scheduleAPI).catch(err => fetchError())).json()
-    if (!schedule.Data)
-        return
-    const identifyWeek = {
-        0: 'ch1',
-        1: 'zn1',
-        2: 'ch2',
-        3: 'zn2'
-    }
-    const simpleSchedule = schedule.Data.map(el => [el.Day, el.Class.Name, el.Time.Time, el.Room.Name, identifyWeek[el.DayNumber]])
-    let ch1 = []
-    let zn1 = []
-    let ch2 = []
-    let zn2 = []
-
-    for (const el of simpleSchedule) {
-        switch (el.pop()) {
-            case 'ch1':
-                ch1.push(el.join('|'))
-                break
-
-            case 'ch2':
-                ch2.push(el.join('|'))
-                break
-
-            case 'zn1':
-                zn1.push(el.join('|'))
-                break
-
-            case 'zn2':
-                zn2.push(el.join('|'))
-        }
-    }
-
-    let ch = []
-    let zn = []
-    let ch1Indexes = []
-    let ch2Indexes = []
-    let zn1Indexes = []
-    let zn2Indexes = []
-
-    for (const item in ch1) {
-        for (const segment in ch2) {
-            if (ch1[item] === ch2[segment]) {
-                ch.push(ch1[item])
-                ch1Indexes.push(Number(item))
-                ch2Indexes.push(Number(segment))
-            }
-        }
-    }
-
-    for (const item in zn1) {
-        for (const segment in zn2) {
-            if (zn1[item] === zn2[segment]) {
-                zn.push(zn1[item])
-                zn1Indexes.push(Number(item))
-                zn2Indexes.push(Number(segment))
-            }
-        }
-    }
-
-    ch1Indexes = ch1Indexes.sort((a, b) => b - a)
-    ch2Indexes = ch2Indexes.sort((a, b) => b - a)
-    zn1Indexes = zn1Indexes.sort((a, b) => b - a)
-    zn2Indexes = zn2Indexes.sort((a, b) => b - a)
-
-    for (const i of ch1Indexes) {
-        ch1.splice(i, 1)
-    }
-
-    for (const i of ch2Indexes) {
-        ch2.splice(i, 1)
-    }
-
-    for (const i of zn1Indexes) {
-        zn1.splice(i, 1)
-    }
-
-    for (const i of zn2Indexes) {
-        zn2.splice(i, 1)
-    }
-
-    ch = ch.map(splitByVerticalLine)
-    ch1 = ch1.map(splitByVerticalLine)
-    ch2 = ch2.map(splitByVerticalLine)
-    zn = zn.map(splitByVerticalLine)
-    zn1 = zn1.map(splitByVerticalLine)
-    zn2 = zn2.map(splitByVerticalLine)
-
-    return [ch, ch1, ch2, zn, zn1, zn2]
-
-
-    function fetchError() {
-        document.documentElement.style.visibility = 'visible'
-        document.body.innerHTML = `
+function fetchError() {
+    document.documentElement.style.visibility = 'visible'
+    document.body.innerHTML = `
             <nav id="w0" class="navbar-inverse navbar"><div class="container"><div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w0-collapse"><span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -410,7 +304,6 @@ async function fetchSchedule(group) {
             <a href="https://orioks.miet.ru/">Назад<a/>
             </div>
             `
-    }
 }
 
 

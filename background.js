@@ -1,6 +1,6 @@
 chrome.storage.local.get().then(storage => {
     if (storage.settings == undefined) {
-        const storageTemplate = { settings: { checkbox1: true, checkbox2: true, checkbox3: true, checkbox4: true, checkbox5: true } }
+        const storageTemplate = { settings: { checkbox1: true, checkbox2: true, checkbox3: true, checkbox4: true, checkbox5: true }, schedule: [], group: '' }
         chrome.storage.local.set(storageTemplate)
         storage = storageTemplate
     }
@@ -29,6 +29,17 @@ chrome.storage.local.get().then(storage => {
 
             case 'settingsPopup':
                 sendResponse({ answer: storage.settings })
+                break
+
+            case 'getSchedule':
+                sendResponse({ answer: storage.schedule, group: storage.group })
+                break
+
+            case 'setSchedule':
+                storage.schedule = request.schedule
+                storage.group = request.group
+                chrome.storage.local.set(storage)
+                sendResponse({ answer: 'settings have been changed' })
                 break
         }
     })
