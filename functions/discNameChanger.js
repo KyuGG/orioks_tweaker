@@ -1,3 +1,13 @@
+//Константа всех теоретических названий дисциплины по физической культуре
+const PHYS_NAMES = [
+    'Физическая культура',
+    'Физическая культура и спорт',
+    'Практическая физическая культура и спорт (индивидуальные виды спорта)',
+    'Практическая физическая культура и спорт (командные виды спорта)',
+    'Индивидуальные виды спорта',
+    'Командные виды спорта'
+]
+
 function discNameChanger() {
     if (!(location.pathname == '/student/student'))
         return
@@ -37,17 +47,13 @@ function discNameChanger() {
                 alert('Слова в названии дисциплины слишком длинные.\nРасширение не гарантирует корректность работы в таком случае')
             const prevName = disc.querySelector(':nth-child(2)').getAttribute('prevname')
             let discNames = JSON.parse(localStorage.getItem('discNames'))
-            if (isPhysicalEducation(prevName)) {
-                discNames['Физическая культура'] = newName
-                discNames['Физическая культура и спорт'] = newName
-                discNames['Практическая физическая культура и спорт (индивидуальные виды спорта)'] = newName
-                discNames['Практическая физическая культура и спорт (командные виды спорта)'] = newName
-            }
+            if (isPhysicalEducation(prevName)) 
+                for(let i of PHYS_NAMES) discNames[i] = newName
             else
                 discNames[prevName] = newName
-            disc.querySelector(':nth-child(2)').textContent = newName
             discNames = JSON.stringify(discNames)
             localStorage.setItem('discNames', discNames)
+            discNameLoader()
         }
     })
 }
@@ -116,7 +122,6 @@ function checkNameLength(name) {
 }
 
 function isPhysicalEducation(name) {
-    if (name == 'Физическая культура и спорт' || name == 'Практическая физическая культура и спорт (индивидуальные виды спорта)' || name == 'Практическая физическая культура и спорт (командные виды спорта)')
-        return true
+    for(let i of PHYS_NAMES) if(i==name) return true
     return false
 }
