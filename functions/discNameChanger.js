@@ -5,7 +5,8 @@ const PHYS_NAMES = [
     'Практическая физическая культура и спорт (индивидуальные виды спорта)',
     'Практическая физическая культура и спорт (командные виды спорта)',
     'Индивидуальные виды спорта',
-    'Командные виды спорта'
+    'Командные виды спорта',
+    'Индивидуальные виды спорта / Командные виды спорта'
 ]
 
 function discNameChanger() {
@@ -47,13 +48,13 @@ function discNameChanger() {
                 alert('Слова в названии дисциплины слишком длинные.\nРасширение не гарантирует корректность работы в таком случае')
             const prevName = disc.querySelector(':nth-child(2)').getAttribute('prevname')
             let discNames = JSON.parse(localStorage.getItem('discNames'))
-            if (isPhysicalEducation(prevName)) 
-                for(let i of PHYS_NAMES) discNames[i] = newName
+            if (isPhysicalEducation(prevName))
+                for (const physName of PHYS_NAMES) discNames[physName] = newName
             else
                 discNames[prevName] = newName
             discNames = JSON.stringify(discNames)
             localStorage.setItem('discNames', discNames)
-            discNameLoader()
+            disc.querySelector(':nth-child(2)').textContent = newName
         }
     })
 }
@@ -122,6 +123,6 @@ function checkNameLength(name) {
 }
 
 function isPhysicalEducation(name) {
-    for(let i of PHYS_NAMES) if(i==name) return true
+    for (const physName of PHYS_NAMES) if (physName == name) return true
     return false
 }
