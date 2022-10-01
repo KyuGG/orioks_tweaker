@@ -54,7 +54,7 @@ function discNameChanger() {
                 discNames[prevName] = newName
             discNames = JSON.stringify(discNames)
             localStorage.setItem('discNames', discNames)
-            disc.querySelector(':nth-child(2)').textContent = newName
+            updateNames()
         }
     })
 }
@@ -66,6 +66,24 @@ function discNameLoader() {
     if (!(localStorage.discNames != '{}'))
         return
 
+    updateNames()
+}
+
+function checkNameLength(name) {
+    const nameArr = name.split(' ')
+    for (const word of nameArr) {
+        if (word.length > 14)
+            return true
+    }
+    return false
+}
+
+function isPhysicalEducation(name) {
+    for (const physName of PHYS_NAMES) if (physName == name) return true
+    return false
+}
+
+function updateNames(){
     let selector = ''
     switch (location.pathname) {
         case '/student/news/view':
@@ -111,18 +129,4 @@ function discNameLoader() {
                 disc.innerText = name.replace(n, newNames[n] + '\n')
         }
     }
-}
-
-function checkNameLength(name) {
-    const nameArr = name.split(' ')
-    for (const word of nameArr) {
-        if (word.length > 14)
-            return true
-    }
-    return false
-}
-
-function isPhysicalEducation(name) {
-    for (const physName of PHYS_NAMES) if (physName == name) return true
-    return false
 }
