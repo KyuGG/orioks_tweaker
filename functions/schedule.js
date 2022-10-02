@@ -167,6 +167,10 @@ async function loadSchedule() {
         child.classList.remove('sem')
     })
 
+    //если группа не выбрана
+    if (!schedule.length)
+        return
+
     //числитель
     for (const ch of schedule[0]) {
         const week = document.querySelector(`.ch .schedule-${ch[2].split(' ')[0] - 1}-${ch[0]}`)
@@ -338,7 +342,7 @@ function mobileSchedule() {
 function setCurrentDates() {
     const currentDate = new Date()
     let today = currentDate.getDay()
-
+    
     const identifyWeek = {
         'числитель': 'ch',
         'знаменатель': 'zn'

@@ -1,5 +1,5 @@
 chrome.storage.local.get().then(storage => {
-    if (storage.settings == undefined) {
+    if (storage.settings == undefined || storage?.schedule == undefined) {
         const storageTemplate = { settings: { checkbox1: true, checkbox2: true, checkbox3: true, checkbox4: true, checkbox5: true }, schedule: [], group: '' }
         chrome.storage.local.set(storageTemplate)
         storage = storageTemplate

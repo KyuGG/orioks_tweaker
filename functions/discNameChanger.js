@@ -84,7 +84,7 @@ function isPhysicalEducation(name) {
 }
 
 // функция обновляет все названия предметов на те, что заданы в localStorage
-function updateNames(){
+function updateNames() {
     let selector = ''
     let usePrevname = false
     switch (location.pathname) {
@@ -127,7 +127,7 @@ function updateNames(){
     const newNames = JSON.parse(localStorage.getItem('discNames'))
     for (const disc of dises) {
         let name
-        if(usePrevname) name = disc.getAttribute('prevname')
+        if (usePrevname) name = disc.getAttribute('prevname')
         else name = disc.textContent.trim()
         for (const n in newNames) {
             if (name.includes(n))
