@@ -61,7 +61,7 @@ function discNameChanger() {
 
 function discNameLoader() {
     if (location.pathname == '/student/student')
-        document.querySelectorAll('tr.pointer td:nth-child(2)').forEach(td => td.setAttribute('prevname', td.textContent))
+        document.querySelectorAll('tr.pointer td:nth-child(2), div.table tr td:last-child span:first-child').forEach(td => td.setAttribute('prevname', td.textContent))
 
     if (!(localStorage.discNames != '{}'))
         return
@@ -83,8 +83,10 @@ function isPhysicalEducation(name) {
     return false
 }
 
+// функция обновляет все названия предметов на те, что заданы в localStorage
 function updateNames(){
     let selector = ''
+    let usePrevname = false
     switch (location.pathname) {
         case '/student/news/view':
             const disc = document.querySelector('strong')
@@ -101,6 +103,7 @@ function updateNames(){
 
         case '/student/student':
             selector = 'tr.pointer td:nth-child(2), div.table tr td:last-child span:first-child'
+            usePrevname = true
             break
 
         case '/student/homework/list':
@@ -123,7 +126,9 @@ function updateNames(){
     const dises = document.querySelectorAll(selector)
     const newNames = JSON.parse(localStorage.getItem('discNames'))
     for (const disc of dises) {
-        const name = disc.textContent.trim()
+        let name
+        if(usePrevname) name = disc.getAttribute('prevname')
+        else name = disc.textContent.trim()
         for (const n in newNames) {
             if (name.includes(n))
                 disc.innerText = name.replace(n, newNames[n] + '\n')
