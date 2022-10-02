@@ -54,19 +54,39 @@ function discNameChanger() {
                 discNames[prevName] = newName
             discNames = JSON.stringify(discNames)
             localStorage.setItem('discNames', discNames)
-            disc.querySelector(':nth-child(2)').textContent = newName
+            updateNames()
         }
     })
 }
 
 function discNameLoader() {
     if (location.pathname == '/student/student')
-        document.querySelectorAll('tr.pointer td:nth-child(2)').forEach(td => td.setAttribute('prevname', td.textContent))
+        document.querySelectorAll('tr.pointer td:nth-child(2), div.table tr td:last-child span:first-child').forEach(td => td.setAttribute('prevname', td.textContent))
 
     if (!(localStorage.discNames != '{}'))
         return
 
+    updateNames()
+}
+
+function checkNameLength(name) {
+    const nameArr = name.split(' ')
+    for (const word of nameArr) {
+        if (word.length > 14)
+            return true
+    }
+    return false
+}
+
+function isPhysicalEducation(name) {
+    for (const physName of PHYS_NAMES) if (physName == name) return true
+    return false
+}
+
+// функция обновляет все названия предметов на те, что заданы в localStorage
+function updateNames(){
     let selector = ''
+    let usePrevname = false
     switch (location.pathname) {
         case '/student/news/view':
             const disc = document.querySelector('strong')
@@ -83,6 +103,7 @@ function discNameLoader() {
 
         case '/student/student':
             selector = 'tr.pointer td:nth-child(2), div.table tr td:last-child span:first-child'
+            usePrevname = true
             break
 
         case '/student/homework/list':
@@ -105,24 +126,12 @@ function discNameLoader() {
     const dises = document.querySelectorAll(selector)
     const newNames = JSON.parse(localStorage.getItem('discNames'))
     for (const disc of dises) {
-        const name = disc.textContent.trim()
+        let name
+        if(usePrevname) name = disc.getAttribute('prevname')
+        else name = disc.textContent.trim()
         for (const n in newNames) {
             if (name.includes(n))
                 disc.innerText = name.replace(n, newNames[n] + '\n')
         }
     }
-}
-
-function checkNameLength(name) {
-    const nameArr = name.split(' ')
-    for (const word of nameArr) {
-        if (word.length > 14)
-            return true
-    }
-    return false
-}
-
-function isPhysicalEducation(name) {
-    for (const physName of PHYS_NAMES) if (physName == name) return true
-    return false
 }
