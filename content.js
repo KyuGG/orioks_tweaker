@@ -1,15 +1,32 @@
 document.documentElement.style.visibility = 'hidden'
 
 getSettings().then(settings => {
-    changeTheme()
+    loadTheme()
 
+    const navItems = [
+        {
+            name: 'Расписание',
+            href: '/schedule',
+            condition: settings.answer.checkbox3,
+            position: 1
+        },
+        {
+            name: 'Стиль',
+            href: '/customization',
+            condition: true,        //TODO: add actual checkbox
+            position: 1
+        }
+    ]
+    
     window.onload = async () => {
         logo()
         bugReport()
         await sleep(100)
+        await appendNavItems(navItems)
         if (settings.answer.checkbox1) fixScore()
         if (settings.answer.checkbox2) runDownload()
         if (settings.answer.checkbox3) await schedule()
+        //if (settings.answer.checkbox3) await customThemePage()
         if (settings.answer.checkbox4) discNameChanger()
         if (settings.answer.checkbox5) coloredElements()
         discNameLoader()

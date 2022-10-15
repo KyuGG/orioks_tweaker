@@ -1,12 +1,31 @@
-function changeTheme() {
-    document.documentElement.style.setProperty('--color1', '#0f1010')
-    document.documentElement.style.setProperty('--color2', 'black')
-    document.documentElement.style.setProperty('--color3', '#0b0c0c')
-    document.documentElement.style.setProperty('--color4', 'rgb(20, 33, 41)')
-    document.documentElement.style.setProperty('--color5', 'rgb(0, 140, 186)')
-    document.documentElement.style.setProperty('--navbar', '#0e0e0c')
-    document.documentElement.style.setProperty('--text-color', 'rgba(255, 255, 255, 0.8)')
-    document.documentElement.style.setProperty('--border-color', '#2f2f33')
+let theme = {}
+
+function loadTheme() {
+    if(localStorage.customTheme) theme = JSON.parse(localStorage.customTheme)
+    else resetTheme()
+    applyTheme()
+}
+
+function saveTheme() {
+    localStorage.setItem('customTheme', JSON.stringify(theme))
+}
+
+function resetTheme() {
+    theme.color1 = '#0f1010'
+    theme.color2 = 'black'
+    theme.color3 = '#0b0c0c'
+    theme.color4 = 'rgb(20, 33, 41)'
+    theme.color5 = 'rgb(0, 140, 186)'
+    theme.navbar = '#0e0e0c'
+    theme.textColor = 'rgba(255, 255, 255, 0.8)'
+    theme.borderColor = '#2f2f33'
+    saveTheme()
+}
+
+function applyTheme() {
+    for(let i in theme){
+        document.documentElement.style.setProperty('--' + i, theme[i])
+    }
 }
 
 function coloredElements() {

@@ -1,22 +1,8 @@
 async function schedule() {
-    const nav = document.querySelector('.navbar-nav')
-    const scheduleButton = document.createElement('li')
-    const scheduleButtonLink = document.createElement('a')
-    scheduleButtonLink.textContent = 'Расписание'
-    scheduleButtonLink.href = '/schedule'
-    scheduleButton.append(scheduleButtonLink)
-    nav.children[1].after(scheduleButton)
-
     if (!(location.pathname === '/schedule'))
         return
 
-    const container = document.querySelector('.container.margin-top')
-    container.insertAdjacentHTML('afterbegin', `
-        <ul class="breadcrumb">
-            <li><a href="/">Главная</a></li>
-            <li><a href="https://orioks.miet.ru/schedule">Расписание</a></li>
-        </ul>
-        `)
+    await preparePage('Расписание')
 
     const content = document.querySelector('.row')
     document.querySelectorAll('.col-md-6').forEach(block => block.remove())
