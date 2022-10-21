@@ -1,4 +1,5 @@
 document.documentElement.style.visibility = 'hidden'
+let theme = new Theme
 
 getSettings().then(settings => {
     loadTheme()
@@ -26,7 +27,7 @@ getSettings().then(settings => {
         if (settings.answer.checkbox1) fixScore()
         if (settings.answer.checkbox2) runDownload()
         if (settings.answer.checkbox3) await schedule()
-        //if (settings.answer.checkbox3) await customThemePage()
+        if (settings.answer.checkbox3) await customThemePage()
         if (settings.answer.checkbox4) discNameChanger()
         if (settings.answer.checkbox5) coloredElements()
         discNameLoader()

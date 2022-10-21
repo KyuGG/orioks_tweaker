@@ -21,6 +21,8 @@
                 "https://orioks.miet.ru/storage/*"
             ],
             "js": [
+                "classes/colour.js",
+                "classes/theme.js",
                 "content.js",
                 "functions/navbar.js",
                 "functions/customPage.js",
@@ -47,7 +49,7 @@
             "run_at": "document_start"
         },
         {
-            "matches":["https://orioks.miet.ru/schedule"],
+            "matches":["https://orioks.miet.ru/schedule", "https://orioks.miet.ru/customization"],
             "css": ["newCSSRules/schedule.css"],
             "run_at": "document_start"
         }

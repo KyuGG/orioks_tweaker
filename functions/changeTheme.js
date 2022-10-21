@@ -1,31 +1,53 @@
-let theme = {}
+const DEFAULT_THEME = {
+    'color1': '#ffffff',
+    'color2': '#006687',
+    'color3': '#f5f5f5',
+    'color4': '#dff0d8',
+    'color5': '#43ac6a',
+    'textColor': '#000000',
+    'navbar': '#008cba',
+    'navbarText': '#ffffff',
+    'borderColor': '#dddddd',
+    'ding': "#e5140d"
+}
+
+const AUTHOR_THEME = {
+    'color1': '#0f1010',
+    'color2': '#000000',
+    'color3': '#0b0c0c',
+    'color4': '#142129',
+    'color5': '#008cba',
+    'navbar': '#0e0e0c',
+    'navbarText': '#ffffff',
+    'ding': "#e5140d",
+    'textColor': '#ffffff',
+    'borderColor': '#2f2f33',
+    'testraw': '!raw'
+}
 
 function loadTheme() {
-    if(localStorage.customTheme) theme = JSON.parse(localStorage.customTheme)
-    else resetTheme()
+    if(localStorage.customTheme) theme.importStyles(JSON.parse(localStorage.customTheme))
+    else {loadThemeSchema(DEFAULT_THEME); saveTheme()}
     applyTheme()
 }
 
 function saveTheme() {
-    localStorage.setItem('customTheme', JSON.stringify(theme))
+    localStorage.setItem('customTheme', JSON.stringify(theme.getAllStyles()))
 }
 
-function resetTheme() {
-    theme.color1 = '#0f1010'
-    theme.color2 = 'black'
-    theme.color3 = '#0b0c0c'
-    theme.color4 = 'rgb(20, 33, 41)'
-    theme.color5 = 'rgb(0, 140, 186)'
-    theme.navbar = '#0e0e0c'
-    theme.textColor = 'rgba(255, 255, 255, 0.8)'
-    theme.borderColor = '#2f2f33'
-    saveTheme()
+function loadThemeSchema(themeSchema=DEFAULT_THEME) {
+    theme.importStyles(themeSchema)
+    //for(let el in themeSchema) theme[el] = themeSchema[el]
 }
 
 function applyTheme() {
-    for(let i in theme){
-        document.documentElement.style.setProperty('--' + i, theme[i])
+    console.log(theme)
+    for(let i of theme.getKeys()){
+        document.documentElement.style.setProperty('--' + i, theme.getStyle(i))
     }
+    /*for(let i in theme){
+        document.documentElement.style.setProperty('--' + i, theme[i])
+    }*/
 }
 
 function coloredElements() {

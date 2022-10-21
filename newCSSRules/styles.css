@@ -6,8 +6,10 @@ html {
     --color5: #43ac6a;
     --textColor: black;
     --navbar: #008cba;
+    --navbarText: #ffffff;
     --borderColor: #dddddd;
     --transition: none;
+    --ding: #e5140d;
 }
 
 
@@ -152,4 +154,13 @@ a:hover {
 h3.panel-title {
     background-color: #5bc0de !important;
     color: black !important;
+}
+
+.navbar-inverse .navbar-nav>li>a,
+.navbar-inverse .navbar-brand {
+    color: var(--navbarText) !important
+}
+
+.count-messages-top-menu{
+    background: var(--ding) !important;
 }

@@ -5,7 +5,6 @@ async function schedule() {
     await preparePage('Расписание')
 
     const content = document.querySelector('.row')
-    document.querySelectorAll('.col-md-6').forEach(block => block.remove())
     const scheduleHeader = document.createElement('div')
     const scheduleH2 = document.createElement('h3')
     const scheduleBtn = document.createElement('button')
