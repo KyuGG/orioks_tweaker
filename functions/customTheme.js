@@ -15,7 +15,6 @@ async function customThemePage() {
 
     buttonList.push(createButton('Apply Styles', () => {
         let colors = getCubeColors()
-        console.log(colors)
         for(let i in colors) theme.setStyleRGB(i, colors[i])
         applyTheme()
     }))
@@ -118,7 +117,6 @@ function createRGBSlider(varName){
 }
 
 function changeSlider(e, ev){
-    //console.log(e)
     let value = e.path[0].value
     if(value>255) value = 255
     else if(value<0) value = 0
@@ -129,7 +127,6 @@ function changeSlider(e, ev){
 
 function changeCube(block){
     colors = block.children[0].children
-    //console.log(colors)
     cube = block.children[1]
     let R = colors[0].children[0].value
     let G = colors[1].children[0].value
@@ -141,7 +138,6 @@ function changeCube(block){
 function getCubeColors(){
     let result = {}
     document.querySelectorAll(".rgbCube").forEach((el) => {result[el.id] = el.style.backgroundColor})
-    console.log(result)
     return result
 }
 
@@ -152,12 +148,9 @@ function setCubeColors(){
 }
 
 function syncSlidersCube(block){
-    console.log(block)
     colors = block.children[1].style.backgroundColor.replace('rgb(', '').replace(')', '').split(', ')
     sliders = block.children[0].children
     for(let i = 0; i<3; i++) {sliders[i].children[0].value = colors[i]; sliders[i].children[1].value = colors[i]}
-    console.log(sliders)
-    console.log(colors)
 }
 
 const varDesc = {
@@ -166,9 +159,9 @@ const varDesc = {
     'color3': '',
     'color4': '',
     'color5': '',
-    'navbar': '',
-    'navbarText': '',
-    'textColor': '',
-    'borderColor': '',
-    'ding': ''
+    'navbar': 'Фон навигационной панели.',
+    'navbarText': 'Цвет текста в навигационной панели.',
+    'textColor': 'Цвет текста, применяемый в основном контенте страницы.',
+    'borderColor': 'Цвет границ объектов.',
+    'ding': 'Цвет фона "колокольчика уведомлений"'
 }

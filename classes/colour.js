@@ -14,8 +14,6 @@ class Colour{
 
     constructor(hex){
         this.setConverted(Colour.modes.HEX, hex)
-        /*hex = hex.replace('#', '')
-        for(let i=0; i<3; i++) this._color[i] = parseInt(hex.slice(i*2, (i+1)*2), 16)*/
     }
 
     getConverted(mode){
@@ -36,7 +34,6 @@ class Colour{
     }
 
     setConverted(mode, color){
-        console.log(mode)
         switch(mode){
             case 0:
                 color = color.replace('rgb(', '').replace(')', '').replaceAll(' ', '').split(',');

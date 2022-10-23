@@ -27,7 +27,11 @@ const AUTHOR_THEME = {
 
 function loadTheme() {
     if(localStorage.customTheme) theme.importStyles(JSON.parse(localStorage.customTheme))
-    else {loadThemeSchema(DEFAULT_THEME); saveTheme()}
+    else {
+        loadThemeSchema(AUTHOR_THEME)
+        saveTheme()
+        alert('Была загружена и применена авторская тема одного из создателей этого расширения. Перейдите на вкладку "Стиль", если желаете её изменить.')
+    }
     applyTheme()
 }
 
@@ -37,17 +41,12 @@ function saveTheme() {
 
 function loadThemeSchema(themeSchema=DEFAULT_THEME) {
     theme.importStyles(themeSchema)
-    //for(let el in themeSchema) theme[el] = themeSchema[el]
 }
 
 function applyTheme() {
-    console.log(theme)
     for(let i of theme.getKeys()){
         document.documentElement.style.setProperty('--' + i, theme.getStyle(i))
     }
-    /*for(let i in theme){
-        document.documentElement.style.setProperty('--' + i, theme[i])
-    }*/
 }
 
 function coloredElements() {
