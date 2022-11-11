@@ -159,6 +159,12 @@ async function loadSchedule() {
             resolve([response.answer, response.group])
         else fetchError()
     }))
+    
+    if (!schedule.length) {
+        document.querySelector('.schedule-contents').style.display = 'none'
+        return
+    }
+
     document.querySelectorAll('.schedule td:not(:first-child)').forEach(child => {
         child.textContent = ''
         child.classList.add('holiday')
@@ -342,7 +348,7 @@ function mobileSchedule() {
 function setCurrentDates() {
     const currentDate = new Date()
     let today = currentDate.getDay()
-    
+
     const identifyWeek = {
         'числитель': 'ch',
         'знаменатель': 'zn'
