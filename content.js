@@ -1,5 +1,4 @@
 document.documentElement.style.visibility = 'hidden'
-let theme = new Theme
 
 getSettings().then(settings => {
     loadTheme()
@@ -23,7 +22,7 @@ getSettings().then(settings => {
         logo()
         bugReport()
         await sleep(100)
-        await appendNavItems(navItems)
+        appendNavItems(navItems)
         if (settings.answer.checkbox1) fixScore()
         if (settings.answer.checkbox2) runDownload()
         if (settings.answer.checkbox3) await schedule()
