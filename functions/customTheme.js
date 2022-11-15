@@ -9,13 +9,13 @@ async function customThemePage() {
     const buttons = document.createElement('div')
 
     const title = document.createElement('h3')
-    title.textContent = "Settings (BETA!)"
+    title.textContent = 'Settings (BETA!)'
 
-    buttonList = []
+    const buttonList = []
 
     buttonList.push(createButton('Apply Styles', () => {
-        let colors = getCubeColors()
-        for(let i in colors) theme.setStyleRGB(i, colors[i])
+        const colors = getCubeColors()
+        for (const i in colors) theme.setStyleRGB(i, colors[i])
         applyTheme()
     }))
 
@@ -33,22 +33,22 @@ async function customThemePage() {
         saveTheme()
     }))
 
-    buttonList.push(createButton('Debug Styles', () =>{
+    buttonList.push(createButton('Debug Styles', () => {
         console.log(theme)
         console.log(getCubeColors())
     }))
-    
+
     content.appendChild(title)
     appendList(buttons, buttonList)
 
-    for(let i in varDesc){
+    for (const i in varDesc) {
         content.appendChild(createRGBSlider(i))
     }
 
     content.appendChild(buttons)
 }
 
-function createButton(text, callback){
+function createButton(text, callback) {
     const btn = document.createElement('button')
     btn.classList.add('my-btn')
     btn.textContent = text
@@ -56,11 +56,11 @@ function createButton(text, callback){
     return btn
 }
 
-function appendList(parent, children){
-    for(let el of children) parent.appendChild(el)
+function appendList(parent, children) {
+    for (const el of children) parent.appendChild(el)
 }
 
-function createRGBSlider(varName){
+function createRGBSlider(varName) {
     const result = document.createElement('div')
     const title = document.createElement('h2')
     title.textContent = varName
@@ -71,19 +71,19 @@ function createRGBSlider(varName){
     const sliders = document.createElement('div')
     sliders.style.display = 'flex'
     sliders.style.flexDirection = 'column'
-    for(let i=0; i<3; i++){
-        let field = document.createElement('div')
+    for (let i = 0; i < 3; i++) {
+        const field = document.createElement('div')
         field.style.display = 'flex'
         field.style.flexDirection = 'row'
-        let slider = document.createElement('input')
-        let textInput = document.createElement('input')
-        slider.type = "range"
+        const slider = document.createElement('input')
+        const textInput = document.createElement('input')
+        slider.type = 'range'
         slider.value = 20
         slider.min = 0
         slider.max = 255
-        slider.addEventListener("input", changeSlider)
-        textInput.addEventListener("input", changeSlider)
-        textInput.type = "number"
+        slider.addEventListener('input', changeSlider)
+        textInput.addEventListener('input', changeSlider)
+        textInput.type = 'number'
         textInput.value = 20
         textInput.min = 0
         textInput.max = 255
@@ -102,7 +102,7 @@ function createRGBSlider(varName){
     rgbShow.style.backgroundColor = theme.getStyle(varName)
 
     rgbShow.id = varName
-    rgbShow.classList.add("rgbCube")
+    rgbShow.classList.add('rgbCube')
 
     element.appendChild(sliders)
     element.appendChild(rgbShow)
@@ -116,41 +116,41 @@ function createRGBSlider(varName){
     return result
 }
 
-function changeSlider(e, ev){
+function changeSlider(e) {
     let value = e.path[0].value
-    if(value>255) value = 255
-    else if(value<0) value = 0
-    e.path[1].childNodes.forEach((ch) => {ch.value = value})
+    if (value > 255) value = 255
+    else if (value < 0) value = 0
+    e.path[1].childNodes.forEach(ch => ch.value = value)
 
     changeCube(e.path[3])
 }
 
-function changeCube(block){
-    colors = block.children[0].children
-    cube = block.children[1]
-    let R = colors[0].children[0].value
-    let G = colors[1].children[0].value
-    let B = colors[2].children[0].value
+function changeCube(block) {
+    const colors = block.children[0].children
+    const cube = block.children[1]
+    const R = colors[0].children[0].value
+    const G = colors[1].children[0].value
+    const B = colors[2].children[0].value
 
-    cube.style.backgroundColor = "rgb(" + R + ", " + G + ", " + B + ")"
+    cube.style.backgroundColor = `rgb(${R}, ${G}, ${B})`
 }
 
-function getCubeColors(){
+function getCubeColors() {
     let result = {}
-    document.querySelectorAll(".rgbCube").forEach((el) => {result[el.id] = el.style.backgroundColor})
+    document.querySelectorAll('.rgbCube').forEach(el => result[el.id] = el.style.backgroundColor)
     return result
 }
 
-function setCubeColors(){
-    for(let i in varDesc){
+function setCubeColors() {
+    for (const i in varDesc) {
         document.getElementById(i).style.backgroundColor = theme[i]
     }
 }
 
-function syncSlidersCube(block){
+function syncSlidersCube(block) {
     colors = block.children[1].style.backgroundColor.replace('rgb(', '').replace(')', '').split(', ')
     sliders = block.children[0].children
-    for(let i = 0; i<3; i++) {sliders[i].children[0].value = colors[i]; sliders[i].children[1].value = colors[i]}
+    for (let i = 0; i < 3; i++) { sliders[i].children[0].value = colors[i]; sliders[i].children[1].value = colors[i] }
 }
 
 const varDesc = {

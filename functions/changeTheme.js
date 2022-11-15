@@ -8,7 +8,7 @@ const DEFAULT_THEME = {
     'navbar': '#008cba',
     'navbarText': '#ffffff',
     'borderColor': '#dddddd',
-    'ding': "#e5140d"
+    'ding': '#e5140d'
 }
 
 const AUTHOR_THEME = {
@@ -19,14 +19,14 @@ const AUTHOR_THEME = {
     'color5': '#008cba',
     'navbar': '#0e0e0c',
     'navbarText': '#ffffff',
-    'ding': "#e5140d",
+    'ding': '#e5140d',
     'textColor': '#ffffff',
     'borderColor': '#2f2f33',
     'testraw': '!raw'
 }
 
 function loadTheme() {
-    if(localStorage.customTheme) theme.importStyles(JSON.parse(localStorage.customTheme))
+    if (localStorage.customTheme) theme.importStyles(JSON.parse(localStorage.customTheme))
     else {
         loadThemeSchema(AUTHOR_THEME)
         saveTheme()
@@ -39,12 +39,12 @@ function saveTheme() {
     localStorage.setItem('customTheme', JSON.stringify(theme.getAllStyles()))
 }
 
-function loadThemeSchema(themeSchema=DEFAULT_THEME) {
+function loadThemeSchema(themeSchema = DEFAULT_THEME) {
     theme.importStyles(themeSchema)
 }
 
 function applyTheme() {
-    for(let i of theme.getKeys()){
+    for (const i of theme.getKeys()) {
         document.documentElement.style.setProperty('--' + i, theme.getStyle(i))
     }
 }

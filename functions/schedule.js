@@ -2,7 +2,7 @@ async function schedule() {
     if (!(location.pathname === '/schedule'))
         return
 
-    await preparePage('Расписание')
+    preparePage('Расписание')
 
     const content = document.querySelector('.row')
     const scheduleHeader = document.createElement('div')
