@@ -160,6 +160,7 @@ async function loadSchedule() {
         else fetchError()
     }))
     
+    //если группа не выбрана
     if (!schedule.length) {
         document.querySelector('.schedule-contents').style.display = 'none'
         return
@@ -172,10 +173,6 @@ async function loadSchedule() {
         child.classList.remove('lab')
         child.classList.remove('sem')
     })
-
-    //если группа не выбрана
-    if (!schedule.length)
-        return
 
     //числитель
     for (const ch of schedule[0]) {
