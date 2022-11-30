@@ -1,23 +1,26 @@
 {
-  "name": "test-plugin",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build-watch": "vue-cli-service  --env.NODE_ENV=development build-watch --mode development"
-  },
-  "dependencies": {
-    "vue": "^3.2.13"
-  },
-  "devDependencies": {
-    "@types/chrome": "^0.0.179",
-    "@vue/cli-plugin-typescript": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "prettier": "^2.8.0",
-    "sass": "^1.32.7",
-    "sass-loader": "^12.0.0",
-    "typescript": "~4.5.5",
-    "vue-cli-plugin-chrome-extension-cli": "~1.1.4"
-  }
+    "name": "test-plugin",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "sass-watch": "npx sass --watch src/styles:dist/styles",
+        "build-watch": "vue-cli-service  --env.NODE_ENV=development build-watch --mode development",
+        "watch": "npx concurrently --prefix-colors \"yellow,blue\" --kill-others \"npm run sass-watch\" \"npm run build-watch\""
+    },
+    "dependencies": {
+        "vue": "^3.2.13"
+    },
+    "devDependencies": {
+        "@types/chrome": "^0.0.179",
+        "@vue/cli-plugin-typescript": "~5.0.0",
+        "@vue/cli-service": "~5.0.0",
+        "concurrently": "^7.6.0",
+        "prettier": "^2.8.0",
+        "sass": "^1.32.7",
+        "sass-loader": "^12.0.0",
+        "typescript": "~4.5.5",
+        "vue-cli-plugin-chrome-extension-cli": "~1.1.4"
+    }
 }
