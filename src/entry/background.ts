@@ -1,15 +1,4 @@
-interface StorageSettings {
-    version: string
-    settings: {
-        fixScore: boolean
-        fixDownload: boolean
-        schedule: boolean
-        disciplineNames: boolean
-        darkTheme: boolean
-    }
-    schedule: []
-    group: string
-}
+import StorageSettings from '@/interfaces/StorageSettings'
 
 const storageTemplate: StorageSettings = {
     version: '1.0.12',
@@ -32,14 +21,11 @@ if (storage?.version !== storageTemplate.version) {
     await chrome.storage.local.set(storage)
 }
 
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    switch (request.data) {
+    switch (request.task) {
         case 'changeSettings':
-            storage.settings.fixScore = request.settings.fixScore
-            storage.settings.fixDownload = request.settings.fixDownload
-            storage.settings.schedule = request.settings.schedule
-            storage.settings.disciplineNames = request.settings.disciplineNames
-            storage.settings.darkTheme = request.settings.darkTheme
+            storage.settings = request.settings
             chrome.storage.local.set(storage)
             sendResponse({ answer: 'settings have been changed' })
             break
@@ -54,12 +40,18 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                         })
                 })
 
-        case 'settingsPopup':
-            sendResponse({ answer: storage.settings })
+        case 'getSettings':
+            sendResponse({
+                settings: storage.settings,
+                version: storage.version,
+            })
             break
 
         case 'getSchedule':
-            sendResponse({ answer: storage.schedule, group: storage.group })
+            sendResponse({
+                answer: storage.schedule,
+                group: storage.group,
+            })
             break
 
         case 'setSchedule':
