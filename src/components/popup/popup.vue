@@ -112,6 +112,8 @@
 
 <script setup lang="ts">
 import StorageSettings from '../../interfaces/StorageSettings'
+import GetSettingsResponse from '../../interfaces/GetSettingsResponse'
+
 import { ref } from 'vue'
 import Switcher from './switcher.vue'
 
@@ -120,13 +122,18 @@ document.body.style.margin = '0'
 const settings = ref(null as unknown as StorageSettings['settings'])
 let version = ''
 
-chrome.runtime.sendMessage({ task: 'getSettings' }, (response: {
-    settings: StorageSettings['settings'],
-    version: StorageSettings['version']
-}) => {
+
+
+chrome.runtime.sendMessage({ task: 'getSettings' }, (response: GetSettingsResponse) => {
     settings.value = response.settings
     version = response.version
 })
+
+
+
+
+
+
 
 
 // window.onload = () => document.body.style.opacity = '100%'
