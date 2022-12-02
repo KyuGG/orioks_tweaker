@@ -1,5 +1,6 @@
 <template>
     <div class="popup"
+         :style="`--opacity: ${opacity};`"
          v-if="(settings && version)">
         <h2>ORIOKS tweaker {{ version }}</h2>
         <div class="switcher">
@@ -114,25 +115,25 @@
 import StorageSettings from '../../interfaces/StorageSettings'
 import GetSettingsResponse from '../../interfaces/GetSettingsResponse'
 
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Switcher from './switcher.vue'
 
-document.body.style.margin = '0'
-
-const settings = ref(null as unknown as StorageSettings['settings'])
-let version = ''
+import wakeUpBackground from '../../functions/wakeUpBackground'
 
 
+const settings = ref(null as StorageSettings['settings'])
+const version = ref('')
 
-chrome.runtime.sendMessage({ task: 'getSettings' }, (response: GetSettingsResponse) => {
-    settings.value = response.settings
-    version = response.version
+const opacity = ref('0')
+
+wakeUpBackground().then(() => {
+    chrome.runtime.sendMessage({ task: 'getSettings' }, (response: GetSettingsResponse) => {
+        settings.value = response.settings
+        version.value = response.version
+    })
 })
 
-
-
-
-
+onMounted(() => setTimeout(() => opacity.value = '100%', 100))
 
 
 
@@ -210,9 +211,12 @@ const description = () => chrome.tabs.create({ url: 'https://github.com/KyuGG/or
 }
 
 .popup {
+    --opacity: 0;
     width: 200px;
     padding: 30px;
     background: #1d1c1c;
+    opacity: var(--opacity);
+    transition: 1.5s;
 }
 
 .switcher {
@@ -244,5 +248,13 @@ h3 {
         background: #5581d3;
         color: black;
     }
+}
+</style>
+
+<style lang="scss">
+html,
+body {
+    margin: 0;
+    background: #1d1c1c;
 }
 </style>
