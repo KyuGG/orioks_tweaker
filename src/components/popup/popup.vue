@@ -111,7 +111,7 @@
 </template>
 
 <script setup lang="ts">
-import StorageSettings from '@/interfaces/StorageSettings'
+import StorageSettings from '../../interfaces/StorageSettings'
 import { ref } from 'vue'
 import Switcher from './switcher.vue'
 
@@ -188,10 +188,8 @@ chrome.runtime.sendMessage({ task: 'getSettings' }, (response: {
 // checkbox3.onclick = onClick
 // checkbox4.onclick = onClick
 // checkbox5.onclick = onClick
-
 const bugReport = () => chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
 const description = () => chrome.tabs.create({ url: 'https://github.com/KyuGG/orioks_tweaker#функционал' })
-
 </script>
 
 <style scoped lang="scss">
@@ -207,7 +205,7 @@ const description = () => chrome.tabs.create({ url: 'https://github.com/KyuGG/or
 .popup {
     width: 200px;
     padding: 30px;
-    background: #1d1c1c
+    background: #1d1c1c;
 }
 
 .switcher {
@@ -240,5 +238,4 @@ h3 {
         color: black;
     }
 }
-
 </style>
