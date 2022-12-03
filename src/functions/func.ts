@@ -1,4 +1,1 @@
-
-export default function func() {
-	
-}
+export default function func() {}

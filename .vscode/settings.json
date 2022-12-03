@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "[vue]": {
+        "editor.defaultFormatter": "Vue.volar"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "html.format.wrapAttributes": "preserve"
+}

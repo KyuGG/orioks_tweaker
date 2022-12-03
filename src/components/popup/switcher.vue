@@ -1,9 +1,10 @@
 <template>
-    <input type="checkbox"
-           class="ios8-switch"
-           :id="id"
-           :checked="checked"
-           @change="emit('update', checked)" />
+    <input
+        type="checkbox"
+        class="ios8-switch"
+        :id="id"
+        :checked="checked"
+        @change="emit('update', checked)" />
     <label :for="id">{{ label }}</label>
 </template>
 
@@ -43,7 +44,7 @@ const emit = defineEmits<{
     border-radius: 16px;
     background: #1d1c1c;
     border: 1px solid #3b3b3b;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .ios8-switch+label:after {
@@ -57,7 +58,7 @@ const emit = defineEmits<{
     border-radius: 16px;
     background: #fff;
     border: 1px solid #d9d9d9b0;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .ios8-switch+label:hover:after {
@@ -74,7 +75,7 @@ const emit = defineEmits<{
 
 label {
     color: white;
-    transition: .3s;
+    transition: 0.3s;
 
     &:hover {
         color: #5581d3;
