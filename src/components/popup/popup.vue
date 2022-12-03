@@ -1,61 +1,76 @@
 <template>
-    <div class="popup"
-         :style="`--opacity: ${opacity};`"
-         v-if="(settings && version)">
+    <div
+        class="popup"
+        :style="`--opacity: ${opacity};`"
+        v-if="settings && version">
         <h2>ORIOKS tweaker {{ version }}</h2>
         <div class="switcher">
-            <Switcher label="All Settings"
-                      id="allSettings"
-                      :checked="(settings.fixScore && settings.fixDownload && settings.schedule && settings.disciplineNames && settings.darkTheme)"
-                      @update="(checked: boolean) => settings.fixScore = settings.fixDownload = settings.schedule = settings.disciplineNames = settings.darkTheme = !checked">
+            <Switcher
+                label="All Settings"
+                id="allSettings"
+                :checked="
+                    settings.fixScore &&
+                    settings.fixDownload &&
+                    settings.schedule &&
+                    settings.disciplineNames &&
+                    settings.darkTheme
+                "
+                @update="(checked: boolean) => settings.fixScore = settings.fixDownload = settings.schedule = settings.disciplineNames = settings.darkTheme = !checked">
             </Switcher>
         </div>
         <h3>Basic Settings</h3>
         <div class="switcher">
-            <Switcher label="Fix Score"
-                      id="fixScore"
-                      :checked="settings.fixScore"
-                      @update="(checked: boolean) => settings.fixScore = !checked">
+            <Switcher
+                label="Fix Score"
+                id="fixScore"
+                :checked="settings.fixScore"
+                @update="(checked: boolean) => settings.fixScore = !checked">
             </Switcher>
         </div>
         <div class="switcher">
-            <Switcher label="Fix Download"
-                      id="fixDownload"
-                      :checked="settings.fixDownload"
-                      @update="(checked: boolean) => settings.fixDownload = !checked">
+            <Switcher
+                label="Fix Download"
+                id="fixDownload"
+                :checked="settings.fixDownload"
+                @update="(checked: boolean) => settings.fixDownload = !checked">
             </Switcher>
         </div>
         <div class="switcher">
-            <Switcher label="Schedule"
-                      id="schedule"
-                      :checked="settings.schedule"
-                      @update="(checked: boolean) => settings.schedule = !checked">
+            <Switcher
+                label="Schedule"
+                id="schedule"
+                :checked="settings.schedule"
+                @update="(checked: boolean) => settings.schedule = !checked">
             </Switcher>
         </div>
         <h3>Customize</h3>
         <div class="switcher">
-            <Switcher label="Discipline Names"
-                      id="disciplineNames"
-                      :checked="settings.disciplineNames"
-                      @update="(checked: boolean) => settings.disciplineNames = !checked">
+            <Switcher
+                label="Discipline Names"
+                id="disciplineNames"
+                :checked="settings.disciplineNames"
+                @update="(checked: boolean) => settings.disciplineNames = !checked">
             </Switcher>
         </div>
         <div class="switcher">
-            <Switcher label="Dark Theme"
-                      id="darkTheme"
-                      :checked="settings.darkTheme"
-                      @update="(checked: boolean) => settings.darkTheme = !checked">
+            <Switcher
+                label="Dark Theme"
+                id="darkTheme"
+                :checked="settings.darkTheme"
+                @update="(checked: boolean) => settings.darkTheme = !checked">
             </Switcher>
         </div>
         <div class="buttons">
-            <input id="bugreport"
-                   type="button"
-                   value="Report a Bug"
-                   @click="bugReport">
-            <input id="description"
-                   type="button"
-                   value="Description"
-                   @click="description">
+            <input
+                id="bugreport"
+                type="button"
+                value="Report a Bug"
+                @click="bugReport" />
+            <input
+                id="description"
+                type="button"
+                value="Description"
+                @click="description" />
         </div>
 
         <!-- {{ settings.fixDownload }} -->
@@ -120,10 +135,8 @@ import Switcher from './switcher.vue'
 
 import wakeUpBackground from '../../functions/wakeUpBackground'
 
-
 const settings = ref(null as StorageSettings['settings'])
 const version = ref('')
-
 const opacity = ref('0')
 
 wakeUpBackground().then(() => {
@@ -133,9 +146,7 @@ wakeUpBackground().then(() => {
     })
 })
 
-onMounted(() => setTimeout(() => opacity.value = '100%', 100))
-
-
+onMounted(() => setTimeout(() => (opacity.value = '100%'), 100))
 
 // window.onload = () => document.body.style.opacity = '100%'
 // document.documentElement.style.setProperty('--setting-transition', 'all .3s')
