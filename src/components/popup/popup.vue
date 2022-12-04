@@ -128,23 +128,22 @@
 
 <script setup lang="ts">
 import { Settings } from '../../interfaces/StorageSettings'
-import GetSettingsResponse from '../../interfaces/GetSettingsResponse'
 
 import { onMounted, ref } from 'vue'
 import Switcher from './switcher.vue'
 
-import wakeUpBackground from '../../functions/wakeUpBackground'
+import getSettings from '../../functions/getSettings'
 
 const settings = ref(null as Settings)
 const version = ref('')
 const opacity = ref('0')
 
-wakeUpBackground().then(() => {
-    chrome.runtime.sendMessage({ task: 'getSettings' }, (response: GetSettingsResponse) => {
-        settings.value = response.settings
-        version.value = response.version
-    })
+
+getSettings().then(response => {
+    settings.value = response.settings
+    version.value = response.version
 })
+
 
 onMounted(() => setTimeout(() => (opacity.value = '100%'), 300))
 
