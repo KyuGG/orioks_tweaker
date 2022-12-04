@@ -1,5 +1,5 @@
 export default function fixScore() {
-    if (!(location.pathname == '/student/student')) return false
+    if (!(location.pathname === '/student/student')) return false
     removeJunk()
     const dises = document.querySelectorAll('tr.pointer span.grade')
     const json = JSON.parse(document.querySelector('#forang').textContent).dises
@@ -7,7 +7,7 @@ export default function fixScore() {
         let realMaxScore = 0
         let realScore = 0
         for (const segment of json[i].segments[0].allKms) {
-            if (segment.grade.b != '-') {
+            if (segment.grade.b !== '-') {
                 realMaxScore += segment.max_ball
                 if (!isNaN(segment.grade.b)) realScore += segment.grade.b
             }
@@ -28,8 +28,8 @@ function removeJunk() {
 
 /**Возвращает класс для элемента оценки, отражающий эффективность учащегося
  * @param percent процент, отражающий эффективность учащегося на данный момент (0..100)
- * @returns строка, в которой указаны классы, кои необходимо присвоить элементу с оценкой
-*/
+ * @returns строка, в которой указаны классы, которые необходимо присвоить элементу с оценкой
+ */
 function percentGrade(percent: number): string {
     if (percent >= 86) return 'grade_5 grade'
     else if (percent >= 70) return 'grade_4 grade'

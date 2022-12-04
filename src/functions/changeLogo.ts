@@ -1,8 +1,5 @@
-import wakeUpBackground from './wakeUpBackground'
-
-export default async function changeLogo() {
-    await wakeUpBackground()
-    const logoLink = chrome.runtime.getURL('./assets/logo.png')
+export default function changeLogo() {
+    const logoLink = chrome.runtime.getURL('assets/logo.png')
     const icon = document.createElement('link')
     icon.rel = 'icon'
     icon.type = 'image/png'
