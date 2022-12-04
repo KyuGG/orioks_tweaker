@@ -15,7 +15,7 @@
                     settings.disciplineNames &&
                     settings.darkTheme
                 "
-                @update="(checked: boolean) => settings.fixScore = settings.fixDownload = settings.schedule = settings.disciplineNames = settings.darkTheme = !checked">
+                @update="onUpdate">
             </Switcher>
         </div>
         <h3>Basic Settings</h3>
@@ -24,7 +24,7 @@
                 label="Fix Score"
                 id="fixScore"
                 :checked="settings.fixScore"
-                @update="(checked: boolean) => settings.fixScore = !checked">
+                @update="onUpdate">
             </Switcher>
         </div>
         <div class="switcher">
@@ -32,7 +32,7 @@
                 label="Fix Download"
                 id="fixDownload"
                 :checked="settings.fixDownload"
-                @update="(checked: boolean) => settings.fixDownload = !checked">
+                @update="onUpdate">
             </Switcher>
         </div>
         <div class="switcher">
@@ -40,7 +40,7 @@
                 label="Schedule"
                 id="schedule"
                 :checked="settings.schedule"
-                @update="(checked: boolean) => settings.schedule = !checked">
+                @update="onUpdate">
             </Switcher>
         </div>
         <h3>Customize</h3>
@@ -49,7 +49,7 @@
                 label="Discipline Names"
                 id="disciplineNames"
                 :checked="settings.disciplineNames"
-                @update="(checked: boolean) => settings.disciplineNames = !checked">
+                @update="onUpdate">
             </Switcher>
         </div>
         <div class="switcher">
@@ -57,7 +57,7 @@
                 label="Dark Theme"
                 id="darkTheme"
                 :checked="settings.darkTheme"
-                @update="(checked: boolean) => settings.darkTheme = !checked">
+                @update="onUpdate">
             </Switcher>
         </div>
         <div class="buttons">
@@ -133,6 +133,7 @@ import { onMounted, ref } from 'vue'
 import Switcher from './switcher.vue'
 
 import getSettings from '../../functions/getSettings'
+import wakeUpBackground from '../../functions/wakeUpBackground'
 
 const settings = ref(null as Settings)
 const version = ref('')
@@ -145,7 +146,25 @@ getSettings().then(response => {
 })
 
 
+const onUpdate = async (evt: InputEvent, checked: boolean) => {
+    const slider = evt.target as HTMLInputElement
+
+    if (slider.id === 'allSettings') {
+        for (const key of Object.keys(settings.value))
+            settings.value[key] = !checked
+    }
+    else
+        settings.value[slider.id] = !checked
+
+    await wakeUpBackground()
+    chrome.runtime.sendMessage({ task: 'setSettings', settings: settings.value }, response => {
+        console.log(response)
+    })
+}
+
+
 onMounted(() => setTimeout(() => (opacity.value = '100%'), 300))
+
 
 // window.onload = () => document.body.style.opacity = '100%'
 // document.documentElement.style.setProperty('--setting-transition', 'all .3s')

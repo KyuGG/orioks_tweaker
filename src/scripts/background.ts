@@ -24,7 +24,7 @@ if (storage?.version !== storageTemplate.version) {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     switch (request.task) {
-        case 'changeSettings':
+        case 'setSettings':
             storage.settings = request.settings
             chrome.storage.local.set(storage)
             sendResponse({ answer: 'settings have been changed' })
