@@ -8,13 +8,7 @@
             <Switcher
                 label="All Settings"
                 id="allSettings"
-                :checked="
-                    settings.fixScore &&
-                    settings.fixDownload &&
-                    settings.schedule &&
-                    settings.disciplineNames &&
-                    settings.darkTheme
-                "
+                :checked="allChecked"
                 @update="onUpdate">
             </Switcher>
         </div>
@@ -72,57 +66,6 @@
                 value="Description"
                 @click="description" />
         </div>
-
-        <!-- {{ settings.fixDownload }} -->
-        <!-- <div class="switcher">
-            <input type="checkbox"
-                   class="ios8-switch"
-                   id="checkbox-all" />
-            <label for="checkbox-all">All Settings</label>
-        </div>
-        <h3>Basic Settings</h3>
-        <div class="switcher">
-            <input type="checkbox"
-                   class="ios8-switch"
-                   id="checkbox-1" />
-            <label for="checkbox-1">Fix Score</label>
-        </div>
-        <br />
-        <div class="switcher">
-            <input type="checkbox"
-                   class="ios8-switch"
-                   id="checkbox-2" />
-            <label for="checkbox-2">Fix Download</label>
-        </div>
-        <br />
-        <div class="switcher">
-            <input type="checkbox"
-                   class="ios8-switch"
-                   id="checkbox-3" />
-            <label for="checkbox-3">Schedule</label>
-        </div>
-        <h3>Customize</h3>
-        <div class="switcher">
-            <input type="checkbox"
-                   class="ios8-switch"
-                   id="checkbox-4" />
-            <label for="checkbox-4">Discipline Names</label>
-        </div>
-        <br />
-        <div class="switcher">
-            <input type="checkbox"
-                   class="ios8-switch"
-                   id="checkbox-5" />
-            <label for="checkbox-5">Dark Theme</label>
-        </div>
-        <div>
-            <input id="bugreport"
-                   type="button"
-                   value="Report a Bug" />
-            <input id="description"
-                   type="button"
-                   value="Description" />
-        </div> -->
     </div>
 </template>
 
@@ -135,16 +78,25 @@ import Switcher from './switcher.vue'
 import getSettings from '../../helpers/getSettings'
 import wakeUpBackground from '../../helpers/wakeUpBackground'
 
+
 const settings = ref(null as Settings)
+const allChecked = ref(false)
 const version = ref('')
 const opacity = ref('0')
-
 
 getSettings().then(response => {
     settings.value = response.settings
     version.value = response.version
+
+    allChecked.value = isAllChecked()
 })
 
+const isAllChecked = () => {
+    let allChecked = true
+    for (const key of Object.keys(settings.value))
+        allChecked = allChecked && settings.value[key]
+    return allChecked
+}
 
 const onUpdate = async (evt: InputEvent, checked: boolean) => {
     const slider = evt.target as HTMLInputElement
@@ -156,75 +108,16 @@ const onUpdate = async (evt: InputEvent, checked: boolean) => {
     else
         settings.value[slider.id] = !checked
 
+    allChecked.value = isAllChecked()
+
     await wakeUpBackground()
     chrome.runtime.sendMessage({ task: 'setSettings', settings: settings.value }, response => {
         console.log(response)
     })
 }
 
-
 onMounted(() => setTimeout(() => (opacity.value = '100%'), 300))
 
-
-// window.onload = () => document.body.style.opacity = '100%'
-// document.documentElement.style.setProperty('--setting-transition', 'all .3s')
-// chrome.runtime.sendMessage({ data: 'settingsPopup' }, response => {
-//     if (!chrome.runtime.lastError) {
-//         checkbox1.checked = response.answer.checkbox1
-//         checkbox2.checked = response.answer.checkbox2
-//         checkbox3.checked = response.answer.checkbox3
-//         checkbox4.checked = response.answer.checkbox4
-//         checkbox5.checked = response.answer.checkbox5
-//         checkboxAll.checked = checkbox1.checked && checkbox2.checked && checkbox3.checked && checkbox4.checked && checkbox5.checked
-//         setTimeout(() => document.documentElement.style.setProperty('--setting-transition', 'all .3s'), 100)
-//     }
-//     else location.reload()
-// })
-
-// bugreport.onclick = () => {
-//     chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
-// }
-
-// description.onclick = () => {
-//     chrome.tabs.create({ url: 'https://github.com/KyuGG/orioks_tweaker#функционал' })
-// }
-
-// function onClick() {
-//     checkboxAll.checked = checkbox1.checked && checkbox2.checked && checkbox3.checked && checkbox4.checked && checkbox5.checked
-//     const settings = {
-//         checkbox1: checkbox1.checked,
-//         checkbox2: checkbox2.checked,
-//         checkbox3: checkbox3.checked,
-//         checkbox4: checkbox4.checked,
-//         checkbox5: checkbox5.checked
-//     }
-//     chrome.runtime.sendMessage({ data: 'changeSettings', settings: settings }, response => console.log(response.answer))
-// }
-
-// checkboxAll.onclick = () => {
-//     const isTurnedOn = checkboxAll.checked
-
-//     checkbox1.checked = isTurnedOn
-//     checkbox2.checked = isTurnedOn
-//     checkbox3.checked = isTurnedOn
-//     checkbox4.checked = isTurnedOn
-//     checkbox5.checked = isTurnedOn
-
-//     const settings = {
-//         checkbox1: isTurnedOn,
-//         checkbox2: isTurnedOn,
-//         checkbox3: isTurnedOn,
-//         checkbox4: isTurnedOn,
-//         checkbox5: isTurnedOn
-//     }
-//     chrome.runtime.sendMessage({ data: 'changeSettings', settings: settings }, response => console.log(response.answer))
-// }
-
-// checkbox1.onclick = onClick
-// checkbox2.onclick = onClick
-// checkbox3.onclick = onClick
-// checkbox4.onclick = onClick
-// checkbox5.onclick = onClick
 const bugReport = () => chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
 const description = () => chrome.tabs.create({ url: 'https://github.com/KyuGG/orioks_tweaker#функционал' })
 </script>
