@@ -1,5 +1,6 @@
 import getSettings from '../functions/getSettings'
 import changeLogo from '../functions/changeLogo'
+import fixScore from '../functions/fixScore'
 
 document.documentElement.style.visibility = 'hidden'
 
@@ -9,7 +10,7 @@ window.onload = async () => {
     await changeLogo()
     // bugReport()
     // await sleep(100)
-    // if (settings.fixScore) fixScore()
+    if (settings.fixScore) fixScore()
     // if (settings.answer.checkbox2) runDownload()
     // if (settings.answer.checkbox3) await schedule()
     // if (settings.answer.checkbox4) discNameChanger()
