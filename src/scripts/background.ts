@@ -1,5 +1,5 @@
 import GetSettingsResponse from '../interfaces/getSettingsResponse'
-import StorageSettings from '../interfaces/StorageSettings'
+import { StorageSettings } from '../interfaces/StorageSettings'
 
 const storageTemplate: StorageSettings = {
     version: '1.0.12',

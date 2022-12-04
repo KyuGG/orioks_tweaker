@@ -1,6 +1,6 @@
-import StorageSettings from './StorageSettings'
+import { Settings } from './StorageSettings'
 
 export default interface GetSettingsResponse {
-    settings: StorageSettings['settings']
-    version: StorageSettings['version']
+    settings: Settings
+    version: string
 }

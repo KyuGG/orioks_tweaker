@@ -127,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-import StorageSettings from '../../interfaces/StorageSettings'
+import { Settings } from '../../interfaces/StorageSettings'
 import GetSettingsResponse from '../../interfaces/GetSettingsResponse'
 
 import { onMounted, ref } from 'vue'
@@ -135,7 +135,7 @@ import Switcher from './switcher.vue'
 
 import wakeUpBackground from '../../functions/wakeUpBackground'
 
-const settings = ref(null as StorageSettings['settings'])
+const settings = ref(null as Settings)
 const version = ref('')
 const opacity = ref('0')
 
@@ -146,7 +146,7 @@ wakeUpBackground().then(() => {
     })
 })
 
-onMounted(() => setTimeout(() => (opacity.value = '100%'), 100))
+onMounted(() => setTimeout(() => (opacity.value = '100%'), 300))
 
 // window.onload = () => document.body.style.opacity = '100%'
 // document.documentElement.style.setProperty('--setting-transition', 'all .3s')
