@@ -1,14 +1,16 @@
 import getSettings from '../functions/getSettings'
+import changeLogo from '../functions/changeLogo'
+import fixScore from '../functions/fixScore'
 
 document.documentElement.style.visibility = 'hidden'
 
 const { settings } = await getSettings()
 // changeTheme()
 window.onload = async () => {
-    // logo()
+    await changeLogo()
     // bugReport()
     // await sleep(100)
-    // if (settings.answer.checkbox1) fixScore()
+    if (settings.fixScore) fixScore()
     // if (settings.answer.checkbox2) runDownload()
     // if (settings.answer.checkbox3) await schedule()
     // if (settings.answer.checkbox4) discNameChanger()

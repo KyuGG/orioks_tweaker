@@ -4,7 +4,8 @@
     "description": "ORIOKS extension",
     "scripts": {
         "build": "npx webpack",
-        "watch": "npx webpack --watch"
+        "watch": "npx webpack --watch",
+        "prettify": "npx prettier -w --cache src/scripts src/functions/ src/interfaces/"
     },
     "author": "KyuGG, lordmyrnya",
     "license": "ISC",

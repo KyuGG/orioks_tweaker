@@ -23,5 +23,9 @@
         }
     ],
     "permissions": ["tabs", "scripting", "storage"],
-    "host_permissions": ["https://orioks.miet.ru/*"]
+    "host_permissions": ["https://orioks.miet.ru/*"],
+    "web_accessible_resources": [{
+        "resources": ["assets/*.png"],
+        "matches": ["https://orioks.miet.ru/*"]
+    }]
 }
