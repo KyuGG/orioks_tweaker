@@ -2,7 +2,7 @@ import getSettings from '../functions/getSettings'
 
 document.documentElement.style.visibility = 'hidden'
 
-const settings = await getSettings()
+const { settings } = await getSettings()
 // changeTheme()
 window.onload = async () => {
     // logo()
