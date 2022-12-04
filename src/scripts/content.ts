@@ -1,4 +1,4 @@
-import getSettings from '../functions/getSettings'
+import getSettings from '../helpers/getSettings'
 import changeLogo from '../functions/changeLogo'
 import fixScore from '../functions/fixScore'
 
