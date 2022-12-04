@@ -15,10 +15,7 @@ export default function fixScore() {
         if (realMaxScore > 100) realMaxScore = 100
         dises[i].textContent = String(Math.round(realScore * 100) / 100)
         const percent = Math.round((realScore / realMaxScore) * 100)
-        if (percent >= 86) dises[i].className = 'grade_5 grade'
-        else if (percent >= 70) dises[i].className = 'grade_4 grade'
-        else if (percent >= 50) dises[i].className = 'grade_3 grade'
-        else dises[i].className = 'grade_1 grade'
+        dises[i].className = percentGrade(percent)
     }
 }
 
@@ -27,4 +24,15 @@ function removeJunk() {
     document
         .querySelectorAll('.bad, .mvb, thead.ng-scope th:last-child')
         .forEach(el => el.remove())
+}
+
+/**Возвращает класс для элемента оценки, отражающий эффективность учащегося
+ * @param percent процент, отражающий эффективность учащегося на данный момент (0..100)
+ * @returns строка, в которой указаны классы, кои необходимо присвоить элементу с оценкой
+*/
+function percentGrade(percent: number): string {
+    if (percent >= 86) return 'grade_5 grade'
+    else if (percent >= 70) return 'grade_4 grade'
+    else if (percent >= 50) return 'grade_3 grade'
+    return 'grade_1 grade'
 }
