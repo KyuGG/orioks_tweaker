@@ -1,4 +1,4 @@
-import countScoreObject from '../interfaces/countScoreObject'
+import CountScoreObject from '../interfaces/CountScoreObject'
 
 export default function fixScore() {
     if (!(location.pathname === '/student/student')) return false
@@ -39,11 +39,12 @@ function percentGrade(percent: number): string {
  * @param disc объект одной дисциплины (который выкачивается из #forang).
  * @returns объект, в котором отражается реальный максимальный (max) и реальный текущий (real) балл за дисциплину.
  */
-export function countScore(disc): countScoreObject {
-    const result = {
+export function countScore(disc: any) {
+    const result: CountScoreObject = {
         max: 0,
         real: 0,
     }
+
     for (const segment of disc.segments[0].allKms) {
         if (segment.grade.b !== '-') {
             result.max += segment.max_ball
