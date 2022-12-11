@@ -1,9 +1,13 @@
 {
-	"compilerOptions": {
-		"target": "es2017",
-		"module": "esnext",
-		"lib": ["es5", "es6", "dom"],
-		"moduleResolution": "node",
-		"rootDir": "src"
-	}
+    "compilerOptions": {
+        "target": "es2017",
+        "module": "esnext",
+        "lib": ["es5", "es6", "dom"],
+        "moduleResolution": "node",
+        "rootDir": "src",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        }
+    }
 }

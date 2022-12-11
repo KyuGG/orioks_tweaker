@@ -1,4 +1,4 @@
-import GetSettingsResponse from '../interfaces/GetSettingsResponse'
+import GetSettingsResponse from '@/interfaces/GetSettingsResponse'
 import wakeUpBackground from './wakeUpBackground'
 
 export default async function getSettings() {

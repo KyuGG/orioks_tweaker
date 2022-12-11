@@ -1,4 +1,4 @@
-import CountScoreObject from '../interfaces/CountScoreObject'
+import CountScoreObject from '@/interfaces/CountScoreObject'
 
 export default function fixScore() {
     if (!(location.pathname === '/student/student')) return false
