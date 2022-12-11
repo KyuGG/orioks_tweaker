@@ -2,6 +2,7 @@
 const path = require('path')
 const fs = require('fs')
 
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -28,6 +29,7 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.ts', '.js'],
+		plugins: [new TsconfigPathsPlugin({})]
 	},
 	module: {
 		rules: [

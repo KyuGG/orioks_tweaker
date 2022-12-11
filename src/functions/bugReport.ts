@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
-import App from '../components/bugReport.vue'
+import App from '@/components/bugReport.vue'
 
 export default function bugReport() {
-    createApp(App).mount('.container.margin-top')
+    if (location.pathname === '/bugreport')
+        createApp(App).mount('.container.margin-top')
 }

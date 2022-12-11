@@ -1,7 +1,7 @@
-import getSettings from '../helpers/getSettings'
-import changeLogo from '../functions/changeLogo'
-import fixScore from '../functions/fixScore'
-import bugReport from '../functions/bugReport'
+import getSettings from '@/helpers/getSettings'
+import changeLogo from '@/functions/changeLogo'
+import fixScore from '@/functions/fixScore'
+import bugReport from '@/functions/bugReport'
 document.documentElement.style.visibility = 'hidden'
 
 const { settings } = await getSettings()
