@@ -49,19 +49,20 @@ module.exports = {
 			//compile other scss (vue) to js files
 			{
 				test: /\.s(a|c)ss$/,
-				exclude: [path.resolve(__dirname, 'src/styles')],
-				use: ['vue-style-loader', 'css-loader', 'sass-loader'],
+				include: [path.resolve(__dirname, 'src/components')],
+				use: [
+					{
+						loader: 'style-loader',
+						options: {
+							insert: 'html'
+						}
+					},
+					'css-loader',
+					'sass-loader'],
 			},
 			{
 				test: /\.vue$/,
 				loader: 'vue-loader',
-			},
-			{
-				test: /\.json$/,
-				type: 'asset/resource',
-				generator: {
-					filename: '[name].json',
-				},
 			},
 		],
 	},
