@@ -2,6 +2,7 @@
     "compilerOptions": {
         "target": "es2017",
         "module": "esnext",
+        "strict": true,
         "lib": ["es5", "es6", "dom"],
         "moduleResolution": "node",
         "rootDir": "src",
