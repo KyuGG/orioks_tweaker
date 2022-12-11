@@ -70,13 +70,13 @@
 </template>
 
 <script setup lang="ts">
-import { Settings } from '../../interfaces/StorageSettings'
+import { Settings } from '@/interfaces/StorageSettings'
 
 import { onMounted, ref } from 'vue'
 import Switcher from './switcher.vue'
 
-import getSettings from '../../helpers/getSettings'
-import wakeUpBackground from '../../helpers/wakeUpBackground'
+import getSettings from '@/helpers/getSettings'
+import wakeUpBackground from '@/helpers/wakeUpBackground'
 
 
 const settings = ref(null as Settings)
