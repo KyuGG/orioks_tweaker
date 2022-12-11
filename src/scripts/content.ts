@@ -1,14 +1,14 @@
 import getSettings from '../helpers/getSettings'
 import changeLogo from '../functions/changeLogo'
 import fixScore from '../functions/fixScore'
-
+import bugReport from '../functions/bugReport'
 document.documentElement.style.visibility = 'hidden'
 
 const { settings } = await getSettings()
 // changeTheme()
 window.onload = async () => {
-    await changeLogo()
-    // bugReport()
+    changeLogo()
+    bugReport()
     // await sleep(100)
     if (settings.fixScore) fixScore()
     // if (settings.answer.checkbox2) runDownload()
