@@ -4,7 +4,7 @@
         class="ios8-switch"
         :id="id"
         :checked="checked"
-        @change="(evt: InputEvent) => emit('update', evt, checked)" />
+        @change="(payload: Event) => emit('update', payload, checked)" />
     <label :for="id">{{ label }}</label>
 </template>
 
@@ -16,7 +16,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-    (event: 'update', evt: InputEvent, checked: boolean): void
+    (event: 'update', payload: Event, checked: boolean): void
 }>()
 </script>
 

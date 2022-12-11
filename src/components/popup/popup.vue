@@ -79,7 +79,7 @@ import getSettings from '@/helpers/getSettings'
 import wakeUpBackground from '@/helpers/wakeUpBackground'
 
 
-const settings = ref(null as Settings)
+const settings = ref(null as unknown as Settings)
 const allChecked = ref(false)
 const version = ref('')
 const opacity = ref('0')
@@ -94,19 +94,20 @@ getSettings().then(response => {
 const isAllChecked = () => {
     let allChecked = true
     for (const key of Object.keys(settings.value))
-        allChecked = allChecked && settings.value[key]
+        allChecked = allChecked && settings.value[key as keyof Settings]
     return allChecked
 }
 
-const onUpdate = async (evt: InputEvent, checked: boolean) => {
+const onUpdate = async (payload: Event, checked: boolean) => {
+    const evt = payload as InputEvent
     const slider = evt.target as HTMLInputElement
 
     if (slider.id === 'allSettings') {
         for (const key of Object.keys(settings.value))
-            settings.value[key] = !checked
+            settings.value[key as keyof Settings] = !checked
     }
     else
-        settings.value[slider.id] = !checked
+        settings.value[slider.id as keyof Settings] = !checked
 
     allChecked.value = isAllChecked()
 
@@ -116,7 +117,7 @@ const onUpdate = async (evt: InputEvent, checked: boolean) => {
     })
 }
 
-onMounted(() => setTimeout(() => (opacity.value = '100%'), 300))
+onMounted(() => setTimeout(() => (opacity.value = '100%'), 100))
 
 const bugReport = () => chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
 const description = () => chrome.tabs.create({ url: 'https://github.com/KyuGG/orioks_tweaker#функционал' })

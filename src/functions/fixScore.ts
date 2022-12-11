@@ -4,12 +4,17 @@ export default function fixScore() {
     if (!(location.pathname === '/student/student')) return false
     removeJunk()
     const dises = document.querySelectorAll('tr.pointer span.grade')
-    const json = JSON.parse(document.querySelector('#forang').textContent).dises
+    const forang = document.querySelector('#forang') as HTMLDivElement
+    const json = JSON.parse(forang.innerText).dises
     for (const i in json) {
         const scores = countScore(json[i])
-        dises[i].textContent = String(Math.round(scores.real * 100) / 100)
+
+        dises[Number(i)].textContent = String(
+            Math.round(scores.real * 100) / 100
+        )
+
         const percent = Math.round((scores.real / scores.max) * 100)
-        dises[i].className = percentGrade(percent)
+        dises[Number(i)].className = percentGrade(percent)
     }
 }
 
