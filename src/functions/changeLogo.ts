@@ -1,3 +1,6 @@
+/**
+ * @summary Меняет иконку на вкладке сайта и логотип в профиле на логотип tweaker
+ */
 export default function changeLogo() {
     const logoLink = chrome.runtime.getURL('assets/logo.png')
     const icon = document.createElement('link')
