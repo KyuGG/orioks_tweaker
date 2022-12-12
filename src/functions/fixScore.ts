@@ -1,5 +1,7 @@
 import CountScoreObject from '@/interfaces/CountScoreObject'
-
+/**
+ * @summary Осуществляет полный подсчет всех баллов без учета текущей недели
+ */
 export default function fixScore() {
     if (!(location.pathname === '/student/student')) return false
     removeJunk()
