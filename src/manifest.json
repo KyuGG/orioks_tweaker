@@ -21,6 +21,11 @@
             "js": ["content.js"],
             "css": ["styles/default.css"],
             "run_at": "document_start"
+        },
+        {
+            "matches": ["https://orioks.miet.ru/student/student*"],
+            "css": ["styles/fixScoreGrades.css"],
+            "run_at": "document_start"
         }
     ],
     "permissions": ["tabs", "scripting", "storage"],

@@ -1,0 +1,46 @@
+// Прилепить балл к правой стороне
+tr.pointer td:last-child {
+    text-align: right;
+}
+
+// Перенос слов в таблицах
+table:not(.modal-body table) {
+    word-break: break-word;
+}
+
+// Текущая оценка (итог дисциплины)
+.text-right span {
+    width: 120px !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+// Минимальная ширина для первой колонке в таблице с детальными оценками (иначе не влезает "Итог")
+td.ng-binding {
+    min-width: 45px;
+}
+
+// Долги
+.click.hidden-md.hidden-lg span.grade,
+.click.hidden-md.hidden-lg div {
+    display: none;
+}
+
+// Чтобы влезало время начала пары в блоке с расписанием
+.well table td:first-child {
+    width: 20%;
+}
+
+// Чтобы влезали названия ресурсов в модальных окнах
+@media (max-width: 768px) {
+    .modal-body tr {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 2px solid white !important;
+    }
+
+    .modal-body td {
+        border: none !important;
+    }
+}
