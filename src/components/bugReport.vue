@@ -1,5 +1,6 @@
 <template>
     <div>
+        <NavPanel name="Сообщить об ошибке"></NavPanel>
         <h1>ORIOKS Tweaker</h1>
         <h2>Напишите об ошибке</h2>
         <a href="https://github.com/KyuGG/orioks_tweaker/issues">GitHub</a>
@@ -7,6 +8,11 @@
         <a href="https://vk.me/kyugg">VK</a>
     </div>
 </template>
+
+<script setup lang="ts">
+import NavPanel from './navPanel.vue'
+
+</script>
 
 <style scoped lang="scss">
 a {
