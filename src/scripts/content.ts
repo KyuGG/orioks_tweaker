@@ -1,6 +1,7 @@
 import getSettings from '@/helpers/getSettings'
 import changeLogo from '@/functions/changeLogo'
 import fixScore from '@/functions/fixScore'
+import fixDownload from '@/functions/fixDownload'
 import bugReport from '@/functions/bugReport'
 document.documentElement.style.visibility = 'hidden'
 
@@ -9,9 +10,11 @@ const { settings } = await getSettings()
 window.onload = async () => {
     changeLogo()
     bugReport()
-    // await sleep(100)
+
+    await sleep(100)
+
     if (settings.fixScore) fixScore()
-    // if (settings.answer.checkbox2) runDownload()
+    if (settings.fixDownload) fixDownload()
     // if (settings.answer.checkbox3) await schedule()
     // if (settings.answer.checkbox4) discNameChanger()
     // if (settings.answer.checkbox5) coloredElements()
