@@ -92,10 +92,10 @@ getSettings().then(response => {
 })
 
 const isAllChecked = () => {
-    let allChecked = true
     for (const key of Object.keys(settings.value))
-        allChecked = allChecked && settings.value[key as keyof Settings]
-    return allChecked
+        if (!settings.value[key as keyof Settings])
+            return false
+    return true
 }
 
 const onUpdate = async (payload: Event, checked: boolean) => {
@@ -122,6 +122,7 @@ onMounted(() => setTimeout(() => (opacity.value = '100%'), 100))
 const bugReport = () => chrome.tabs.create({ url: 'https://orioks.miet.ru/bugreport' })
 const description = () => chrome.tabs.create({ url: 'https://github.com/KyuGG/orioks_tweaker#функционал' })
 </script>
+
 
 <style scoped lang="scss">
 * {
