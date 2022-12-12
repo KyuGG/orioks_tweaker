@@ -4,7 +4,7 @@
     "version": "1.0.12",
     "description": "Модификация для ОРИОКСа. Правильное отображение баллов, интеграция расписания занятий и кастомизация!",
     "background": {
-        "service_worker": "/background.js"
+        "service_worker": "background.js"
     },
     "action": {
         "default_popup": "popup.html"
@@ -18,7 +18,8 @@
                 "https://orioks.miet.ru/manuals/*",
                 "https://orioks.miet.ru/storage/*"
             ],
-            "js": ["/content.js"],
+            "js": ["content.js"],
+            "css": ["styles/default.css"],
             "run_at": "document_start"
         }
     ],
@@ -26,7 +27,7 @@
     "host_permissions": ["https://orioks.miet.ru/*"],
     "web_accessible_resources": [
         {
-            "resources": ["assets/*.png"],
+            "resources": ["assets/*"],
             "matches": ["https://orioks.miet.ru/*"]
         }
     ]
