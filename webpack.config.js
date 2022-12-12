@@ -36,7 +36,11 @@ module.exports = {
 			{
 				test: /\.ts?$/,
 				loader: 'ts-loader',
-				options: { appendTsSuffixTo: [/\.vue$/] },
+				options: { 
+					appendTsSuffixTo: [/\.vue$/],
+					// for scoped vue styles
+					ignoreDiagnostics: [7006],
+				},
 			},
 			//compile scss to css from styles folder
 			{

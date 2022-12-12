@@ -1,9 +1,15 @@
 <template>
-    <h1>BUG REPORT PAGE</h1>
+    <div>
+        <h1>ORIOKS Tweaker</h1>
+        <h2>Напишите об ошибке</h2>
+        <a href="https://github.com/KyuGG/orioks_tweaker/issues">GitHub</a>
+        <br>
+        <a href="https://vk.me/kyugg">VK</a>
+    </div>
 </template>
 
 <style scoped lang="scss">
-h1 {
-    color: purple;
+a {
+    font-size: 22pt;
 }
 </style>

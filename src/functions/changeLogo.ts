@@ -6,7 +6,7 @@ export default function changeLogo() {
     icon.href = logoLink
     document.head.append(icon)
 
-    if (location.pathname == '/user/profile') {
+    if (location.pathname === '/user/profile') {
         const logo = document.querySelector(
             '.img-responsive'
         ) as HTMLImageElement
