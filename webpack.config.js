@@ -7,6 +7,7 @@ const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+
 const webpack = require('webpack')
 
 const getFiles = dir => fs.readdirSync(dir).reduce((acc, v) => ({ ...acc, [v.replace('.' + v.split('.').pop(), '')]: `${dir}/${v}` }), {})
@@ -28,19 +29,29 @@ module.exports = {
 		publicPath: '',
 	},
 	resolve: {
-		extensions: ['.ts', '.js'],
+		extensions: ['.ts', '.tsx', '.js'],
 		plugins: [new TsconfigPathsPlugin({})]
 	},
 	module: {
 		rules: [
 			{
-				test: /\.ts?$/,
-				loader: 'ts-loader',
-				options: { 
-					appendTsSuffixTo: [/\.vue$/],
-					// for scoped vue styles
-					ignoreDiagnostics: [7006],
-				},
+				test: /\.tsx?$/,
+				use: [
+					{
+						loader: 'babel-loader',
+						options: {
+							plugins: ["@vue/babel-plugin-jsx"]  
+						}
+					},
+					{
+						loader: 'ts-loader',
+						options: {
+							appendTsSuffixTo: [/\.vue$/],
+							// for scoped vue styles
+							ignoreDiagnostics: [7006],
+						},
+					}
+				],
 			},
 			//compile scss to css from styles folder
 			{

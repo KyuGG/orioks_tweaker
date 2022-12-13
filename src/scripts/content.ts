@@ -3,6 +3,8 @@ import changeLogo from '@/functions/changeLogo'
 import fixScore from '@/functions/fixScore'
 import fixDownload from '@/functions/fixDownload'
 import bugReport from '@/functions/bugReport'
+import schedule from '@/functions/schedule'
+
 document.documentElement.style.visibility = 'hidden'
 
 const { settings } = await getSettings()
@@ -15,7 +17,7 @@ window.onload = async () => {
 
     if (settings.fixScore) fixScore()
     if (settings.fixDownload) fixDownload()
-    // if (settings.answer.checkbox3) await schedule()
+    if (settings.schedule) schedule()
     // if (settings.answer.checkbox4) discNameChanger()
     // if (settings.answer.checkbox5) coloredElements()
     // discNameLoader()
