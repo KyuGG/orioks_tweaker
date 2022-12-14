@@ -6,5 +6,5 @@ export default function vnodeToDom(vnode: JSX.Element) {
 
     render(vnode, container)
 
-    return container.firstChild as Node
+    return container.firstChild as HTMLElement
 }
