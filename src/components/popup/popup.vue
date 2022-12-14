@@ -2,14 +2,16 @@
     <div
         class="popup"
         :style="`--opacity: ${opacity};`"
-        v-if="settings && version">
+        v-if="settings && version"
+    >
         <h2>ORIOKS tweaker {{ version }}</h2>
         <div class="switcher">
             <Switcher
                 label="All Settings"
                 id="allSettings"
                 :checked="allChecked"
-                @update="onUpdate">
+                @update="onUpdate"
+            >
             </Switcher>
         </div>
         <h3>Basic Settings</h3>
@@ -18,7 +20,8 @@
                 label="Fix Score"
                 id="fixScore"
                 :checked="settings.fixScore"
-                @update="onUpdate">
+                @update="onUpdate"
+            >
             </Switcher>
         </div>
         <div class="switcher">
@@ -26,7 +29,8 @@
                 label="Fix Download"
                 id="fixDownload"
                 :checked="settings.fixDownload"
-                @update="onUpdate">
+                @update="onUpdate"
+            >
             </Switcher>
         </div>
         <div class="switcher">
@@ -34,7 +38,8 @@
                 label="Schedule"
                 id="schedule"
                 :checked="settings.schedule"
-                @update="onUpdate">
+                @update="onUpdate"
+            >
             </Switcher>
         </div>
         <h3>Customize</h3>
@@ -43,7 +48,8 @@
                 label="Discipline Names"
                 id="disciplineNames"
                 :checked="settings.disciplineNames"
-                @update="onUpdate">
+                @update="onUpdate"
+            >
             </Switcher>
         </div>
         <div class="switcher">
@@ -51,7 +57,8 @@
                 label="Dark Theme"
                 id="darkTheme"
                 :checked="settings.darkTheme"
-                @update="onUpdate">
+                @update="onUpdate"
+            >
             </Switcher>
         </div>
         <div class="buttons">
@@ -59,12 +66,14 @@
                 id="bugreport"
                 type="button"
                 value="Report a Bug"
-                @click="bugReport" />
+                @click="bugReport"
+            />
             <input
                 id="description"
                 type="button"
                 value="Description"
-                @click="description" />
+                @click="description"
+            />
         </div>
     </div>
 </template>
