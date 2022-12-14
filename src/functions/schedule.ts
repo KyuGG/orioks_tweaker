@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
-import Schedule from '@/components/schedule.vue'
-import ScheduleNavButton from '@/components/scheduleNavButton.vue'
+import Schedule from '@/components/schedule/schedulePage.vue'
+import ScheduleNavButton from '@/components/schedule/scheduleNavButton.vue'
 import vueToDom from '@/helpers/vueToDom'
 
 /**
