@@ -4,7 +4,8 @@
         class="ios8-switch"
         :id="id"
         :checked="checked"
-        @change="(payload: Event) => emit('update', payload, checked)" />
+        @change="(payload: Event) => emit('update', payload, checked)"
+    />
     <label :for="id">{{ label }}</label>
 </template>
 
