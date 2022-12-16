@@ -10,12 +10,16 @@
             placeholder="Подсказки"
             @click="hints"
         ></MyButton>
+        <ScheduleHints></ScheduleHints>
+        <ScheduleTable></ScheduleTable>
     </div>
 </template>
 
 <script setup lang="ts">
 import MyButton from '../myButton.vue'
 import NavPanel from '../navPanel.vue'
+import ScheduleHints from './scheduleHints.vue'
+import ScheduleTable from './scheduleTable.vue'
 
 const group = 'GROUP'
 
