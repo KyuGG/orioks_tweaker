@@ -1,6 +1,6 @@
 import vueToDom from '@/helpers/vueToDom'
-import nullChangesVue from '@/components/disciplineEditTools/nullChanges.vue'
-import editNameVue from '@/components/disciplineEditTools/editName.vue'
+import NullChanges from '@/components/disciplineEditTools/nullChanges.vue'
+import EditName from '@/components/disciplineEditTools/editName.vue'
 
 /**Подгружает инструментарий для изменения названия дисциплин */
 export default function disciplineEditTools() {
@@ -11,7 +11,7 @@ export default function disciplineEditTools() {
 
 /**Загружает на страницу кнопку сброса изменений */
 function addNullButton() {
-    const clearSettings = vueToDom(nullChangesVue)
+    const clearSettings = vueToDom(NullChanges)
     const table = document.querySelector('table')
     if (table) table.before(clearSettings)
 }
@@ -21,7 +21,7 @@ function addEditButtons() {
     const dises = document.querySelectorAll('tr.pointer')
     dises.forEach(disc => {
         const td = disc.querySelector(':first-child')
-        const marker = vueToDom(editNameVue)
+        const marker = vueToDom(EditName)
         if (td) td.prepend(marker)
     })
 }
