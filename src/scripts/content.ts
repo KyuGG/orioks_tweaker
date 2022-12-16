@@ -4,6 +4,8 @@ import fixScore from '@/functions/fixScore'
 import fixDownload from '@/functions/fixDownload'
 import bugReport from '@/functions/bugReport'
 import schedule from '@/functions/schedule'
+import disciplineNames from '@/functions/disciplineNames'
+import disciplineEditTools from '@/functions/disciplineEditTools'
 
 document.documentElement.style.visibility = 'hidden'
 
@@ -18,9 +20,9 @@ window.onload = async () => {
     if (settings.fixScore) fixScore()
     if (settings.fixDownload) fixDownload()
     if (settings.schedule) schedule()
-    // if (settings.answer.checkbox4) discNameChanger()
+    if (settings.disciplineNames) disciplineEditTools()
     // if (settings.answer.checkbox5) coloredElements()
-    // discNameLoader()
+    disciplineNames()
     document.documentElement.style.visibility = 'visible'
     await sleep(500)
     document.documentElement.style.setProperty('--transition', '.3s')
