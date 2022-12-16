@@ -17,7 +17,7 @@ const storageTemplate: StorageSettings = {
 let storage = (await chrome.storage.local.get()) as StorageSettings
 
 //update local storage
-if (storage?.version !== storageTemplate.version) {
+if (storage.version !== storageTemplate.version) {
     storage = storageTemplate
     await chrome.storage.local.set(storage)
 }
