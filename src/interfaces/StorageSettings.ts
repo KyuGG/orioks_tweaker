@@ -1,7 +1,9 @@
+import { LessonParsed } from '@/interfaces/Lesson'
+
 export interface StorageSettings {
     version: string
     settings: Settings
-    schedule: []
+    schedule: LessonParsed[]
     group: string
 }
 

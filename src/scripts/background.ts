@@ -50,7 +50,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
         case 'getSchedule':
             sendResponse({
-                answer: storage.schedule,
+                schedule: storage.schedule,
                 group: storage.group,
             })
             break

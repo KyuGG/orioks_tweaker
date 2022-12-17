@@ -21,8 +21,12 @@
 </template>
 
 <script setup lang="ts">
+import { LessonParsed } from '@/interfaces/Lesson'
 import ScheduleLesson from './scheduleLesson.vue'
 
+const props = defineProps<{
+    week: LessonParsed[]
+}>()
 
 const time = [
     'Пара №1\n9:00-10:30',
@@ -49,12 +53,12 @@ td,
 th {
     text-align: center;
     height: 50px !important;
-    width: 14.28%;
+    width: 15.5%;
 }
 
 .time {
-    width: 6.5% !important;
-    min-width: 57px;
+    min-width: 60px;
+    width: 7%;
     height: 110px;
     font-size: 9pt;
 }
