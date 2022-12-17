@@ -1,7 +1,7 @@
 <template>
     <table>
         <tr>
-            <th>Время</th>
+            <th class="time">Время</th>
             <th>Понедельник</th>
             <th>Вторник</th>
             <th>Среда</th>
@@ -40,15 +40,22 @@ table {
     text-align: center;
 }
 
+th,
+td,
+.time {
+    border: 1px solid rgba($color: black, $alpha: 0.3);
+}
+
 th {
     text-align: center;
-    height: 50px;
+    height: 50px !important;
+    width: 14.28%;
 }
 
 .time {
-    width: 7%;
+    width: 6.5% !important;
+    min-width: 57px;
     height: 110px;
     font-size: 9pt;
-    border: 1px solid;
 }
 </style>

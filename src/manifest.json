@@ -26,6 +26,11 @@
             "matches": ["https://orioks.miet.ru/student/student*"],
             "css": ["styles/fixScoreGrades.css"],
             "run_at": "document_start"
+        },
+        {
+            "matches": ["https://miet.ru/schedule*"],
+            "js": ["scheduleFetch.js"],
+            "run_at": "document_start"
         }
     ],
     "permissions": ["tabs", "scripting", "storage"],

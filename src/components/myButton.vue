@@ -1,7 +1,7 @@
 <template>
     <button
         class="my-btn"
-        @click="emit('click')"
+        @click="(payload: MouseEvent) => emit('click', payload)"
     >{{ placeholder }}</button>
 </template>
 
@@ -11,7 +11,7 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-    (event: 'click'): void
+    (event: 'click', payload: MouseEvent): void
 }>()
 </script>
 

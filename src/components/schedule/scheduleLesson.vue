@@ -5,10 +5,10 @@
 </template>
 
 <script setup lang="ts">
-import Lesson from '@/interfaces/Lesson'
+import { LessonClassname } from '@/interfaces/Lesson'
 const props = defineProps<{
     lesson: string,
-    type: Lesson
+    type: LessonClassname
 }>()
 </script>
 
@@ -16,5 +16,21 @@ const props = defineProps<{
 td {
     height: 110px;
     font-size: 9pt;
+}
+
+.lecture {
+    background: #b6c6e7;
+}
+
+.lab {
+    background: #fdd677;
+}
+
+.sem {
+    background: white;
+}
+
+.holiday {
+    background-color: #c5e0b5;
 }
 </style>

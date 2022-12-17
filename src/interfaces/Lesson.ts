@@ -1,3 +1,11 @@
-export type Lesson = 'lecture' | 'sem' | 'lab' | 'holiday'
+type LessonClassname = 'lecture' | 'sem' | 'lab' | 'holiday'
 
-export default Lesson
+/** Массив, содержаищй информацию о паре
+ * @param 0 - Номер дня недели [1-6]
+ * @param 1 - Название предмета
+ * @param 2 - Номер пары
+ * @param 3 - Номер аудитории
+ */
+type LessonParsed = [string, string, string, string] | []
+
+export { LessonClassname, LessonParsed }
