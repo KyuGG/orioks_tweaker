@@ -2,7 +2,7 @@ import GetSettingsResponse from '@/interfaces/getSettingsResponse'
 import { StorageSettings } from '@/interfaces/StorageSettings'
 
 const storageTemplate: StorageSettings = {
-    version: '1.0.12',
+    version: chrome.runtime.getManifest().version,
     settings: {
         fixScore: true,
         fixDownload: true,
