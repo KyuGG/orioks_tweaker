@@ -1,12 +1,14 @@
 <template>
-    <input
-        type="checkbox"
-        class="ios8-switch"
-        :id="id"
-        :checked="checked"
-        @change="(payload: Event) => emit('update', payload, checked)"
-    />
-    <label :for="id">{{ label }}</label>
+    <div>
+        <input
+            type="checkbox"
+            class="ios8-switch"
+            :id="id"
+            :checked="checked"
+            @change="(payload: Event) => emit('update', payload, checked)"
+        />
+        <label :for="id">{{ label }}</label>
+    </div>
 </template>
 
 <script setup lang="ts">
