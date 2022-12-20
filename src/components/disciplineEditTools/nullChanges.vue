@@ -1,5 +1,8 @@
 <template>
-    <MyButton placeholder="Обнулить изменения" @click="nullNames"></MyButton>
+    <MyButton
+        placeholder="Обнулить изменения"
+        @click="nullNames"
+    ></MyButton>
 </template>
 
 <script setup lang="ts">

@@ -1,5 +1,8 @@
 <template>
-    <img :src="path" @click="changeName" />
+    <img
+        :src="path"
+        @click="changeName"
+    />
 </template>
 
 <script setup lang="ts">
