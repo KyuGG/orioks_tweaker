@@ -54,6 +54,7 @@ th {
     text-align: center;
     height: 50px !important;
     width: 15.5%;
+    min-width: 95px;
 }
 
 .time {
