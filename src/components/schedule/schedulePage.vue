@@ -11,7 +11,9 @@
             @click="hints"
         ></MyButton>
         <ScheduleHints></ScheduleHints>
-        <ScheduleTable :week="ch"></ScheduleTable>
+        <div class="content hints-active">
+            <ScheduleTable :week="ch"></ScheduleTable>
+        </div>
     </div>
 </template>
 
@@ -27,8 +29,9 @@ import ScheduleTable from './scheduleTable.vue'
 
 let group = ''
 let schedule: LessonParsed[]
-let ch: Ref<LessonParsed[]> = ref([])
-let zn: Ref<LessonParsed[]> = ref([])
+const ch: Ref<LessonParsed[]> = ref([])
+const zn: Ref<LessonParsed[]> = ref([])
+const isHintsActive = localStorage.getItem('hints')
 
 wakeUpBackground().then(() => {
     chrome.runtime.sendMessage({ task: 'getSchedule' }, (response: GetScheduleResponse) => {
@@ -42,7 +45,11 @@ wakeUpBackground().then(() => {
 
 
 const choose = () => console.log('choose')
-const hints = () => console.log('hints')
+const hints = () => {
+    // const hints = Boolean(localStorage.getItem('hints'))
+    // console.log(hints)
+    // localStorage.setItem('hints', String(hints))
+}
 </script>
 
 <style scoped lang="scss">
@@ -50,5 +57,13 @@ h3 {
     margin-top: 10px;
     border: 1px solid #dddddd;
     padding: 5px;
+}
+
+.content {
+    transform: translateY(-60px);
+
+    &.hints-active {
+        transform: translateY(0);
+    }
 }
 </style>
