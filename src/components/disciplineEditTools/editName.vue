@@ -16,11 +16,12 @@ function changeName(evt: MouseEvent) {
     switch (checkName(newName)) {
         case -1:
             alert('Название не может быть пустым!')
-            return
             break
+
         case 1:
             alert(
-                'Слова в названии дисциплины слишком длинные.\nРасширение не гарантирует корректность работы в таком случае'
+                'Слова в названии дисциплины слишком длинные.\n' +
+                'Расширение не гарантирует корректность работы в таком случае'
             )
             break
     }
@@ -28,13 +29,13 @@ function changeName(evt: MouseEvent) {
     newName = newName as string
     newName.trim()
 
-    const marker = evt.target as HTMLElement
-    const disc = marker.parentElement?.parentElement
+    const marker = evt.target as HTMLImageElement
+    const disc = marker?.parentElement?.parentElement
     if (!disc) return
     const prevNameEl = disc.querySelector(':nth-child(2)')
     if (!prevNameEl) return
     let prevName = prevNameEl.getAttribute('prevname')
-    if (prevName == null) return
+    if (!prevName) return
 
     setName(prevName, newName)
 }

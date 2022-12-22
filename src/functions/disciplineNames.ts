@@ -34,7 +34,7 @@ export default function disciplineNames() {
 function prevNamer() {
     const dises = document.querySelectorAll(SELECTORS['/student/student'])
     dises.forEach(disc => {
-        const name = disc.textContent || ''
+        const name = disc.textContent as string
         disc.setAttribute('prevname', name)
     })
 }
@@ -45,7 +45,7 @@ function prevNamer() {
  * @returns -1 если поле пустое; 1 если длина имени слишком большая; 0 если всё хорошо.
  */
 export function checkName(name: string | null) {
-    if (name == '' || name == null || !name) return -1
+    if (!name) return -1
     else if (checkNameLength(name)) return 1
     return 0
 }
@@ -66,7 +66,9 @@ export function checkNameLength(name: string, length = 14) {
 
 /**Проверяет наличие названия дисциплины в константе дисциплин по физкультуре */
 function isPhysicalEducation(name: string) {
-    for (const physName of PHYS_NAMES) if (physName == name) return true
+    for (const physName of PHYS_NAMES) {
+        if (physName === name) return true
+    }
     return false
 }
 
@@ -74,14 +76,12 @@ function isPhysicalEducation(name: string) {
 export function updateNames() {
     let usePrevname = false
 
-    if (location.pathname == '/student/news/view') return newsView()
-    if (location.pathname == '/student/student') usePrevname = true
+    if (location.pathname === '/student/news/view') return newsView()
+    if (location.pathname === '/student/student') usePrevname = true
 
     const selector = SELECTORS[location.pathname]
     if (!selector) return
-    const dises = document.querySelectorAll(
-        selector
-    ) as NodeListOf<HTMLDivElement>
+    const dises = document.querySelectorAll(selector)
 
     const newNames = getNewNames()
     dises.forEach(disc => {
@@ -90,11 +90,9 @@ export function updateNames() {
         else name = disc.textContent
         if (!name) return
         name = name.trim()
-        for (const n in newNames) {
-            if (name.includes(n)) {
-                disc.innerText = name.replace(n, newNames[n] + '\n')
-            }
-        }
+        for (const n in newNames)
+            if (name.includes(n))
+                disc.textContent = name.replace(n, newNames[n] + '\n')
     })
 }
 
@@ -107,7 +105,7 @@ function newsView() {
     const newNames = getNewNames()
 
     for (const n in newNames)
-        if (name.includes(n)) disc.innerText = name.replace(n, newNames[n])
+        if (name.includes(n)) disc.textContent = name.replace(n, newNames[n])
 }
 
 /**Возвращает изменённые имена дисциплин */
@@ -123,9 +121,9 @@ export function getNewNames(): Record<string, string> {
  */
 export function setName(oldName: string, newName: string) {
     const names = getNewNames()
-    if (isPhysicalEducation(oldName)) {
+    if (isPhysicalEducation(oldName))
         for (let name of PHYS_NAMES) names[name] = newName
-    } else names[oldName] = newName
+    else names[oldName] = newName
     localStorage.setItem('discNames', JSON.stringify(names))
 
     updateNames()
@@ -141,9 +139,9 @@ export function resetNames() {
 function revertChanges() {
     if (location.pathname !== '/student/student') return
 
-    const dises = document.querySelectorAll(
+    const dises: NodeListOf<HTMLDivElement> = document.querySelectorAll(
         SELECTORS['/student/student']
-    ) as NodeListOf<HTMLDivElement>
+    )
 
     dises.forEach(disc => {
         const prevName = disc.getAttribute('prevname')
