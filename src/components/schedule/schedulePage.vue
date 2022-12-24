@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="isScheduleLoaded">
         <NavPanel name="Расписание"></NavPanel>
         <h3>Группа: {{ group }}</h3>
         <MyButton
@@ -14,7 +14,14 @@
             <ScheduleHints></ScheduleHints>
         </div>
         <div :class="`content ${hintsActive}`">
-            <ScheduleTable :week="ch"></ScheduleTable>
+            <ScheduleTable
+                week="ch"
+                :schedule="ch"
+            ></ScheduleTable>
+            <ScheduleTable
+                week="zn"
+                :schedule="zn"
+            ></ScheduleTable>
         </div>
     </div>
 </template>
@@ -30,9 +37,10 @@ import ScheduleHints from './scheduleHints.vue'
 import ScheduleTable from './scheduleTable.vue'
 
 let group = ''
-let schedule: LessonParsed[]
-const ch: Ref<LessonParsed[]> = ref([])
-const zn: Ref<LessonParsed[]> = ref([])
+let schedule: LessonParsed[][]
+const ch: Ref<LessonParsed[][]> = ref([])
+const zn: Ref<LessonParsed[][]> = ref([])
+const isScheduleLoaded = ref(false)
 const hintsActive = ref(localStorage.getItem('hints')) as Ref<string>
 if (hintsActive.value === null) hintsActive.value = 'hints-active'
 
@@ -44,11 +52,16 @@ wakeUpBackground().then(() => {
 
         ch.value = [schedule[0], schedule[1], schedule[2]]
         zn.value = [schedule[3], schedule[4], schedule[5]]
+
+        isScheduleLoaded.value = true
     })
 })
 
 
-const choose = () => console.log('choose')
+const choose = () => {
+    alert('Вы будете перенаправлены на сайт МИЭТа, выберите нужную группу а затем нажмите "Сохранить в ОРИОКС"')
+    location.href = 'https://miet.ru/schedule'
+}
 const hints = () => {
     hintsActive.value = hintsActive.value === 'hints-active' ? '' : 'hints-active'
 
