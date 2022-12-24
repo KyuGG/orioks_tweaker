@@ -19,7 +19,8 @@ const saveSchedule = async () => {
     else alert('Выберите группу')
 
     location.href = 'https://orioks.miet.ru/schedule'
-}</script>
+}
+</script>
 
 <style scoped lang="scss">
 span {

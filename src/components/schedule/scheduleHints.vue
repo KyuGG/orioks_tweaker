@@ -4,22 +4,37 @@
             <ScheduleLesson
                 type="lecture"
                 lesson="Лекция"
+                splitted-lesson=""
+                week=""
+                day=""
             ></ScheduleLesson>
             <ScheduleLesson
                 type="lab"
                 lesson="Лаба"
+                splitted-lesson=""
+                week=""
+                day=""
             ></ScheduleLesson>
             <ScheduleLesson
                 type="sem"
                 lesson="Семинар"
+                splitted-lesson=""
+                week=""
+                day=""
             ></ScheduleLesson>
             <ScheduleLesson
                 type="holiday"
                 lesson="Окно"
+                splitted-lesson=""
+                week=""
+                day=""
             ></ScheduleLesson>
             <ScheduleLesson
-                type="sem"
+                type="sem current-lesson"
                 lesson="Сейчас"
+                splitted-lesson=""
+                week=""
+                day=""
             ></ScheduleLesson>
         </tr>
     </table>
