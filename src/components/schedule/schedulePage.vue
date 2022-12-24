@@ -10,8 +10,10 @@
             placeholder="Подсказки"
             @click="hints"
         ></MyButton>
-        <ScheduleHints></ScheduleHints>
-        <div class="content hints-active">
+        <div :class="`schedule-hints ${hintsActive}`">
+            <ScheduleHints></ScheduleHints>
+        </div>
+        <div :class="`content ${hintsActive}`">
             <ScheduleTable :week="ch"></ScheduleTable>
         </div>
     </div>
@@ -31,7 +33,9 @@ let group = ''
 let schedule: LessonParsed[]
 const ch: Ref<LessonParsed[]> = ref([])
 const zn: Ref<LessonParsed[]> = ref([])
-const isHintsActive = localStorage.getItem('hints')
+const hintsActive = ref(localStorage.getItem('hints')) as Ref<string>
+if (hintsActive.value === null) hintsActive.value = 'hints-active'
+
 
 wakeUpBackground().then(() => {
     chrome.runtime.sendMessage({ task: 'getSchedule' }, (response: GetScheduleResponse) => {
@@ -46,9 +50,9 @@ wakeUpBackground().then(() => {
 
 const choose = () => console.log('choose')
 const hints = () => {
-    // const hints = Boolean(localStorage.getItem('hints'))
-    // console.log(hints)
-    // localStorage.setItem('hints', String(hints))
+    hintsActive.value = hintsActive.value === 'hints-active' ? '' : 'hints-active'
+
+    localStorage.setItem('hints', hintsActive.value)
 }
 </script>
 
@@ -61,9 +65,19 @@ h3 {
 
 .content {
     transform: translateY(-60px);
+    transition: .3s;
 
     &.hints-active {
         transform: translateY(0);
+    }
+}
+
+.schedule-hints {
+    opacity: 0;
+    transition: .3s;
+
+    &.hints-active {
+        opacity: 100%;
     }
 }
 </style>

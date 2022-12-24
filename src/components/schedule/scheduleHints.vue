@@ -1,5 +1,5 @@
 <template>
-    <table class="hints hints-active">
+    <table class="hints">
         <tr>
             <ScheduleLesson
                 type="lecture"
@@ -36,11 +36,6 @@ table {
     width: 100%;
     margin: 10px 0;
     transition: .3s;
-    opacity: 0;
-
-    &.hints-active {
-        opacity: 100%;
-    }
 }
 
 td {
