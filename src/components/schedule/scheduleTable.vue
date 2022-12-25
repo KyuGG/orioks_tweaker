@@ -40,35 +40,51 @@ const chooseLesson = (i: number, j: number) => {
 
 
     for (const lesson of props.schedule[0]) {
-        if (lesson[0] === String(i) && lesson['2']?.split(' ')[0] === String(j))
-            return lesson[1] as string
+        if (lesson[0] === String(i) && lesson[2]?.split(' ')[0] === String(j))
+            return createLessonName(lesson as string[])
     }
 
     return ''
 }
+
 
 const chooseSplittedLesson = (i: number, j: number) => {
     if ((chooseLesson(i, j)) !== '')
         return ''
 
     for (const upLesson of props.schedule[1]) {
-        if (upLesson[0] === String(i) && upLesson['2']?.split(' ')[0] === String(j)) {
+        if (upLesson[0] === String(i) && upLesson[2]?.split(' ')[0] === String(j)) {
             for (const downLesson of props.schedule[2]) {
-                if (downLesson[0] === String(i) && downLesson['2']?.split(' ')[0] === String(j))
-                    return [upLesson[1], downLesson[1]] as [string, string]
+                if (downLesson[0] === String(i) && downLesson[2]?.split(' ')[0] === String(j))
+                    return [createLessonName(upLesson), createLessonName(downLesson)] as [string, string]
 
             }
-            return [upLesson[1], ''] as [string, string]
+            return [createLessonName(upLesson), ''] as [string, string]
         }
     }
 
     for (const downLesson of props.schedule[2]) {
-        if (downLesson[0] === String(i) && downLesson['2']?.split(' ')[0] === String(j))
-            return ['', downLesson[1]] as [string, string]
+        if (downLesson[0] === String(i) && downLesson[2]?.split(' ')[0] === String(j))
+            return ['', createLessonName(downLesson)] as [string, string]
     }
 
     return ''
 }
+
+const removeLessonType = (lesson: string) => {
+    const lessonTypes = [
+        '[Лек]',
+        '[Лаб]',
+        '[Пр]'
+    ]
+    for (const lessonType of lessonTypes)
+        lesson = lesson.replace(lessonType, '')
+    return lesson.trim()
+}
+
+
+const createLessonName = (lesson: string[]) => removeLessonType(lesson[1]) + '\n' + lesson[3]
+
 
 const days = [
     'Понедельник',
