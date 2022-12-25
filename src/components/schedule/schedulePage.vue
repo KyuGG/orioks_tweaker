@@ -130,9 +130,19 @@ h3 {
 .schedule-hints {
     opacity: 0;
     transition: .3s;
+    transform: translateY(-60px);
+    visibility: hidden;
+    z-index: 0;
 
     &.hints-active {
+        visibility: visible;
         opacity: 100%;
+        transform: translateY(0);
     }
+}
+
+.my-btn {
+    z-index: 1;
+    position: relative;
 }
 </style>
