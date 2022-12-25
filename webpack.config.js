@@ -92,7 +92,8 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			filename: 'popup.html',
-			chunks: ['popup']
+			chunks: ['popup'],
+			title: 'ORIOKS Tweaker'
 		}),
 		new CopyPlugin({
 			patterns: [
