@@ -19,7 +19,6 @@
 </template>
 
 <script setup lang="ts">
-import getLessonType from '@/helpers/getLessonType'
 import { LessonObject, LessonParsed } from '@/interfaces/Lesson'
 import ScheduleLesson from './scheduleLesson.vue'
 
@@ -95,6 +94,24 @@ const removeLessonType = (lesson: string) => {
 
 /** @returns Новое имя дисциплины, содержащее только название и кабинет */
 const createLessonName = (lesson: string[]) => removeLessonType(lesson[1]) + ' ' + lesson[3]
+
+/** @returns Тип пары исходя из пометки в названии */
+const getLessonType = (lesson: string) => {
+    const type = lesson.split(' ')
+    switch (type[type.length - 1]) {
+        case '[Лек]':
+            return 'lecture'
+
+        case '[Лаб]':
+            return 'lab'
+
+        case '':
+            return 'holiday'
+
+        default:
+            return 'sem'
+    }
+}
 
 /** Заполняет объект дисциплины для передачи в компонент scheduleLesson */
 const fillLesson = (lessonObject: LessonObject, lesson: LessonParsed) => {
