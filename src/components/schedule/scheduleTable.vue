@@ -2,19 +2,17 @@
     <table>
         <tr>
             <th class="time">Время</th>
-            <th>Понедельник</th>
-            <th>Вторник</th>
-            <th>Среда</th>
-            <th>Четверг</th>
-            <th>Пятница</th>
-            <th>Суббота</th>
+            <th
+                v-for="i in 6"
+                :class="checkCurrentDay(i)"
+            > {{ days[i - 1] }} </th>
         </tr>
         <tr v-for="i in 7">
             <td class="time">{{ time[i - 1] }}</td>
             <ScheduleLesson
                 v-for="j in 6"
                 :lesson="chooseLesson(j, i)"
-                :splittedLesson="chooseSplittedLesson(i, j)"
+                :splittedLesson="chooseSplittedLesson(j, i)"
                 :type="getLessonType(chooseLesson(j, i))"
             ></ScheduleLesson>
         </tr>
@@ -28,9 +26,15 @@ import ScheduleLesson from './scheduleLesson.vue'
 
 const props = defineProps<{
     week: string,
+    currentWeek: string,
+    currentDay: number,
     schedule: LessonParsed[][],
 }>()
 
+
+
+const checkCurrentDay = (day: number) =>
+    props.currentDay === day && props.currentWeek.includes(props.week) ? 'current-day' : ''
 
 const chooseLesson = (i: number, j: number) => {
 
@@ -44,13 +48,13 @@ const chooseLesson = (i: number, j: number) => {
 }
 
 const chooseSplittedLesson = (i: number, j: number) => {
-    if ((chooseLesson(j, i)) !== '')
+    if ((chooseLesson(i, j)) !== '')
         return ''
 
     for (const upLesson of props.schedule[1]) {
-        if (upLesson[0] === String(j) && upLesson['2']?.split(' ')[0] === String(i)) {
+        if (upLesson[0] === String(i) && upLesson['2']?.split(' ')[0] === String(j)) {
             for (const downLesson of props.schedule[2]) {
-                if (downLesson[0] === String(j) && downLesson['2']?.split(' ')[0] === String(i))
+                if (downLesson[0] === String(i) && downLesson['2']?.split(' ')[0] === String(j))
                     return [upLesson[1], downLesson[1]] as [string, string]
 
             }
@@ -59,12 +63,21 @@ const chooseSplittedLesson = (i: number, j: number) => {
     }
 
     for (const downLesson of props.schedule[2]) {
-        if (downLesson[0] === String(j) && downLesson['2']?.split(' ')[0] === String(i))
+        if (downLesson[0] === String(i) && downLesson['2']?.split(' ')[0] === String(j))
             return ['', downLesson[1]] as [string, string]
     }
 
     return ''
 }
+
+const days = [
+    'Понедельник',
+    'Вторник',
+    'Среда',
+    'Четверг',
+    'Пятница',
+    'Суббота'
+]
 
 const time = [
     'Пара №1\n9:00-10:30',
@@ -93,6 +106,11 @@ th {
     height: 50px !important;
     width: 15.5%;
     min-width: 95px;
+
+    &.current-day {
+        background: rgb(61, 140, 177);
+        color: black;
+    }
 }
 
 .time {
