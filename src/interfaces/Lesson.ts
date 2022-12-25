@@ -16,6 +16,7 @@ type LessonClassname =
  */
 type LessonParsed = [string, string, string, string] | []
 
+/** Интерфейс, описывающий пару, передаваемую в компонент scheduleLesson*/
 interface LessonObject {
     name: string
     type: LessonClassname
