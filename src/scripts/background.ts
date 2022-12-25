@@ -1,4 +1,4 @@
-import GetSettingsResponse from '@/interfaces/getSettingsResponse'
+import GetSettingsResponse from '@/interfaces/GetSettingsResponse'
 import { StorageSettings } from '@/interfaces/StorageSettings'
 
 const storageTemplate: StorageSettings = {
