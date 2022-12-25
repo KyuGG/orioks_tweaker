@@ -16,10 +16,14 @@
         <div :class="`content ${hintsActive}`">
             <ScheduleTable
                 week="ch"
+                :currentWeek="currentWeek"
+                :currentDay="currentDay"
                 :schedule="ch"
             ></ScheduleTable>
             <ScheduleTable
                 week="zn"
+                :currentWeek="currentWeek"
+                :currentDay="currentDay"
                 :schedule="zn"
             ></ScheduleTable>
         </div>
@@ -56,6 +60,44 @@ wakeUpBackground().then(() => {
         isScheduleLoaded.value = true
     })
 })
+
+
+const getCurrentDay = () => {
+    const day = new Date().getDay()
+    return day === 0 ? 1 : day
+}
+
+
+/**@returns 'ch1', 'ch2', 'zn1', 'zn2', ''*/
+const getCurrentWeek = () => {
+    const weekBlock = document.querySelector('.small') as HTMLLinkElement
+    const weekInfo = (weekBlock.textContent as string).trim().split(' ')
+
+    const identifyWeek: Record<string, string> = {
+        'числитель': 'ch',
+        'знаменатель': 'zn'
+    }
+
+    const switchWeek: Record<string, string> = {
+        'ch1': 'zn1',
+        'zn1': 'ch2',
+        'ch2': 'zn2',
+        'zn2': 'ch1'
+    }
+
+    if (weekInfo.length > 1) {
+        let currentWeek = identifyWeek[weekInfo[3]] + weekInfo[2]
+        if (getCurrentDay() !== new Date().getDay())
+            currentWeek = switchWeek[currentWeek]
+        return currentWeek
+    }
+
+    return ''
+}
+
+const currentDay = getCurrentDay()
+const currentWeek = getCurrentWeek()
+
 
 
 const choose = () => {
