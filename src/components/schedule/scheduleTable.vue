@@ -13,7 +13,6 @@
                 v-for="j in 6"
                 :lesson="chooseLesson(j, i)"
                 :splittedLesson="chooseSplittedLesson(j, i)"
-                :type="getLessonType(chooseLesson(j, i))"
             ></ScheduleLesson>
         </tr>
     </table>
@@ -21,7 +20,7 @@
 
 <script setup lang="ts">
 import getLessonType from '@/helpers/getLessonType'
-import { LessonParsed } from '@/interfaces/Lesson'
+import { LessonObject, LessonParsed } from '@/interfaces/Lesson'
 import ScheduleLesson from './scheduleLesson.vue'
 
 const props = defineProps<{
@@ -37,38 +36,51 @@ const checkCurrentDay = (day: number) =>
     props.currentDay === day && props.currentWeek.includes(props.week) ? 'current-day' : ''
 
 const chooseLesson = (i: number, j: number) => {
-
+    const lessonObject: LessonObject = { name: '', type: 'holiday' }
 
     for (const lesson of props.schedule[0]) {
-        if (lesson[0] === String(i) && lesson[2]?.split(' ')[0] === String(j))
-            return createLessonName(lesson as string[])
+        if (lesson[0] === String(i) && lesson[2]?.split(' ')[0] === String(j)) {
+            lessonObject.type = getLessonType(lesson[1] as string)
+            lessonObject.name = createLessonName(lesson)
+        }
     }
 
-    return ''
+    return lessonObject
 }
 
 
 const chooseSplittedLesson = (i: number, j: number) => {
-    if ((chooseLesson(i, j)) !== '')
-        return ''
+    const lessonObjects: [LessonObject, LessonObject] = [
+        { name: '', type: 'holiday' },
+        { name: '', type: 'holiday' }
+    ]
+
+    if ((chooseLesson(i, j).name) !== '')
+        return lessonObjects
 
     for (const upLesson of props.schedule[1]) {
         if (upLesson[0] === String(i) && upLesson[2]?.split(' ')[0] === String(j)) {
             for (const downLesson of props.schedule[2]) {
-                if (downLesson[0] === String(i) && downLesson[2]?.split(' ')[0] === String(j))
-                    return [createLessonName(upLesson), createLessonName(downLesson)] as [string, string]
+                if (downLesson[0] === String(i) && downLesson[2]?.split(' ')[0] === String(j)) {
+                    fillLesson(lessonObjects[0], upLesson)
+                    fillLesson(lessonObjects[1], downLesson)
+                    return lessonObjects
+                }
 
             }
-            return [createLessonName(upLesson), ''] as [string, string]
+            fillLesson(lessonObjects[0], upLesson)
+            return lessonObjects
         }
     }
 
     for (const downLesson of props.schedule[2]) {
-        if (downLesson[0] === String(i) && downLesson[2]?.split(' ')[0] === String(j))
-            return ['', createLessonName(downLesson)] as [string, string]
+        if (downLesson[0] === String(i) && downLesson[2]?.split(' ')[0] === String(j)) {
+            fillLesson(lessonObjects[1], downLesson)
+            return lessonObjects
+        }
     }
 
-    return ''
+    return lessonObjects
 }
 
 const removeLessonType = (lesson: string) => {
@@ -83,8 +95,12 @@ const removeLessonType = (lesson: string) => {
 }
 
 
-const createLessonName = (lesson: string[]) => removeLessonType(lesson[1]) + '\n' + lesson[3]
+const createLessonName = (lesson: string[]) => removeLessonType(lesson[1]) + ' ' + lesson[3]
 
+const fillLesson = (lessonObject: LessonObject, lesson: LessonParsed) => {
+    lessonObject.name = createLessonName(lesson)
+    lessonObject.type = getLessonType(lesson[1] as string)
+}
 
 const days = [
     'Понедельник',

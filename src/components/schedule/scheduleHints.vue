@@ -2,37 +2,37 @@
     <table class="hints">
         <tr>
             <ScheduleLesson
-                type="lecture"
-                lesson="Лекция"
-                splitted-lesson=""
+                :lesson="{ name: 'Лекция', type: 'lecture' }"
+                :splitted-lesson="emptySplittedLesson"
             ></ScheduleLesson>
             <ScheduleLesson
-                type="lab"
-                lesson="Лаба"
-                splitted-lesson=""
+                :lesson="{ name: 'Лаба', type: 'lab' }"
+                :splitted-lesson="emptySplittedLesson"
             ></ScheduleLesson>
             <ScheduleLesson
-                type="sem"
-                lesson="Семинар"
-                splitted-lesson=""
+                :lesson="{ name: 'Семинар', type: 'sem' }"
+                :splitted-lesson="emptySplittedLesson"
             ></ScheduleLesson>
             <ScheduleLesson
-                type="holiday"
-                lesson="Окно"
-                splitted-lesson=""
+                :lesson="{ name: 'Окно', type: 'holiday' }"
+                :splitted-lesson="emptySplittedLesson"
             ></ScheduleLesson>
             <ScheduleLesson
-                type="sem current-lesson"
-                lesson="Сейчас"
-                splitted-lesson=""
+                :lesson="{ name: 'Сейчас', type: 'sem current-lesson' }"
+                :splitted-lesson="emptySplittedLesson"
             ></ScheduleLesson>
         </tr>
     </table>
 </template>
 
 <script setup lang="ts">
+import { LessonObject } from '@/interfaces/Lesson'
 import ScheduleLesson from './scheduleLesson.vue'
 
+const emptySplittedLesson: [LessonObject, LessonObject] = [
+    { name: '', type: 'holiday' },
+    { name: '', type: 'holiday' }
+]
 
 </script>
 
