@@ -1,26 +1,21 @@
 <template>
     <td
-        v-if="!splittedLesson.length"
-        :class="type"
+        v-if="!splittedLesson[0].name && !splittedLesson[1].name"
+        :class="lesson.type"
     >
-        {{ lesson }}
+        {{ lesson.name }}
     </td>
-    <td
-        v-else
-        :class="type"
-    >
-        <div :class="getLessonType(splittedLesson[0])"> {{ splittedLesson[0] }} </div>
-        <div :class="getLessonType(splittedLesson[1])"> {{ splittedLesson[1] }} </div>
+    <td v-else>
+        <div :class="splittedLesson[0].type"> {{ splittedLesson[0].name }} </div>
+        <div :class="splittedLesson[1].type"> {{ splittedLesson[1].name }} </div>
     </td>
 </template>
 
 <script setup lang="ts">
-import getLessonType from '@/helpers/getLessonType'
-import { LessonClassname } from '@/interfaces/Lesson'
+import { LessonObject } from '@/interfaces/Lesson'
 const props = defineProps<{
-    lesson: string,
-    splittedLesson: [string, string] | ''
-    type: LessonClassname
+    lesson: LessonObject,
+    splittedLesson: [LessonObject, LessonObject]
 }>()
 </script>
 

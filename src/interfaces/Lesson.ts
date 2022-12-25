@@ -16,4 +16,9 @@ type LessonClassname =
  */
 type LessonParsed = [string, string, string, string] | []
 
-export { LessonClassname, LessonParsed }
+interface LessonObject {
+    name: string
+    type: LessonClassname
+}
+
+export { LessonClassname, LessonParsed, LessonObject }
