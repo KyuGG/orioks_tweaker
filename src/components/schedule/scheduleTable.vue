@@ -30,25 +30,23 @@ const props = defineProps<{
     schedule: LessonParsed[][],
 }>()
 
-
-
+/** @returns Класс, который необходимо выдать тегу th, чтобы показать текущий день */
 const checkCurrentDay = (day: number) =>
     props.currentDay === day && props.currentWeek.includes(props.week) ? 'current-day' : ''
 
+/** @returns Объект дисциплины для передачи в компонент scheduleLesson */
 const chooseLesson = (i: number, j: number) => {
     const lessonObject: LessonObject = { name: '', type: 'holiday' }
 
-    for (const lesson of props.schedule[0]) {
-        if (lesson[0] === String(i) && lesson[2]?.split(' ')[0] === String(j)) {
-            lessonObject.type = getLessonType(lesson[1] as string)
-            lessonObject.name = createLessonName(lesson)
-        }
-    }
+    for (const lesson of props.schedule[0])
+        if (lesson[0] === String(i) && lesson[2]?.split(' ')[0] === String(j))
+            fillLesson(lessonObject, lesson)
 
     return lessonObject
 }
 
-
+/** @returns 2 объекта дисциплины, требуется для случаев, когда нужно разбить
+ *  пару на две, к примеру, по Ч1 и Ч2 и отобразить внутри одного блока */
 const chooseSplittedLesson = (i: number, j: number) => {
     const lessonObjects: [LessonObject, LessonObject] = [
         { name: '', type: 'holiday' },
@@ -83,6 +81,7 @@ const chooseSplittedLesson = (i: number, j: number) => {
     return lessonObjects
 }
 
+/** @returns Название пары без ее типа в конце ([Лек], [Пр], [Лаб]) */
 const removeLessonType = (lesson: string) => {
     const lessonTypes = [
         '[Лек]',
@@ -94,9 +93,10 @@ const removeLessonType = (lesson: string) => {
     return lesson.trim()
 }
 
-
+/** @returns Новое имя дисциплины, содержащее только название и кабинет */
 const createLessonName = (lesson: string[]) => removeLessonType(lesson[1]) + ' ' + lesson[3]
 
+/** Заполняет объект дисциплины для передачи в компонент scheduleLesson */
 const fillLesson = (lessonObject: LessonObject, lesson: LessonParsed) => {
     lessonObject.name = createLessonName(lesson)
     lessonObject.type = getLessonType(lesson[1] as string)
