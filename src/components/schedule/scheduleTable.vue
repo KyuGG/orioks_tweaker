@@ -8,11 +8,12 @@
             > {{ days[i - 1] }} </th>
         </tr>
         <tr v-for="i in 7">
-            <td class="time">{{ time[i - 1] }}</td>
+            <td class="time">{{ timeCol[i - 1] }}</td>
             <ScheduleLesson
                 v-for="j in 6"
                 :lesson="chooseLesson(j, i)"
                 :splittedLesson="chooseSplittedLesson(j, i)"
+                :currentLesson="currentLeson(i)"
             ></ScheduleLesson>
         </tr>
     </table>
@@ -119,6 +120,27 @@ const fillLesson = (lessonObject: LessonObject, lesson: LessonParsed) => {
     lessonObject.type = getLessonType(lesson[1] as string)
 }
 
+/** @returns Класс, который необходимо выдать тегу td, чтобы показать текущую пару */
+const currentLeson = (day: number) => {
+    if (props.currentWeek.includes(props.week) &&
+        props.currentDay === day) {
+        const currentDate = new Date()
+        const currentTime = currentDate.getTime()
+        for (const time of timeLesson) {
+            const [startHour, startMinutes] = time[0].split(':').map((num: string) => Number(num))
+            const [endHour, endMinutes] = time[1].split(':').map((num: string) => Number(num))
+
+            const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), startHour, startMinutes)
+            const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), endHour, endMinutes)
+
+            if (currentTime > startDate.getTime() &&
+                currentTime < endDate.getTime())
+                return 'current-lesson'
+        }
+    }
+    return ''
+}
+
 const days = [
     'Понедельник',
     'Вторник',
@@ -128,7 +150,7 @@ const days = [
     'Суббота'
 ]
 
-const time = [
+const timeCol = [
     'Пара №1\n9:00-10:30',
     'Пара №2\n10:40-12:10',
     'Пара №3\n12:20-13:50\n12:50-14:20',
@@ -136,6 +158,16 @@ const time = [
     'Пара №5\n16:10-17:40',
     'Пара №6\n18:20-19:50',
     'Пара №7\n20:00-21:30'
+]
+
+const timeLesson = [
+    ['9:00', '10:30'],
+    ['10:40', '12:10'],
+    ['12:20', '14:20'],
+    ['14:30', '16:00'],
+    ['16:10', '17:40'],
+    ['18:20', '19:50'],
+    ['20:00', '21:30']
 ]
 </script>
 
