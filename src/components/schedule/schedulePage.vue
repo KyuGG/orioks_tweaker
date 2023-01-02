@@ -13,7 +13,10 @@
         <div :class="`schedule-hints ${hintsActive}`">
             <ScheduleHints></ScheduleHints>
         </div>
-        <div :class="`content ${hintsActive}`">
+        <div
+            v-if="schedule.length"
+            :class="`content ${hintsActive}`"
+        >
             <ScheduleTable
                 week="ch"
                 :currentWeek="currentWeek"
@@ -32,6 +35,7 @@
 
 <script setup lang="ts">
 import wakeUpBackground from '@/helpers/wakeUpBackground'
+import { CurrentWeek } from '@/interfaces/CurrentWeek'
 import GetScheduleResponse from '@/interfaces/GetScheduleResponse'
 import { LessonParsed } from '@/interfaces/Lesson'
 import { Ref, ref } from 'vue'
@@ -68,9 +72,12 @@ const getCurrentDay = () => {
 }
 
 
-/**@returns 'ch1', 'ch2', 'zn1', 'zn2', ''*/
-const getCurrentWeek = () => {
+const getCurrentWeek = (): CurrentWeek => {
     const weekBlock = document.querySelector('.small') as HTMLLinkElement
+
+    // Если сессия
+    if (!weekBlock) return ''
+
     const weekInfo = (weekBlock.textContent as string).trim().split(' ')
 
     const identifyWeek: Record<string, string> = {
@@ -78,15 +85,16 @@ const getCurrentWeek = () => {
         'знаменатель': 'zn'
     }
 
-    const switchWeek: Record<string, string> = {
+    const switchWeek: Record<CurrentWeek, CurrentWeek> = {
         'ch1': 'zn1',
         'zn1': 'ch2',
         'ch2': 'zn2',
-        'zn2': 'ch1'
+        'zn2': 'ch1',
+        '': '',
     }
 
     if (weekInfo.length > 1) {
-        let currentWeek = identifyWeek[weekInfo[3]] + weekInfo[2]
+        let currentWeek = identifyWeek[weekInfo[3]] + weekInfo[2] as CurrentWeek
         if (getCurrentDay() !== new Date().getDay())
             currentWeek = switchWeek[currentWeek]
         return currentWeek
