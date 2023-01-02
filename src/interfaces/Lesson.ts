@@ -1,4 +1,4 @@
-type LessonClassname =
+export type LessonClassname =
     | 'lecture'
     | 'lecture current-lesson'
     | 'sem'
@@ -14,12 +14,10 @@ type LessonClassname =
  * @param 2 - Номер пары
  * @param 3 - Номер аудитории
  */
-type LessonParsed = [string, string, string, string] | []
+export type LessonParsed = [string, string, string, string] | []
 
 /** Интерфейс, описывающий пару, передаваемую в компонент scheduleLesson*/
-interface LessonObject {
+export interface LessonObject {
     name: string
     type: LessonClassname
 }
-
-export { LessonClassname, LessonParsed, LessonObject }
