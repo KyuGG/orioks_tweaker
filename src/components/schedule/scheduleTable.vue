@@ -4,7 +4,7 @@
             <th class="time">Время</th>
             <th
                 v-for="i in 6"
-                :class="checkCurrentDay(i)"
+                :class="`${checkCurrentDay(i)} ${mobileHidden(i)}`"
             > {{ days[i - 1] }} </th>
         </tr>
         <tr v-for="i in 7">
@@ -14,6 +14,7 @@
                 :lesson="chooseLesson(j, i)"
                 :splittedLesson="chooseSplittedLesson(j, i)"
                 :currentLesson="currentLeson(i)"
+                :mobileHidden="mobileHidden(j)"
             ></ScheduleLesson>
         </tr>
     </table>
@@ -33,6 +34,10 @@ const props = defineProps<{
 /** @returns Класс, который необходимо выдать тегу th, чтобы показать текущий день */
 const checkCurrentDay = (day: number) =>
     props.currentDay === day && props.currentWeek.includes(props.week) ? 'current-day' : ''
+
+/** @returns Класс, который необходимо выдать всем тегам th и td, не относящимся к сегодняшнему дню (для скрытия в мобильном режиме) */
+const mobileHidden = (day: number) =>
+    props.currentDay !== day ? 'mobile-hidden' : ''
 
 /** @returns Объект дисциплины для передачи в компонент scheduleLesson */
 const chooseLesson = (i: number, j: number) => {
@@ -199,5 +204,12 @@ th {
     width: 7%;
     height: 110px;
     font-size: 9pt;
+}
+
+
+@media (max-width: 768px) {
+    .mobile-hidden {
+        display: none;
+    }
 }
 </style>
