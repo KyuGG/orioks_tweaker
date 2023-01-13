@@ -1,11 +1,14 @@
 <template>
     <td
         v-if="!splittedLesson[0].name && !splittedLesson[1].name"
-        :class="lesson.type"
+        :class="`${lesson.type} ${mobileHidden}`"
     >
         {{ lesson.name }}
     </td>
-    <td v-else>
+    <td
+        v-else
+        :class="mobileHidden"
+    >
         <div :class="splittedLesson[0].type"> {{ splittedLesson[0].name }} </div>
         <div :class="splittedLesson[1].type"> {{ splittedLesson[1].name }} </div>
     </td>
@@ -15,7 +18,8 @@
 import { LessonObject } from '@/interfaces/Lesson'
 const props = defineProps<{
     lesson: LessonObject,
-    splittedLesson: [LessonObject, LessonObject]
+    splittedLesson: [LessonObject, LessonObject],
+    mobileHidden: string
 }>()
 </script>
 
