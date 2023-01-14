@@ -21,7 +21,7 @@
         >
             <ScheduleTable
                 week="ch"
-                :currentWeek="currentWeek"
+                :currentWeek="'ch1'"
                 :currentDay="currentDay"
                 :currentChosenDay="currentChosenDay"
                 :schedule="ch"

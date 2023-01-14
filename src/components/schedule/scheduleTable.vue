@@ -13,7 +13,6 @@
                 v-for="j in 6"
                 :lesson="chooseLesson(j, i)"
                 :splittedLesson="chooseSplittedLesson(j, i)"
-                :currentLesson="currentLeson(i)"
                 :mobileHidden="mobileHidden(j)"
             ></ScheduleLesson>
         </tr>
@@ -21,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { LessonObject, LessonParsed } from '@/interfaces/Lesson'
+import { LessonObject, LessonParsed, LessonClassname } from '@/interfaces/Lesson'
 import ScheduleLesson from './scheduleLesson.vue'
 
 const props = defineProps<{
@@ -34,7 +33,7 @@ const props = defineProps<{
 
 /** @returns Класс, который необходимо выдать тегу th, чтобы показать текущий день */
 const checkCurrentDay = (day: number) =>
-    props.currentDay === day && props.currentWeek.includes(props.week) ? 'current-day' : ''
+    props.currentDay === day ? 'current-day' : ''
 
 /** @returns Класс, который необходимо выдать всем тегам th и td, не относящимся к сегодняшнему дню (для скрытия в мобильном режиме) */
 const mobileHidden = (day: number) =>
@@ -42,7 +41,7 @@ const mobileHidden = (day: number) =>
 
 /** @returns Объект дисциплины для передачи в компонент scheduleLesson */
 const chooseLesson = (i: number, j: number) => {
-    const lessonObject: LessonObject = { name: '', type: 'holiday' }
+    const lessonObject: LessonObject = { name: '', type: ('holiday ' + currentLesson(j)) as LessonClassname }
 
     for (const lesson of props.schedule[0])
         if (lesson[0] === String(i) && lesson[2]?.split(' ')[0] === String(j))
@@ -127,7 +126,7 @@ const fillLesson = (lessonObject: LessonObject, lesson: LessonParsed) => {
 }
 
 /** @returns Класс, который необходимо выдать тегу td, чтобы показать текущую пару */
-const currentLeson = (day: number) => {
+const currentLesson = (day: number) => {
     if (props.currentWeek.includes(props.week) &&
         props.currentDay === day) {
         const currentDate = new Date()
@@ -138,7 +137,8 @@ const currentLeson = (day: number) => {
 
             const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), startHour, startMinutes)
             const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), endHour, endMinutes)
-
+            console.log(currentTime > startDate.getTime() &&
+                currentTime < endDate.getTime())
             if (currentTime > startDate.getTime() &&
                 currentTime < endDate.getTime())
                 return 'current-lesson'
