@@ -3,23 +3,28 @@
         <tr>
             <ScheduleLesson
                 :lesson="{ name: 'Лекция', type: 'lecture' }"
-                :splitted-lesson="emptySplittedLesson"
+                :splittedLesson="emptySplittedLesson"
+                mobileHidden=""
             ></ScheduleLesson>
             <ScheduleLesson
                 :lesson="{ name: 'Лаба', type: 'lab' }"
-                :splitted-lesson="emptySplittedLesson"
+                :splittedLesson="emptySplittedLesson"
+                mobileHidden=""
             ></ScheduleLesson>
             <ScheduleLesson
                 :lesson="{ name: 'Семинар', type: 'sem' }"
-                :splitted-lesson="emptySplittedLesson"
+                :splittedLesson="emptySplittedLesson"
+                mobileHidden=""
             ></ScheduleLesson>
             <ScheduleLesson
                 :lesson="{ name: 'Окно', type: 'holiday' }"
-                :splitted-lesson="emptySplittedLesson"
+                :splittedLesson="emptySplittedLesson"
+                mobileHidden=""
             ></ScheduleLesson>
             <ScheduleLesson
                 :lesson="{ name: 'Сейчас', type: 'sem current-lesson' }"
-                :splitted-lesson="emptySplittedLesson"
+                :splittedLesson="emptySplittedLesson"
+                mobileHidden=""
             ></ScheduleLesson>
         </tr>
     </table>

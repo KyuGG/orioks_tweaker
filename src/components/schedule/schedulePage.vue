@@ -4,10 +4,12 @@
         <h3>Группа: {{ group }}</h3>
         <MyButton
             placeholder="Выбрать"
+            value="Выбрать"
             @click="choose"
         ></MyButton>
         <MyButton
             placeholder="Подсказки"
+            value="Подсказки"
             @click="hints"
         ></MyButton>
         <div :class="`schedule-hints ${hintsActive}`">
@@ -21,15 +23,18 @@
                 week="ch"
                 :currentWeek="currentWeek"
                 :currentDay="currentDay"
+                :currentChosenDay="currentChosenDay"
                 :schedule="ch"
             ></ScheduleTable>
             <ScheduleTable
                 week="zn"
                 :currentWeek="currentWeek"
                 :currentDay="currentDay"
+                :currentChosenDay="currentChosenDay"
                 :schedule="zn"
             ></ScheduleTable>
         </div>
+        <ScheduleMobileDayChooser @click="changeDay"></ScheduleMobileDayChooser>
     </div>
 </template>
 
@@ -42,6 +47,7 @@ import { Ref, ref } from 'vue'
 import MyButton from '../myButton.vue'
 import NavPanel from '../navPanel.vue'
 import ScheduleHints from './scheduleHints.vue'
+import ScheduleMobileDayChooser from './scheduleMobileDayChooser.vue'
 import ScheduleTable from './scheduleTable.vue'
 
 let group = ''
@@ -104,9 +110,14 @@ const getCurrentWeek = (): CurrentWeek => {
 }
 
 const currentDay = getCurrentDay()
+const currentChosenDay = ref(currentDay)
 const currentWeek = getCurrentWeek()
 
 
+const changeDay = (payload: MouseEvent) => {
+    const target = payload.target as HTMLButtonElement
+    currentChosenDay.value = Number(target.value)
+}
 
 const choose = () => {
     alert('Вы будете перенаправлены на сайт МИЭТа, выберите нужную группу а затем нажмите "Сохранить в ОРИОКС"')
