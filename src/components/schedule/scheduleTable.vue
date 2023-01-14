@@ -28,6 +28,7 @@ const props = defineProps<{
     week: string,
     currentWeek: string,
     currentDay: number,
+    currentChosenDay: number,
     schedule: LessonParsed[][],
 }>()
 
@@ -37,7 +38,7 @@ const checkCurrentDay = (day: number) =>
 
 /** @returns Класс, который необходимо выдать всем тегам th и td, не относящимся к сегодняшнему дню (для скрытия в мобильном режиме) */
 const mobileHidden = (day: number) =>
-    props.currentDay !== day ? 'mobile-hidden' : ''
+    props.currentChosenDay !== day ? 'mobile-hidden' : ''
 
 /** @returns Объект дисциплины для передачи в компонент scheduleLesson */
 const chooseLesson = (i: number, j: number) => {

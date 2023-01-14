@@ -1,23 +1,18 @@
 <template>
     <button
         class="my-btn"
+        :value="value"
         @click="(payload: MouseEvent) => emit('click', payload)"
     >{{ placeholder }}</button>
 </template>
 
 <script setup lang="ts">
 const props = defineProps<{
-    placeholder: string
+    placeholder: string,
+    value: string
 }>()
 
 const emit = defineEmits<{
     (event: 'click', payload: MouseEvent): void
 }>()
 </script>
-
-<style scoped lang="scss">
-.my-btn {
-    width: 160px;
-    margin-right: 2px;
-}
-</style>
