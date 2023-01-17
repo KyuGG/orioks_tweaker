@@ -41,12 +41,13 @@ const mobileHidden = (day: number) =>
 
 /** @returns Объект дисциплины для передачи в компонент scheduleLesson */
 const chooseLesson = (i: number, j: number) => {
-    const lessonObject: LessonObject = { name: '', type: ('holiday ' + currentLesson(j)) as LessonClassname }
+
+    const lessonObject: LessonObject = { name: '', type: 'holiday' }
 
     for (const lesson of props.schedule[0])
         if (lesson[0] === String(i) && lesson[2]?.split(' ')[0] === String(j))
-            fillLesson(lessonObject, lesson)
-
+            fillLesson(lessonObject, lesson, currentLesson(i, j))
+        
     return lessonObject
 }
 
@@ -58,8 +59,8 @@ const chooseSplittedLesson = (i: number, j: number) => {
         { name: '', type: 'holiday' }
     ]
 
-    if ((chooseLesson(i, j).name) !== '')
-        return lessonObjects
+    // if ((chooseLesson(i, j).name) !== '')
+    //     return lessonObjects
 
     for (const upLesson of props.schedule[1]) {
         if (upLesson[0] === String(i) && upLesson[2]?.split(' ')[0] === String(j)) {
@@ -120,28 +121,31 @@ const getLessonType = (lesson: string) => {
 }
 
 /** Заполняет объект дисциплины для передачи в компонент scheduleLesson */
-const fillLesson = (lessonObject: LessonObject, lesson: LessonParsed) => {
+const fillLesson = (lessonObject: LessonObject, lesson: LessonParsed, currentLesson: string = '') => {
     lessonObject.name = createLessonName(lesson)
-    lessonObject.type = getLessonType(lesson[1] as string)
+
+    const type = getLessonType(lesson[1] as string) + ' ' + currentLesson as LessonClassname
+
+    lessonObject.type = type
 }
 
 /** @returns Класс, который необходимо выдать тегу td, чтобы показать текущую пару */
-const currentLesson = (day: number) => {
+const currentLesson = (day: number, lesson: number) => {
     if (props.currentWeek.includes(props.week) &&
         props.currentDay === day) {
+
         const currentDate = new Date()
         const currentTime = currentDate.getTime()
-        for (const time of timeLesson) {
-            const [startHour, startMinutes] = time[0].split(':').map((num: string) => Number(num))
-            const [endHour, endMinutes] = time[1].split(':').map((num: string) => Number(num))
-
-            const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), startHour, startMinutes)
-            const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), endHour, endMinutes)
-            console.log(currentTime > startDate.getTime() &&
-                currentTime < endDate.getTime())
-            if (currentTime > startDate.getTime() &&
-                currentTime < endDate.getTime())
-                return 'current-lesson'
+        
+        const [startHour, startMinutes] = timeLesson[lesson - 1][0].split(':').map((num: string) => Number(num))
+        const [endHour, endMinutes] = timeLesson[lesson - 1][1].split(':').map((num: string) => Number(num))
+        
+        const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), startHour, startMinutes)
+        const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), endHour, endMinutes)
+        
+        if (currentTime > startDate.getTime() &&
+            currentTime < endDate.getTime()) {
+            return 'current-lesson'
         }
     }
     return ''
