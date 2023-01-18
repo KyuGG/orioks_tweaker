@@ -12,21 +12,23 @@
             <ScheduleLesson
                 v-for="j in 6"
                 :lesson="chooseLesson(j, i)"
+                :currentLesson="currentLesson(j, i)"
                 :splittedLesson="chooseSplittedLesson(j, i)"
-                :currentLesson="currentLeson(i)"
                 :mobileHidden="mobileHidden(j)"
+                :currentWeek="currentWeek"
             ></ScheduleLesson>
         </tr>
     </table>
 </template>
 
 <script setup lang="ts">
-import { LessonObject, LessonParsed } from '@/interfaces/Lesson'
+import { CurrentWeek } from '@/interfaces/CurrentWeek'
+import { CurrentLesson, LessonObject, LessonParsed, MobileHidden } from '@/interfaces/Lesson'
 import ScheduleLesson from './scheduleLesson.vue'
 
 const props = defineProps<{
     week: string,
-    currentWeek: string,
+    currentWeek: CurrentWeek,
     currentDay: number,
     currentChosenDay: number,
     schedule: LessonParsed[][],
@@ -34,14 +36,15 @@ const props = defineProps<{
 
 /** @returns Класс, который необходимо выдать тегу th, чтобы показать текущий день */
 const checkCurrentDay = (day: number) =>
-    props.currentDay === day && props.currentWeek.includes(props.week) ? 'current-day' : ''
+    props.currentDay === day && props.currentWeek.length ? 'current-day' : ''
 
 /** @returns Класс, который необходимо выдать всем тегам th и td, не относящимся к сегодняшнему дню (для скрытия в мобильном режиме) */
-const mobileHidden = (day: number) =>
+const mobileHidden = (day: number): MobileHidden =>
     props.currentChosenDay !== day ? 'mobile-hidden' : ''
 
 /** @returns Объект дисциплины для передачи в компонент scheduleLesson */
 const chooseLesson = (i: number, j: number) => {
+
     const lessonObject: LessonObject = { name: '', type: 'holiday' }
 
     for (const lesson of props.schedule[0])
@@ -59,8 +62,8 @@ const chooseSplittedLesson = (i: number, j: number) => {
         { name: '', type: 'holiday' }
     ]
 
-    if ((chooseLesson(i, j).name) !== '')
-        return lessonObjects
+    // if ((chooseLesson(i, j).name) !== '')
+    //     return lessonObjects
 
     for (const upLesson of props.schedule[1]) {
         if (upLesson[0] === String(i) && upLesson[2]?.split(' ')[0] === String(j)) {
@@ -123,25 +126,29 @@ const getLessonType = (lesson: string) => {
 /** Заполняет объект дисциплины для передачи в компонент scheduleLesson */
 const fillLesson = (lessonObject: LessonObject, lesson: LessonParsed) => {
     lessonObject.name = createLessonName(lesson)
-    lessonObject.type = getLessonType(lesson[1] as string)
+
+    const type = getLessonType(lesson[1] as string)
+
+    lessonObject.type = type
 }
 
 /** @returns Класс, который необходимо выдать тегу td, чтобы показать текущую пару */
-const currentLeson = (day: number) => {
+const currentLesson = (day: number, lesson: number): CurrentLesson => {
     if (props.currentWeek.includes(props.week) &&
         props.currentDay === day) {
+
         const currentDate = new Date()
         const currentTime = currentDate.getTime()
-        for (const time of timeLesson) {
-            const [startHour, startMinutes] = time[0].split(':').map((num: string) => Number(num))
-            const [endHour, endMinutes] = time[1].split(':').map((num: string) => Number(num))
 
-            const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), startHour, startMinutes)
-            const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), endHour, endMinutes)
+        const [startHour, startMinutes] = timeLesson[lesson - 1][0].split(':').map((num: string) => Number(num))
+        const [endHour, endMinutes] = timeLesson[lesson - 1][1].split(':').map((num: string) => Number(num))
 
-            if (currentTime > startDate.getTime() &&
-                currentTime < endDate.getTime())
-                return 'current-lesson'
+        const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), startHour, startMinutes)
+        const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), endHour, endMinutes)
+
+        if (currentTime > startDate.getTime() &&
+            currentTime < endDate.getTime()) {
+            return 'current-lesson'
         }
     }
     return ''
