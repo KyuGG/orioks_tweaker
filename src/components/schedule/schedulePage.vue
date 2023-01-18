@@ -21,18 +21,18 @@
         >
             <ScheduleTable
                 week="ch"
-                :currentWeek="'ch1'"
+                :currentWeek="currentWeek"
                 :currentDay="currentDay"
                 :currentChosenDay="currentChosenDay"
                 :schedule="ch"
             ></ScheduleTable>
-            <!-- <ScheduleTable
+            <ScheduleTable
                 week="zn"
                 :currentWeek="currentWeek"
                 :currentDay="currentDay"
                 :currentChosenDay="currentChosenDay"
                 :schedule="zn"
-            ></ScheduleTable> -->
+            ></ScheduleTable>
         </div>
         <ScheduleMobileDayChooser @click="changeDay"></ScheduleMobileDayChooser>
     </div>

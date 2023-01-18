@@ -3,26 +3,36 @@
         <tr>
             <ScheduleLesson
                 :lesson="{ name: 'Лекция', type: 'lecture' }"
+                currentLesson=""
+                currentWeek=""
                 :splittedLesson="emptySplittedLesson"
                 mobileHidden=""
             ></ScheduleLesson>
             <ScheduleLesson
                 :lesson="{ name: 'Лаба', type: 'lab' }"
+                currentLesson=""
+                currentWeek=""
                 :splittedLesson="emptySplittedLesson"
                 mobileHidden=""
             ></ScheduleLesson>
             <ScheduleLesson
                 :lesson="{ name: 'Семинар', type: 'sem' }"
+                currentLesson=""
+                currentWeek=""
                 :splittedLesson="emptySplittedLesson"
                 mobileHidden=""
             ></ScheduleLesson>
             <ScheduleLesson
                 :lesson="{ name: 'Окно', type: 'holiday' }"
+                currentLesson=""
+                currentWeek=""
                 :splittedLesson="emptySplittedLesson"
                 mobileHidden=""
             ></ScheduleLesson>
             <ScheduleLesson
-                :lesson="{ name: 'Сейчас', type: 'sem current-lesson' }"
+                :lesson="{ name: 'Сейчас', type: 'sem' }"
+                currentLesson="current-lesson"
+                currentWeek=""
                 :splittedLesson="emptySplittedLesson"
                 mobileHidden=""
             ></ScheduleLesson>

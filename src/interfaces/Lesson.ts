@@ -1,12 +1,4 @@
-export type LessonClassname =
-    | 'lecture'
-    | 'lecture current-lesson'
-    | 'sem'
-    | 'sem current-lesson'
-    | 'lab'
-    | 'lab current-lesson'
-    | 'holiday'
-    | 'holiday current-lesson'
+export type LessonClassname = 'lecture' | 'sem' | 'lab' | 'holiday'
 
 /** Массив, содержащий информацию о паре
  * @param 0 - Номер дня недели [1-6]
@@ -21,3 +13,7 @@ export interface LessonObject {
     name: string
     type: LessonClassname
 }
+
+export type CurrentLesson = 'current-lesson' | ''
+
+export type MobileHidden = 'mobile-hidden' | ''

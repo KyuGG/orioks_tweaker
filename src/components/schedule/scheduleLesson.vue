@@ -1,7 +1,7 @@
 <template>
     <td
         v-if="!splittedLesson[0].name && !splittedLesson[1].name"
-        :class="`${lesson.type} ${mobileHidden}`"
+        :class="`${lesson.type} ${currentLesson} ${mobileHidden}`"
     >
         {{ lesson.name }}
     </td>
@@ -9,18 +9,35 @@
         v-else
         :class="mobileHidden"
     >
-        <div :class="splittedLesson[0].type"> {{ splittedLesson[0].name }} </div>
-        <div :class="splittedLesson[1].type"> {{ splittedLesson[1].name }} </div>
+        <div :class="currentSplittedLesson(0)"> {{ splittedLesson[0].name }} </div>
+        <div :class="currentSplittedLesson(1)"> {{ splittedLesson[1].name }} </div>
     </td>
 </template>
 
 <script setup lang="ts">
-import { LessonObject } from '@/interfaces/Lesson'
+import { CurrentWeek } from '@/interfaces/CurrentWeek'
+import { LessonObject, CurrentLesson, MobileHidden } from '@/interfaces/Lesson'
 const props = defineProps<{
     lesson: LessonObject,
+    currentLesson: CurrentLesson,
     splittedLesson: [LessonObject, LessonObject],
-    mobileHidden: string
+    mobileHidden: MobileHidden,
+    currentWeek: CurrentWeek
 }>()
+
+const currentSplittedLesson = (num: number) => {
+    if (props.currentLesson.length) {
+        if (num === 0) {
+            if (props.currentWeek[2] === '1') return props.splittedLesson[0].type += ' current-lesson'
+        }
+        if (num === 1) {
+            if (props.currentWeek[2] === '2') return props.splittedLesson[1].type += ' current-lesson'
+        }
+    }
+    if (num === 0) return props.splittedLesson[0].type
+    if (num === 1) return props.splittedLesson[1].type
+
+}
 </script>
 
 <style scoped lang="scss">
