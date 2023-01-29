@@ -2,16 +2,32 @@
     <div v-if="isScheduleLoaded">
         <NavPanel name="Расписание"></NavPanel>
         <h3>Группа: {{ group }}</h3>
-        <MyButton
-            placeholder="Выбрать"
-            value="Выбрать"
-            @click="choose"
-        ></MyButton>
-        <MyButton
-            placeholder="Подсказки"
-            value="Подсказки"
-            @click="hints"
-        ></MyButton>
+        <div class="buttons">
+            <div>
+                <MyButton
+                    placeholder="Выбрать"
+                    value="Выбрать"
+                    @click="choose"
+                ></MyButton>
+                <MyButton
+                    placeholder="Подсказки"
+                    value="Подсказки"
+                    @click="hints"
+                ></MyButton>
+            </div>
+            <div>
+                <MyButton
+                    placeholder="Числитель"
+                    value="ch"
+                    @click="isChosenWeekCh = true"
+                ></MyButton>
+                <MyButton
+                    placeholder="Знаменатель"
+                    value="zn"
+                    @click="isChosenWeekCh = false"
+                ></MyButton>
+            </div>
+        </div>
         <div :class="`schedule-hints ${hintsActive}`">
             <ScheduleHints></ScheduleHints>
         </div>
@@ -20,6 +36,7 @@
             :class="`content ${hintsActive}`"
         >
             <ScheduleTable
+                v-if="isChosenWeekCh"
                 week="ch"
                 :currentWeek="currentWeek"
                 :currentDay="currentDay"
@@ -27,6 +44,7 @@
                 :schedule="ch"
             ></ScheduleTable>
             <ScheduleTable
+                v-else
                 week="zn"
                 :currentWeek="currentWeek"
                 :currentDay="currentDay"
@@ -112,7 +130,7 @@ const getCurrentWeek = (): CurrentWeek => {
 const currentDay = getCurrentDay()
 const currentChosenDay = ref(currentDay)
 const currentWeek = getCurrentWeek()
-
+const isChosenWeekCh = ref(currentWeek === '' || currentWeek.startsWith('ch'))
 
 const changeDay = (payload: MouseEvent) => {
     const target = payload.target as HTMLButtonElement
@@ -146,6 +164,15 @@ h3 {
     }
 }
 
+.buttons {
+    display: flex;
+    justify-content: space-between;
+
+    div:last-child {
+        text-align: right;
+    }
+}
+
 .schedule-hints {
     opacity: 0;
     transition: .3s;
@@ -161,5 +188,6 @@ h3 {
 .my-btn {
     z-index: 1;
     position: relative;
+    width: 111px;
 }
 </style>
