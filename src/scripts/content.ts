@@ -9,13 +9,12 @@ import disciplineEditTools from '@/functions/disciplineEditTools'
 
 document.documentElement.style.visibility = 'hidden'
 
-const { settings } = await getSettings()
 // changeTheme()
 window.onload = async () => {
     changeLogo()
     bugReport()
 
-    await sleep(100)
+    const { settings } = await getSettings()
 
     if (settings.fixScore) fixScore()
     if (settings.fixDownload) fixDownload()
