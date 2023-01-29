@@ -44,13 +44,13 @@ const currentSplittedLesson = (num: number) => {
 td {
     height: 110px;
     font-size: 9pt;
-
+    color: black;
     div {
         height: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-
+        color: black;
         &:first-child {
             border-bottom: 1px dashed rgba($color: #000000, $alpha: 0.3);
         }

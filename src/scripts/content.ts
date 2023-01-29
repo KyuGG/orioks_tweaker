@@ -6,6 +6,7 @@ import bugReport from '@/functions/bugReport'
 import schedule from '@/functions/schedule'
 import disciplineNames from '@/functions/disciplineNames'
 import disciplineEditTools from '@/functions/disciplineEditTools'
+import changeTheme from '@/functions/changeTheme'
 
 document.documentElement.style.visibility = 'hidden'
 
@@ -20,6 +21,7 @@ window.onload = async () => {
     if (settings.fixDownload) fixDownload()
     if (settings.schedule) schedule()
     if (settings.disciplineNames) disciplineEditTools()
+    if (settings.darkTheme) changeTheme()
     // if (settings.answer.checkbox5) coloredElements()
     disciplineNames()
     document.documentElement.style.visibility = 'visible'
