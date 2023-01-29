@@ -16,3 +16,9 @@ const emit = defineEmits<{
     (event: 'click', payload: MouseEvent): void
 }>()
 </script>
+
+<style lang="scss" scoped>
+.my-btn:focus {
+    outline: none;
+}
+</style>
