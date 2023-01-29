@@ -6,6 +6,17 @@ export default function changeTheme() {
     document.documentElement.style.setProperty('--color4', 'rgb(20, 33, 41)')
     document.documentElement.style.setProperty('--color5', 'rgb(0, 140, 186)')
     document.documentElement.style.setProperty('--navbar', '#0e0e0c')
-    document.documentElement.style.setProperty('--text-color', 'rgba(255, 255, 255, 0.8)')
+    document.documentElement.style.setProperty(
+        '--text-color',
+        'rgba(255, 255, 255, 0.8)'
+    )
     document.documentElement.style.setProperty('--border-color', '#2f2f33')
+    coloredTestImages()
+}
+
+function coloredTestImages() {
+    if (location.pathname.startsWith('/student/student/test'))
+        document
+            .querySelectorAll('img')
+            .forEach(img => img.classList.add('invert-img'))
 }
