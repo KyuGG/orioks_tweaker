@@ -219,5 +219,9 @@ th {
     .mobile-hidden {
         display: none;
     }
+
+    .time {
+        width: .4%;
+    }
 }
 </style>

@@ -30,21 +30,21 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             sendResponse({ answer: 'settings have been changed' })
             break
 
-        case 'settings':
-            if (storage.settings.darkTheme)
-                chrome.tabs.query({ url: 'https://orioks.miet.ru/*' }, tabs => {
-                    for (const tab of tabs)
-                        chrome.scripting.insertCSS({
-                            target: { tabId: tab.id as number },
-                            files: ['newCSSRules/styles.scss'],
-                        })
-                })
-
         case 'getSettings':
             const settingsResponse: GetSettingsResponse = {
                 settings: storage.settings,
                 version: storage.version,
             }
+
+            if (storage.settings.darkTheme)
+                chrome.tabs.query({ url: 'https://orioks.miet.ru/*' }, tabs => {
+                    for (const tab of tabs)
+                        chrome.scripting.insertCSS({
+                            target: { tabId: tab.id as number },
+                            files: ['styles/styles.css'],
+                        })
+                })
+
             sendResponse(settingsResponse)
             break
 
