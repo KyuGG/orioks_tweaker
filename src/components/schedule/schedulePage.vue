@@ -19,11 +19,13 @@
                 <MyButton
                     placeholder="Числитель"
                     value="ch"
+                    :class="isChosenWeekCh ? 'chosen' : ''"
                     @click="isChosenWeekCh = true"
                 ></MyButton>
                 <MyButton
                     placeholder="Знаменатель"
                     value="zn"
+                    :class="isChosenWeekCh ? '' : 'chosen'"
                     @click="isChosenWeekCh = false"
                 ></MyButton>
             </div>
@@ -189,5 +191,13 @@ h3 {
     z-index: 1;
     position: relative;
     width: 111px;
+    transition: .3s;
+
+    &.chosen {
+        z-index: 2;
+        border-radius: 7px;
+        filter: drop-shadow(0px 0px 7px black);
+        transform: scale(1.05);
+    }
 }
 </style>
