@@ -1,6 +1,7 @@
 <template>
     <MyButton
         placeholder="Обнулить изменения"
+        value="nullChanges"
         @click="nullNames"
     ></MyButton>
 </template>
