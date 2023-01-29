@@ -196,7 +196,7 @@ h3 {
     &.chosen {
         z-index: 2;
         border-radius: 7px;
-        filter: drop-shadow(0px 0px 7px black);
+        filter: drop-shadow(0px 0px 7px rgb(111, 111, 111));
         transform: scale(1.05);
     }
 }
