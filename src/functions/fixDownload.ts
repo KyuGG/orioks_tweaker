@@ -1,6 +1,4 @@
-/**
- * @summary  Заменяет http на https в ссылках на файлы, тем самым позволяет скачать файл
- */
+/** Заменяет http на https в ссылках на файлы, тем самым позволяет скачать файл */
 export default function fixDownload() {
     document.documentElement.onclick = evt => {
         const target = evt.target as HTMLElement

@@ -10,7 +10,6 @@ import changeTheme from '@/functions/changeTheme'
 
 document.documentElement.style.visibility = 'hidden'
 
-// changeTheme()
 window.onload = async () => {
     changeLogo()
     bugReport()
@@ -22,7 +21,7 @@ window.onload = async () => {
     if (settings.schedule) schedule()
     if (settings.disciplineNames) disciplineEditTools()
     if (settings.darkTheme) changeTheme()
-    // if (settings.answer.checkbox5) coloredElements()
+    
     disciplineNames()
     document.documentElement.style.visibility = 'visible'
     await sleep(500)

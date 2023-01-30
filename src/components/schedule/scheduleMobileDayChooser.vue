@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import MyButton from '../myButton.vue'
+import MyButton from '../MyButton.vue'
 
 const emit = defineEmits<{
     (event: 'click', payload: MouseEvent): void
@@ -59,6 +59,7 @@ const emit = defineEmits<{
 
 <style scoped lang="scss">
 table {
+    z-index: 3;
     position: sticky;
     bottom: 0;
     width: 100%;
