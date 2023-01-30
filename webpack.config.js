@@ -36,22 +36,12 @@ module.exports = {
 		rules: [
 			{
 				test: /\.tsx?$/,
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							plugins: ["@vue/babel-plugin-jsx"]  
-						}
-					},
-					{
-						loader: 'ts-loader',
-						options: {
-							appendTsSuffixTo: [/\.vue$/],
-							// for scoped vue styles
-							ignoreDiagnostics: [7006],
-						},
-					}
-				],
+				loader: 'ts-loader',
+				options: {
+					appendTsSuffixTo: [/\.vue$/],
+					// for scoped vue styles
+					ignoreDiagnostics: [7006],
+				},
 			},
 			//compile scss to css from styles folder
 			{
