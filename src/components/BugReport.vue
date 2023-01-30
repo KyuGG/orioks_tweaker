@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import NavPanel from './NavPanel1.vue'
+import NavPanel from './NavPanel.vue'
 
 </script>
 

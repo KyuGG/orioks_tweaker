@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from '@/components/BugReport1.vue'
+import App from '@/components/BugReport.vue'
 
 /** Встраивает vue компонент на отдельную страницу сайта с возможностью багрепорта */
 export default function bugReport() {
