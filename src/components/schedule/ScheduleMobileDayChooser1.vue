@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import MyButton from '../MyButton.vue'
+import MyButton from '../MyButton1.vue'
 
 const emit = defineEmits<{
     (event: 'click', payload: MouseEvent): void

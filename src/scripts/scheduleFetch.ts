@@ -1,5 +1,5 @@
 import vueToDom from '@/helpers/vueToDom'
-import ScheduleFetch from '@/components/schedule/ScheduleFetch.vue'
+import ScheduleFetch from '@/components/schedule/ScheduleFetch1.vue'
 
 window.onload = () => {
     const scheduleFetch = vueToDom(ScheduleFetch)
