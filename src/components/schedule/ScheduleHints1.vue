@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import { LessonObject } from '@/interfaces/Lesson'
-import ScheduleLesson from './ScheduleLesson.vue'
+import ScheduleLesson from './ScheduleLesson1.vue'
 
 const emptySplittedLesson: [LessonObject, LessonObject] = [
     { name: '', type: 'holiday' },

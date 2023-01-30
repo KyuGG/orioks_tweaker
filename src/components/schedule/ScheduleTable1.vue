@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { CurrentWeek } from '@/interfaces/CurrentWeek'
 import { CurrentLesson, LessonObject, LessonParsed, MobileHidden } from '@/interfaces/Lesson'
-import ScheduleLesson from './ScheduleLesson.vue'
+import ScheduleLesson from './ScheduleLesson1.vue'
 
 const props = defineProps<{
     week: string,
