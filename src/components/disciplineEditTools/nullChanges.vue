@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import MyButton from '../myButton.vue'
+import MyButton from '../MyButton.vue'
 import { resetNames } from '@/functions/disciplineNames'
 
 function nullNames() {

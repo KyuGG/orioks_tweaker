@@ -24,6 +24,7 @@ const SELECTORS: Record<string, string> = {
         '.schedule-td:not(:first-child, .includes-div), .includes-div *:not(br)',
 }
 
+/**Производит замену названий дисциплин */
 export default function disciplineNames() {
     prevNamer()
     document.querySelectorAll('.bad').forEach(el => el.remove())

@@ -1,6 +1,6 @@
 import vueToDom from '@/helpers/vueToDom'
-import NullChanges from '@/components/disciplineEditTools/nullChanges.vue'
-import EditName from '@/components/disciplineEditTools/editName.vue'
+import NullChanges from '@/components/disciplineEditTools/NullChanges.vue'
+import EditName from '@/components/disciplineEditTools/EditName.vue'
 
 /**Подгружает инструментарий для изменения названия дисциплин */
 export default function disciplineEditTools() {

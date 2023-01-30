@@ -1,7 +1,5 @@
 import CountScoreObject from '@/interfaces/CountScoreObject'
-/**
- * @summary Осуществляет полный подсчет всех баллов без учета текущей недели
- */
+/** Осуществляет полный подсчет всех баллов без учета текущей недели */
 export default function fixScore() {
     if (!(location.pathname === '/student/student')) return false
     removeJunk()
@@ -20,9 +18,7 @@ export default function fixScore() {
     }
 }
 
-/**
- * @summary удаление красных точек (.bad), надписей типа 'из 100' (.mvb) и кнопки 'балл' (thead.ng-scope th:last-child)
- */
+/** удаление красных точек (.bad), надписей типа 'из 100' (.mvb) и кнопки 'балл' (thead.ng-scope th:last-child) */
 function removeJunk() {
     document
         .querySelectorAll('.bad, .mvb, thead.ng-scope th:last-child')
