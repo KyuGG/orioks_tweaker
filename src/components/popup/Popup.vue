@@ -82,7 +82,7 @@
 import { Settings } from '@/interfaces/StorageSettings'
 
 import { onMounted, ref } from 'vue'
-import Switcher from './Switcher1.vue'
+import Switcher from './Switcher.vue'
 
 import getSettings from '@/helpers/getSettings'
 import wakeUpBackground from '@/helpers/wakeUpBackground'
