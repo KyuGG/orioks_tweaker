@@ -1,9 +1,19 @@
-/**Функция "пробуждает" background-скрипт. Желательно использовать перед тем, как сделать запрос к хрому. Требует использование await.*/
-export default function wakeUpBackground(): Promise<void> {
+import defaultResponse from '@/interfaces/DefaultResponse'
+import sleep from './sleep'
+
+export default async function wakeUpBackground() {
+    while (!(await getStatus())) await sleep(200)
+    return true
+}
+
+function getStatus(): Promise<defaultResponse> {
     return new Promise(resolve => {
-        chrome.runtime.sendMessage({ task: 'wakeUp' }, () => {
-            chrome.runtime.lastError ? null : null
-            resolve()
-        })
+        chrome.runtime.sendMessage(
+            { task: 'wakeUp' },
+            (response: defaultResponse | undefined) => {
+                chrome.runtime.lastError
+                resolve(response as defaultResponse)
+            }
+        )
     })
 }

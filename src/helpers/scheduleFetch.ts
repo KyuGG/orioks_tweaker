@@ -1,3 +1,4 @@
+import DefaultResponse from '@/interfaces/DefaultResponse'
 import { LessonParsed } from '@/interfaces/Lesson'
 import wakeUpBackground from './wakeUpBackground'
 
@@ -110,7 +111,7 @@ export default async function scheduleFetch(group: string) {
     await wakeUpBackground()
     chrome.runtime.sendMessage(
         { task: 'setSchedule', schedule: result, group: group },
-        response => console.log(response.answer)
+        (response: DefaultResponse) => console.log(response.answer)
     )
 }
 

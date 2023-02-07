@@ -80,6 +80,7 @@
 
 <script setup lang="ts">
 import { Settings } from '@/interfaces/StorageSettings'
+import DefaultResponse from '@/interfaces/DefaultResponse'
 
 import { onMounted, ref } from 'vue'
 import Switcher from './Switcher.vue'
@@ -121,8 +122,8 @@ const onUpdate = async (payload: Event, checked: boolean) => {
     allChecked.value = isAllChecked()
 
     await wakeUpBackground()
-    chrome.runtime.sendMessage({ task: 'setSettings', settings: settings.value }, response => {
-        console.log(response)
+    chrome.runtime.sendMessage({ task: 'setSettings', settings: settings.value }, (response: DefaultResponse) => {
+        console.log(response.answer)
     })
 }
 
