@@ -36,7 +36,7 @@ const props = defineProps<{
 
 /** @returns Класс, который необходимо выдать тегу th, чтобы показать текущий день */
 const checkCurrentDay = (day: number) =>
-    props.currentDay === day && props.currentWeek.length ? 'current-day' : ''
+    props.currentDay === day && props.currentWeek.includes(props.week) ? 'current-day' : ''
 
 /** @returns Класс, который необходимо выдать всем тегам th и td, не относящимся к сегодняшнему дню (для скрытия в мобильном режиме) */
 const mobileHidden = (day: number): MobileHidden =>
