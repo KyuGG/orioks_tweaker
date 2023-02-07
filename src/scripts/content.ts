@@ -1,4 +1,6 @@
 import getSettings from '@/helpers/getSettings'
+import sleep from '@/helpers/sleep'
+
 import changeLogo from '@/functions/changeLogo'
 import fixScore from '@/functions/fixScore'
 import fixDownload from '@/functions/fixDownload'
@@ -13,6 +15,7 @@ document.documentElement.style.visibility = 'hidden'
 window.onload = async () => {
     changeLogo()
     bugReport()
+    changeTheme()
 
     const { settings } = await getSettings()
 
@@ -20,7 +23,6 @@ window.onload = async () => {
     if (settings.fixDownload) fixDownload()
     if (settings.schedule) schedule()
     if (settings.disciplineNames) disciplineEditTools()
-    if (settings.darkTheme) changeTheme()
     
     disciplineNames()
     document.documentElement.style.visibility = 'visible'
@@ -28,4 +30,3 @@ window.onload = async () => {
     document.documentElement.style.setProperty('--transition', '.3s')
 }
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))

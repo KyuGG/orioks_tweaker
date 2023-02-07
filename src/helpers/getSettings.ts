@@ -6,8 +6,9 @@ export default async function getSettings() {
     await wakeUpBackground()
 
     const settings: GetSettingsResponse = await new Promise(resolve =>
-        chrome.runtime.sendMessage({ task: 'getSettings' }, response =>
-            resolve(response)
+        chrome.runtime.sendMessage(
+            { task: 'getSettings' },
+            (response: GetSettingsResponse) => resolve(response)
         )
     )
 
