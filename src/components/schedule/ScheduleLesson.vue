@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { CurrentWeek } from '@/interfaces/CurrentWeek'
+import CurrentWeek from '@/interfaces/CurrentWeek'
 import { LessonObject, CurrentLesson, MobileHidden } from '@/interfaces/Lesson'
 const props = defineProps<{
     lesson: LessonObject,
