@@ -34,7 +34,7 @@ chrome.runtime.onMessage.addListener(
             case 'setSettings':
                 const settingsRequest = request as SetSettingsRequest
                 storage.settings = settingsRequest.settings
-                await chrome.storage.local.set(storage)
+                chrome.storage.local.set(storage)
                 sendResponse({ answer: 'settings have been changed' })
                 break
 
@@ -73,7 +73,7 @@ chrome.runtime.onMessage.addListener(
                 const scheduleRequest = request as SetScheduleRequest
                 storage.schedule = scheduleRequest.schedule
                 storage.group = scheduleRequest.group
-                await chrome.storage.local.set(storage)
+                chrome.storage.local.set(storage)
                 sendResponse({ answer: 'settings have been changed' })
                 break
 
