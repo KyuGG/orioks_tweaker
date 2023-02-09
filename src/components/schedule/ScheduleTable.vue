@@ -22,7 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import { CurrentWeek } from '@/interfaces/CurrentWeek'
+import CurrentDay from '@/interfaces/CurrentDay'
+import CurrentWeek from '@/interfaces/CurrentWeek'
 import { CurrentLesson, LessonObject, LessonParsed, MobileHidden } from '@/interfaces/Lesson'
 import ScheduleLesson from './ScheduleLesson.vue'
 
@@ -35,7 +36,7 @@ const props = defineProps<{
 }>()
 
 /** @returns Класс, который необходимо выдать тегу th, чтобы показать текущий день */
-const checkCurrentDay = (day: number) =>
+const checkCurrentDay = (day: number): CurrentDay =>
     props.currentDay === day && props.currentWeek.includes(props.week) ? 'current-day' : ''
 
 /** @returns Класс, который необходимо выдать всем тегам th и td, не относящимся к сегодняшнему дню (для скрытия в мобильном режиме) */

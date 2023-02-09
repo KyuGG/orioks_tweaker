@@ -60,7 +60,7 @@
 
 <script setup lang="ts">
 import wakeUpBackground from '@/helpers/wakeUpBackground'
-import { CurrentWeek } from '@/interfaces/CurrentWeek'
+import CurrentWeek from '@/interfaces/CurrentWeek'
 import GetScheduleResponse from '@/interfaces/GetScheduleResponse'
 import { LessonParsed } from '@/interfaces/Lesson'
 import { Ref, ref } from 'vue'
