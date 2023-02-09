@@ -102,8 +102,16 @@ const removeLessonType = (lesson: string) => {
     return lesson.trim()
 }
 
+/** @returns Название дисциплины в соответствии с предпочтениями пользователя (название берётся из localStorage.discNames)*/
+const renameLesson = (lesson: string) => {
+    const names = localStorage.getItem('discNames')
+    let rename
+    if (names) rename = JSON.parse(names)[lesson]
+    return rename || lesson
+}
+
 /** @returns Новое имя дисциплины, содержащее только название и кабинет */
-const createLessonName = (lesson: string[]) => removeLessonType(lesson[1]) + ' ' + lesson[3]
+const createLessonName = (lesson: string[]) => renameLesson(removeLessonType(lesson[1])) + ' ' + lesson[3]
 
 /** @returns Тип пары исходя из пометки в названии */
 const getLessonType = (lesson: string) => {
