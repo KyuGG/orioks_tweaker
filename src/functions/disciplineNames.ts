@@ -20,8 +20,6 @@ const SELECTORS: Record<string, string> = {
     '/portfolio/list-uchebnie-project/index':
         'tr[class*=project]:nth-child(2n-1) td:nth-child(3)',
     '/student/homework/create': 'select#homework-discipline-field option',
-    '/schedule':
-        '.schedule-td:not(:first-child, .includes-div), .includes-div *:not(br)',
 }
 
 /**Производит замену названий дисциплин */

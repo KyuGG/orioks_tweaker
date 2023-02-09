@@ -9,7 +9,7 @@
                 mobileHidden=""
             ></ScheduleLesson>
             <ScheduleLesson
-                :lesson="{ name: 'Лаб.', type: 'lab' }"
+                :lesson="{ name: 'ЛР', type: 'lab' }"
                 currentLesson=""
                 currentWeek=""
                 :splittedLesson="emptySplittedLesson"
