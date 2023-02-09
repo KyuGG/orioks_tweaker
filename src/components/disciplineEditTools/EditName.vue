@@ -1,12 +1,17 @@
 <template>
     <img
         :src="path"
+        :class="darkTheme && 'invert-img'"
         @click="changeName"
     />
 </template>
 
 <script setup lang="ts">
 import { setName, checkName } from '@/functions/disciplineNames'
+
+const props = defineProps<{
+    darkTheme: boolean
+}>()
 
 const path = chrome.runtime.getURL('assets/marker.png')
 

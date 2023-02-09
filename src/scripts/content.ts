@@ -16,13 +16,13 @@ window.onload = async () => {
     changeLogo()
     bugReport()
     changeTheme()
-
+    
     const { settings } = await getSettings()
 
     if (settings.fixScore) fixScore()
     if (settings.fixDownload) fixDownload()
     if (settings.schedule) schedule()
-    if (settings.disciplineNames) disciplineEditTools()
+    if (settings.disciplineNames) disciplineEditTools(settings.darkTheme)
     
     disciplineNames()
     document.documentElement.style.visibility = 'visible'
